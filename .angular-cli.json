@@ -19,9 +19,18 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "./assets/js/jquery.min.js",
+        "./assets/js/bootstrap.min.js",
+        "./assets/js/jquery.dataTables.js",
+        "./assets/dist/js/ace.min.js",
+        "./assets/dist/js/ace-small.min.js",
+        "./assets/dist/js/ace-elements.min.js",
+        "./assets/js/src/ace.sidebar.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
