@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { } from '@shared/shared.module';
+import { InputFieldComponent } from '@shared/components';
 
 @Component({
   selector: 'app-create-order',
