@@ -3631,6 +3631,10 @@ ng-click-outside@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ng-click-outside/-/ng-click-outside-3.2.0.tgz#e0fb3eab9caa2b6ccb4ff51c2c0811e0cef2cf87"
 
+ng2-bs3-modal@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/ng2-bs3-modal/-/ng2-bs3-modal-0.13.0.tgz#e501a660a968668b44cc28252c310fdd67e4fd7a"
+
 ng2-toastr@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/ng2-toastr/-/ng2-toastr-4.1.2.tgz#1b452f07139961c38f866c6e24a06247efa21b11"

@@ -1,1 +1,12 @@
-<button class="btn btn-default">HI DM</button>
+<button class="btn btn-primary" (click)="modalCreate.open()" >Tạo đơn hàng mới</button>
+
+
+<bs-modal #modalCreate>
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">Vui thoi</h4>
+  </bs-modal-header>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalCreate.dismiss()">{{ 'button.cancel-btn' | translate }}</button>
+    <button type="button" class="btn btn-primary" (click)="modalCreate.close()">{{ 'button.delete' | translate }}</button>
+  </bs-modal-footer>
+</bs-modal>
