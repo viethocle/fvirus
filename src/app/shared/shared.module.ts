@@ -19,6 +19,8 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
   ],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     ClickOutsideModule,
     InputFieldComponent,
     BsModalModule,
