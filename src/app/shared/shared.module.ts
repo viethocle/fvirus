@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InputFieldComponent } from './components/';
 import { ClickOutsideModule } from "ng-click-outside";
+import { DragulaModule } from "ng2-dragula";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    DragulaModule
   ],
-  exports: [
-    ClickOutsideModule
-  ],
+  exports: [ClickOutsideModule],
   declarations: [InputFieldComponent]
 })
-export class SharedModule { }
+export class SharedModule {}
