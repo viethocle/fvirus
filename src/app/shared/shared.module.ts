@@ -2,16 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InputFieldComponent } from './components/';
-import { FooterComponent } from './components/footer/footer.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ClickOutsideModule } from "ng-click-outside";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClickOutsideModule
   ],
-  declarations: [InputFieldComponent, FooterComponent, NavbarComponent, SidebarComponent]
+  exports: [
+    ClickOutsideModule
+  ],
+  declarations: [InputFieldComponent]
 })
 export class SharedModule { }

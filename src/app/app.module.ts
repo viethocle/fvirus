@@ -9,6 +9,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { AppRoutingModule } from './app.routing';
 import { SharedModule } from '@shared/shared.module';
+import { CoreModule } from "@core/core.module";
 
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
@@ -31,6 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    CoreModule,
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
