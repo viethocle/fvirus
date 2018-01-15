@@ -7,6 +7,7 @@ import { DragulaModule } from 'ng2-dragula';
 
 import { DashboardRoutes } from './dashboard.routing';
 import { KanbanComponent } from './components/kanban/kanban.component';
+import { DashboardPage } from './pages/dashboard/dashboard.page';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +15,9 @@ import { KanbanComponent } from './components/kanban/kanban.component';
     DragulaModule,
     RouterModule.forChild(DashboardRoutes)
   ],
-  declarations: [CreateOrderComponent, KanbanComponent]
+  declarations: [
+    CreateOrderComponent, 
+    KanbanComponent, 
+    DashboardPage]
 })
 export class DashboardModule { }
