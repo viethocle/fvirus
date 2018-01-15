@@ -14,10 +14,13 @@ export class DashboardService {
     private http: HttpClient
   ) { }
 
-
+  /** POST new order */
   createOrder(value: any) {
     // let params = new HttpParams().set('description', value.description
-    return this.http.post(this.baseUrl, value);
+    return this.http.post(this.baseUrl, value)
+               .pipe(
+                  catchError(this.handleError('create new order', []))
+                 );
   }
 
   /**
