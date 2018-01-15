@@ -4,6 +4,7 @@ import { environment } from '@environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { Order } from './order';
 
 @Injectable()
 export class DashboardService {
@@ -15,12 +16,10 @@ export class DashboardService {
   ) { }
 
   /** POST new order */
-  createOrder(value: any) {
+  createOrder(value): Observable<Order> {
     // let params = new HttpParams().set('description', value.description
     return this.http.post(this.baseUrl, value)
-               .pipe(
-                  catchError(this.handleError('create new order', []))
-                 );
+               .map((res: any) => res.order as Order);
   }
 
   /**
