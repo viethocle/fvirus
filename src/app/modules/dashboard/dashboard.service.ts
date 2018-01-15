@@ -15,6 +15,14 @@ export class DashboardService {
     private http: HttpClient
   ) { }
 
+
+  /** GET all orders */
+
+  getOrders(): Observable<Order[]> {
+    return this.http.get(this.baseUrl)
+               .map((res: any) => res.orders as Order[]);
+  }
+
   /** POST new order */
   createOrder(value): Observable<Order> {
     // let params = new HttpParams().set('description', value.description

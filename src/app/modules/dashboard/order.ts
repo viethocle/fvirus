@@ -1,4 +1,4 @@
 export interface Order {
-  id: string, 
-  description: string;
+  id: number, 
+  name: string,
 }
