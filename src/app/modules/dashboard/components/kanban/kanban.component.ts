@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
+import { DashboardService } from '../../dashboard.service';
 import { Order } from '../../order';
 
 @Component({
@@ -16,7 +17,8 @@ export class KanbanComponent implements OnInit {
   @ViewChild('bagDone') bagDone: ElementRef;
 
   constructor(
-    private dragulaService: DragulaService
+    private dragulaService: DragulaService,
+    private dashboardService: DashboardService
   ) { }
 
   ngOnInit() {
@@ -26,17 +28,25 @@ export class KanbanComponent implements OnInit {
 
 
   setDropModelDragula() {
-    this.dragulaService.dropModel.subscribe(args => {
-      let [bagName, el, target, source] = args;
-      console.log('el be dragged: ' + el.dataset.id);
-      console.log('Old bag: ' + source.dataset.id);
-      console.log('New bag: ' + target.dataset.id);
-    })
+    
+    this.dragulaService.drop.subscribe((value) => {
+      console.log(`drop: ${value[0]}`);
+      this.onDrop(value.slice(1));
+    });
+  }
+
+  private onDrop(args) {
+    let [e, el] = args;
+    console.log(e.dataset.id);
+    console.log(el.dataset.id);
   }
 
   setOrders() {
-    this.orders = [{ name: 'Dummy One', id: 1 }, { name: 'Dummy Two', id: 2 }, { name: 'Dummy Three', id: 3 }, { name: 'Dummy Four', id: 4 }];
-    this.orders2 = [{ name: 'Dummy Five', id: 5 }, { name: 'Dummy Six', id: 6 }, { name: 'Dummy Seven', id: 7 }, { name: 'Dummy Eight', id: 8 }];
+    this.dashboardService.getOrders()
+        .subscribe(orders => {
+          this.orders = orders;
+        })
+    this.orders2 = [];
   }
 
 }
