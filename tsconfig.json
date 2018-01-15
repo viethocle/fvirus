@@ -22,5 +22,10 @@
       "@modules/*": [ "app/modules/*"],
       "@environments/*": ["environments/*"]
     }
-  }
+  },
+  "plugins": [
+    {
+      "name": "@angular/language-service"
+    }
+  ]
 }
