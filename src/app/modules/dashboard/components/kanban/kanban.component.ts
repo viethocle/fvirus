@@ -24,6 +24,12 @@ export class KanbanComponent implements OnInit {
   ngOnInit() {
     this.setOrders();
     this.setDropModelDragula();
+    this.dashboardService.orderChange.subscribe(dataOrder => {
+      if (dataOrder != undefined) {
+        this.orders.push(dataOrder.data);
+        console.log(dataOrder);
+      }
+    })
   }
 
 
