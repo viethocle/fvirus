@@ -7,6 +7,8 @@ import {
   AbstractControl
 } from '@angular/forms';
 import { BsModalComponent } from 'ng2-bs3-modal';
+import { DashboardService } from '../../dashboard.service';
+
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
@@ -18,7 +20,8 @@ export class CreateOrderComponent implements OnInit {
   formNewOrder: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private dashboardService: DashboardService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -28,7 +31,13 @@ export class CreateOrderComponent implements OnInit {
   buildForm() {
     this.formNewOrder = this.formBuilder.group({
       description: [""]
-    })
+    });
+  }
+
+  createOrder() {
+    this.modalCreate.close();
+    this.dashboardService.createOrder(this.formNewOrder.value)
+        .subscribe(res => console.log("success"));
   }
 
 }
