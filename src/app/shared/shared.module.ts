@@ -19,7 +19,6 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     ClickOutsideModule,
     BsModalModule,
-    DragulaModule,
     TranslateModule,
   ],
   exports: [
