@@ -6,12 +6,16 @@ import { SharedModule } from '@shared/shared.module';
 
 import { DashboardRoutes } from './dashboard.routing';
 import { KanbanComponent } from './components/kanban/kanban.component';
+import { DashboardPage } from './pages/dashboard/dashboard.page';
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(DashboardRoutes)
   ],
-  declarations: [CreateOrderComponent, KanbanComponent]
+  declarations: [
+    CreateOrderComponent, 
+    KanbanComponent, 
+    DashboardPage]
 })
 export class DashboardModule { }

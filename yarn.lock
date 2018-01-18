@@ -246,6 +246,10 @@ acorn@^5.0.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.3.0.tgz#7446d39459c54fb49a80e6ee6478149b940ec822"
 
+actioncable@^5.1.4:
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/actioncable/-/actioncable-5.1.4.tgz#f1751f0316b3b3530ef278bf44257efe996c4f92"
+
 adm-zip@0.4.4:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.4.tgz#a61ed5ae6905c3aea58b3a657d25033091052736"
@@ -3659,14 +3663,15 @@ ng-click-outside@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ng-click-outside/-/ng-click-outside-3.2.0.tgz#e0fb3eab9caa2b6ccb4ff51c2c0811e0cef2cf87"
 
+ng2-bs3-modal@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/ng2-bs3-modal/-/ng2-bs3-modal-0.13.0.tgz#e501a660a968668b44cc28252c310fdd67e4fd7a"
+
 ng2-dragula@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/ng2-dragula/-/ng2-dragula-1.5.0.tgz#12a221d7a34fc629cc74dc98efb26448290eb6e5"
   dependencies:
     dragula "^3.7.2"
-ng2-bs3-modal@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/ng2-bs3-modal/-/ng2-bs3-modal-0.13.0.tgz#e501a660a968668b44cc28252c310fdd67e4fd7a"
 
 ng2-toastr@^4.1.2:
   version "4.1.2"

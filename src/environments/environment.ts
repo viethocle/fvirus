@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3000/api'
+  baseUrl: 'http://localhost:3000/api',
+  baseUrlSocket: 'ws://localhost:3000/cable'
 };

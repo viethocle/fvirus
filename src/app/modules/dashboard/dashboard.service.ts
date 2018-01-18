@@ -2,24 +2,66 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { Order } from './order';
+import { DataOrder } from './data-order';
+import * as ActionCable from 'actioncable';
 
 @Injectable()
-export class DashboardService {
+export class DashboardService  {
+
+  private cable: ActionCable.Cable;
+  private subscription: ActionCable.Channel;
+
+  orderChange = new BehaviorSubject<DataOrder>(null);
 
   readonly baseUrl = environment.baseUrl + '/orders.json';
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    this.setConnect();
+  }
+
+
+  /** GET all orders */
+
+  getOrders(): Observable<Order[]> {
+    return this.http.get(this.baseUrl)
+               .map((res: any) => res.orders as Order[]);
+  }
 
   /** POST new order */
   createOrder(value): Observable<Order> {
     // let params = new HttpParams().set('description', value.description
     return this.http.post(this.baseUrl, value)
                .map((res: any) => res.order as Order);
+  }
+
+
+  /** Set Connection */
+  setConnect() {
+    this.cable = ActionCable.createConsumer(environment.baseUrlSocket);
+    this.subscription = this.cable.subscriptions.create("OrdersChannel", {
+      connected: this.connected,
+      disconnected: this.disconnected,
+      received: data => this.received(data)
+    });
+  }
+
+  private connected() {
+    console.log("connected to order channel!");
+  }
+
+  private disconnected() {
+    console.log("disconnected!");
+  }
+
+
+  private received(data) {
+    this.orderChange.next(data as DataOrder);
   }
 
   /**
