@@ -6,6 +6,7 @@ import { ClickOutsideModule } from "ng-click-outside";
 import { DragulaModule } from "ng2-dragula";
 import { BsModalModule }       from "ng2-bs3-modal";
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TranslateModule } from '@ngx-translate/core';
     InputFieldComponent,
     ErrorLabelComponent,
     BsModalModule,
-    TranslateModule
+    TranslateModule,
+    NgxPaginationModule
   ],
 })
 export class SharedModule {}
