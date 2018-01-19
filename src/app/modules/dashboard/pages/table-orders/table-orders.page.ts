@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Order } from '../../order';
 import { DashboardService } from '../../dashboard.service';
-
+import { ISubscription } from "rxjs/Subscription";
 @Component({
   selector: 'app-dashboard-table-orders',
   templateUrl: './table-orders.page.html',
   styleUrls: ['./table-orders.page.css']
 })
-export class TableOrdersPage implements OnInit {
+export class TableOrdersPage implements OnInit, OnDestroy {
 
   orders: Order[];
+  loading: boolean;
+  private subscriptionGetOrders: ISubscription;
   public configPagination = {
-    id: "server",
+    id: 'server',
     itemsPerPage: 10,
     currentPage: 1,
-    totalItems: 0
+    totalItems: 10
   };
 
   constructor(
@@ -22,23 +24,26 @@ export class TableOrdersPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getOrders();
+    this.getPage(1);
   }
 
   getPage(page: number) {
-    
-  }
-
-  private getOrders() {
-    this.dashboardService.getOrdersWithPagination(1)
-        .subscribe(res => {
-          this.configPagination.totalItems = res.total;
-          this.orders = res.orders;
-        })
+    this.subscriptionGetOrders = this.dashboardService.getOrdersWithPagination(page)
+      .do(res => {
+        this.configPagination.totalItems = res.total;
+        this.configPagination.currentPage = page;
+      })
+      .subscribe(res => {
+        this.orders = res.orders;
+      })
   }
 
   handlerAddNewOrder(order) {
     console.log(order);
+  }
+
+  ngOnDestroy() {
+    this.subscriptionGetOrders.unsubscribe();
   }
 
 }
