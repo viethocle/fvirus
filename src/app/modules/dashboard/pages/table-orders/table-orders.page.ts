@@ -39,7 +39,7 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   }
 
   handlerAddNewOrder(order) {
-    console.log(order);
+    this.orders.unshift(order);
   }
 
   ngOnDestroy() {
