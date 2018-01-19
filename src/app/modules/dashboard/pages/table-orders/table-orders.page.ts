@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Order } from '../../order';
+import { DashboardService } from '../../dashboard.service';
 
 @Component({
   selector: 'app-dashboard-table-orders',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableOrdersPage implements OnInit {
 
-  constructor() { }
+  orders: Order[];
+
+  constructor(
+    private dashboardService: DashboardService
+  ) { }
 
   ngOnInit() {
+    this.getOrders();
+  }
+
+  private getOrders() {
+    this.dashboardService.getOrders()
+        .subscribe(orders => this.orders = orders);
+  }
+
+  handlerAddNewOrder(order) {
+    console.log(order);
   }
 
 }
