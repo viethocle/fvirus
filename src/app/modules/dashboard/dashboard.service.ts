@@ -21,7 +21,7 @@ export class DashboardService  {
 
   constructor(
     private http: HttpClient
-  ) { 
+  ) {
     this.setConnect();
   }
 
@@ -29,8 +29,15 @@ export class DashboardService  {
   /** GET all orders */
 
   getOrders(): Observable<Order[]> {
-    return this.http.get(this.baseUrl)
-               .map((res: any) => res.orders as Order[]);
+    // return this.http.get(this.baseUrl)
+    //            .map((res: any) => res.orders as Order[]);
+    const ordersMock: Order[] = [
+      { id: 1, description: "Order 1" },
+      { id: 2, description: "Order 2" },
+      { id: 3, description: "Order 3" },
+      { id: 4, description: "Order 4" }
+    ];
+    return Observable.of(ordersMock);
   }
 
   /** POST new order */
@@ -72,18 +79,18 @@ export class DashboardService  {
    */
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
- 
+
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
- 
+
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
- 
+
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
- 
+
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
   }

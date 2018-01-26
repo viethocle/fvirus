@@ -8,8 +8,8 @@
 
 
       <div class='container' [dragula]='"first-bag"' [dragulaModel]="orders2" [attr.data-id]="'bag-done'" #bagDone>
-        <div *ngFor="let order of orders2;" [attr.data-id]="order.id" [innerHtml]="order.name"></div>
+        <div *ngFor="let order of orders2;" [attr.data-id]="order.id" [innerHtml]="order.description"></div>
       </div>
-  
+
     </div>
 </div>
