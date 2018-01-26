@@ -11,7 +11,7 @@ import * as ActionCable from 'actioncable';
 
 
 export interface IOrdersPaginate {
-  total: number, 
+  total: number,
   orders: Order[]
 }
 
@@ -44,13 +44,6 @@ export class DashboardService  {
       { id: 4, description: "Order 4" }
     ];
     return Observable.of(ordersMock);
-  }
-
-  /** GET orders with pagination */
-
-  getOrdersWithPagination(page: number): Observable<IOrdersPaginate> {
-    let params = new HttpParams().set('page', page.toString());
-    return this.http.get<IOrdersPaginate>(this.baseUrl, { params: params } );
   }
 
   /** GET orders with pagination */
