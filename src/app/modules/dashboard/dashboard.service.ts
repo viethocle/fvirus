@@ -53,6 +53,13 @@ export class DashboardService  {
     return this.http.get<IOrdersPaginate>(this.baseUrl, { params: params } );
   }
 
+  /** GET orders with pagination */
+
+  getOrdersWithPagination(page: number): Observable<IOrdersPaginate> {
+    let params = new HttpParams().set('page', page.toString());
+    return this.http.get<IOrdersPaginate>(this.baseUrl, { params: params } );
+  }
+
   /** POST new order */
   createOrder(value): Observable<Order> {
     // let params = new HttpParams().set('description', value.description
