@@ -38,100 +38,17 @@
 
 <ul class="nav nav-list">
   <li *ngIf="isManager" routerLinkActive="active">
-    <a [routerLink]="['/dashboard']">
+    <a [routerLink]="['/dashboard/kanban']">
       <i class="menu-icon fa fa-desktop"></i>
       <span class="menu-text"> {{ 'sidebar.dashboard' | translate }} </span>
     </a>
   </li>
 
   <li routerLinkActive="active">
-    <a [routerLink]="['/products']">
+    <a [routerLink]="['/dashboard/list']">
       <i class="menu-icon fa fa-tasks "></i>
       <span class="menu-text">
-        {{ 'sidebar.products' | translate }}
-      </span>
-    </a>
-  </li>
-
-  <li routerLinkActive="active">
-    <a [routerLink]="['/storage']">
-      <i class="menu-icon fa fa-database "></i>
-      <span class="menu-text">
-        {{ 'sidebar.storage' | translate }}
-      </span>
-    </a>
-  </li>
-
-  <li routerLinkActive="active">
-    <a [routerLink]="['/import-product']">
-      <i class="menu-icon fa fa-cloud-download "></i>
-      <span class="menu-text">
-        {{ 'sidebar.import' | translate }}
-      </span>
-    </a>
-  </li>
-
-  <li class="" routerLinkActive="active">
-    <a href="#" class="dropdown-toggle">
-      <i class="menu-icon fa fa-cart-arrow-down"></i>
-      <span class="menu-text"> {{ 'sidebar.orders' | translate }} </span>
-      <b class="arrow fa fa-angle-down"></b>
-    </a>
-    <b class="arrow"></b>
-    <ul class="submenu">
-      <li routerLinkActive="active">
-        <a [routerLink]="['/new-order']">
-          <i class="menu-icon fa fa-plus-square"></i>
-          <span class="menu-text">
-            {{ 'sidebar.createOrder' | translate }}
-          </span>
-        </a>
-      </li>
-      <li routerLinkActive="active">
-        <a [routerLink]="['/order-history']">
-          <i class="menu-icon fa fa-book"></i>
-          <span class="menu-text">
-            {{ 'sidebar.ordersHistory' | translate }}
-          </span>
-        </a>
-      </li>
-
-      <li routerLinkActive="active">
-        <a [routerLink]="['/return-order']">
-          <i class="menu-icon fa fa-book"></i>
-          <span class="menu-text">
-            {{ 'sidebar.return-invoice' | translate }}
-          </span>
-        </a>
-      </li>
-    </ul>
-  </li>
-
-
-  <li routerLinkActive="active">
-    <a [routerLink]="['/customers']">
-      <i class="menu-icon fa fa-users  "></i>
-      <span class="menu-text">
-        {{ 'sidebar.customers' | translate }}
-      </span>
-    </a>
-  </li>
-
-  <li *ngIf="isManager" routerLinkActive="active">
-    <a [routerLink]="['/users']">
-      <i class="menu-icon fa fa-user-plus"></i>
-      <span class="menu-text">
-        {{ 'sidebar.user-management' | translate }}
-        <!-- {{ 'sidebar.customers' | translate }} -->
-      </span>
-    </a>
-  </li>
-
-  <li *ngIf="isManager" routerLinkActive="active">
-    <a [routerLink]="['/discount-rate']">
-      <i class="menu-icon fa fa-gift"></i>
-      <span class="menu-text">
-        {{ 'sidebar.discountedRate' | translate }}
+        Danh sách đơn hàng
       </span>
     </a>
   </li>

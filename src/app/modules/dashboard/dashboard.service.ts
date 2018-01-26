@@ -9,6 +9,12 @@ import { Order } from './order';
 import { DataOrder } from './data-order';
 import * as ActionCable from 'actioncable';
 
+
+export interface IOrdersPaginate {
+  total: number, 
+  orders: Order[]
+}
+
 @Injectable()
 export class DashboardService  {
 
@@ -38,6 +44,13 @@ export class DashboardService  {
       { id: 4, description: "Order 4" }
     ];
     return Observable.of(ordersMock);
+  }
+
+  /** GET orders with pagination */
+
+  getOrdersWithPagination(page: number): Observable<IOrdersPaginate> {
+    let params = new HttpParams().set('page', page.toString());
+    return this.http.get<IOrdersPaginate>(this.baseUrl, { params: params } );
   }
 
   /** POST new order */
