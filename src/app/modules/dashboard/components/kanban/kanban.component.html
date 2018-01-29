@@ -12,7 +12,7 @@
               #bagNew>
           <div *ngFor="let order of orders | new;"
                 [attr.data-id]="order.id"
-                [innerHtml]="order.description">
+                [innerHtml]="order.description + ' - ' + order.customer">
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
               #bagInprogress>
           <div  *ngFor="let order of orders | inprogress;"
                 [attr.data-id]="order.id"
-                [innerHtml]="order.description">
+                [innerHtml]="order.description + ' - ' + order.customer">
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
               #bagReady>
           <div  *ngFor="let order of orders | ready;"
                 [attr.data-id]="order.id"
-                [innerHtml]="order.description">
+                [innerHtml]="order.description + ' - ' + order.customer">
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
               #bagClosed>
           <div  *ngFor="let order of orders | closed;"
                 [attr.data-id]="order.id"
-                [innerHtml]="order.description">
+                [innerHtml]="order.description + ' - ' + order.customer">
           </div>
         </div>
       </div>
