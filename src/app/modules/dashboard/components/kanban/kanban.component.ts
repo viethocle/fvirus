@@ -4,38 +4,36 @@ import { DashboardService } from '../../dashboard.service';
 import { Order } from '../../order';
 
 @Component({
-  selector: 'app-kanban',
-  templateUrl: './kanban.component.html',
-  styleUrls: ['./kanban.component.css']
+  selector: "app-kanban",
+  templateUrl: "./kanban.component.html",
+  styleUrls: ["./kanban.component.css"]
 })
 export class KanbanComponent implements OnInit {
-
   orders: Order[];
-  orders2: Order[];
 
-  @ViewChild('bagTodo') bagTodo: ElementRef;
-  @ViewChild('bagDone') bagDone: ElementRef;
+  @ViewChild("bagNew") bagNew: ElementRef;
+  @ViewChild("bagInprogress") bagInprogress: ElementRef;
+  @ViewChild("bagReady") bagReady: ElementRef;
+  @ViewChild("bagClosed") bagClosed: ElementRef;
 
   constructor(
     private dragulaService: DragulaService,
     private dashboardService: DashboardService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.setOrders();
+    this.getOrders();
     this.setDropModelDragula();
     this.dashboardService.orderChange.subscribe(dataOrder => {
       if (dataOrder != undefined) {
         this.orders.push(dataOrder.data);
         console.log(dataOrder);
       }
-    })
+    });
   }
 
-
   setDropModelDragula() {
-    
-    this.dragulaService.drop.subscribe((value) => {
+    this.dragulaService.drop.subscribe(value => {
       console.log(`drop: ${value[0]}`);
       this.onDrop(value.slice(1));
     });
@@ -47,12 +45,9 @@ export class KanbanComponent implements OnInit {
     console.log(el.dataset.id);
   }
 
-  setOrders() {
-    this.dashboardService.getOrders()
-        .subscribe(orders => {
-          this.orders = orders;
-        })
-    this.orders2 = [];
+  getOrders() {
+    this.dashboardService.getOrders().subscribe(orders => {
+      this.orders = orders;
+    });
   }
-
 }

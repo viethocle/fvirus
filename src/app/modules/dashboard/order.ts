@@ -1,4 +1,6 @@
 export interface Order {
-  id: number, 
-  description: string,
+  id: number;
+  customer: string;
+  description: string;
+  status: string;
 }

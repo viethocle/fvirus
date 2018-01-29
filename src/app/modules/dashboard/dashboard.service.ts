@@ -38,10 +38,17 @@ export class DashboardService  {
     // return this.http.get(this.baseUrl)
     //            .map((res: any) => res.orders as Order[]);
     const ordersMock: Order[] = [
-      { id: 1, description: "Order 1" },
-      { id: 2, description: "Order 2" },
-      { id: 3, description: "Order 3" },
-      { id: 4, description: "Order 4" }
+      { id: 1, description: "Order 1", customer: "Binh", status: "closed" },
+      { id: 2, description: "Order 2", customer: "Thuan", status: "new" },
+      { id: 3, description: "Order 3", customer: "Hoc", status: "new" },
+      { id: 4, description: "Order 4", customer: "Binh", status: "new" },
+      { id: 5, description: "Order 5", customer: "Thuan", status: "inprogress" },
+      { id: 6, description: "Order 6", customer: "Hoc", status: "inprogress" },
+      { id: 7, description: "Order 7", customer: "Binh", status: "ready" },
+      { id: 8, description: "Order 8", customer: "Thuan", status: "ready" },
+      { id: 9, description: "Order 9", customer: "Hoc", status: "ready" },
+      { id: 10, description: "Order 10", customer: "Binh", status: "inprogress" },
+      { id: 11, description: "Order 11", customer: "Hoc", status: "closed" }
     ];
     return Observable.of(ordersMock);
   }
@@ -51,6 +58,9 @@ export class DashboardService  {
   getOrdersWithPagination(page: number): Observable<IOrdersPaginate> {
     let params = new HttpParams().set('page', page.toString());
     return this.http.get<IOrdersPaginate>(this.baseUrl, { params: params } );
+  }
+  getOrdersWithPaginationMock(page: number): Observable<Order[]> {
+    return this.getOrders();
   }
 
   /** POST new order */

@@ -1,7 +1,8 @@
 .kanban {
-  background-color: rgb(247, 239, 242);
+  background-color: rgb(206, 210, 219);
   margin: 0 auto;
   max-width: 90%;
+  min-height: 200px;
 }
 
 input, button {
@@ -19,8 +20,9 @@ h1 {
 }
 
 h3 {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-bottom: 5px solid #A13462;
+  background-color: rgba(145, 113, 113, 0.2);
+
+  border-bottom: 5px solid #438eb9;
   text-align: center;
   padding: 10px;
 }
@@ -123,16 +125,19 @@ button:hover {
 
 .wrapper {
   display: table;
+  width: 100%;
 }
 
 .container {
   display: table-cell;
   background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid #438eb9;
+  max-width: 0px;
 }
 
-.container:nth-child(odd) {
+/* .container:nth-child(odd) {
   background-color: rgba(0, 0, 0, 0.2);
-}
+} */
 
 
 /*
@@ -141,7 +146,7 @@ button:hover {
  */
 
 .container div, .gu-mirror {
-  margin: 10px;
+  margin: 10px 0;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.2);
   transition: opacity 0.4s ease-in-out;
