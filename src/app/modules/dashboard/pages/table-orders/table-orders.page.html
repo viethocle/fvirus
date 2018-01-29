@@ -19,7 +19,14 @@
           <td>{{ order.id }}</td>
           <td>{{ order.description }}</td>
           <td>{{ order.customer }}</td>
-          <td>{{ order.status }}</td>
+          <td>
+            <span class="label arrowed-right arrowed-in"
+            [ngClass]="{'label-danger': order.status == 'new',
+                        'label-warning': order.status == 'inprogress',
+                        'label-success': order.status == 'ready'}">
+              {{ order.status }}
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
