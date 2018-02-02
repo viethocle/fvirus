@@ -50,4 +50,9 @@ export class KanbanComponent implements OnInit {
       this.orders = orders;
     });
   }
+
+  innerHtml( order: Order ) {
+    let content = order.description + " - " + order.customer;
+    return content;
+  }
 }
