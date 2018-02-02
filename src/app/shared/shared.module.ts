@@ -11,6 +11,13 @@ import { NewPipe } from './pipes/new.pipe';
 import { InprogressPipe } from './pipes/inprogress.pipe';
 import { ReadyPipe } from './pipes/ready.pipe';
 import { ClosedPipe } from './pipes/closed.pipe';
+import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
+import { PERFECT_SCROLLBAR_CONFIG } from "ngx-perfect-scrollbar";
+import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -43,7 +50,14 @@ import { ClosedPipe } from './pipes/closed.pipe';
     NewPipe,
     InprogressPipe,
     ReadyPipe,
-    ClosedPipe
+    ClosedPipe,
+    PerfectScrollbarModule
+  ],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ]
 })
 export class SharedModule {}

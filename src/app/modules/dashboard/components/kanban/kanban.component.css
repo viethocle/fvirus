@@ -197,6 +197,10 @@ nested-repeat-example .container span {
 }
 
 .bag-status {
-  min-height: 30px;
+  min-height: 300px;
+}
+
+.scroller {
+  max-height: 400px;
 }
 
