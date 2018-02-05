@@ -1,5 +1,5 @@
 
-export enum Status {
+export enum StatusOrder {
   new         = 'new',
   ready       = 'ready',
   inprogress  = 'inprogress',
@@ -9,6 +9,6 @@ export enum Status {
 export interface Order {
   id: number;
   description: string;
-  status: Status;
+  status: StatusOrder;
   due_date: string;
 }

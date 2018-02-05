@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { DashboardService } from '../../dashboard.service';
-import { Order } from '../../order';
+import { Order, StatusOrder } from '../../order';
 import { DatePipe } from "@angular/common";
 
 @Component({
@@ -11,6 +11,7 @@ import { DatePipe } from "@angular/common";
 })
 export class KanbanComponent implements OnInit {
   orders: Order[] = [];
+  statusOrder = StatusOrder;
 
   @ViewChild("bagNew") bagNew: ElementRef;
   @ViewChild("bagInprogress") bagInprogress: ElementRef;
@@ -36,15 +37,16 @@ export class KanbanComponent implements OnInit {
 
   setDropModelDragula() {
     this.dragulaService.drop.subscribe(value => {
-      console.log(`drop: ${value[0]}`);
       this.onDrop(value.slice(1));
     });
   }
 
   private onDrop(args) {
     let [e, el] = args;
-    console.log(e.dataset.id);
-    console.log(el.dataset.id);
+    let order_id = e.dataset.id;
+    let status_to_change = el.dataset.id;
+    console.log(order_id);
+    console.log(status_to_change);
   }
 
   getOrders() {
