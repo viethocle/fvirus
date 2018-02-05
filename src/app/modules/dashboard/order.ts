@@ -3,4 +3,5 @@ export interface Order {
   customer: string;
   description: string;
   status: string;
+  dueDate: string;
 }

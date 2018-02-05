@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { DashboardService } from '../../dashboard.service';
 import { Order } from '../../order';
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-kanban",
@@ -18,7 +19,8 @@ export class KanbanComponent implements OnInit {
 
   constructor(
     private dragulaService: DragulaService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -51,8 +53,21 @@ export class KanbanComponent implements OnInit {
     });
   }
 
-  innerHtml( order: Order ) {
-    let content = order.description + " - " + order.customer;
+  innerHtml(order: Order) {
+    let content = `
+    <div>
+        <h4>
+          ${order.customer}
+        </h4>
+        <div>
+          <h5>
+            ${order.description}
+          </h5>
+          <h6>
+            Deadline: ${this.datePipe.transform(order.dueDate, "dd-MM-yyyy")}
+          </h6>
+        </div>
+    </div>`;
     return content;
   }
 }

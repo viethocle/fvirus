@@ -48,6 +48,6 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptionGetOrders.unsubscribe();
+    // this.subscriptionGetOrders.unsubscribe();
   }
 }
