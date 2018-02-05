@@ -57,6 +57,14 @@ export class DashboardService  {
                .map((res: any) => res.order as Order);
   }
 
+  /** UPDATE status order */
+  updateStatusOrder(order_id: string, status_to_change: string): Observable<Order> {
+    let url = `${environment.baseUrl}/orders/${order_id}/${status_to_change}.json`;
+
+    return this.http.put(url, {})
+                    .map((res: any) => res.order as Order);
+  }
+
 
   /** Set Connection */
   setConnect() {

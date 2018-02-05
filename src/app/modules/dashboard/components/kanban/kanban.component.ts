@@ -3,6 +3,7 @@ import { DragulaService } from 'ng2-dragula';
 import { DashboardService } from '../../dashboard.service';
 import { Order, StatusOrder } from '../../order';
 import { DatePipe } from "@angular/common";
+import * as _ from 'lodash';
 
 @Component({
   selector: "app-kanban",
@@ -40,6 +41,12 @@ export class KanbanComponent implements OnInit {
     let [e, el] = args;
     let order_id = e.dataset.id;
     let status_to_change = el.dataset.id;
+    
+    // call api to change status order 
+    this.dashboardService.updateStatusOrder(order_id, status_to_change)
+        .subscribe((order: Order) => {
+          _.assign(this.orders.find(t => t.id === order.id), order);
+        });
   }
 
   getOrders() {
