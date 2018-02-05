@@ -15,14 +15,13 @@ export class TableOrdersPage implements OnInit, OnDestroy {
     id: "server",
     itemsPerPage: 10,
     currentPage: 1,
-    totalItems: 10
+    totalItems: 0
   };
 
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit() {
-    // this.getPage(1);
-    this.getOrdersMock();
+    this.getPage(1);
   }
 
   getPage(page: number) {
