@@ -3,3 +3,8 @@
 #main-product {
     margin-top: 1.2em;
 }
+
+.cdk-overlay-container {
+    z-index: 2000;
+    position: absolute;
+}
