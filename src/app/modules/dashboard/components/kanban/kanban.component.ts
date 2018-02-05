@@ -40,14 +40,11 @@ export class KanbanComponent implements OnInit {
     let [e, el] = args;
     let order_id = e.dataset.id;
     let status_to_change = el.dataset.id;
-    console.log(order_id);
-    console.log(status_to_change);
   }
 
   getOrders() {
     this.dashboardService.getOrders().subscribe(orders => {
       this.orders = orders;
-      console.log(orders);
     });
   }
 
