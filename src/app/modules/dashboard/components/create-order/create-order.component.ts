@@ -20,6 +20,7 @@ export class CreateOrderComponent implements OnInit {
   @ViewChild("modalCreate") modalCreate: BsModalComponent;
   formNewOrder: FormGroup;
   @Output() newOrder = new EventEmitter<Order>();
+  minDueDate: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +28,8 @@ export class CreateOrderComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+    let d = new Date();
+    this.minDueDate = new Date(new Date().setDate(new Date().getDate() - 1)); // mean yesterday
   }
 
 
