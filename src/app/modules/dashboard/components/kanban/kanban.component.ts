@@ -13,11 +13,6 @@ export class KanbanComponent implements OnInit {
   orders: Order[] = [];
   statusOrder = StatusOrder;
 
-  @ViewChild("bagNew") bagNew: ElementRef;
-  @ViewChild("bagInprogress") bagInprogress: ElementRef;
-  @ViewChild("bagReady") bagReady: ElementRef;
-  @ViewChild("bagClosed") bagClosed: ElementRef;
-
   constructor(
     private dragulaService: DragulaService,
     private dashboardService: DashboardService,
