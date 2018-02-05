@@ -9,7 +9,7 @@
           <perfect-scrollbar class="scroller">
             <div  class="bag-status"
                   [dragula]='"first-bag"'
-                  [attr.data-id]="'bag-new'"
+                  [attr.data-id]="statusOrder.new"
                   #bagNew>
               <div  class="box-order"
                     *ngFor="let order of orders | new;"
@@ -25,7 +25,7 @@
           <perfect-scrollbar class="scroller">
             <div  class="bag-status"
                   [dragula]='"first-bag"'
-                  [attr.data-id]="'bag-inprogress'"
+                  [attr.data-id]="statusOrder.inprogress"
                   #bagInprogress>
               <div  class="box-order"
                     *ngFor="let order of orders | inprogress;"
@@ -41,7 +41,7 @@
           <perfect-scrollbar class="scroller">
             <div  class="bag-status"
                   [dragula]='"first-bag"'
-                  [attr.data-id]="'bag-ready'"
+                  [attr.data-id]="statusOrder.ready"
                   #bagReady>
               <div  class="box-order"
                     *ngFor="let order of orders | ready;"
@@ -57,7 +57,7 @@
           <perfect-scrollbar class="scroller">
             <div  class="bag-status"
                   [dragula]='"first-bag"'
-                  [attr.data-id]="'bag-closed'"
+                  [attr.data-id]="statusOrder.closed"
                   #bagClosed>
               <div  class="box-order"
                     *ngFor="let order of orders | closed;"
