@@ -10,7 +10,7 @@ import { DatePipe } from "@angular/common";
   styleUrls: ["./kanban.component.css"]
 })
 export class KanbanComponent implements OnInit {
-  orders: Order[];
+  orders: Order[] = [];
 
   @ViewChild("bagNew") bagNew: ElementRef;
   @ViewChild("bagInprogress") bagInprogress: ElementRef;
@@ -50,21 +50,19 @@ export class KanbanComponent implements OnInit {
   getOrders() {
     this.dashboardService.getOrders().subscribe(orders => {
       this.orders = orders;
+      console.log(orders);
     });
   }
 
   innerHtml(order: Order) {
     let content = `
     <div>
-        <h4>
-          ${order.customer}
-        </h4>
         <div>
           <h5>
             ${order.description}
           </h5>
           <h6>
-            Deadline: ${this.datePipe.transform(order.dueDate, "dd-MM-yyyy")}
+            Deadline: ${this.datePipe.transform(order.due_date, "dd-MM-yyyy")}
           </h6>
         </div>
     </div>`;
