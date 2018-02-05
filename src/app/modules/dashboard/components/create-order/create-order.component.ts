@@ -32,7 +32,8 @@ export class CreateOrderComponent implements OnInit {
 
   buildForm() {
     this.formNewOrder = this.formBuilder.group({
-      description: [""]
+      description: [""],
+      due_date: ["", Validators.required]
     });
   }
 

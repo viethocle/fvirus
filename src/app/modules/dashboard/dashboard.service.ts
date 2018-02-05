@@ -67,6 +67,7 @@ export class DashboardService  {
   /** POST new order */
   createOrder(value): Observable<Order> {
     // let params = new HttpParams().set('description', value.description
+    console.log(value);
     return this.http.post(this.baseUrl, value)
                .map((res: any) => res.order as Order);
   }

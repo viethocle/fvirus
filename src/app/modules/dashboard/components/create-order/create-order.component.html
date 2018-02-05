@@ -12,6 +12,13 @@
     <div [class.has-error]="formNewOrder.get('description').errors && (formNewOrder.get('description').dirty || formNewOrder.get('description').touched)">
       <label for="new-description" class="control-label">Description</label>
       <textarea  class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formNewOrder.get('description')"></textarea>
+
+      <div class="input-wrapper">
+        <label for="datetime-picker" class="control-label">Due date:</label>
+        <input id="datetime-picker" class="form-control" [formControl]="formNewOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
+          [owlDateTime]="dtPicker2">
+        <owl-date-time #dtPicker2></owl-date-time>
+      </div>
     </div>
 
 
