@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
 import { NavbarComponent } from './modules/layout/navbar/navbar.component';
 import { FooterComponent } from './modules/layout/footer/footer.component';
+import { CustomerComponent } from './modules/customer/customer.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -26,7 +27,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     SidebarComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,
