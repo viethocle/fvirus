@@ -17,7 +17,7 @@ export interface ICustomersTotal {
 @Injectable()
 export class CustomerService {
   // private baseUrl = `${environment.token_auth_config.apiBase}`;
-  private baseUrl = "http://roll-novahub.herokuapp.com/api";
+  private baseUrl = `${environment.baseUrl}`;
 
   private url = `${this.baseUrl}/customers`;
 
