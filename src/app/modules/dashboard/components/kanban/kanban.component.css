@@ -1,9 +1,4 @@
-.kanban {
-  background-color: rgb(206, 210, 219);
-  margin: 0 auto;
-  max-width: 90%;
-  min-height: 200px;
-}
+
 
 input, button {
   font-family: Georgia, Helvetica;
@@ -20,8 +15,6 @@ h1 {
 }
 
 h3 {
-  border-bottom: 5px solid #ccc;
-  text-align: center;
   padding-bottom: 10px;
   margin: 5px 10px;
 }
@@ -79,11 +72,7 @@ ul {
   padding: 0;
 }
 
-.parent {
-  background-color: rgba(255, 255, 255, 0.2);
-  margin: 50px 0;
-  padding: 20px 0;
-}
+
 .container{
   padding: 0;
 }
@@ -204,3 +193,18 @@ nested-repeat-example .container span {
   max-height: 400px;
 }
 
+.col-md-3 {
+  padding: 0 6px;
+}
+
+
+.column-kanban {
+  padding-top: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: #f5f5f5;
+}
+
+.header-new {
+  color: #82AF6F;
+}
