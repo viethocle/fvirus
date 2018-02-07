@@ -230,3 +230,8 @@ nested-repeat-example .container span {
   background: #00B961; 
   border: 1px solid #00B961;
 }
+
+.kb-header-working {
+  background: #F4CE46;
+  border: 1px solid #F4CE46;
+}
