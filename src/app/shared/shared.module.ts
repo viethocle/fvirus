@@ -17,6 +17,7 @@ import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 import { DatePipe } from "@angular/common";
 import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { DateTimeViPipe } from './pipes/date-time-vi.pipe';
+import { MatchHeightDirective } from './directives/match-height.directive';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -31,7 +32,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     InprogressPipe,
     ReadyPipe,
     ClosedPipe,
-    DateTimeViPipe
+    DateTimeViPipe,
+    MatchHeightDirective
   ],
   imports: [
     FormsModule,
