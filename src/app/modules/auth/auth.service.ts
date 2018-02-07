@@ -43,10 +43,8 @@ export class AuthService {
     return this.authService
       .signIn({ email: email, password: password })
       .map(res => {
+        this.router.navigate([""])
         this.userSignedIn$.next(true);
-        this.router.navigate(["/"]).then(r => {
-          window.location.reload();
-        });
         return res;
       });
   }
