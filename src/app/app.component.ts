@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { SidebarService } from "@modules/layout/sidebar.service";
 import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-
+import { Angular2TokenService } from 'angular2-token';
+import { AuthService } from './modules/auth/auth.service';
+import { Router } from '@angular/router';
+import { Observable } from "rxjs/Observable";
+import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
 
 @Component({
   selector: "app-root",
@@ -10,17 +14,20 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = "app";
+  title = "roll";
+  outSidebar = false;
   public userSignedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     true
   );
 
   constructor(
     private translate: TranslateService,
-    private sidebarSvc: SidebarService
+    private sidebarSvc: SidebarService,
+    private authToken: Angular2TokenService,
+    private authSvc: AuthService
   ) {
-    // this.authSvc.userSignedIn$.subscribe(data => this.userSignedIn$.next(data));
-    // // const lang = localStorage.getItem("lang");
+    this.authSvc.userSignedIn$.subscribe(data => this.userSignedIn$.next(data));
+    // const lang = localStorage.getItem("lang");
     translate.setDefaultLang("vi");
   }
 
@@ -29,7 +36,6 @@ export class AppComponent {
   }
 
   isLoggedIn(): boolean {
-    return true;
-    // return this.authToken.userSignedIn();
+    return this.authToken.userSignedIn();
   }
 }

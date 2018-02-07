@@ -3,6 +3,13 @@ import { CommonModule } from '@angular/common';
 import { SidebarService } from '../modules/layout/sidebar.service';
 import { DashboardService } from '@modules/dashboard/dashboard.service';
 import { DragulaService } from 'ng2-dragula';
+import { AuthService } from '@modules/auth/auth.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {
+  ManagementGuard,
+  LoggedInGuard
+} from './guard/';
+
 
 @NgModule({
   imports: [
@@ -12,7 +19,10 @@ import { DragulaService } from 'ng2-dragula';
   providers: [
     SidebarService,
     DashboardService,
-    DragulaService
+    DragulaService,
+    AuthService,
+    LoggedInGuard,
+    ManagementGuard
   ]
 })
 export class CoreModule { }
