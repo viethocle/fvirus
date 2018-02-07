@@ -11,11 +11,15 @@
                   [dragula]='"first-bag"'
                   [attr.data-id]="statusOrder.new"
                   #bagNew>
-              <div  class="box-order"
+              <!-- <div  class="box-order"
                     *ngFor="let order of orders | new;"
                     [attr.data-id]="order.id"
                     [innerHtml]="innerHtml(order)">
-              </div>
+              </div> -->
+
+              <li *ngFor="let order of orders | new;" [attr.data-id]="order.id">
+                <kanban-card [order]="order" ></kanban-card>
+              </li>
             </div>
           </perfect-scrollbar>
         </div>
