@@ -2,9 +2,10 @@
   <div class='parent'>
       <div class='wrapper container-fluid' myMatchHeight="kanban-column">
         <div class='col-md-3 kanban-column'>
-          <div class="kb-header kb-header-new">
+          <!-- <div class="kb-header kb-header-new">
             New
-          </div>
+          </div> -->
+          <h4>New</h4>          
           <div  class="bag-status  column-kanban"
                 [dragula]='"first-bag"'
                 [attr.data-id]="statusOrder.new"
@@ -17,9 +18,10 @@
         </div>
 
         <div class='col-md-3 kanban-column'>
-          <div class="kb-header kb-header-working">
+          <!-- <div class="kb-header kb-header-working">
             Inprogress
-          </div>
+          </div> -->
+          <h4>Inprogress</h4>
           <div  class="bag-status  column-kanban"
                 [dragula]='"first-bag"'
                 [attr.data-id]="statusOrder.inprogress"

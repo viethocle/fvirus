@@ -9,6 +9,7 @@ import { KanbanComponent } from './components/kanban/kanban.component';
 import { DashboardPage } from './pages/dashboard/dashboard.page';
 import { TableOrdersPage } from './pages/table-orders/table-orders.page';
 import { KanbanCardComponent } from './components/kanban-card/kanban-card.component';
+import { MatchHeightDirective } from '@shared/directives/match-height.directive';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,6 +17,7 @@ import { KanbanCardComponent } from './components/kanban-card/kanban-card.compon
     RouterModule.forChild(DashboardRoutes)
   ],
   declarations: [
+    MatchHeightDirective,
     CreateOrderComponent, 
     KanbanComponent, 
     DashboardPage,

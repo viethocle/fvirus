@@ -185,6 +185,7 @@ nested-repeat-example .container span {
 }
 
 .bag-status {
+  height: inherit;
   min-height: 300px;
 }
 
@@ -198,6 +199,11 @@ nested-repeat-example .container span {
 
 .wrapper {
   margin-top: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.container-fluid {
+  padding-left: 0px;
 }
 
 

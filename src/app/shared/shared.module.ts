@@ -43,8 +43,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     InprogressPipe,
     ReadyPipe,
     ClosedPipe,
-    DateTimeViPipe,
-    MatchHeightDirective
+    DateTimeViPipe
   ],
   imports: [
     FormsModule,
@@ -73,8 +72,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DatePipe,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    DateTimeViPipe,
-    MatchHeightDirective
+    DateTimeViPipe
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },
