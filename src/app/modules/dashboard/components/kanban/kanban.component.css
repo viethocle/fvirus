@@ -196,6 +196,10 @@ nested-repeat-example .container span {
   padding: 0 6px;
 }
 
+.wrapper {
+  margin-top: 10px;
+}
+
 
 .column-kanban {
   padding-top: 8px;
@@ -211,4 +215,18 @@ nested-repeat-example .container span {
 .kanban-column {
   height: 100%;
   position: relative;
+}
+
+.kb-header {
+  color:#fff;
+  width: 100%;
+  height: 40px;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.kb-header-new {
+  background: #00B961; 
+  border: 1px solid #00B961;
 }
