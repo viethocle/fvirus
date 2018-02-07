@@ -4,59 +4,51 @@
       <div class='wrapper container-fluid'>
         <div class='col-md-3'>
           <h4 class="header-new">New</h4>
-          <perfect-scrollbar class="scroller">
-            <div  class="bag-status  column-kanban"
-                  [dragula]='"first-bag"'
-                  [attr.data-id]="statusOrder.new"
-                  #bagNew>  
+          <div  class="bag-status  column-kanban"
+                [dragula]='"first-bag"'
+                [attr.data-id]="statusOrder.new"
+                #bagNew>  
 
-              <div *ngFor="let order of orders | new;" [attr.data-id]="order.id">
-                <kanban-card [order]="order" ></kanban-card>
-              </div>
+            <div *ngFor="let order of orders | new;" [attr.data-id]="order.id">
+              <kanban-card [order]="order" ></kanban-card>
             </div>
-          </perfect-scrollbar>
+          </div>
         </div>
 
         <div class='col-md-3'>
           <h4>In Progress</h4>
-          <perfect-scrollbar class="scroller">
-            <div  class="bag-status  column-kanban"
-                  [dragula]='"first-bag"'
-                  [attr.data-id]="statusOrder.inprogress"
-                  #bagInprogress>
-              <div *ngFor="let order of orders | inprogress;" [attr.data-id]="order.id">
-                <kanban-card [order]="order"></kanban-card>
-              </div>
+          <div  class="bag-status  column-kanban"
+                [dragula]='"first-bag"'
+                [attr.data-id]="statusOrder.inprogress"
+                #bagInprogress>
+            <div *ngFor="let order of orders | inprogress;" [attr.data-id]="order.id">
+              <kanban-card [order]="order"></kanban-card>
             </div>
-          </perfect-scrollbar>
+          </div>
         </div>
 
         <div class='col-md-3'>
           <h4>Ready</h4>
-          <perfect-scrollbar class="scroller">
-            <div  class="bag-status column-kanban"
-                  [dragula]='"first-bag"'
-                  [attr.data-id]="statusOrder.ready"
-                  #bagReady>
-              <div *ngFor="let order of orders | ready;" [attr.data-id]="order.id">
-                <kanban-card [order]="order"></kanban-card>
-              </div>
+          <div  class="bag-status column-kanban"
+                [dragula]='"first-bag"'
+                [attr.data-id]="statusOrder.ready"
+                #bagReady>
+            <div *ngFor="let order of orders | ready;" [attr.data-id]="order.id">
+              <kanban-card [order]="order"></kanban-card>
             </div>
-          </perfect-scrollbar>
+          </div>
         </div>
 
         <div class='col-md-3'>
           <h4>Closed</h4>
-          <perfect-scrollbar class="scroller">
-            <div  class="bag-status  column-kanban"
-                  [dragula]='"first-bag"'
-                  [attr.data-id]="statusOrder.closed"
-                  #bagClosed>
-              <div *ngFor="let order of orders | closed;" [attr.data-id]="order.id">
-                <kanban-card [order]="order"></kanban-card>
-              </div>
+          <div  class="bag-status  column-kanban"
+                [dragula]='"first-bag"'
+                [attr.data-id]="statusOrder.closed"
+                #bagClosed>
+            <div *ngFor="let order of orders | closed;" [attr.data-id]="order.id">
+              <kanban-card [order]="order"></kanban-card>
             </div>
-          </perfect-scrollbar>
+          </div>
         </div>
 
       </div>
