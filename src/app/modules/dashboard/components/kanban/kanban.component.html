@@ -1,60 +1,61 @@
 <div class="kanban">
-  <div class='parent'>
-      <div class='wrapper container-fluid' myMatchHeight="kanban-column">
-        <div class='col-md-3 kanban-column'>
-          <!-- <div class="kb-header kb-header-new">
-            New
-          </div> -->
-          <h4>New</h4>          
-          <div  class="bag-status  column-kanban"
-                [dragula]='"first-bag"'
-                [attr.data-id]="statusOrder.new"
-                #bagNew>  
+  <perfect-scrollbar>
+    <div class='wrapper container-fluid' myMatchHeight="kanban-column">
+      <div class='col-md-3 kanban-column'>
+        <!-- <div class="kb-header kb-header-new">
+          New
+        </div> -->
+        <h4>New</h4>          
+        <div  class="bag-status  column-kanban"
+              [dragula]='"first-bag"'
+              [attr.data-id]="statusOrder.new"
+              #bagNew>  
 
-            <div *ngFor="let order of orders | new;" [attr.data-id]="order.id">
-              <kanban-card [order]="order" ></kanban-card>
-            </div>
+          <div *ngFor="let order of orders | new;" [attr.data-id]="order.id">
+            <kanban-card [order]="order" ></kanban-card>
           </div>
         </div>
-
-        <div class='col-md-3 kanban-column'>
-          <!-- <div class="kb-header kb-header-working">
-            Inprogress
-          </div> -->
-          <h4>Inprogress</h4>
-          <div  class="bag-status  column-kanban"
-                [dragula]='"first-bag"'
-                [attr.data-id]="statusOrder.inprogress"
-                #bagInprogress>
-            <div *ngFor="let order of orders | inprogress;" [attr.data-id]="order.id">
-              <kanban-card [order]="order"></kanban-card>
-            </div>
-          </div>
-        </div>
-
-        <div class='col-md-3 kanban-column'>
-          <h4>Ready</h4>
-          <div  class="bag-status column-kanban"
-                [dragula]='"first-bag"'
-                [attr.data-id]="statusOrder.ready"
-                #bagReady>
-            <div *ngFor="let order of orders | ready;" [attr.data-id]="order.id">
-              <kanban-card [order]="order"></kanban-card>
-            </div>
-          </div>
-        </div>
-
-        <div class='col-md-3 kanban-column'>
-          <h4>Closed</h4>
-          <div  class="bag-status  column-kanban"
-                [dragula]='"first-bag"'
-                [attr.data-id]="statusOrder.closed"
-                #bagClosed>
-            <div *ngFor="let order of orders | closed;" [attr.data-id]="order.id">
-              <kanban-card [order]="order"></kanban-card>
-            </div>
-          </div>
-        </div>
-
       </div>
+
+      <div class='col-md-3 kanban-column'>
+        <!-- <div class="kb-header kb-header-working">
+          Inprogress
+        </div> -->
+        <h4>Inprogress</h4>
+        <div  class="bag-status  column-kanban"
+              [dragula]='"first-bag"'
+              [attr.data-id]="statusOrder.inprogress"
+              #bagInprogress>
+          <div *ngFor="let order of orders | inprogress;" [attr.data-id]="order.id">
+            <kanban-card [order]="order"></kanban-card>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-3 kanban-column'>
+        <h4>Ready</h4>
+        <div  class="bag-status column-kanban"
+              [dragula]='"first-bag"'
+              [attr.data-id]="statusOrder.ready"
+              #bagReady>
+          <div *ngFor="let order of orders | ready;" [attr.data-id]="order.id">
+            <kanban-card [order]="order"></kanban-card>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-3 kanban-column'>
+        <h4>Closed</h4>
+        <div  class="bag-status  column-kanban"
+              [dragula]='"first-bag"'
+              [attr.data-id]="statusOrder.closed"
+              #bagClosed>
+          <div *ngFor="let order of orders | closed;" [attr.data-id]="order.id">
+            <kanban-card [order]="order"></kanban-card>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </perfect-scrollbar>
 </div>
