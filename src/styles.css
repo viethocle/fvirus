@@ -8,3 +8,8 @@
     z-index: 2000;
     position: absolute;
 }
+
+.wrapper-full-page {
+    height: auto;
+    min-height: 100vh;
+}

@@ -7,7 +7,8 @@ import { AuthService } from '@modules/auth/auth.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {
   ManagementGuard,
-  LoggedInGuard
+  LoggedInGuard,
+  LogoutGuard
 } from './guard/';
 
 
@@ -22,7 +23,8 @@ import {
     DragulaService,
     AuthService,
     LoggedInGuard,
-    ManagementGuard
+    ManagementGuard,
+    LogoutGuard
   ]
 })
 export class CoreModule { }

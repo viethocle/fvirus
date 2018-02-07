@@ -5,12 +5,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-<<<<<<< HEAD
 import { Angular2TokenService } from 'angular2-token';
 import { HttpModule } from '@angular/http';
-=======
-import { HttpModule } from "@angular/http";
->>>>>>> customer
 
 import { AppRoutingModule } from './app.routing';
 import { SharedModule } from '@shared/shared.module';

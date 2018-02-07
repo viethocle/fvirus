@@ -20,7 +20,8 @@ const routes: Routes = [
   },
   {
     path: "login",
-    loadChildren: "./modules/auth/auth.module#AuthModule"
+    loadChildren: "./modules/auth/auth.module#AuthModule",
+    canLoad: [LogoutGuard]
   },
   {
     path: "customers",
