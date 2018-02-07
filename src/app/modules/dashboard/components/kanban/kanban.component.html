@@ -1,8 +1,7 @@
 <div class="kanban">
   <div class='parent'>
-      <h2 class="">Kanban board</h2>
       <div class='wrapper container-fluid'>
-        <div class='col-md-3'>
+        <div class='col-md-3 kanban-column'>
           <h4 class="header-new">New</h4>
           <div  class="bag-status  column-kanban"
                 [dragula]='"first-bag"'
@@ -15,7 +14,7 @@
           </div>
         </div>
 
-        <div class='col-md-3'>
+        <div class='col-md-3 kanban-column'>
           <h4>In Progress</h4>
           <div  class="bag-status  column-kanban"
                 [dragula]='"first-bag"'
@@ -27,7 +26,7 @@
           </div>
         </div>
 
-        <div class='col-md-3'>
+        <div class='col-md-3 kanban-column'>
           <h4>Ready</h4>
           <div  class="bag-status column-kanban"
                 [dragula]='"first-bag"'
@@ -39,7 +38,7 @@
           </div>
         </div>
 
-        <div class='col-md-3'>
+        <div class='col-md-3 kanban-column'>
           <h4>Closed</h4>
           <div  class="bag-status  column-kanban"
                 [dragula]='"first-bag"'

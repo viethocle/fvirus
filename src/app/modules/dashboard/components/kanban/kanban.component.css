@@ -115,9 +115,10 @@ button:hover {
 /* dragula-specific example page styles */
 
 .wrapper {
-  display: table;
   border-spacing: 5px 0;
   width: 100%;
+  min-height: 500px;
+  position: absolute;
 }
 
 .container {
@@ -207,4 +208,9 @@ nested-repeat-example .container span {
 
 .header-new {
   color: #82AF6F;
+}
+
+.kanban-column {
+  height: 100%;
+  position: relative;
 }
