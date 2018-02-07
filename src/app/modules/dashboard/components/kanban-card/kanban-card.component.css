@@ -3,7 +3,13 @@
   border: 1px solid #ccc;
   cursor: move;
   line-height: 1.42857143;
+  padding-top: 10px;
   padding-left: 10px;
   padding-bottom: 12px;
   margin-bottom: -1px;
+}
+
+.card-key {
+  font-size: 1.119em;
+  color: #3b73af;
 }
