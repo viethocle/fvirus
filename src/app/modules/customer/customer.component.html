@@ -38,8 +38,6 @@
             <i class="ace-icon glyphicon glyphicon-map-marker"></i>{{ 'Table.phone' | translate }}</th>
           <th>
             <i class="ace-icon glyphicon glyphicon-home"></i>{{ 'Table.address' | translate }}</th>
-          <th>
-            <i class="ace-icon fa fa-gift bigger-130"></i>{{ 'Table.level' | translate }}</th>
           <th class="sorting_disabled"></th>
         </tr>
       </thead>
@@ -51,7 +49,6 @@
             <td>{{ customer.email }}</td>
             <td>{{ customer.phone }}</td>
             <td>{{ customer.address }}</td>
-            <td class="center">{{ customer.level}}</td>
             <td class="action-buttons center">
               <button class="btn btn-xs btn-info" (click)="changeToEdit(customer)">
                 <i class="ace-icon fa fa-pencil bigger-120"></i>
@@ -63,30 +60,23 @@
           </ng-container>
           <ng-container *ngIf="customer.id == editing">
             <td>
-              <input type="text" #name value={{customer.name}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, selectedValue , customer.id, $event)"
+              <input type="text" #name value={{customer.name}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, customer.id, $event)"
                 (keyup.escape)="revertEdit()">
             </td>
             <td>
-              <input type="text" #email value={{customer.email}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, selectedValue , customer.id, $event)"
+              <input type="text" #email value={{customer.email}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, customer.id, $event)"
                 (keyup.escape)="revertEdit()">
             </td>
             <td>
-              <input type="text" #phone value={{customer.phone}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, selectedValue , customer.id, $event)"
+              <input type="text" #phone value={{customer.phone}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, customer.id, $event)"
                 (keyup.escape)="revertEdit()">
             </td>
             <td>
-              <input type="text" #address value={{customer.address}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, selectedValue , customer.id, $event)"
+              <input type="text" #address value={{customer.address}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, customer.id, $event)"
                 (keyup.escape)="revertEdit()">
-            </td>
-            <td class="center">
-              <select [(ngModel)]="selectedValue">
-                <option *ngFor="let level of levels" [ngValue]="level" [selected]="level == customer.level ">{{level}}</option>
-              </select>
-              <!-- <input type="number" #level value={{customer.level}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value,level.value, customer.id, $event)"
-                  (keyup.escape)="revertEdit()"> -->
             </td>
             <td class="action-buttons">
-              <a (click)="editCustomer(name.value, email.value, phone.value, address.value, selectedValue , customer.id, $event)" class="green pointer"
+              <a (click)="editCustomer(name.value, email.value, phone.value, address.value, customer.id, $event)" class="green pointer"
                 tooltip="Ok">
                 <i class="ace-icon fa fa-check bigger-150 "></i>
               </a>
@@ -164,12 +154,6 @@
 
       <app-input-field [attribute]="'Table.address' | translate" [control]="formAdd.get('address')">
       </app-input-field>
-      <div id="level">
-        <span class="bigger-110">{{'Table.level' | translate}}</span>
-        <select [(ngModel)]="addvalue" id="select">
-          <option *ngFor="let level of levels" [ngValue]="level" [selected]="level == 0 ">{{level}}</option>
-        </select>
-      </div>
     </div>
   </bs-modal-body>
   <bs-modal-footer>

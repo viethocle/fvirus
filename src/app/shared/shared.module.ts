@@ -15,6 +15,17 @@ import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { PERFECT_SCROLLBAR_CONFIG } from "ngx-perfect-scrollbar";
 import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 import { DatePipe } from "@angular/common";
+import { ToastModule, ToastOptions } from "ng2-toastr/ng2-toastr";
+import { ToastrService } from "./toastr.service";
+
+export class CustomOption extends ToastOptions {
+  animate = "flyRight"; // you can pass any options to override defaults
+  newestOnTop = false;
+  showCloseButton = true;
+  dismiss = "auto";
+  timeOut = 2000;
+  positionClass = "toast-top-right";
+}
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -36,7 +47,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     ClickOutsideModule,
     BsModalModule,
-    TranslateModule
+    TranslateModule,
+    ToastModule.forRoot()
   ],
   exports: [
     FormsModule,
@@ -56,11 +68,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DatePipe
   ],
   providers: [
+    { provide: ToastOptions, useClass: CustomOption },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    DatePipe
+    DatePipe,
+    ToastrService
   ]
 })
 export class SharedModule {}

@@ -5,6 +5,4 @@ export class Customer {
   email: string;
   phone: string;
   address: string;
-  level: number;
-  active: boolean;
 }

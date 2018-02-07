@@ -126,6 +126,7 @@ export class CustomerComponent implements OnInit {
         this.configPagination.currentPage = page;
         this.customers = res.customers;
         this.loading = false;
+        console.log(this.customers);
       });
   }
 
@@ -148,7 +149,6 @@ export class CustomerComponent implements OnInit {
 
   changeToEdit(customer: Customer) {
     this.editing = customer.id;
-    this.selectedValue = customer.level;
   }
 
   editCustomer(
@@ -156,14 +156,13 @@ export class CustomerComponent implements OnInit {
     email: string,
     phone: string,
     add: string,
-    level: number,
     id: number
   ) {
+    console.log(this.customer.id);
     this.customer.name = name;
     this.customer.email = email;
     this.customer.phone = phone;
     this.customer.address = add;
-    this.customer.level = level;
     this.customerService
       .updateCustomer(this.customer, id)
       .subscribe(customer => {
@@ -174,8 +173,6 @@ export class CustomerComponent implements OnInit {
           customer.phone;
         this.customers.find(cus => cus.id === customer.id).address =
           customer.address;
-        this.customers.find(cus => cus.id === customer.id).level =
-          customer.level;
         this.revertEdit();
       });
   }

@@ -17,7 +17,7 @@ export interface ICustomersTotal {
 @Injectable()
 export class CustomerService {
   // private baseUrl = `${environment.token_auth_config.apiBase}`;
-  private baseUrl = "https://roll-novahub.herokuapp.com/api";
+  private baseUrl = "http://roll-novahub.herokuapp.com/api";
 
   private url = `${this.baseUrl}/customers`;
 
@@ -46,16 +46,12 @@ export class CustomerService {
     const url = `${
       this.url
     }.json?page=${page}&search_text=${search_text}&per_page=${per_page}`;
-    return this.http
-      .get(url)
-      .map(res => res.json() as ICustomersTotal);
+    return this.http.get(url).map(res => res.json() as ICustomersTotal);
   }
 
   getCustomersWithObservable(): Observable<Customer[]> {
     const getUrl = `${this.url}.json`;
-    return this.http
-      .get(getUrl)
-      .map(res => res.json().customers as Customer[]);
+    return this.http.get(getUrl).map(res => res.json().customers as Customer[]);
   }
 
   deleteCustomer(customer: Customer): Promise<any> {
@@ -72,8 +68,7 @@ export class CustomerService {
       `name=${customer.name}`,
       `email=${customer.email}`,
       `phone=${customer.phone}`,
-      `address=${customer.address}`,
-      `level=${customer.level}`
+      `address=${customer.address}`
     ].join("&");
     const updateUrl = `${this.url}/${id}.json?${params}`;
     return this.http
@@ -86,8 +81,7 @@ export class CustomerService {
       `name=${value.name}`,
       `email=${value.email}`,
       `phone=${value.phone}`,
-      `address=${value.address}`,
-      `level=${selectedValue}`
+      `address=${value.address}`
     ].join("&");
     const addUrl = `${this.url}.json?${params}`;
     return this.http
