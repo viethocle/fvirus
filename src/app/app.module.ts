@@ -5,7 +5,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-
+import { Angular2TokenService } from 'angular2-token';
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app.routing';
 import { SharedModule } from '@shared/shared.module';
@@ -15,6 +16,7 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
 import { NavbarComponent } from './modules/layout/navbar/navbar.component';
 import { FooterComponent } from './modules/layout/footer/footer.component';
+import { LoginComponent } from './modules/auth/login/login.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -36,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -44,7 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, Angular2TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -6,8 +6,8 @@ import {
   ViewChild,
   AfterViewInit
 } from "@angular/core";
-// import { AuthService } from "../../auth/auth.service";
-// import { Angular2TokenService } from "angular2-token";
+import { AuthService } from "../../auth/auth.service";
+import { Angular2TokenService } from "angular2-token";
 import { Router, Event, NavigationStart } from "@angular/router";
 import { SidebarService } from "../sidebar.service";
 
@@ -22,8 +22,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   status = false; // true mean open sidebar
 
   constructor(
-    // public authService: Angular2TokenService,
-    // private authSvc: AuthService,
+    public authService: Angular2TokenService,
+    private authSvc: AuthService,
     private sideSvc: SidebarService,
     private router: Router
   ) {}
@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // this.getUsername();
+    this.getUsername();
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         if (this.btnSidebar.nativeElement.classList.contains("display")) {
@@ -54,24 +54,20 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   getUsername(): string {
-    return "Thuan";
-    // if (this.authService.currentUserData) {
-    //   // console.log(this.authService.currentUserData);
-    //   return this.authService.currentUserData.name;
-    // }
+    if (this.authService.currentUserData) {
+      return this.authService.currentUserData.name;
+    }
   }
 
   isLoggedIn(): boolean {
-    return true;
-    // return this.authService.userSignedIn();
+    return this.authService.userSignedIn();
   }
 
   isLoggedOut(): boolean {
-    return false;
-    // return !this.authService.userSignedIn();
+    return !this.authService.userSignedIn();
   }
 
   logOut() {
-    // this.authSvc.logOut();
+    this.authSvc.logOut();
   }
 }

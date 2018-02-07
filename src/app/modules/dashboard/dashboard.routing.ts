@@ -8,7 +8,7 @@ export const DashboardRoutes: Routes = [
   {
     path: "kanban",
     component: DashboardPage
-  }, 
+  },
   {
     path: "list",
     component: TableOrdersPage
