@@ -18,6 +18,17 @@ import { DatePipe } from "@angular/common";
 import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { DateTimeViPipe } from './pipes/date-time-vi.pipe';
 import { MatchHeightDirective } from './directives/match-height.directive';
+import { ToastModule, ToastOptions } from "ng2-toastr/ng2-toastr";
+import { ToastrService } from "./toastr.service";
+
+export class CustomOption extends ToastOptions {
+  animate = "flyRight"; // you can pass any options to override defaults
+  newestOnTop = false;
+  showCloseButton = true;
+  dismiss = "auto";
+  timeOut = 2000;
+  positionClass = "toast-top-right";
+}
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -41,7 +52,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     ClickOutsideModule,
     BsModalModule,
-    TranslateModule
+    TranslateModule,
+    ToastModule.forRoot()
   ],
   exports: [
     FormsModule,
@@ -65,6 +77,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatchHeightDirective
   ],
   providers: [
+    { provide: ToastOptions, useClass: CustomOption },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
@@ -72,7 +85,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     { 
       provide: OWL_DATE_TIME_LOCALE, 
       useValue: 'vi' },
-    DatePipe
+    DatePipe,
+    ToastrService
   ]
 })
 export class SharedModule {}

@@ -6,6 +6,7 @@ import {
   LogoutGuard
 } from './core/guard/';
 
+import { CustomerComponent } from "./modules/customer/customer.component";
 
 const routes: Routes = [
   {
@@ -20,7 +21,10 @@ const routes: Routes = [
   {
     path: "login",
     loadChildren: "./modules/auth/auth.module#AuthModule"
-    canNotLoad: [LoggedInGuard]
+  },
+  {
+    path: "customers",
+    component: CustomerComponent
   }
 ];
 
