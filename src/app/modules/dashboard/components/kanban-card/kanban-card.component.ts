@@ -14,7 +14,7 @@ export class KanbanCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.order + 'in kanban card');
+  
   }
 
 }
