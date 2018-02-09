@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { Http, Response } from "@angular/http";
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
@@ -20,6 +20,7 @@ import { CustomerService } from "./customer.service";
 import { Customer } from "./customer.model";
 import { ToastrService } from "../../shared/toastr.service";
 import * as _ from "lodash";
+import { ToastsManager } from "ng2-toastr/ng2-toastr";
 
 @Component({
   selector: "app-customer",
@@ -59,11 +60,14 @@ export class CustomerComponent implements OnInit {
     private http: Http,
     private customerService: CustomerService,
     private toastrService: ToastrService,
+    private toastr: ToastsManager,
+    vRef: ViewContainerRef,
     fb: FormBuilder
   ) {
+    this.toastr.setRootViewContainerRef(vRef);
     this.formAdd = fb.group({
       name: ["", Validators.required],
-      phone: ["", Validators.email],
+      phone: [""],
       email: [""],
       address: [""]
     });
@@ -141,7 +145,7 @@ export class CustomerComponent implements OnInit {
   sendRequestDeleteCustomer(customer: Customer) {
     this.customerService.deleteCustomer(customer).then(res => {
       this.customers = _.reject(this.customers, ["id", customer.id]);
-      this.toastrService.SetMessageSuccess("Success");
+      this.toastrService.SetMessageSuccess("Deleted");
     });
   }
 
@@ -171,7 +175,7 @@ export class CustomerComponent implements OnInit {
         this.customers.find(cus => cus.id === customer.id).address =
           customer.address;
         this.revertEdit();
-        this.toastrService.SetMessageSuccess("Success");
+        this.toastrService.SetMessageSuccess("Updated");
       });
   }
 

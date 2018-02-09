@@ -6,12 +6,11 @@ import {
   LogoutGuard
 } from './core/guard/';
 
-import { CustomerComponent } from "./modules/customer/customer.component";
-
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/dashboard/kanban', pathMatch: 'full'
+    path: "",
+    redirectTo: "/dashboard/kanban",
+    pathMatch: "full"
   },
   {
     path: "dashboard",
@@ -24,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: "customers",
-    component: CustomerComponent
+    loadChildren: "./modules/customer/customer.module#CustomerModule"
   }
 ];
 
