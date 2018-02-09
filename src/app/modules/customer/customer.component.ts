@@ -63,7 +63,7 @@ export class CustomerComponent implements OnInit {
   ) {
     this.formAdd = fb.group({
       name: ["", Validators.required],
-      phone: [""],
+      phone: ["", Validators.email],
       email: [""],
       address: [""]
     });
@@ -105,7 +105,6 @@ export class CustomerComponent implements OnInit {
 
   onChangeCount($event) {
     this.loading = true;
-    console.log(this.perPage);
     this.customerService
       .getCustomersWithPage(1, this.perPage, this.currentSearch)
       .subscribe(res => {
@@ -126,7 +125,6 @@ export class CustomerComponent implements OnInit {
         this.configPagination.currentPage = page;
         this.customers = res.customers;
         this.loading = false;
-        console.log(this.customers);
       });
   }
 
@@ -158,7 +156,6 @@ export class CustomerComponent implements OnInit {
     add: string,
     id: number
   ) {
-    console.log(this.customer.id);
     this.customer.name = name;
     this.customer.email = email;
     this.customer.phone = phone;
@@ -174,6 +171,7 @@ export class CustomerComponent implements OnInit {
         this.customers.find(cus => cus.id === customer.id).address =
           customer.address;
         this.revertEdit();
+        this.toastrService.SetMessageSuccess("Success");
       });
   }
 
@@ -188,6 +186,7 @@ export class CustomerComponent implements OnInit {
         this.customers.unshift(customer);
         this.formAdd.reset();
         this.addvalue = 0;
+        this.toastrService.SetMessageSuccess("Success");
       });
   }
 }
