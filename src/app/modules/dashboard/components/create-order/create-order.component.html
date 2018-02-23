@@ -33,10 +33,10 @@
 
       <div class="results">
         <perfect-scrollbar class="scroller">
-          <div [ngClass]="{'box-container' : termCustomer != ''}">
-            <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let i = index">
+          <div [ngClass]="{'box-container' : termCustomer != ''}" >
+            <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let rowIDx = index">
               <ng-container *ngIf="termCustomer != ''">
-                <button type="button" class="list-group-item list-customers" [attr.data-index]="i">
+                <button type="button" class="list-group-item list-customers" [attr.data-index]="rowIDx" #listCustomers>
                   <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
               </ng-container>
             </ng-container>

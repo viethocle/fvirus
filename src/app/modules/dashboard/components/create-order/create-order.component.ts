@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, ViewChildren, ElementRef, Renderer2 } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -21,6 +21,7 @@ import { CustomerService } from "@modules/customer/customer.service";
 export class CreateOrderComponent implements OnInit {
 
   @ViewChild("modalCreate") modalCreate: BsModalComponent;
+  @ViewChildren("listCustomers") listCustomers;
   formNewOrder: FormGroup;
   @Output() newOrder = new EventEmitter<Order>();
   minDueDate: any;
@@ -30,7 +31,8 @@ export class CreateOrderComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dashboardService: DashboardService,
-    private customerService: CustomerService) { }
+    private customerService: CustomerService,
+    private renderer2: Renderer2) { }
 
   ngOnInit() {
     this.buildForm();
@@ -59,7 +61,9 @@ export class CreateOrderComponent implements OnInit {
   }
 
   shiftFocusDown() {
-    console.log("Down");
+    let listsButton = this.listCustomers.toArray();
+    listsButton[1].nativeElement.focus();
+    console.log(listsButton);
   }
 
 }
