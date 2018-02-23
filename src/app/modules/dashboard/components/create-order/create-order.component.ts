@@ -50,7 +50,8 @@ export class CreateOrderComponent implements OnInit {
   buildForm() {
     this.formNewOrder = this.formBuilder.group({
       description: [""],
-      due_date: ["", Validators.required]
+      due_date: ["", Validators.required],
+      customer_id: [""]
     });
   }
 
@@ -61,6 +62,9 @@ export class CreateOrderComponent implements OnInit {
 
   createOrder() {
     this.modalCreate.close();
+    this.formNewOrder.patchValue({
+      customer_id: this.customerSelected.id
+    })
     this.dashboardService.createOrder(this.formNewOrder.value)
         .subscribe((newOrder: Order) => this.newOrder.emit(newOrder));
   }
