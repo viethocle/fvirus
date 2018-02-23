@@ -1,3 +1,4 @@
+import { CustomerService } from './../../../customer/customer.service';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import {
   FormControl,
@@ -24,12 +25,12 @@ export class CreateOrderComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dashboardService: DashboardService) { }
+    private dashboardService: DashboardService,
+    private customerService: CustomerService) { }
 
   ngOnInit() {
     this.buildForm();
-    let d = new Date();
-    this.minDueDate = new Date(new Date().setDate(new Date().getDate() - 1)); // mean yesterday
+    this.initDatetime();
   }
 
 
@@ -38,6 +39,11 @@ export class CreateOrderComponent implements OnInit {
       description: [""],
       due_date: ["", Validators.required]
     });
+  }
+
+  initDatetime(): any {
+    let d = new Date();
+    this.minDueDate = new Date(new Date().setDate(new Date().getDate() - 1)); // mean yesterday
   }
 
   createOrder() {

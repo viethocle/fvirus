@@ -1,7 +1,7 @@
 <button class="btn btn-primary" (click)="modalCreate.open()" >Tạo đơn hàng mới</button>
 
 
-<bs-modal #modalCreate>
+<bs-modal #modalCreate >
   <bs-modal-header [showDismiss]="true">
     <h4 class="modal-title">Tao order</h4>
   </bs-modal-header>
@@ -22,6 +22,11 @@
           #dtPicker2 
           [pickerType]="'calendar'"></owl-date-time>
       </div>
+
+      <label for="" class="control-label">
+        Customer:
+      </label>
+      <input type="search" class="form-control">
     </div>
 
 
