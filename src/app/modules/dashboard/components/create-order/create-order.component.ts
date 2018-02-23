@@ -61,13 +61,29 @@ export class CreateOrderComponent implements OnInit {
         .subscribe((newOrder: Order) => this.newOrder.emit(newOrder));
   }
 
-  shiftFocusDown() {
+  shiftFocusDown(e) {
+    e.preventDefault();
     this.currentFocusIndex++;
+    this.focusElement(this.currentFocusIndex);
+  }
+
+  shiftFocusUp(e) {
+    e.preventDefault();
+    this.currentFocusIndex--;
+    this.focusElement(this.currentFocusIndex);
+  }
+
+  escapeSearch(e) {
+    this.termCustomer = "";
+    e.stopPropagation();
+  }
+
+  focusElement(id) {
     let listsButton = this.listCustomers.toArray().map(res => res.nativeElement);
     listsButton.forEach(e => {
       this.renderer2.removeClass(e, 'focus-customer');
     });
-    this.renderer2.addClass(listsButton[this.currentFocusIndex], 'focus-customer');
+    this.renderer2.addClass(listsButton[id], 'focus-customer');
   }
 
 }

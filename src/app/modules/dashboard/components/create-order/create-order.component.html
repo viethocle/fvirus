@@ -29,7 +29,9 @@
       <input 
         type="search" class="form-control"
         [(ngModel)]="termCustomer"
-        (keyup.arrowdown)="shiftFocusDown()">
+        (keyup.escape)="escapeSearch($event)"
+        (keyup.arrowup)="shiftFocusUp($event)"
+        (keyup.arrowdown)="shiftFocusDown($event)">
 
       <div class="results">
         <perfect-scrollbar class="scroller">
