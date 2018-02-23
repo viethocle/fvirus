@@ -28,8 +28,18 @@
       <label for="" class="control-label">
         Customer:
       </label>
-      <input type="search" class="form-control" [(ngModel)]="termCustomer" (input)="onChangeTermCustomer()" (keyup.enter)="chooseCustomer()"
-        (keyup.escape)="escapeSearch($event)" (keyup.arrowup)="shiftFocusUp($event)" (keyup.arrowdown)="shiftFocusDown($event)">
+
+      <div class="input-group">
+        <input type="search" class="form-control" [(ngModel)]="termCustomer" 
+              (input)="onChangeTermCustomer()" 
+              (keyup.enter)="chooseCustomer()"
+              (keyup.escape)="escapeSearch($event)" 
+              (keyup.arrowup)="shiftFocusUp($event)" 
+              (keyup.arrowdown)="shiftFocusDown($event)">
+        <span class="input-group-addon">
+          <i class="ace-icon fa fa-search"></i>
+        </span>
+      </div>
 
       <div class="results">
         <perfect-scrollbar class="scroller">

@@ -13,3 +13,11 @@ label {
 .focus-customer {
   background-color: bisque;
 }
+
+dt {
+  width: 80px;
+}
+
+dd {
+  margin-left: 100px;
+}
