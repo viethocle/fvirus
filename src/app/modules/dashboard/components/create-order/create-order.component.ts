@@ -27,6 +27,7 @@ export class CreateOrderComponent implements OnInit {
   minDueDate: any;
   customers: Customer[] = [];
   termCustomer = "";
+  currentFocusIndex: number = -1;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,9 +62,12 @@ export class CreateOrderComponent implements OnInit {
   }
 
   shiftFocusDown() {
-    let listsButton = this.listCustomers.toArray();
-    listsButton[1].nativeElement.focus();
-    console.log(listsButton);
+    this.currentFocusIndex++;
+    let listsButton = this.listCustomers.toArray().map(res => res.nativeElement);
+    listsButton.forEach(e => {
+      this.renderer2.removeClass(e, 'focus-customer');
+    });
+    this.renderer2.addClass(listsButton[this.currentFocusIndex], 'focus-customer');
   }
 
 }

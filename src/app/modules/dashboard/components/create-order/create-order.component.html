@@ -36,7 +36,7 @@
           <div [ngClass]="{'box-container' : termCustomer != ''}" >
             <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let rowIDx = index">
               <ng-container *ngIf="termCustomer != ''">
-                <button type="button" class="list-group-item list-customers" [attr.data-index]="rowIDx" #listCustomers>
+                <button type="button" class="list-group-item list-customers" [attr.data-index]="rowIDx" #listCustomers (keyup.arrowdown)="shiftFocusDown()">
                   <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
               </ng-container>
             </ng-container>

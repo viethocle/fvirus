@@ -9,3 +9,7 @@ label {
 .box-container {
   max-height: 283px;
 }
+
+.focus-customer {
+  background-color: bisque;
+}
