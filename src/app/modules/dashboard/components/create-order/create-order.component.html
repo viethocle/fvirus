@@ -33,7 +33,7 @@
       <div class="results">
         <perfect-scrollbar class="scroller">
           <div [ngClass]="{'box-container' : termCustomer != ''}">
-            <ng-container *ngFor="let customer of customers">
+            <ng-container *ngFor="let customer of customers|mySearch:termCustomer">
               <ng-container *ngIf="termCustomer != ''">
                 <button type="button" class="list-group-item list-customers">
                   <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>

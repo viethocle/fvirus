@@ -3,7 +3,7 @@ import { Ng2SearchPipe } from 'ng2-search-filter';
 import * as _ from 'lodash';
 
 @Pipe({
-  name: 'my-search'
+  name: 'mySearch'
 })
 export class MySearchPipe implements PipeTransform {
 

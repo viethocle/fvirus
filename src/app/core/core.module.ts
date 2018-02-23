@@ -1,3 +1,4 @@
+import { Ng2SearchPipe } from 'ng2-search-filter';
 import { CustomerService } from './../modules/customer/customer.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -26,7 +27,8 @@ import {
     LoggedInGuard,
     ManagementGuard,
     LogoutGuard,
-    CustomerService
+    CustomerService,
+    Ng2SearchPipe
   ]
 })
 export class CoreModule { }
