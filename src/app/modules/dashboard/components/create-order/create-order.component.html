@@ -1,54 +1,80 @@
 <button class="btn btn-primary" (click)="modalCreate.open()" >Tạo đơn hàng mới</button>
 
 
-<bs-modal #modalCreate >
+<bs-modal #modalCreate [size]="'lg'" >
   <bs-modal-header [showDismiss]="true">
     <h4 class="modal-title">Tao order</h4>
   </bs-modal-header>
 
-  <bs-modal-body>
+  <bs-modal-body class="container-fluid">
 
-    <!-- description -->
-    <div [class.has-error]="formNewOrder.get('description').errors && (formNewOrder.get('description').dirty || formNewOrder.get('description').touched)">
-      <label for="new-description" class="control-label">Description</label>
-      <textarea  class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formNewOrder.get('description')"></textarea>
+    <div class="col-md-6">
+      <!-- description -->
+      <div [class.has-error]="formNewOrder.get('description').errors && (formNewOrder.get('description').dirty || formNewOrder.get('description').touched)">
+        <label for="new-description" class="control-label">Description</label>
+        <textarea class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formNewOrder.get('description')"></textarea>
+      
+      </div>
+      <div class="input-wrapper">
+        <label for="datetime-picker" class="control-label">Due date:</label>
+        <input id="datetime-picker" class="form-control" [formControl]="formNewOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
+          [owlDateTime]="dtPicker2" [min]="minDueDate">
+        <owl-date-time #dtPicker2 [pickerType]="'calendar'"></owl-date-time>
+      </div>
 
-    </div>
-    <div class="input-wrapper">
-      <label for="datetime-picker" class="control-label">Due date:</label>
-      <input id="datetime-picker" class="form-control" [formControl]="formNewOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
-        [owlDateTime]="dtPicker2" [min]="minDueDate">
-      <owl-date-time #dtPicker2 [pickerType]="'calendar'"></owl-date-time>
-    </div>
-    
-    <label for="" class="control-label">
-      Customer:
-    </label>
-    <input type="search" class="form-control" 
-           [(ngModel)]="termCustomer" 
-           (input)="onChangeTermCustomer()" 
-           (keyup.enter)="chooseCustomer()"
-           (keyup.escape)="escapeSearch($event)" 
-           (keyup.arrowup)="shiftFocusUp($event)" 
-           (keyup.arrowdown)="shiftFocusDown($event)">
-    
-    <div class="results">
-      <perfect-scrollbar class="scroller">
-        <div [ngClass]="{'box-container' : termCustomer != ''}">
-          <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let rowIDx = index">
-            <ng-container *ngIf="termCustomer != ''">
-              <button type="button" class="list-group-item list-customers" 
-                      [attr.data-rowIndex]="rowIDx" 
-                      [attr.data-idCustomer]="customer.id"
-                      #listCustomers 
-                      (click)="selectCustomer(customer)">
-                <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
+    </div>    
+
+    <div class="col-md-6">
+      <label for="" class="control-label">
+        Customer:
+      </label>
+      <input type="search" class="form-control" [(ngModel)]="termCustomer" (input)="onChangeTermCustomer()" (keyup.enter)="chooseCustomer()"
+        (keyup.escape)="escapeSearch($event)" (keyup.arrowup)="shiftFocusUp($event)" (keyup.arrowdown)="shiftFocusDown($event)">
+
+      <div class="results">
+        <perfect-scrollbar class="scroller">
+          <div [ngClass]="{'box-container' : termCustomer != ''}">
+            <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let rowIDx = index">
+              <ng-container *ngIf="termCustomer != ''">
+                <button type="button" class="list-group-item list-customers" [attr.data-rowIndex]="rowIDx" [attr.data-idCustomer]="customer.id"
+                  #listCustomers (click)="selectCustomer(customer)">
+                  <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
+              </ng-container>
             </ng-container>
-          </ng-container>
-        </div>
-      </perfect-scrollbar>
-    </div>
+          </div>
+        </perfect-scrollbar>
+      </div>
 
+      <div *ngIf="customerSelected && termCustomer == ''">
+        <div class="widget-box widget-color-green2">
+          <div class="widget-header">
+            <h5 class="widget-title bigger lighter">
+              <i class="ace-icon fa fa-users"></i> {{ 'newOrder.newCustomer.selected' | translate }}
+            </h5>
+            <i class="ace-icon fa fa-times close-btn pointer" (click)="customerSelected=''"></i>
+          </div>
+          <div class="widget-body">
+            <div class="widget-main">
+              <dl class="dl-horizontal">
+                <dt>{{ 'Table.name' | translate }}</dt>
+                <dd>{{customerSelected?.name}}</dd>
+      
+                <dt>{{ 'Table.phone' | translate }}</dt>
+                <dd>{{customerSelected?.phone}}</dd>
+      
+                <dt>{{ 'Table.email' | translate }}</dt>
+                <dd>{{customerSelected?.email}}</dd>
+      
+                <dt>{{ 'Table.address' | translate }}</dt>
+                <dd>{{customerSelected?.address}}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
   </bs-modal-body>
 
   <bs-modal-footer>

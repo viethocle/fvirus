@@ -31,6 +31,7 @@ export class CreateOrderComponent implements OnInit {
   customers: Customer[] = [];
   termCustomer = "";
   currentFocusIndex: number = -1;
+  customerSelected: Customer;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -75,7 +76,8 @@ export class CreateOrderComponent implements OnInit {
 
   //* handle event keyup enter andn click customer
   selectCustomer(cus: Customer) {
-    console.log(cus);
+    this.customerSelected = cus;
+    this.termCustomer = "";
   }
 
   shiftFocusDown(e) {
