@@ -29,6 +29,8 @@
       <input 
         type="search" class="form-control"
         [(ngModel)]="termCustomer"
+        (input)="onChangeTermCustomer()"
+        (keyup.enter)="chooseCustomer()"
         (keyup.escape)="escapeSearch($event)"
         (keyup.arrowup)="shiftFocusUp($event)"
         (keyup.arrowdown)="shiftFocusDown($event)">
@@ -38,7 +40,11 @@
           <div [ngClass]="{'box-container' : termCustomer != ''}" >
             <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let rowIDx = index">
               <ng-container *ngIf="termCustomer != ''">
-                <button type="button" class="list-group-item list-customers" [attr.data-index]="rowIDx" #listCustomers (keyup.arrowdown)="shiftFocusDown()">
+                <button type="button" class="list-group-item list-customers" 
+                        [attr.data-rowIndex]="rowIDx" 
+                        [attr.data-idCustomer]="customer.id"
+                        #listCustomers 
+                        (click)="selectCustomer(customer)">
                   <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
               </ng-container>
             </ng-container>

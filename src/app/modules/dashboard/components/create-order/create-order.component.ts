@@ -12,6 +12,8 @@ import { DashboardService } from '../../dashboard.service';
 import { Order } from '../../order';
 import { Customer } from "@modules/customer/customer.model";
 import { CustomerService } from "@modules/customer/customer.service";
+import { PerfectScrollbarComponent } from "ngx-perfect-scrollbar";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-create-order',
@@ -21,6 +23,7 @@ import { CustomerService } from "@modules/customer/customer.service";
 export class CreateOrderComponent implements OnInit {
 
   @ViewChild("modalCreate") modalCreate: BsModalComponent;
+  @ViewChild(PerfectScrollbarComponent) componentScroll: PerfectScrollbarComponent;
   @ViewChildren("listCustomers") listCustomers;
   formNewOrder: FormGroup;
   @Output() newOrder = new EventEmitter<Order>();
@@ -61,6 +64,20 @@ export class CreateOrderComponent implements OnInit {
         .subscribe((newOrder: Order) => this.newOrder.emit(newOrder));
   }
 
+  chooseCustomer() {
+    if (this.currentFocusIndex === -1) return;
+    let listsButton = this.listCustomers.toArray().map(res => res.nativeElement);
+    let selectedCustomerId = listsButton[this.currentFocusIndex].dataset.idcustomer;
+    let selectedCustomer = this.customers.find(cus => cus.id === _.toNumber(selectedCustomerId));
+    this.selectCustomer(selectedCustomer);
+  }
+
+
+  //* handle event keyup enter andn click customer
+  selectCustomer(cus: Customer) {
+    console.log(cus);
+  }
+
   shiftFocusDown(e) {
     e.preventDefault();
     this.currentFocusIndex++;
@@ -78,12 +95,20 @@ export class CreateOrderComponent implements OnInit {
     e.stopPropagation();
   }
 
+  onChangeTermCustomer() {
+    this.currentFocusIndex = -1;
+  }
+
   focusElement(id) {
     let listsButton = this.listCustomers.toArray().map(res => res.nativeElement);
+    if (id > listsButton.count || id < 0) {
+      return;
+    }
     listsButton.forEach(e => {
       this.renderer2.removeClass(e, 'focus-customer');
     });
     this.renderer2.addClass(listsButton[id], 'focus-customer');
+    this.componentScroll.directiveRef.scrollToY(40 * id);
   }
 
 }
