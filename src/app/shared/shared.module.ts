@@ -70,6 +70,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     InprogressPipe,
     ReadyPipe,
     ClosedPipe,
+    MySearchPipe,
     PerfectScrollbarModule,
     DatePipe,
     OwlDateTimeModule,

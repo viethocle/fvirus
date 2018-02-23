@@ -26,7 +26,22 @@
       <label for="" class="control-label">
         Customer:
       </label>
-      <input type="search" class="form-control">
+      <input 
+        type="search" class="form-control"
+        [(ngModel)]="termCustomer">
+
+      <div class="results">
+        <perfect-scrollbar class="scroller">
+          <div [ngClass]="{'box-container' : termCustomer != ''}">
+            <ng-container *ngFor="let customer of customers">
+              <ng-container *ngIf="termCustomer != ''">
+                <button type="button" class="list-group-item list-customers">
+                  <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
+              </ng-container>
+            </ng-container>
+          </div>
+        </perfect-scrollbar>
+      </div>
     </div>
 
 

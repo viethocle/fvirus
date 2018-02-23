@@ -5,3 +5,7 @@
 label {
   margin-top: 8px;
 }
+
+.box-container {
+  max-height: 283px;
+}

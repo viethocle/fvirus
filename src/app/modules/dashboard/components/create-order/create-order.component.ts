@@ -25,6 +25,7 @@ export class CreateOrderComponent implements OnInit {
   @Output() newOrder = new EventEmitter<Order>();
   minDueDate: any;
   customers: Customer[] = [];
+  termCustomer = "";
 
   constructor(
     private formBuilder: FormBuilder,
