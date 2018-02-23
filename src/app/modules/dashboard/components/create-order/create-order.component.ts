@@ -58,4 +58,8 @@ export class CreateOrderComponent implements OnInit {
         .subscribe((newOrder: Order) => this.newOrder.emit(newOrder));
   }
 
+  shiftFocusDown() {
+    console.log("Down");
+  }
+
 }

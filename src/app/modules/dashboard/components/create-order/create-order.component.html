@@ -28,14 +28,15 @@
       </label>
       <input 
         type="search" class="form-control"
-        [(ngModel)]="termCustomer">
+        [(ngModel)]="termCustomer"
+        (keyup.arrowdown)="shiftFocusDown()">
 
       <div class="results">
         <perfect-scrollbar class="scroller">
           <div [ngClass]="{'box-container' : termCustomer != ''}">
-            <ng-container *ngFor="let customer of customers|mySearch:termCustomer">
+            <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let i = index">
               <ng-container *ngIf="termCustomer != ''">
-                <button type="button" class="list-group-item list-customers">
+                <button type="button" class="list-group-item list-customers" [attr.data-index]="i">
                   <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
               </ng-container>
             </ng-container>
