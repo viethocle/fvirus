@@ -13,47 +13,41 @@
       <label for="new-description" class="control-label">Description</label>
       <textarea  class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formNewOrder.get('description')"></textarea>
 
-      <div class="input-wrapper">
-        <label for="datetime-picker" class="control-label">Due date:</label>
-        <input id="datetime-picker" class="form-control" [formControl]="formNewOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
-          [owlDateTime]="dtPicker2"
-          [min]="minDueDate">
-        <owl-date-time 
-          #dtPicker2 
-          [pickerType]="'calendar'"></owl-date-time>
-      </div>
-
-      <label for="" class="control-label">
-        Customer:
-      </label>
-      <input 
-        type="search" class="form-control"
-        [(ngModel)]="termCustomer"
-        (input)="onChangeTermCustomer()"
-        (keyup.enter)="chooseCustomer()"
-        (keyup.escape)="escapeSearch($event)"
-        (keyup.arrowup)="shiftFocusUp($event)"
-        (keyup.arrowdown)="shiftFocusDown($event)">
-
-      <div class="results">
-        <perfect-scrollbar class="scroller">
-          <div [ngClass]="{'box-container' : termCustomer != ''}" >
-            <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let rowIDx = index">
-              <ng-container *ngIf="termCustomer != ''">
-                <button type="button" class="list-group-item list-customers" 
-                        [attr.data-rowIndex]="rowIDx" 
-                        [attr.data-idCustomer]="customer.id"
-                        #listCustomers 
-                        (click)="selectCustomer(customer)">
-                  <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
-              </ng-container>
-            </ng-container>
-          </div>
-        </perfect-scrollbar>
-      </div>
     </div>
-
-
+    <div class="input-wrapper">
+      <label for="datetime-picker" class="control-label">Due date:</label>
+      <input id="datetime-picker" class="form-control" [formControl]="formNewOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
+        [owlDateTime]="dtPicker2" [min]="minDueDate">
+      <owl-date-time #dtPicker2 [pickerType]="'calendar'"></owl-date-time>
+    </div>
+    
+    <label for="" class="control-label">
+      Customer:
+    </label>
+    <input type="search" class="form-control" 
+           [(ngModel)]="termCustomer" 
+           (input)="onChangeTermCustomer()" 
+           (keyup.enter)="chooseCustomer()"
+           (keyup.escape)="escapeSearch($event)" 
+           (keyup.arrowup)="shiftFocusUp($event)" 
+           (keyup.arrowdown)="shiftFocusDown($event)">
+    
+    <div class="results">
+      <perfect-scrollbar class="scroller">
+        <div [ngClass]="{'box-container' : termCustomer != ''}">
+          <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let rowIDx = index">
+            <ng-container *ngIf="termCustomer != ''">
+              <button type="button" class="list-group-item list-customers" 
+                      [attr.data-rowIndex]="rowIDx" 
+                      [attr.data-idCustomer]="customer.id"
+                      #listCustomers 
+                      (click)="selectCustomer(customer)">
+                <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
+            </ng-container>
+          </ng-container>
+        </div>
+      </perfect-scrollbar>
+    </div>
 
   </bs-modal-body>
 
