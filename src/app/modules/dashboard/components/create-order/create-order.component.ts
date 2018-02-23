@@ -1,4 +1,3 @@
-import { CustomerService } from './../../../customer/customer.service';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import {
   FormControl,
@@ -9,7 +8,10 @@ import {
 } from '@angular/forms';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { DashboardService } from '../../dashboard.service';
+
 import { Order } from '../../order';
+import { Customer } from "@modules/customer/customer.model";
+import { CustomerService } from "@modules/customer/customer.service";
 
 @Component({
   selector: 'app-create-order',
@@ -22,6 +24,7 @@ export class CreateOrderComponent implements OnInit {
   formNewOrder: FormGroup;
   @Output() newOrder = new EventEmitter<Order>();
   minDueDate: any;
+  customers: Customer[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,6 +34,8 @@ export class CreateOrderComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.initDatetime();
+    this.customerService.getCustomersWithObservable()
+        .subscribe(customers => this.customers = customers);
   }
 
 
