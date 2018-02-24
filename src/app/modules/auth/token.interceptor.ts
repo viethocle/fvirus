@@ -23,7 +23,6 @@ export class TokenInterceptor implements HttpInterceptor {
         uid: headers.get('uid')
       }
     });
-    console.log(request);
     return next.handle(request);
   }
 }
