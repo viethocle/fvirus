@@ -28,7 +28,7 @@ export class DashboardService  {
   constructor(
     private http: HttpClient
   ) {
-    this.setConnect();
+    // this.setConnect();
   }
 
 

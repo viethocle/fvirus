@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   baseUrl: 'https://roll-novahub.herokuapp.com/api',
   baseUrlSocket: 'wss://roll-novahub.herokuapp.com/cable'
 };
