@@ -14,6 +14,7 @@ import { Customer } from "@modules/customer/customer.model";
 import { CustomerService } from "@modules/customer/customer.service";
 import { PerfectScrollbarComponent } from "ngx-perfect-scrollbar";
 import * as _ from 'lodash';
+import { QueryList } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-create-order',
@@ -78,7 +79,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
 
-  //* handle event keyup enter andn click customer
+  // * handle event keyup enter andn click customer
   selectCustomer(cus: Customer) {
     this.customerSelected = cus;
     this.termCustomer = "";
@@ -86,19 +87,21 @@ export class CreateOrderComponent implements OnInit {
 
   shiftFocusDown(e) {
     e.preventDefault();
+    let lengthResults = this.listCustomers.toArray().length;
+    if (this.currentFocusIndex === lengthResults - 1) return;
     this.currentFocusIndex++;
     this.focusElement(this.currentFocusIndex);
   }
 
   shiftFocusUp(e) {
     e.preventDefault();
+    if (this.currentFocusIndex == 0) return;
     this.currentFocusIndex--;
     this.focusElement(this.currentFocusIndex);
   }
 
   escapeSearch(e) {
     this.termCustomer = "";
-    e.stopPropagation();
   }
 
   onChangeTermCustomer() {

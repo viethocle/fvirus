@@ -247,5 +247,8 @@
       "return-success": "Trả hóa đơn thành công"
     },
     "import": "Số lượng bằng 0, không có gì được nhập"
+  },
+  "notification": {
+    "not-found": "Không tìm thấy kết quả"
   }
 }

@@ -34,8 +34,8 @@
               (input)="onChangeTermCustomer()" 
               (keyup.enter)="chooseCustomer()"
               (keyup.escape)="escapeSearch($event)" 
-              (keyup.arrowup)="shiftFocusUp($event)" 
-              (keyup.arrowdown)="shiftFocusDown($event)">
+              (keydown.arrowup)="shiftFocusUp($event)" 
+              (keydown.arrowdown)="shiftFocusDown($event)">
         <span class="input-group-addon">
           <i class="ace-icon fa fa-search"></i>
         </span>
@@ -53,6 +53,10 @@
             </ng-container>
           </div>
         </perfect-scrollbar>
+
+        <div *ngIf="listCustomers?.length === 0 && termCustomer != ''">
+          {{ "notification.not-found" | translate }}
+        </div>
       </div>
 
       <!-- show customer selected -->
