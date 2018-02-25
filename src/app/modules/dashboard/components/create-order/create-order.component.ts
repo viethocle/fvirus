@@ -105,7 +105,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   onChangeTermCustomer() {
-    this.currentFocusIndex = -1;
+    this.currentFocusIndex = -1; // reset focus when typing new term 
   }
 
   focusElement(id) {
