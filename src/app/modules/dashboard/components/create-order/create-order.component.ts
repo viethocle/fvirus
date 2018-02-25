@@ -15,23 +15,14 @@ import { Customer } from "@modules/customer/customer.model";
 import { CustomerService } from "@modules/customer/customer.service";
 import { PerfectScrollbarComponent } from "ngx-perfect-scrollbar";
 import * as _ from 'lodash';
-import { QueryList } from '@angular/core/src/render3';
+import { FlyInOut } from '../../flyInOut.animate';
 
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.css'],
   animations: [
-    trigger('flyInOut', [
-      state('in', style({ transform: 'translateX(0)' })),
-      transition('void => *', [
-        style({ transform: 'translateX(-100%)' }),
-        animate(100)
-      ]),
-      transition('* => void', [
-        animate(100, style({ transform: 'translateX(100%)' }))
-      ])
-    ])
+    FlyInOut
   ]
 })
 export class CreateOrderComponent implements OnInit {

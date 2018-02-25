@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger} from '@angular/animations';
+import { AnimationEntryMetadata } from '@angular/core';
 
-export const FlyInOut = 
+export const FlyInOut: AnimationEntryMetadata  = 
   trigger('flyInOut', [
     state('in', style({transform: 'translateX(0)'})),
     transition('void => *', [
