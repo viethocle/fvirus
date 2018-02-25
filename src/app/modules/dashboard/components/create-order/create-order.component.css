@@ -21,3 +21,14 @@ dt {
 dd {
   margin-left: 100px;
 }
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+}
+
+.close-btn:hover {
+  font-size: 1.3em;
+
+}
