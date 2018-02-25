@@ -60,13 +60,13 @@
       </div>
 
       <!-- show customer selected -->
-      <div *ngIf="customerSelected && termCustomer == ''">
-        <div class="widget-box transparent" [@flyInOut]="'in'">
+      <div *ngIf="customerSelected && termCustomer == ''" [@flyInOut]="'in'">
+        <div class="widget-box widget-color-green2" >
           <div class="widget-header">
             <h5 class="widget-title bigger lighter">
               <i class="ace-icon fa fa-users"></i> {{ 'newOrder.newCustomer.selected' | translate }}
             </h5>
-            <i class="ace-icon fa fa-times close-btn pointer" (click)="customerSelected=''"></i>
+            <i class="ace-icon fa fa-times close-btn pointer" (click)="customerSelected=null"></i>
           </div>
           <div class="widget-body">
             <div class="widget-main">
