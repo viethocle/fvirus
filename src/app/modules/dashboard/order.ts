@@ -1,3 +1,4 @@
+import { Customer } from '@modules/customer/customer.model';
 
 export enum StatusOrder {
   new         = 'new',
@@ -6,9 +7,10 @@ export enum StatusOrder {
   closed      = 'closed'
 }
 
-export interface Order {
+export class Order {
   id: number;
   description: string;
   status: StatusOrder;
   due_date: string;
+  customer: Customer
 }

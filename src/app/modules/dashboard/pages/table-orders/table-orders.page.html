@@ -9,15 +9,16 @@
         <tr>
           <th>Id </th>
           <th>Description</th>
+          <th>Customer name </th>
           <th>Due date</th>
           <th>Status</th>
-
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let order of orders | paginate: configPagination">
           <td>{{ order.id }}</td>
           <td>{{ order.description }}</td>
+          <td>{{ order.customer.name }}</td>
           <td>{{ order.due_date | dateTimeVi }}</td>
           <td>
             <span class="label arrowed-right arrowed-in"
