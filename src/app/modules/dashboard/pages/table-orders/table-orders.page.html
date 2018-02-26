@@ -12,6 +12,7 @@
           <th>Customer name </th>
           <th>Due date</th>
           <th>Status</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,7 @@
               {{ order.status }}
             </span>
           </td>
+          <td [innerHTML]="returnHtmlDeleteOrder()"></td>
         </tr>
       </tbody>
     </table>

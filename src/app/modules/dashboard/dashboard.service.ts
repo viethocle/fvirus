@@ -62,6 +62,11 @@ export class DashboardService  {
                     .map((res: any) => res.order as Order);
   }
 
+  /** DELETE order */
+  deleteOrder() {
+    
+  }
+
 
   /** Set Connection */
   setConnect() {

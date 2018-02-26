@@ -1,3 +1,4 @@
+import { BsmodalService } from './../../bsmodal.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Order } from '../../order';
 import { DashboardService } from '../../dashboard.service';
@@ -20,7 +21,9 @@ export class TableOrdersPage implements OnInit, OnDestroy {
     totalItems: 0
   };
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private bsmodalService: BsmodalService) {}
 
   ngOnInit() {
     this.getPage(1);
@@ -44,6 +47,16 @@ export class TableOrdersPage implements OnInit, OnDestroy {
 
   truncateDescription(des: string) {
     return _.truncate(des, {'length': 24});
+  }
+
+  returnHtmlDeleteOrder() {
+    return `<button class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}">
+                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+              </button>`
+  }
+
+  openModalDeleteOrder(order: Order) {
+    this.bsmodalService.selectOrder(order);
   }
 
   ngOnDestroy() {
