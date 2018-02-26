@@ -5,7 +5,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/toPromise";
 
 import { environment } from '../../../environments/environment';
-// import { Angular2TokenService } from 'angular2-token';
+import { Angular2TokenService } from 'angular2-token';
 import { Customer } from './customer.model';
 import * as _ from 'lodash';
 
@@ -21,16 +21,16 @@ export class CustomerService {
 
   private url = `${this.baseUrl}/customers`;
 
-  // private headers = this.authService.currentAuthHeaders;
+  private headers = this.authService.currentAuthHeaders;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authService: Angular2TokenService) {
     // this.options.headers = this.authService.currentAuthHeaders;
   }
 
   getCustomers(): Promise<Response> {
     const getUrl = `${this.url}.json`;
     return this.http
-      .get(getUrl)
+      .get(getUrl, { headers: this.headers })
       .toPromise()
       .then(res => {
         return res;
@@ -46,19 +46,23 @@ export class CustomerService {
     const url = `${
       this.url
     }.json?page=${page}&search_text=${search_text}&per_page=${per_page}`;
-    return this.http.get(url).map(res => res.json() as ICustomersTotal);
+    return this.http
+      .get(url, { headers: this.headers })
+      .map(res => res.json() as ICustomersTotal);
   }
 
   getCustomersWithObservable(): Observable<Customer[]> {
     const getUrl = `${this.url}.json`;
-    return this.http.get(getUrl).map(res => res.json().customers as Customer[]);
+    return this.http
+      .get(getUrl, { headers: this.headers })
+      .map(res => res.json().customers as Customer[]);
   }
 
   deleteCustomer(customer: Customer): Promise<any> {
     const deleteUrl = `${this.url}/${customer.id}.json`;
     return this.http
-      .delete(deleteUrl)
-      .map(res => res.json())
+      .delete(deleteUrl, { headers: this.headers })
+      .map(res => res)
       .toPromise()
       .catch(this.handleError);
   }
@@ -72,7 +76,7 @@ export class CustomerService {
     ].join("&");
     const updateUrl = `${this.url}/${id}.json?${params}`;
     return this.http
-      .put(updateUrl, {}, {})
+      .put(updateUrl, {}, { headers: this.headers })
       .map(res => res.json().customer as any);
   }
 
@@ -85,8 +89,9 @@ export class CustomerService {
     ].join("&");
     const addUrl = `${this.url}.json?${params}`;
     return this.http
-      .post(addUrl, JSON.stringify(value), {})
-      .map(res => res.json().customer as Customer);
+      .post(addUrl, JSON.stringify(value), { headers: this.headers })
+      .map(res => res.json().customer as Customer)
+      .catch(err => this.handleError(err));
   }
 
   private handleError(error: any): Promise<any> {

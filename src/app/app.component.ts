@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { SidebarService } from "@modules/layout/sidebar.service";
 import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
@@ -7,6 +7,7 @@ import { AuthService } from './modules/auth/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from "rxjs/Observable";
 import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
+import { ToastsManager } from "ng2-toastr/ng2-toastr";
 
 @Component({
   selector: "app-root",
@@ -24,9 +25,12 @@ export class AppComponent {
     private translate: TranslateService,
     private sidebarSvc: SidebarService,
     private authToken: Angular2TokenService,
-    private authSvc: AuthService
+    private authSvc: AuthService,
+    private toastr: ToastsManager,
+    vRef: ViewContainerRef
   ) {
     this.authSvc.userSignedIn$.subscribe(data => this.userSignedIn$.next(data));
+    this.toastr.setRootViewContainerRef(vRef);
     // const lang = localStorage.getItem("lang");
     translate.setDefaultLang("vi");
   }

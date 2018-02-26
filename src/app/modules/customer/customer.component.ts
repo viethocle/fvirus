@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { Http, Response } from "@angular/http";
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
@@ -20,6 +20,7 @@ import { CustomerService } from "./customer.service";
 import { Customer } from "./customer.model";
 import { ToastrService } from "../../shared/toastr.service";
 import * as _ from "lodash";
+import { ToastsManager } from "ng2-toastr/ng2-toastr";
 
 @Component({
   selector: "app-customer",
@@ -59,8 +60,11 @@ export class CustomerComponent implements OnInit {
     private http: Http,
     private customerService: CustomerService,
     private toastrService: ToastrService,
+    private toastr: ToastsManager,
+    vRef: ViewContainerRef,
     fb: FormBuilder
   ) {
+    this.toastr.setRootViewContainerRef(vRef);
     this.formAdd = fb.group({
       name: ["", Validators.required],
       phone: [""],
@@ -105,7 +109,6 @@ export class CustomerComponent implements OnInit {
 
   onChangeCount($event) {
     this.loading = true;
-    console.log(this.perPage);
     this.customerService
       .getCustomersWithPage(1, this.perPage, this.currentSearch)
       .subscribe(res => {
@@ -126,7 +129,6 @@ export class CustomerComponent implements OnInit {
         this.configPagination.currentPage = page;
         this.customers = res.customers;
         this.loading = false;
-        console.log(this.customers);
       });
   }
 
@@ -143,7 +145,7 @@ export class CustomerComponent implements OnInit {
   sendRequestDeleteCustomer(customer: Customer) {
     this.customerService.deleteCustomer(customer).then(res => {
       this.customers = _.reject(this.customers, ["id", customer.id]);
-      this.toastrService.SetMessageSuccess("Success");
+      this.toastrService.SetMessageSuccess("Deleted");
     });
   }
 
@@ -158,7 +160,6 @@ export class CustomerComponent implements OnInit {
     add: string,
     id: number
   ) {
-    console.log(this.customer.id);
     this.customer.name = name;
     this.customer.email = email;
     this.customer.phone = phone;
@@ -174,6 +175,7 @@ export class CustomerComponent implements OnInit {
         this.customers.find(cus => cus.id === customer.id).address =
           customer.address;
         this.revertEdit();
+        this.toastrService.SetMessageSuccess("Updated");
       });
   }
 
@@ -188,6 +190,7 @@ export class CustomerComponent implements OnInit {
         this.customers.unshift(customer);
         this.formAdd.reset();
         this.addvalue = 0;
+        this.toastrService.SetMessageSuccess("Success");
       });
   }
 }
