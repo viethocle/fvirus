@@ -29,7 +29,11 @@
               {{ order.status }}
             </span>
           </td>
-          <td [innerHTML]="returnHtmlDeleteOrder()"></td>
+          <td>
+            <button class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}">
+            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+          </button>
+        </td>
         </tr>
       </tbody>
     </table>
