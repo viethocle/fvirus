@@ -17,7 +17,6 @@ import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
 import { NavbarComponent } from './modules/layout/navbar/navbar.component';
 import { FooterComponent } from './modules/layout/footer/footer.component';
 import { LoginComponent } from './modules/auth/login/login.component';
-import { CustomerComponent } from './modules/customer/customer.component';
 
 import { TokenInterceptor } from './modules/auth/token.interceptor';
 
