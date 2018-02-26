@@ -4,7 +4,8 @@ import { DashboardService } from '@modules/dashboard/dashboard.service';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Order } from "@modules/dashboard/order";
 import { tap } from "rxjs/operators";
-
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+@Destroyable
 @Component({
   selector: 'app-delete-order',
   templateUrl: './delete-order.component.html',
@@ -24,6 +25,7 @@ export class DeleteOrderComponent implements OnInit {
   ) {
     this.bsmodalService.order$  
         .pipe(
+          takeUntilDestroy(this),
           tap(order => this.order = order)
         )
         .subscribe(_ => this.openModalDelete());
