@@ -116,7 +116,6 @@ button:hover {
   border-spacing: 5px 0;
   width: 100%;
   position: absolute;
-  max-height: 600px;
 }
 
 .container {
@@ -243,7 +242,7 @@ nested-repeat-example .container span {
 }
 
 .wrapper.container-fluid {
-  max-height: 70vh;
+  height: 70vh;
   overflow: hidden;
   overflow-y: scroll;
 }
