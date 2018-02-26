@@ -1,3 +1,4 @@
+import { Customer } from '@modules/customer/customer.model';
 import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { Http, Response } from "@angular/http";
 import { Subject } from "rxjs/Subject";
@@ -16,17 +17,15 @@ import "rxjs/add/operator/delay";
 // import { getLangUrl } from "../shared/get_url_lang";
 // import { environment } from "../../environments/environment";
 
-import { CustomerService } from "./customer.service";
-import { Customer } from "./customer.model";
-import { ToastrService } from "../../shared/toastr.service";
 import * as _ from "lodash";
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
+import { CustomerService } from "@modules/customer/customer.service";
+import { ToastrService } from "@shared/toastr.service";
 
 @Component({
   selector: "app-customer",
   templateUrl: "./customer.component.html",
-  styleUrls: ["./customer.component.css"],
-  providers: [CustomerService]
+  styleUrls: ["./customer.component.css"]
 })
 export class CustomerComponent implements OnInit {
   @ViewChild("modal") modal: BsModalComponent;
