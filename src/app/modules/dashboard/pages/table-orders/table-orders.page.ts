@@ -42,6 +42,10 @@ export class TableOrdersPage implements OnInit, OnDestroy {
     this.orders.unshift(order);
   }
 
+  truncateDescription(des: string) {
+    return _.truncate(des, {'length': 24});
+  }
+
   ngOnDestroy() {
     // this.subscriptionGetOrders.unsubscribe();
   }

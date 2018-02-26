@@ -17,7 +17,7 @@
       <tbody>
         <tr *ngFor="let order of orders | paginate: configPagination">
           <td>{{ order.id }}</td>
-          <td>{{ order.description }}</td>
+          <td>{{ truncateDescription(order.description) }}</td>
           <td>{{ order.customer.name }}</td>
           <td>{{ order.due_date | dateTimeVi }}</td>
           <td>
