@@ -30,7 +30,10 @@
             </span>
           </td>
           <td>
-            <button class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}">
+            <button 
+              class="btn btn-xs btn-danger" 
+              tooltip="{{ 'tooltip.delete' | translate }}"
+              (click)="openModalDelete(order)">
             <i class="ace-icon fa fa-trash-o bigger-120"></i>
           </button>
         </td>
@@ -73,3 +76,5 @@
     <!-- end pagination -->
   </div>
 </div>
+
+<app-delete-order></app-delete-order>

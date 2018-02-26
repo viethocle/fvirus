@@ -55,11 +55,11 @@ export class TableOrdersPage implements OnInit, OnDestroy {
               </button>`
   }
 
-  openModalDeleteOrder(order: Order) {
+  openModalDelete(order: Order) {
     this.bsmodalService.selectOrder(order);
   }
 
   ngOnDestroy() {
-    // this.subscriptionGetOrders.unsubscribe();
+    this.subscriptionGetOrders.unsubscribe();
   }
 }

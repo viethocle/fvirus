@@ -5,6 +5,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { Order } from "@modules/dashboard/order";
 import { tap } from "rxjs/operators";
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import { skip } from "rxjs/operator/skip";
 @Destroyable
 @Component({
   selector: 'app-delete-order',
