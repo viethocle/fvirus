@@ -15,6 +15,7 @@ import { skip } from "rxjs/operator/skip";
 export class DeleteOrderComponent implements OnInit {
 
   @ViewChild('modalDelete') modalDelete: BsModalComponent;
+  @Output() deleteOrderOutput = new EventEmitter<Order>();
   order: Order;
 
   constructor(
@@ -37,7 +38,8 @@ export class DeleteOrderComponent implements OnInit {
   }
 
   deleteOrder() {
-    console.log(this.order);
+    this.dashboardService.deleteOrder(this.order.id)
+        .subscribe(_ => this.deleteOrderOutput.emit(this.order));
   }
 
 }
