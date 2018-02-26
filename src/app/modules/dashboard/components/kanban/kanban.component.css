@@ -241,3 +241,9 @@ nested-repeat-example .container span {
   background: #F4CE46;
   border: 1px solid #F4CE46;
 }
+
+.wrapper.container-fluid {
+  max-height: 70vh;
+  overflow: hidden;
+  overflow-y: scroll;
+}
