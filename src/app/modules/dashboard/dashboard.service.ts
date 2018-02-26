@@ -28,7 +28,7 @@ export class DashboardService  {
   constructor(
     private http: HttpClient
   ) {
-    this.setConnect();
+    // this.setConnect();
   }
 
 
@@ -44,9 +44,6 @@ export class DashboardService  {
   getOrdersWithPagination(page: number): Observable<IOrdersPaginate> {
     let params = new HttpParams().set('page', page.toString());
     return this.http.get<IOrdersPaginate>(this.baseUrl, { params: params } );
-  }
-  getOrdersWithPaginationMock(page: number): Observable<Order[]> {
-    return this.getOrders();
   }
 
   /** POST new order */

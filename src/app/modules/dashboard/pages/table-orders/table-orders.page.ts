@@ -21,8 +21,7 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit() {
-    // this.getPage(1);
-    this.getOrdersMock();
+    this.getPage(1);
   }
 
   getPage(page: number) {
@@ -35,12 +34,6 @@ export class TableOrdersPage implements OnInit, OnDestroy {
       .subscribe(res => {
         this.orders = res.orders;
       });
-  }
-
-  getOrdersMock() {
-    this.dashboardService.getOrders().subscribe(orders => {
-      this.orders = orders;
-    });
   }
 
   handlerAddNewOrder(order) {

@@ -20,6 +20,7 @@ import { DateTimeViPipe } from './pipes/date-time-vi.pipe';
 import { MatchHeightDirective } from './directives/match-height.directive';
 import { ToastModule, ToastOptions } from "ng2-toastr/ng2-toastr";
 import { ToastrService } from "./toastr.service";
+import { MySearchPipe } from './pipes/my-search.pipe';
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -43,7 +44,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     InprogressPipe,
     ReadyPipe,
     ClosedPipe,
-    DateTimeViPipe
+    DateTimeViPipe,
+    MySearchPipe
   ],
   imports: [
     FormsModule,
@@ -68,6 +70,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     InprogressPipe,
     ReadyPipe,
     ClosedPipe,
+    MySearchPipe,
     PerfectScrollbarModule,
     DatePipe,
     OwlDateTimeModule,

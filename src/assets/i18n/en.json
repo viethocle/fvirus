@@ -247,5 +247,8 @@
       "return-success": "Return order successful"
     },
     "import": "Quantity is 0, nothing is imported"
+  }, 
+  "notification": {
+    "not-found": "Not found"
   }
 }

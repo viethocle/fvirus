@@ -46,9 +46,9 @@ export class MatchHeightDirective implements AfterViewChecked {
       return curr > prev ? curr : prev;
     }, 0);
 
-    let kanbans = document.getElementsByClassName('kanban');
-    Array.from(kanbans)
-      .forEach((x: HTMLElement) => x.style.height = `${maxHeight + 40}px`);
+    // let kanbans = document.getElementsByClassName('kanban');
+    // Array.from(kanbans)
+    //   .forEach((x: HTMLElement) => x.style.height = `${maxHeight + 40}px`);
     // apply max height
     Array.from(children)
       .forEach((x: HTMLElement) => x.style.height = `${maxHeight}px`);

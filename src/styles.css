@@ -13,3 +13,11 @@
     height: auto;
     min-height: 100vh;
 }
+
+.modal-body {
+  padding: 0 15px;
+}
+
+.pointer {
+    cursor: pointer;
+}
