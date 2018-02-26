@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Order } from '../../order';
 import { DashboardService } from '../../dashboard.service';
-import { ISubscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs/Subscription";
+import * as _ from 'lodash';
+
 @Component({
   selector: "app-dashboard-table-orders",
   templateUrl: "./table-orders.page.html",
@@ -10,7 +12,7 @@ import { ISubscription } from "rxjs/Subscription";
 export class TableOrdersPage implements OnInit, OnDestroy {
   orders: Order[];
   loading: boolean;
-  private subscriptionGetOrders: ISubscription;
+  private subscriptionGetOrders: Subscription;
   public configPagination = {
     id: "server",
     itemsPerPage: 10,
