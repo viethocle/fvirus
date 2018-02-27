@@ -1,5 +1,10 @@
 import { tap } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, Output, EventEmitter, ViewChildren, ElementRef, Renderer2 } from '@angular/core';
+import { 
+  Component, 
+  OnInit, 
+  ViewChild, Output, EventEmitter, ViewChildren, ElementRef, Renderer2, 
+  AfterViewChecked,
+  ChangeDetectorRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
   FormControl,
@@ -26,7 +31,7 @@ import { FlyInOut } from '../../flyInOut.animate';
     FlyInOut
   ]
 })
-export class CreateOrderComponent implements OnInit {
+export class CreateOrderComponent implements OnInit, AfterViewChecked {
 
   @ViewChild("modalCreate") modalCreate: BsModalComponent;
   @ViewChild(PerfectScrollbarComponent) componentScroll: PerfectScrollbarComponent;
@@ -43,13 +48,18 @@ export class CreateOrderComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dashboardService: DashboardService,
     private customerService: CustomerService,
-    private renderer2: Renderer2) { }
+    private renderer2: Renderer2,
+    private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.buildForm();
     this.initDatetime();
     this.customerService.getCustomersWithObservable()
         .subscribe(customers => this.customers = customers);
+  }
+
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
   }
 
 
