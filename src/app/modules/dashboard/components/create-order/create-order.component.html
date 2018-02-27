@@ -54,7 +54,7 @@
           </div>
         </perfect-scrollbar>
 
-        <div *ngIf="listCustomers?.length === 0 && termCustomer != ''">
+        <div [hidden]="!(listCustomers?.length === 0 && termCustomer != '')">
           {{ "notification.not-found" | translate }}
         </div>
       </div>

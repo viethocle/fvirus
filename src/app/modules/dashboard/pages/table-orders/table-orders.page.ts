@@ -47,6 +47,7 @@ export class TableOrdersPage implements OnInit, OnDestroy {
 
   handlerAddNewOrder(order) {
     this.orders.unshift(order);
+    this.configPagination.totalItems += 1;
   }
 
   truncateDescription(des: string) {

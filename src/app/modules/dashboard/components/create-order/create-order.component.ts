@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, Output, EventEmitter, ViewChildren, ElementRef, Renderer2 } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
@@ -71,6 +72,12 @@ export class CreateOrderComponent implements OnInit {
       customer_id: this.customerSelected.id
     })
     this.dashboardService.createOrder(this.formNewOrder.value)
+        .pipe(
+          tap(_ => { 
+            this.formNewOrder.reset(); 
+            this.customerSelected = null;
+          })
+        )
         .subscribe((newOrder: Order) => this.newOrder.emit(newOrder));
   }
 
