@@ -31,7 +31,7 @@ import { FlyInOut } from '../../flyInOut.animate';
     FlyInOut
   ]
 })
-export class CreateOrderComponent implements OnInit, AfterViewChecked {
+export class CreateOrderComponent implements OnInit {
 
   @ViewChild("modalCreate") modalCreate: BsModalComponent;
   @ViewChild(PerfectScrollbarComponent) componentScroll: PerfectScrollbarComponent;
@@ -59,7 +59,6 @@ export class CreateOrderComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    this.cdRef.detectChanges();
   }
 
 
@@ -126,6 +125,9 @@ export class CreateOrderComponent implements OnInit, AfterViewChecked {
   }
 
   onChangeTermCustomer() {
+    this.cdRef.detectChanges();
+    // See this issue to know reason why I added that code 
+    // https://github.com/angular/angular/issues/17572
     this.currentFocusIndex = -1; // reset focus when typing new term 
   }
 
