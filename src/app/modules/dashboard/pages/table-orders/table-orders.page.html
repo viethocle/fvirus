@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders | paginate: configPagination">
+        <tr *ngFor="let order of orders | paginate: configPagination" [@flyOut]="'in'">
           <td>{{ order.id }}</td>
           <td>{{ truncateDescription(order.description) }}</td>
           <td>{{ order.customer.name }}</td>
@@ -77,4 +77,4 @@
   </div>
 </div>
 
-<app-delete-order></app-delete-order>
+<app-delete-order (deleteOrderOutput)="handleDeleteOrder($event)"></app-delete-order>

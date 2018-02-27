@@ -4,11 +4,15 @@ import { Order } from '../../order';
 import { DashboardService } from '../../dashboard.service';
 import { Subscription } from "rxjs/Subscription";
 import * as _ from 'lodash';
+import { FlyOut } from '../../flyInOut.animate';
 
 @Component({
   selector: "app-dashboard-table-orders",
   templateUrl: "./table-orders.page.html",
-  styleUrls: ["./table-orders.page.css"]
+  styleUrls: ["./table-orders.page.css"],
+  animations: [
+    FlyOut
+  ]
 })
 export class TableOrdersPage implements OnInit, OnDestroy {
   orders: Order[];
@@ -57,6 +61,11 @@ export class TableOrdersPage implements OnInit, OnDestroy {
 
   openModalDelete(order: Order) {
     this.bsmodalService.selectOrder(order);
+  }
+
+  handleDeleteOrder(order: Order) {
+    _.remove(this.orders, (o) => o.id === order.id);
+    this.configPagination.totalItems -= 1;
   }
 
   ngOnDestroy() {
