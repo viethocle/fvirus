@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/toPromise";
@@ -21,81 +21,48 @@ export class CustomerService {
 
   private url = `${this.baseUrl}/customers`;
 
-  private headers = this.authService.currentAuthHeaders;
 
-  constructor(private http: Http, private authService: Angular2TokenService) {
+  constructor(private http: HttpClient) {
     // this.options.headers = this.authService.currentAuthHeaders;
   }
 
-  getCustomers(): Promise<Response> {
-    const getUrl = `${this.url}.json`;
-    return this.http
-      .get(getUrl, { headers: this.headers })
-      .toPromise()
-      .then(res => {
-        return res;
-      })
-      .catch(this.handleError);
-  }
 
   getCustomersWithPage(
     page: number,
     per_page: number,
     search_text: string
   ): Observable<ICustomersTotal> {
-    const url = `${
-      this.url
-    }.json?page=${page}&search_text=${search_text}&per_page=${per_page}`;
+    const url = `${this.url}.json?page=${page}&search_text=${search_text}&per_page=${per_page}`;
     return this.http
-      .get(url, { headers: this.headers })
-      .map(res => res.json() as ICustomersTotal);
+      .get(url)
+      .map(res => res as ICustomersTotal);
   }
 
   getCustomersWithObservable(): Observable<Customer[]> {
     const getUrl = `${this.url}.json`;
     return this.http
-      .get(getUrl, { headers: this.headers })
-      .map(res => res.json().customers as Customer[]);
+      .get(getUrl)
+      .map((res: any) => res.customers as Customer[]);
   }
 
-  deleteCustomer(customer: Customer): Promise<any> {
+  deleteCustomer(customer: Customer): Observable<any> {
     const deleteUrl = `${this.url}/${customer.id}.json`;
     return this.http
-      .delete(deleteUrl, { headers: this.headers })
-      .map(res => res)
-      .toPromise()
-      .catch(this.handleError);
+      .delete(deleteUrl)
   }
 
   updateCustomer(customer: Customer, id: number): Observable<any> {
-    const params: string = [
-      `name=${customer.name}`,
-      `email=${customer.email}`,
-      `phone=${customer.phone}`,
-      `address=${customer.address}`
-    ].join("&");
-    const updateUrl = `${this.url}/${id}.json?${params}`;
+    const updateUrl = `${this.url}/${id}.json`;
     return this.http
-      .put(updateUrl, {}, { headers: this.headers })
-      .map(res => res.json().customer as any);
+      .put(updateUrl, customer)
+      .map((res: any) => res.customer as any);
   }
 
   addCustomer(value: any, selectedValue: number): Observable<Customer> {
-    const params: string = [
-      `name=${value.name}`,
-      `email=${value.email}`,
-      `phone=${value.phone}`,
-      `address=${value.address}`
-    ].join("&");
-    const addUrl = `${this.url}.json?${params}`;
+    const addUrl = `${this.url}.json`;
     return this.http
-      .post(addUrl, JSON.stringify(value), { headers: this.headers })
-      .map(res => res.json().customer as Customer)
-      .catch(err => this.handleError(err));
+      .post(addUrl, value)
+      .map((res: any) => res.customer as Customer);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error("An error occurred", error);
-    return Promise.reject(error.message || error);
-  }
 }
