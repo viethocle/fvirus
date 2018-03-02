@@ -38,7 +38,7 @@ export class EditOrderComponent implements OnInit {
   @ViewChildren("listCustomers") listCustomers;
   order: Order;
   formEditOrder: FormGroup;
-  currentDate: Date;
+  startAt: Date;
   minDueDate: Date;
   customers: Customer[] = [];
   termCustomer = "";
@@ -61,8 +61,9 @@ export class EditOrderComponent implements OnInit {
     this.bsmodalService.orderEdit$
         .pipe(
           tap(order => this.order = order),
-          tap(_ => {
+          tap(order => {
             this.customerSelected = this.customers.find(cus => cus.id === this.order.customer.id)
+            this.startAt = new Date(Date.parse(order.due_date));
             this.cdRef.detectChanges();
           }),
           tap(_ => this.setFormValue())
@@ -99,6 +100,15 @@ export class EditOrderComponent implements OnInit {
     this.customerSelected = cus;
     this.termCustomer = "";
   }
+
+  chooseCustomer() {
+    if (this.currentFocusIndex === -1) return;
+    let listsButton = this.listCustomers.toArray().map(res => res.nativeElement);
+    let selectedCustomerId = listsButton[this.currentFocusIndex].dataset.idcustomer;
+    let selectedCustomer = this.customers.find(cus => cus.id === _.toNumber(selectedCustomerId));
+    this.selectCustomer(selectedCustomer);
+  }
+
 
   shiftFocusDown(e) {
     e.preventDefault();

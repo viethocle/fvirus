@@ -16,8 +16,8 @@
       <div class="input-wrapper">
         <label for="datetime-picker" class="control-label">Due date:</label>
         <input id="datetime-picker" class="form-control" [formControl]="formEditOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
-          [owlDateTime]="dtPicker2" [min]="minDueDate">
-        <owl-date-time #dtPicker2 [pickerType]="'calendar'"></owl-date-time>
+          [owlDateTime]="dtPicker2" >
+        <owl-date-time #dtPicker2 [pickerType]="'calendar'" [startAt]="startAt"></owl-date-time>
       </div>
 
     </div>
