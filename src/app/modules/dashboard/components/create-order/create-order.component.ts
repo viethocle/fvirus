@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, ViewChildren, ElementRef, Renderer2 } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { 
+  Component, 
+  OnInit, 
+  ViewChild, Output, EventEmitter, ViewChildren, ElementRef, Renderer2, 
+  AfterViewChecked,
+  ChangeDetectorRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
   FormControl,
@@ -42,13 +48,17 @@ export class CreateOrderComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dashboardService: DashboardService,
     private customerService: CustomerService,
-    private renderer2: Renderer2) { }
+    private renderer2: Renderer2,
+    private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.buildForm();
     this.initDatetime();
     this.customerService.getCustomersWithObservable()
         .subscribe(customers => this.customers = customers);
+  }
+
+  ngAfterViewChecked() {
   }
 
 
@@ -71,6 +81,12 @@ export class CreateOrderComponent implements OnInit {
       customer_id: this.customerSelected.id
     })
     this.dashboardService.createOrder(this.formNewOrder.value)
+        .pipe(
+          tap(_ => { 
+            this.formNewOrder.reset(); 
+            this.customerSelected = null;
+          })
+        )
         .subscribe((newOrder: Order) => this.newOrder.emit(newOrder));
   }
 
@@ -109,6 +125,9 @@ export class CreateOrderComponent implements OnInit {
   }
 
   onChangeTermCustomer() {
+    this.cdRef.detectChanges();
+    // See this issue to know reason why I added that code 
+    // https://github.com/angular/angular/issues/17572
     this.currentFocusIndex = -1; // reset focus when typing new term 
   }
 

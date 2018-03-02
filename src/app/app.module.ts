@@ -17,7 +17,7 @@ import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
 import { NavbarComponent } from './modules/layout/navbar/navbar.component';
 import { FooterComponent } from './modules/layout/footer/footer.component';
 import { LoginComponent } from './modules/auth/login/login.component';
-import { CustomerComponent } from './modules/customer/customer.component';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 import { TokenInterceptor } from './modules/auth/token.interceptor';
 
@@ -42,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     HttpModule,
+    LoadingBarHttpClientModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

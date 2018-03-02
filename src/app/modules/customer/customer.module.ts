@@ -1,8 +1,8 @@
-import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from "@angular/router";
-import { CustomerComponent } from "./customer.component";
+import { CustomerComponent } from './pages/index-customers/customer.component';
+import { SharedModule } from "@shared/shared.module";
 export const CustomerRoutes: Routes = [
   {
     path: "",

@@ -17,6 +17,7 @@ import { ToastsManager } from "ng2-toastr/ng2-toastr";
 export class AppComponent {
   title = "roll";
   outSidebar = false;
+  colorLoading = '#8bc34a'
   public userSignedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     true
   );

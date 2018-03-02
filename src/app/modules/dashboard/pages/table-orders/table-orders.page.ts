@@ -1,16 +1,23 @@
+import { BsmodalService } from './../../bsmodal.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Order } from '../../order';
 import { DashboardService } from '../../dashboard.service';
-import { ISubscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs/Subscription";
+import * as _ from 'lodash';
+import { FlyOut } from '../../flyInOut.animate';
+
 @Component({
   selector: "app-dashboard-table-orders",
   templateUrl: "./table-orders.page.html",
-  styleUrls: ["./table-orders.page.css"]
+  styleUrls: ["./table-orders.page.css"],
+  animations: [
+    FlyOut
+  ]
 })
 export class TableOrdersPage implements OnInit, OnDestroy {
   orders: Order[];
   loading: boolean;
-  private subscriptionGetOrders: ISubscription;
+  private subscriptionGetOrders: Subscription;
   public configPagination = {
     id: "server",
     itemsPerPage: 10,
@@ -18,7 +25,9 @@ export class TableOrdersPage implements OnInit, OnDestroy {
     totalItems: 0
   };
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private bsmodalService: BsmodalService) {}
 
   ngOnInit() {
     this.getPage(1);
@@ -38,9 +47,38 @@ export class TableOrdersPage implements OnInit, OnDestroy {
 
   handlerAddNewOrder(order) {
     this.orders.unshift(order);
+    this.configPagination.totalItems += 1;
+  }
+
+  truncateDescription(des: string) {
+    return _.truncate(des, {'length': 24});
+  }
+
+  returnHtmlDeleteOrder() {
+    return `<button class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}">
+                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+              </button>`
+  }
+
+  openEditModal(order: Order) {
+    this.bsmodalService.selectOrderToEdit(order);
+  }
+
+  openModalDelete(order: Order) {
+    this.bsmodalService.selectOrderToDelete(order);
+  }
+
+  handleDeleteOrder(order: Order) {
+    _.remove(this.orders, (o) => o.id === order.id);
+    this.configPagination.totalItems -= 1;
+  }
+
+  handleUpdateOrder(order) {
+    console.log("UPDATE " + order);
+    _.assign(this.orders.find(t => t.id === order.id), order);
   }
 
   ngOnDestroy() {
-    // this.subscriptionGetOrders.unsubscribe();
+    this.subscriptionGetOrders.unsubscribe();
   }
 }

@@ -1,22 +1,5 @@
 {
   "Title": "Hello",
-  "customers_in_debt": {
-    "HeaderTable": "Danh sách khách hàng đang nợ hóa đơn",
-    "ListOrders": {
-      "Title": "Danh sách đơn hàng",
-      "THead": {
-        "No": "Order No.",
-        "TotalAmount": "Tổng tiền",
-        "Debt": "Nợ",
-        "CreatedAt": "Ngày tạo",
-        "PayDebt": "Trả nợ"
-      },
-      "Button": {
-        "Pay": "Thanh toán",
-        "Close": "Đóng"
-      }
-    }
-  },
   "Table": {
     "No": "Order No.",
     "address": "Địa chỉ",
@@ -58,71 +41,14 @@
     "password": "Mật khẩu",
     "role": "Vai trò"
   },
-  "newOrder": {
-    "title": "Các đơn hàng",
-    "smallTitle": "Tạo đơn hàng",
-    "quot": "In báo giá",
-    "quotEmail": "Gửi báo giá",
-    "quotEmailTitle": "Gửi báo giá qua Email",
-    "sendTo": "Gửi tới: ",
-    "newCustomer": {
-      "title": "Khách hàng",
-      "placeHolder": "Tìm khách hàng",
-      "orAddNew": "Hoặc tạo mới",
-      "selected": "Khách hàng đã chọn"
-    },
-    "product": {
-      "title": "Tìm sản phẩm",
-      "placeHolder": "Nhập tên hoặc mã của sản phẩm",
-      "titleTable": "Các sản phẩm đang trong đơn hàng",
-      "grandTotal": "Tổng cộng",
-      "pay": "Số tiền thanh toán",
-      "debt": "Số tiền nợ lại"
-    }
-  },
-
-
   "customers": {
 		"title": "Khách hàng",
 		"smallTitle": "Danh sách",
 		"create": "Tạo mới",
 		"titleModal": "Tạo khách hàng mới",
-		"close": "Đóng"
+    "close": "Đóng",
+    "selected_customer": "Khách hàng đã chọn"
 	},
-  "Products": {
-    "THead": {
-      "Name": "Tên sản phẩm",
-      "Code": "Mã sản phẩm",
-      "Unit": "Đơn vị",
-      "DefaultImportedPrice": "Giá nhập mặc định",
-      "DefaultSalePrice": "Giá bán mặc định"
-    },
-    "Modal": {
-      "title-update": "Cập nhật sản phẩm",
-      "Title": "Tạo sản phẩm mới",
-      "Cancel": "Hủy bỏ",
-      "Create": "Tạo"
-    },
-    "Header": {
-      "Title": "Sản phẩm",
-      "smallTitle": "Danh sách"
-    },
-    "header-discount-table": "Bảng chiết khấu"
-  },
-
-  "orderHistory": {
-		"title": "Các đơn hàng",
-		"smallTitle": "Lịch sử đơn hàng",
-		"modalTitle": "Chi tiết đơn hàng",
-		"payDebtTitle": "Thánh toán nợ",
-		"btnPayDebt": "Thanh toán",
-		"btnPrint": "In",
-		"btnClose": "Đóng"
-	},
-	"label": {
-		"fully_paid": "Trả hết",
-		"debt": "Nợ"
-  },
 
   "sidebar": {
 		"dashboard": "Trang chủ",
@@ -138,34 +64,7 @@
     "return-invoice": "Trả hóa đơn"
   },
 
-  "store": {
-		"title": "Bảng",
-		"smallTitle": "Nhập kho",
-		"importTitle": "Nhập sản phẩm",
-		"lblSearch": "Tên( Mã ) sản phẩm",
-		"titleModal": "Nhập sản phẩm",
-		"name": "Tên sản phẩm",
-		"code": "Mã sản phẩm",
-		"qty": "Số lượng",
-		"importedPrice": "Giá nhập",
-		"import": "Nhập hàng"
-  },
 
-  "storage": {
-    "title": "Kho hàng",
-    "smallTitle": "Danh sách",
-    "title2": "Lịch sử nhập kho",
-    "search": "Tìm kiếm theo tên hoặc mã sản phẩm"
-  },
-  "rate": {
-		"title": "Tỷ suất chiết khấu mặc định",
-		"smallTitle": "Danh sách",
-		"createBtn": "Tạo tỷ lệ mới",
-		"cancelBtn": "Hủy bỏ",
-		"action": "Hành động",
-		"confirmDelete": "Bạn có chắc là muốn xóa tỉ lệ này không?",
-		"deleteBtn": "Xóa"
-  },
   "navbar": {
 		"welcome": "Xin chào",
 		"settings": "Cài đặt",
@@ -198,31 +97,24 @@
     "update-btn": "Cập nhật",
     "confirm_remove_account": "Bạn có chắc là muốn xóa tài khoản này không?",
     "confirm_remove_product": "Bạn có chắc là muốn xóa sản phẩm này không?",
-    "confirm_remove_history": "Bạn có chắc là muốn xóa lịch sử sản phẩm này không?"
+    "confirm_remove_history": "Bạn có chắc là muốn xóa lịch sử sản phẩm này không?",
+    "confirm_remove_order": "Bạn có chắc là muốn xóa đơn hàng sản phẩm này không?"
   },
-  "return-order": {
-    "title": "Trả hóa đơn",
-    "title-search": "Tìm hóa đơn",
-    "placeholder": "Gõ số hóa đơn, hoặc tên khách hàng",
-    "alert": "Trả hóa đơn thành công: <br> Hóa đơn số. {{ id }} <br> Tổng tiền: {{ total_amount }} <br> <strong> Tiền trả lại cho khách hàng: {{ paid_return_user }} <br> </strong> <strong> Tiền nợ: {{ debt }} <br> </strong>"
-  },
+
   "button": {
-    "cancel-btn": "Hủy bỏ",
+    "cancel": "Hủy bỏ",
     "create": "Tạo mới",
+    "update": "Cập nhật",
     "delete": "Xóa"
   },
   "tooltip": {
+    "close": "Đóng",
     "edit": "Chỉnh sửa",
     "reactive": "Mở lại",
     "delete": "Xóa",
     "rate": "Tỉ xuất chiết khấu"
   },
   "message": {
-    "product": {
-      "add":  "Bạn vừa tạo thành công sản phẩm",
-      "edit-success": "Bạn vừa cập nhật thành công sản phẩm",
-      "delete": "Đã loại bỏ sản phẩm"
-    },
     "new-order": {
       "choose-customer": "Cần chọn khách hàng hoặc là tạo mới",
       "created-order": "Đã tạo thành công đơn hàng",
@@ -230,7 +122,6 @@
       "sending-mail": "Đang gửi mail",
       "missing-goods": "Sản phẩm {{ name }} hiện tại đang hết hàng hoặc chưa nhập kho"
     },
-    "pay-debt": "Đã thanh toán nợ",
     "forms": {
       "required": "Phần nhập bắt buộc",
       "should-be-matched": "Mật khẩu không khớp",
@@ -241,12 +132,7 @@
       "min-value-error": "Giá trị cần phải lớn hơn {{ value }}",
       "max-length-error": "Độ dài không được quá {{value}} ký tự",
       "min-length-error": "Độ dài phải nhiều hơn {{value}} ký tự"
-    },
-    "return-order": {
-      "quantity-return": "Chỉ có thểm giảm số lượng sản phẩm",
-      "return-success": "Trả hóa đơn thành công"
-    },
-    "import": "Số lượng bằng 0, không có gì được nhập"
+    }
   },
   "notification": {
     "not-found": "Không tìm thấy kết quả"

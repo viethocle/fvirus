@@ -9,15 +9,17 @@
         <tr>
           <th>Id </th>
           <th>Description</th>
+          <th>Customer name </th>
           <th>Due date</th>
           <th>Status</th>
-
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders | paginate: configPagination">
+        <tr *ngFor="let order of orders | paginate: configPagination" [@flyOut]="'in'">
           <td>{{ order.id }}</td>
-          <td>{{ order.description }}</td>
+          <td>{{ truncateDescription(order.description) }}</td>
+          <td>{{ order.customer.name }}</td>
           <td>{{ order.due_date | dateTimeVi }}</td>
           <td>
             <span class="label arrowed-right arrowed-in"
@@ -27,6 +29,20 @@
               {{ order.status }}
             </span>
           </td>
+          <td>
+            <button 
+              class="btn btn-xs btn-info" 
+              tooltip="{{ 'tooltip.edit' | translate }}" 
+              (click)="openEditModal(order)">
+              <i class="ace-icon fa fa-pencil bigger-120"></i>
+            </button>
+            <button 
+              class="btn btn-xs btn-danger" 
+              tooltip="{{ 'tooltip.delete' | translate }}"
+              (click)="openModalDelete(order)">
+            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+          </button>
+        </td>
         </tr>
       </tbody>
     </table>
@@ -66,3 +82,6 @@
     <!-- end pagination -->
   </div>
 </div>
+
+<app-delete-order (deleteOrderOutput)="handleDeleteOrder($event)"></app-delete-order>
+<app-edit-order (updateOrderOutput)="handleUpdateOrder($event)"></app-edit-order>

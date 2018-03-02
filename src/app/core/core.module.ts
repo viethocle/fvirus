@@ -12,6 +12,7 @@ import {
   LoggedInGuard,
   LogoutGuard
 } from './guard/';
+import { BsmodalService } from '../modules/dashboard/bsmodal.service';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {
     ManagementGuard,
     LogoutGuard,
     CustomerService,
-    Ng2SearchPipe
+    Ng2SearchPipe,
+    BsmodalService
   ]
 })
 export class CoreModule { }

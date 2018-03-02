@@ -1,7 +1,5 @@
-<button class="btn btn-primary" (click)="modalCreate.open()" >Tạo đơn hàng mới</button>
 
-
-<bs-modal #modalCreate [size]="'lg'" >
+<bs-modal #modalEdit [size]="'lg'" [keyboard]="false">
   <bs-modal-header [showDismiss]="true">
     <h4 class="modal-title">Tao order</h4>
   </bs-modal-header>
@@ -10,19 +8,19 @@
 
     <div class="col-md-6">
       <!-- description -->
-      <div [class.has-error]="formNewOrder.get('description').errors && (formNewOrder.get('description').dirty || formNewOrder.get('description').touched)">
+      <div [class.has-error]="formEditOrder.get('description').errors && (formEditOrder.get('description').dirty || formEditOrder.get('description').touched)">
         <label for="new-description" class="control-label">Description</label>
-        <textarea class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formNewOrder.get('description')"></textarea>
-      
+        <textarea class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formEditOrder.get('description')"></textarea>
+
       </div>
       <div class="input-wrapper">
         <label for="datetime-picker" class="control-label">Due date:</label>
-        <input id="datetime-picker" class="form-control" [formControl]="formNewOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
-          [owlDateTime]="dtPicker2" [min]="minDueDate">
-        <owl-date-time #dtPicker2 [pickerType]="'calendar'"></owl-date-time>
+        <input id="datetime-picker" class="form-control" [formControl]="formEditOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
+          [owlDateTime]="dtPicker2" >
+        <owl-date-time #dtPicker2 [pickerType]="'calendar'" [startAt]="startAt"></owl-date-time>
       </div>
 
-    </div>    
+    </div>
 
     <div class="col-md-6">
       <label for="" class="control-label">
@@ -30,12 +28,8 @@
       </label>
 
       <div class="input-group">
-        <input type="search" class="form-control" [(ngModel)]="termCustomer" 
-              (input)="onChangeTermCustomer()" 
-              (keyup.enter)="chooseCustomer()"
-              (keyup.escape)="escapeSearch($event)" 
-              (keydown.arrowup)="shiftFocusUp($event)" 
-              (keydown.arrowdown)="shiftFocusDown($event)">
+        <input type="search" class="form-control" [(ngModel)]="termCustomer" (input)="onChangeTermCustomer()" (keyup.enter)="chooseCustomer()"
+          (keyup.escape)="escapeSearch($event)" (keydown.arrowup)="shiftFocusUp($event)" (keydown.arrowdown)="shiftFocusDown($event)">
         <span class="input-group-addon">
           <i class="ace-icon fa fa-search"></i>
         </span>
@@ -61,25 +55,25 @@
 
       <!-- show customer selected -->
       <div *ngIf="customerSelected && termCustomer == ''" [@flyInOut]="'in'">
-        <div class="widget-box widget-color-green2" >
+        <div class="widget-box widget-color-green2">
           <div class="widget-header">
             <h5 class="widget-title bigger lighter">
-              <i class="ace-icon fa fa-users"></i> {{ 'customers.selected_customer' | translate }}
+              <i class="ace-icon fa fa-users" tooltip="{{ 'tooltip.close' | translate }}"></i> {{ 'customers.selected_customer' | translate }}
             </h5>
-            <i class="ace-icon fa fa-times close-btn pointer"  tooltip="{{ 'tooltip.close' | translate }}" (click)="customerSelected=null"></i>
+            <i class="ace-icon fa fa-times close-btn pointer" (click)="customerSelected=null"></i>
           </div>
           <div class="widget-body">
             <div class="widget-main">
               <dl class="dl-horizontal">
                 <dt>{{ 'Table.name' | translate }}</dt>
                 <dd>{{customerSelected?.name}}</dd>
-      
+
                 <dt>{{ 'Table.phone' | translate }}</dt>
                 <dd>{{customerSelected?.phone}}</dd>
-      
+
                 <dt>{{ 'Table.email' | translate }}</dt>
                 <dd>{{customerSelected?.email}}</dd>
-      
+
                 <dt>{{ 'Table.address' | translate }}</dt>
                 <dd>{{customerSelected?.address}}</dd>
               </dl>
@@ -89,11 +83,11 @@
       </div>
 
     </div>
-    
+
   </bs-modal-body>
 
   <bs-modal-footer>
-    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalCreate.dismiss()">{{ 'button.cancel' | translate }}</button>
-    <button type="button" class="btn btn-primary" (click)="createOrder()">{{ 'button.create' | translate }}</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalEdit.dismiss()">{{ 'button.cancel' | translate }}</button>
+    <button type="button" class="btn btn-primary" (click)="updateOrder()">{{ 'button.update' | translate }}</button>
   </bs-modal-footer>
 </bs-modal>

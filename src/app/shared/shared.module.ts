@@ -21,6 +21,7 @@ import { MatchHeightDirective } from './directives/match-height.directive';
 import { ToastModule, ToastOptions } from "ng2-toastr/ng2-toastr";
 import { ToastrService } from "./toastr.service";
 import { MySearchPipe } from './pipes/my-search.pipe';
+import { TooltipModule }       from 'ngx-tooltip';
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -64,6 +65,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     InputFieldComponent,
     ErrorLabelComponent,
     BsModalModule,
+    TooltipModule,
     TranslateModule,
     NgxPaginationModule,
     NewPipe,
