@@ -111,6 +111,10 @@ export class CustomerComponent implements OnInit {
     this.navigateUrl(page, per_page, search);
   }
 
+  openModalEdit(customer: Customer) {
+    
+  }
+
   openModalDelete(customer: Customer) {
     this.customerSelected = customer;
     this.modalConfirm.open();

@@ -12,7 +12,7 @@ import {
   LoggedInGuard,
   LogoutGuard
 } from './guard/';
-import { BsmodalService } from '../modules/dashboard/bsmodal.service';
+import { BsmodalService } from './services/bsmodal.service';
 
 
 @NgModule({
