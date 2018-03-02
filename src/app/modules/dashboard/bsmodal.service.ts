@@ -7,12 +7,18 @@ import { ReplaySubject } from "rxjs/ReplaySubject";
 @Injectable()
 export class BsmodalService {
 
-  order$ = new ReplaySubject<Order>(1);
+  orderDelete$ = new ReplaySubject<Order>(1);
+  orderEdit$ = new ReplaySubject<Order>(1);
 
   constructor() { }
 
-  selectOrder(order: Order) {
-    this.order$.next(order);
+  selectOrderToDelete(order: Order) {
+    this.orderDelete$.next(order);
   }
+
+  selectOrderToEdit(order: Order) {
+    this.orderEdit$.next(order);
+  }
+
 
 }

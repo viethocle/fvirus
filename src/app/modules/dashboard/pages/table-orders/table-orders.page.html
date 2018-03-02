@@ -31,6 +31,12 @@
           </td>
           <td>
             <button 
+              class="btn btn-xs btn-info" 
+              tooltip="{{ 'tooltip.edit' | translate }}" 
+              (click)="openEditModal(order)">
+              <i class="ace-icon fa fa-pencil bigger-120"></i>
+            </button>
+            <button 
               class="btn btn-xs btn-danger" 
               tooltip="{{ 'tooltip.delete' | translate }}"
               (click)="openModalDelete(order)">

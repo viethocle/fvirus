@@ -1,7 +1,16 @@
+import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
+import { tap } from 'rxjs/operators';
+import { CustomerService } from './../../../customer/customer.service';
 import { Order } from './../../order';
 import { BsmodalService } from './../../bsmodal.service';
 import { DashboardService } from './../../dashboard.service';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild, Output, EventEmitter, ViewChildren, ElementRef, Renderer2,
+  AfterViewChecked,
+  ChangeDetectorRef
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,6 +18,7 @@ import {
   FormBuilder,
   AbstractControl
 } from '@angular/forms';
+import { Customer } from "@modules/customer/customer.model";
 
 @Component({
   selector: 'app-edit-order',
@@ -16,18 +26,47 @@ import {
   styleUrls: ['./edit-order.component.css']
 })
 export class EditOrderComponent implements OnInit {
-
+  
+  @ViewChild(PerfectScrollbarComponent) componentScroll: PerfectScrollbarComponent;
+  @ViewChildren("listCustomers") listCustomers;
   order: Order;
   formEditOrder: FormGroup;
+  currentDate: Date;
+  minDueDate: Date;
+  customers: Customer[] = [];
+  termCustomer = "";
+  currentFocusIndex: number = -1;
+  customerSelected: Customer;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private dashboardService: DashboardService,
-    private bsmodalService: BsmodalService
+    private bsmodalService: BsmodalService,
+    private customerService: CustomerService,
+    private cdRef: ChangeDetectorRef,
+    private renderer2: Renderer2
   ) { }
 
   ngOnInit() {
     this.buildForm();
+    this.initDate();
+    this.bsmodalService.order$
+        .pipe(
+          tap(order => this.order = order),
+          tap(_ => {
+            this.customerSelected = this.customers.find(cus => cus.id === this.order.customer.id)
+            this.cdRef.detectChanges();
+          })
+        )
+        .subscribe(_ => this.setFormValue());
+    this.customerService.getCustomersWithObservable()
+        .subscribe(customers => this.customers = customers);
+  }
+
+  private initDate() {
+    let d = new Date();
+    this.minDueDate = new Date(new Date().setDate(new Date().getDate() - 1)); // mean yesterday
   }
 
   private buildForm() {
@@ -38,5 +77,59 @@ export class EditOrderComponent implements OnInit {
     });
 
   }
+
+  private setFormValue() {
+    this.formEditOrder.patchValue({
+      description: this.order.description,
+      due_date: this.order.due_date,
+      customer_id: this.order.customer.id
+    })
+  }
+
+  // * handle event keyup enter andn click customer
+  selectCustomer(cus: Customer) {
+    this.customerSelected = cus;
+    this.termCustomer = "";
+  }
+
+  shiftFocusDown(e) {
+    e.preventDefault();
+    let lengthResults = this.listCustomers.toArray().length;
+    if (this.currentFocusIndex === lengthResults - 1) return;
+    this.currentFocusIndex++;
+    this.focusElement(this.currentFocusIndex);
+  }
+
+  onChangeTermCustomer() {
+    this.cdRef.detectChanges();
+    // See this issue to know reason why I added that code 
+    // https://github.com/angular/angular/issues/17572
+    this.currentFocusIndex = -1; // reset focus when typing new term 
+  }
+
+
+  shiftFocusUp(e) {
+    e.preventDefault();
+    if (this.currentFocusIndex == 0) return;
+    this.currentFocusIndex--;
+    this.focusElement(this.currentFocusIndex);
+  }
+
+  escapeSearch(e) {
+    this.termCustomer = "";
+  }
+
+  private focusElement(id) {
+    let listsButton = this.listCustomers.toArray().map(res => res.nativeElement);
+    if (id > listsButton.count || id < 0) {
+      return;
+    }
+    listsButton.forEach(e => {
+      this.renderer2.removeClass(e, 'focus-customer');
+    });
+    this.renderer2.addClass(listsButton[id], 'focus-customer');
+    this.componentScroll.directiveRef.scrollToY(40 * id);
+  }
+
 
 }

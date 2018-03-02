@@ -25,7 +25,7 @@ export class DeleteOrderComponent implements OnInit {
 
   ngOnInit(
   ) {
-    this.bsmodalService.order$  
+    this.bsmodalService.orderEdit$  
         .pipe(
           takeUntilDestroy(this),
           tap(order => this.order = order)
