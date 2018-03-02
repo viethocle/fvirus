@@ -28,10 +28,11 @@ export class DeleteOrderComponent implements OnInit {
     this.bsmodalService.orderDelete$  
         .pipe(
           takeUntilDestroy(this),
+          tap(console.log)
         )
         .subscribe(order => { 
           if (order) {
-            order => this.order = order;
+            this.order = order;
             this.openModalDelete()
           }
         });
