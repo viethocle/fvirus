@@ -96,7 +96,8 @@
     "update-btn": "Cập nhật",
     "confirm_remove_account": "Bạn có chắc là muốn xóa tài khoản này không?",
     "confirm_remove_product": "Bạn có chắc là muốn xóa sản phẩm này không?",
-    "confirm_remove_history": "Bạn có chắc là muốn xóa lịch sử sản phẩm này không?"
+    "confirm_remove_history": "Bạn có chắc là muốn xóa lịch sử sản phẩm này không?",
+    "confirm_remove_order": "Bạn có chắc là muốn xóa đơn hàng sản phẩm này không?"
   },
 
   "button": {
