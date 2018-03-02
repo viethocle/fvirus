@@ -46,7 +46,8 @@
 		"smallTitle": "Danh sách",
 		"create": "Tạo mới",
 		"titleModal": "Tạo khách hàng mới",
-		"close": "Đóng"
+    "close": "Đóng",
+    "selected_customer": "Khách hàng đã chọn"
 	},
 
   "sidebar": {
@@ -107,6 +108,7 @@
     "delete": "Xóa"
   },
   "tooltip": {
+    "close": "Đóng",
     "edit": "Chỉnh sửa",
     "reactive": "Mở lại",
     "delete": "Xóa",
