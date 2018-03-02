@@ -8,7 +8,7 @@ export enum StatusOrder {
 }
 
 export class Order {
-  id: number;
+  id: string;
   description: string;
   status: StatusOrder;
   due_date: string;

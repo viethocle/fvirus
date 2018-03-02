@@ -36,6 +36,7 @@ export class EditOrderComponent implements OnInit {
   @ViewChild("modalEdit") modalEdit: BsModalComponent;
   @ViewChild(PerfectScrollbarComponent) componentScroll: PerfectScrollbarComponent;
   @ViewChildren("listCustomers") listCustomers;
+  @Output() editOrderOutput = new EventEmitter<Order>();
   order: Order;
   formEditOrder: FormGroup;
   startAt: Date;
@@ -71,6 +72,17 @@ export class EditOrderComponent implements OnInit {
         .subscribe(_ => this.modalEdit.open());
     this.customerService.getCustomersWithObservable()
         .subscribe(customers => this.customers = customers);
+  }
+
+  updateOrder() {
+    this.modalEdit.close();
+    this.formEditOrder.patchValue({
+      customer_id: this.customerSelected.id
+    })
+    
+    this.dashboardService.updateOrder(this.order.id, this.formEditOrder.value)
+        .subscribe(order => this.editOrderOutput.emit(order))
+
   }
 
   private initDate() {
