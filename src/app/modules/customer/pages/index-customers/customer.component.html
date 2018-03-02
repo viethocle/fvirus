@@ -9,7 +9,7 @@
       <div class="col-xs-6">
         <div class="dataTables_length" id="dynamic-table_wrapper_length">
           <label>Show
-            <select [(ngModel)]="perPage" (change)="onChangeCount($event)" name="dynamic-table_wrapper_length" aria-controls="dynamic-table_wrapper"
+            <select [(ngModel)]="currentPerPage" (change)="onChangeCount($event)" name="dynamic-table_wrapper_length" aria-controls="dynamic-table_wrapper"
               class="form-control input-sm">
               <option value="10">10</option>
               <option value="25">25</option>
@@ -110,22 +110,20 @@
     <h4 class="modal-title">{{ 'customers.titleModal' | translate }}</h4>
   </bs-modal-header>
   <bs-modal-body>
-    <div class="search-area well well-sm">
-      <app-input-field [attribute]="'Table.name' | translate" [control]="formAdd.get('name')">
-      </app-input-field>
+    <app-input-field [attribute]="'Table.name' | translate" [control]="formAdd.get('name')">
+    </app-input-field>
 
-      <app-input-field [attribute]="'Table.phone' | translate" [control]="formAdd.get('phone')">
-      </app-input-field>
+    <app-input-field [attribute]="'Table.phone' | translate" [control]="formAdd.get('phone')">
+    </app-input-field>
 
-      <app-input-field [attribute]="'Table.email' | translate" [control]="formAdd.get('email')">
-      </app-input-field>
+    <app-input-field [attribute]="'Table.email' | translate" [control]="formAdd.get('email')">
+    </app-input-field>
 
-      <app-input-field [attribute]="'Table.address' | translate" [control]="formAdd.get('address')">
-      </app-input-field>
-    </div>
+    <app-input-field [attribute]="'Table.address' | translate" [control]="formAdd.get('address')">
+    </app-input-field>
   </bs-modal-body>
   <bs-modal-footer>
-    <button class="btn btn-primary add-cus" (click)="addCustomer(formAdd.value, addvalue)" [disabled]="formAdd.invalid" data-dismiss="modal">
+    <button class="btn btn-primary add-cus" (click)="addCustomer(formAdd.value)" [disabled]="formAdd.invalid" data-dismiss="modal">
       {{ 'customers.create' | translate }}</button>
     <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modal.dismiss()">
       {{ 'customers.close' | translate }}</button>

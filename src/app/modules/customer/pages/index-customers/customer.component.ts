@@ -29,13 +29,14 @@ export class CustomerComponent implements OnInit {
   @ViewChild("modalConfirm") modalConfirm: BsModalComponent;
 
   formAdd: FormGroup;
+  formEditCustomer: FormGroup;
   customers: Customer[];
   cus: Customer = new Customer();
   lists: Array<any> = [];
   editing = -1;
   customerSelected: Customer;
   keyUpSearch = new Subject<string>();
-  perPage = 10;
+  currentPerPage = 10;
   currentSearch = "";
 
   public configPagination = {
@@ -56,8 +57,9 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.buildForm();
+    this.getPage(1, 10);
     this.setGetPage();
-    this.getPage(1);
   }
 
   setGetPage() {
@@ -71,7 +73,7 @@ export class CustomerComponent implements OnInit {
           switchMap(params => 
             this.customerService.getCustomersWithPage(params.page, params.per_page, params.search))
         )
-        .subscribe(res => {
+        .subscribe((res: any) => {
           this.customers = res.customers;
           this.configPagination.totalItems = res.total;
         })
@@ -88,18 +90,24 @@ export class CustomerComponent implements OnInit {
       email: [""],
       address: [""]
     });
+    this.formEditCustomer = this.formBuilder.group({
+      name: ["", Validators.required],
+      phone: [""],
+      email: [""],
+      address: [""]
+    });
   }
 
   getCustomers() {
-    this.loading = true;
-  }
-
-  onChangeCount($event) {
     
   }
 
-  getPage(page: number, per_page) {
-    this.navigateUrl(page, )
+  onChangeCount($event) {
+    this.navigateUrl(1, this.currentPerPage, "");
+  }
+
+  getPage(page: number, per_page = this.currentPerPage, search = this.currentSearch) {
+    this.navigateUrl(page, per_page, search);
   }
 
   openModalDelete(customer: Customer) {
@@ -127,8 +135,8 @@ export class CustomerComponent implements OnInit {
     this.customerService
       .updateCustomer(value, customer_id)
       .subscribe(customer => {
-        this.revertEdit();
-        this.toastrService.SetMessageSuccess("Updated");
+        _.assign(this.customers.find(cus => cus.id === customer.id, customer));
+        // this.toastrService.SetMessageSuccess("Updated");
       });
   }
 
@@ -136,13 +144,13 @@ export class CustomerComponent implements OnInit {
     this.editing = -1;
   }
 
-  addCustomer(value: any, selectedValue: number) {
+  addCustomer(value: any) {
     this.customerService
-      .addCustomer(value, selectedValue)
+      .addCustomer(value)
       .subscribe((customer: Customer) => {
         this.customers.unshift(customer);
         this.formAdd.reset();
-        this.toastrService.SetMessageSuccess("Success");
+        // this.toastrService.SetMessageSuccess("Success");
       });
   }
 }

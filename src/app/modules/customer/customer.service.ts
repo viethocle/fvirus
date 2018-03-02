@@ -58,7 +58,7 @@ export class CustomerService {
       .map((res: any) => res.customer as any);
   }
 
-  addCustomer(value: any, selectedValue: number): Observable<Customer> {
+  addCustomer(value: any): Observable<Customer> {
     const addUrl = `${this.url}.json`;
     return this.http
       .post(addUrl, value)

@@ -44,7 +44,7 @@
   "customers": {
 		"title": "Khách hàng",
 		"smallTitle": "Danh sách",
-		"create": "Tạo mới",
+		"create": "Tạo khách hàng mới",
 		"titleModal": "Tạo khách hàng mới",
     "close": "Đóng",
     "selected_customer": "Khách hàng đã chọn"
