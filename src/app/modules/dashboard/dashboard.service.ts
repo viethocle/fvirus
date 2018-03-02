@@ -65,8 +65,8 @@ export class DashboardService  {
   /** UPDATE order */
   updateOrder(order_id: string, value): Observable<Order> {
     let url = `${environment.baseUrl}/orders/${order_id}.json`;
-    return this.http.put<Order>(url, value)
-                    .map((res: any) => res.order)
+    return this.http.put(url, value)
+                    .map((res: any) => res.order as Order)
   }
 
   /** DELETE order */

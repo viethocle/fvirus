@@ -7,8 +7,8 @@ import { ReplaySubject } from "rxjs/ReplaySubject";
 @Injectable()
 export class BsmodalService {
 
-  orderDelete$ = new ReplaySubject<Order>(1);
-  orderEdit$ = new ReplaySubject<Order>(1);
+  orderDelete$ = new Subject<Order>();
+  orderEdit$ = new Subject<Order>();
 
   constructor() { }
 

@@ -73,6 +73,11 @@ export class TableOrdersPage implements OnInit, OnDestroy {
     this.configPagination.totalItems -= 1;
   }
 
+  handleUpdateOrder(order) {
+    console.log("UPDATE " + order);
+    _.assign(this.orders.find(t => t.id === order.id), order);
+  }
+
   ngOnDestroy() {
     this.subscriptionGetOrders.unsubscribe();
   }

@@ -7,7 +7,7 @@ import { BsmodalService } from './../../bsmodal.service';
 import { DashboardService } from './../../dashboard.service';
 import {
   Component,
-  OnInit,
+  OnInit, OnDestroy,
   ViewChild, Output, EventEmitter, ViewChildren, ElementRef, Renderer2,
   AfterViewChecked,
   ChangeDetectorRef
@@ -22,6 +22,8 @@ import {
 import { Customer } from "@modules/customer/customer.model";
 import { FlyInOut } from '../../flyInOut.animate';
 import * as _ from 'lodash';
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+
 
 @Component({
   selector: 'app-edit-order',
@@ -31,12 +33,12 @@ import * as _ from 'lodash';
     FlyInOut
   ]
 })
-export class EditOrderComponent implements OnInit {
+export class EditOrderComponent implements OnInit, OnDestroy {
   
   @ViewChild("modalEdit") modalEdit: BsModalComponent;
   @ViewChild(PerfectScrollbarComponent) componentScroll: PerfectScrollbarComponent;
   @ViewChildren("listCustomers") listCustomers;
-  @Output() editOrderOutput = new EventEmitter<Order>();
+  @Output() updateOrderOutput = new EventEmitter<Order>();
   order: Order;
   formEditOrder: FormGroup;
   startAt: Date;
@@ -61,17 +63,23 @@ export class EditOrderComponent implements OnInit {
     this.initDate();
     this.bsmodalService.orderEdit$
         .pipe(
-          tap(order => this.order = order),
-          tap(order => {
-            this.customerSelected = this.customers.find(cus => cus.id === this.order.customer.id)
-            this.startAt = new Date(Date.parse(order.due_date));
-            this.cdRef.detectChanges();
-          }),
-          tap(_ => this.setFormValue())
+          takeUntilDestroy(this),
         )
-        .subscribe(_ => this.modalEdit.open());
+        .subscribe(order => { 
+          if (order) {
+            this.order = order;
+            this.customerSelected = this.customers.find(cus => cus.id === this.order.customer.id);
+            this.startAt = new Date(Date.parse(order.due_date));
+            this.setFormValue();
+            this.modalEdit.open();
+          }
+        });
     this.customerService.getCustomersWithObservable()
         .subscribe(customers => this.customers = customers);
+  }
+
+  ngOnDestroy() {
+    this.cdRef.reattach();
   }
 
   updateOrder() {
@@ -81,7 +89,10 @@ export class EditOrderComponent implements OnInit {
     })
     
     this.dashboardService.updateOrder(this.order.id, this.formEditOrder.value)
-        .subscribe(order => this.editOrderOutput.emit(order))
+        .pipe(
+          takeUntilDestroy(this)
+        )
+      .subscribe(order => this.updateOrderOutput.emit(order))
 
   }
 
