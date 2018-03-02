@@ -1,5 +1,5 @@
 
-<bs-modal #modalCreate [size]="'lg'" [keyboard]="false">
+<bs-modal #modalEdit [size]="'lg'" [keyboard]="false">
   <bs-modal-header [showDismiss]="true">
     <h4 class="modal-title">Tao order</h4>
   </bs-modal-header>
@@ -8,9 +8,9 @@
 
     <div class="col-md-6">
       <!-- description -->
-      <div [class.has-error]="formEditOrder.get('description').errors && (formEditOrder.get('description').dirty || formNewOrder.get('description').touched)">
+      <div [class.has-error]="formEditOrder.get('description').errors && (formEditOrder.get('description').dirty || formEditOrder.get('description').touched)">
         <label for="new-description" class="control-label">Description</label>
-        <textarea class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formNewOrder.get('description')"></textarea>
+        <textarea class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formEditOrder.get('description')"></textarea>
 
       </div>
       <div class="input-wrapper">
@@ -87,7 +87,7 @@
   </bs-modal-body>
 
   <bs-modal-footer>
-    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalCreate.dismiss()">{{ 'button.cancel-btn' | translate }}</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalEdit.dismiss()">{{ 'button.cancel-btn' | translate }}</button>
     <button type="button" class="btn btn-primary" >{{ 'button.create' | translate }}</button>
   </bs-modal-footer>
 </bs-modal>

@@ -1,3 +1,4 @@
+import { BsModalComponent } from 'ng2-bs3-modal';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { tap } from 'rxjs/operators';
 import { CustomerService } from './../../../customer/customer.service';
@@ -19,14 +20,20 @@ import {
   AbstractControl
 } from '@angular/forms';
 import { Customer } from "@modules/customer/customer.model";
+import { FlyInOut } from '../../flyInOut.animate';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-edit-order',
   templateUrl: './edit-order.component.html',
-  styleUrls: ['./edit-order.component.css']
+  styleUrls: ['./edit-order.component.css'],
+  animations: [
+    FlyInOut
+  ]
 })
 export class EditOrderComponent implements OnInit {
   
+  @ViewChild("modalEdit") modalEdit: BsModalComponent;
   @ViewChild(PerfectScrollbarComponent) componentScroll: PerfectScrollbarComponent;
   @ViewChildren("listCustomers") listCustomers;
   order: Order;
@@ -51,15 +58,16 @@ export class EditOrderComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.initDate();
-    this.bsmodalService.order$
+    this.bsmodalService.orderEdit$
         .pipe(
           tap(order => this.order = order),
           tap(_ => {
             this.customerSelected = this.customers.find(cus => cus.id === this.order.customer.id)
             this.cdRef.detectChanges();
-          })
+          }),
+          tap(_ => this.setFormValue())
         )
-        .subscribe(_ => this.setFormValue());
+        .subscribe(_ => this.modalEdit.open());
     this.customerService.getCustomersWithObservable()
         .subscribe(customers => this.customers = customers);
   }
