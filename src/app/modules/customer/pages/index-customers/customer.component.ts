@@ -26,6 +26,7 @@ import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
 })
 export class CustomerComponent implements OnInit {
   @ViewChild("modal") modal: BsModalComponent;
+  @ViewChild("modalEdit") modalEdit: BsModalComponent;
   @ViewChild("modalConfirm") modalConfirm: BsModalComponent;
 
   formAdd: FormGroup;
