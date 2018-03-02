@@ -21,7 +21,7 @@
       <div class="col-xs-6">
         <div id="dynamic-table_wrapper_filter" class="dataTables_filter">
           <label>Search:
-            <input (keyup)="keyUpSearch.next($event.target.value)" type="text" class="form-control input-sm" placeholder="" aria-controls="dynamic-table_wrapper">
+            <!-- <input (keyup)="keyUpSearch.next($event.target.value)" type="text" class="form-control input-sm" placeholder="" aria-controls="dynamic-table_wrapper"> -->
           </label>
         </div>
       </div>
@@ -44,47 +44,18 @@
 
       <tbody>
         <tr *ngFor="let customer of customers | paginate: configPagination">
-          <ng-container *ngIf="editing != customer.id">
-            <td>{{ customer.name }}</td>
-            <td>{{ customer.email }}</td>
-            <td>{{ customer.phone }}</td>
-            <td>{{ customer.address }}</td>
-            <td class="action-buttons center">
-              <button class="btn btn-xs btn-info" (click)="changeToEdit(customer)">
-                <i class="ace-icon fa fa-pencil bigger-120"></i>
-              </button>
-              <button class="btn btn-xs btn-danger" (click)="openModalDelete(customer)">
-                <i class="ace-icon fa fa-trash-o bigger-120"></i>
-              </button>
-            </td>
-          </ng-container>
-          <ng-container *ngIf="customer.id == editing">
-            <td>
-              <input type="text" #name value={{customer.name}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, customer.id, $event)"
-                (keyup.escape)="revertEdit()">
-            </td>
-            <td>
-              <input type="text" #email value={{customer.email}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, customer.id, $event)"
-                (keyup.escape)="revertEdit()">
-            </td>
-            <td>
-              <input type="text" #phone value={{customer.phone}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, customer.id, $event)"
-                (keyup.escape)="revertEdit()">
-            </td>
-            <td>
-              <input type="text" #address value={{customer.address}} (keyup.enter)="editCustomer(name.value, email.value, phone.value, address.value, customer.id, $event)"
-                (keyup.escape)="revertEdit()">
-            </td>
-            <td class="action-buttons">
-              <a (click)="editCustomer(name.value, email.value, phone.value, address.value, customer.id, $event)" class="green pointer"
-                tooltip="Ok">
-                <i class="ace-icon fa fa-check bigger-150 "></i>
-              </a>
-              <a (click)="revertEdit()" class="red pointer" tooltip="Cancel">
-                <i class="ace-icon fa fa-remove bigger-150 "></i>
-              </a>
-            </td>
-          </ng-container>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.email }}</td>
+          <td>{{ customer.phone }}</td>
+          <td>{{ customer.address }}</td>
+          <td class="action-buttons center">
+            <button class="btn btn-xs btn-info" >
+              <i class="ace-icon fa fa-pencil bigger-120"></i>
+            </button>
+            <button class="btn btn-xs btn-danger">
+              <i class="ace-icon fa fa-trash-o bigger-120"></i>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -96,9 +67,6 @@
         Danh sách hiện có {{ configPagination.totalItems }} danh mục
       </div>
       <div class="col-xs-6">
-        <div class="spinner" [ngClass]="{ 'hidden': !loading }">
-          <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-        </div>
         <pagination-template #p="paginationApi" [id]="configPagination.id" (pageChange)="getPage($event)">
           <div class="dataTables_paginate paging_full_numbers">
             <ul class="pagination">

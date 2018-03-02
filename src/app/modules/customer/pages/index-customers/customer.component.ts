@@ -1,6 +1,7 @@
+import { tap, switchMap } from 'rxjs/operators';
 import { Customer } from '@modules/customer/customer.model';
 import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
-import { Http, Response } from "@angular/http";
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
@@ -11,17 +12,13 @@ import {
   FormBuilder
 } from "@angular/forms";
 import { BsModalComponent } from "ng2-bs3-modal";
-
-import "rxjs/add/observable/of";
-import "rxjs/add/operator/delay";
-// import { getLangUrl } from "../shared/get_url_lang";
-// import { environment } from "../../environments/environment";
-
 import * as _ from "lodash";
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
 import { CustomerService } from "@modules/customer/customer.service";
 import { ToastrService } from "@shared/toastr.service";
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
 
+@Destroyable
 @Component({
   selector: "app-customer",
   templateUrl: "./customer.component.html",
@@ -32,18 +29,11 @@ export class CustomerComponent implements OnInit {
   @ViewChild("modalConfirm") modalConfirm: BsModalComponent;
 
   formAdd: FormGroup;
-  // dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
   customers: Customer[];
-  customer: Customer = new Customer();
   cus: Customer = new Customer();
   lists: Array<any> = [];
   editing = -1;
-  addvalue = 0;
-  selectedValue = 0;
-  levels: Array<number> = [0, 1, 2, 3, 4, 5, 6];
   customerSelected: Customer;
-  loading: boolean;
   keyUpSearch = new Subject<string>();
   perPage = 10;
   currentSearch = "";
@@ -56,15 +46,43 @@ export class CustomerComponent implements OnInit {
   };
 
   constructor(
-    private http: Http,
     private customerService: CustomerService,
     private toastrService: ToastrService,
-    private toastr: ToastsManager,
-    vRef: ViewContainerRef,
-    fb: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    this.toastr.setRootViewContainerRef(vRef);
-    this.formAdd = fb.group({
+   
+  }
+
+  ngOnInit() {
+    this.setGetPage();
+    this.getPage(1);
+  }
+
+  setGetPage() {
+    this.route.queryParams
+        .pipe(
+          takeUntilDestroy(this),
+          tap(params => {
+            this.configPagination.currentPage = params.page;
+            this.configPagination.itemsPerPage = params.per_page;
+          }),
+          switchMap(params => 
+            this.customerService.getCustomersWithPage(params.page, params.per_page, params.search))
+        )
+        .subscribe(res => {
+          this.customers = res.customers;
+          this.configPagination.totalItems = res.total;
+        })
+  }
+
+  navigateUrl(page, per_page, search_text) {
+    this.router.navigate(['/customers'], { queryParams: { page: page, per_page: per_page, search: search_text } })
+  }
+
+  buildForm() {
+    this.formAdd = this.formBuilder.group({
       name: ["", Validators.required],
       phone: [""],
       email: [""],
@@ -72,63 +90,16 @@ export class CustomerComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.getPage(1);
-
-    const subscriptionSearch = this.keyUpSearch
-      .do(search => {
-        this.currentSearch = search;
-        this.loading = true;
-      })
-      .debounceTime(200)
-      .distinctUntilChanged()
-      .switchMap(search =>
-        this.customerService.getCustomersWithPage(
-          1,
-          this.perPage,
-          this.currentSearch
-        )
-      )
-      .subscribe(res => {
-        this.configPagination.totalItems = res.total;
-        this.configPagination.currentPage = 1;
-        this.customers = res.customers;
-        this.loading = false;
-      });
-  }
-
   getCustomers() {
     this.loading = true;
-    this.customerService.getCustomers().then(cus => {
-      this.customers = cus.json().customers as Customer[];
-      this.dtTrigger.next();
-      this.loading = false;
-    });
   }
 
   onChangeCount($event) {
-    this.loading = true;
-    this.customerService
-      .getCustomersWithPage(1, this.perPage, this.currentSearch)
-      .subscribe(res => {
-        this.configPagination.totalItems = res.total;
-        this.configPagination.itemsPerPage = this.perPage;
-        this.configPagination.currentPage = 1;
-        this.customers = res.customers;
-        this.loading = false;
-      });
+    
   }
 
-  getPage(page: number) {
-    this.loading = true;
-    this.customerService
-      .getCustomersWithPage(page, this.perPage, this.currentSearch)
-      .subscribe(res => {
-        this.configPagination.totalItems = res.total;
-        this.configPagination.currentPage = page;
-        this.customers = res.customers;
-        this.loading = false;
-      });
+  getPage(page: number, per_page) {
+    this.navigateUrl(page, )
   }
 
   openModalDelete(customer: Customer) {
@@ -142,7 +113,7 @@ export class CustomerComponent implements OnInit {
   }
 
   sendRequestDeleteCustomer(customer: Customer) {
-    this.customerService.deleteCustomer(customer).then(res => {
+    this.customerService.deleteCustomer(customer).subscribe(res => {
       this.customers = _.reject(this.customers, ["id", customer.id]);
       this.toastrService.SetMessageSuccess("Deleted");
     });
@@ -152,27 +123,10 @@ export class CustomerComponent implements OnInit {
     this.editing = customer.id;
   }
 
-  editCustomer(
-    name: string,
-    email: string,
-    phone: string,
-    add: string,
-    id: number
-  ) {
-    this.customer.name = name;
-    this.customer.email = email;
-    this.customer.phone = phone;
-    this.customer.address = add;
+  editCustomer(value, customer_id) {
     this.customerService
-      .updateCustomer(this.customer, id)
+      .updateCustomer(value, customer_id)
       .subscribe(customer => {
-        this.customers.find(cus => cus.id === customer.id).name = customer.name;
-        this.customers.find(cus => cus.id === customer.id).email =
-          customer.email;
-        this.customers.find(cus => cus.id === customer.id).phone =
-          customer.phone;
-        this.customers.find(cus => cus.id === customer.id).address =
-          customer.address;
         this.revertEdit();
         this.toastrService.SetMessageSuccess("Updated");
       });
@@ -188,7 +142,6 @@ export class CustomerComponent implements OnInit {
       .subscribe((customer: Customer) => {
         this.customers.unshift(customer);
         this.formAdd.reset();
-        this.addvalue = 0;
         this.toastrService.SetMessageSuccess("Success");
       });
   }
