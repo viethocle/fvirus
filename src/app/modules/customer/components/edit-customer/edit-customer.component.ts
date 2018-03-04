@@ -1,7 +1,6 @@
-import { EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { BsModalComponent } from 'ng2-bs3-modal';
-import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, SimpleChange, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, SimpleChange, EventEmitter, Output } from '@angular/core';
 import { Customer } from '@modules/customer/customer.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, tap } from 'rxjs/operators';
@@ -12,7 +11,7 @@ import { filter, tap } from 'rxjs/operators';
 })
 export class EditCustomerComponent implements OnInit, OnChanges {
   @ViewChild("modalEdit") modalEdit: BsModalComponent;
-  @Output() dismissModal: EventEmitter<any> = new EventEmitter();
+  @Output() dismissModalEdit: EventEmitter<any> = new EventEmitter();
   @Input('customerEdit') customer: Customer;
   private customer$ = new Subject<Customer>();
   formEditCustomer: FormGroup;
@@ -30,7 +29,7 @@ export class EditCustomerComponent implements OnInit, OnChanges {
         )
         .subscribe(_ => this.modalEdit.open());
     this.modalEdit.onDismiss
-        .subscribe(_ => this.dismissModal.next())
+      .subscribe(_ => this.dismissModalEdit.next())
   }
 
   ngOnChanges(changes: SimpleChanges) {
