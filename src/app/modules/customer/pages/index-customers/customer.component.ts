@@ -106,7 +106,6 @@ export class CustomerComponent implements OnInit {
   }
 
   openModalEdit(customer: Customer) {
-    console.log(customer);
     this.customerToEdit = customer;
   }
 
@@ -125,17 +124,6 @@ export class CustomerComponent implements OnInit {
       this.customers = _.reject(this.customers, ["id", customer.id]);
       this.toastrService.SetMessageSuccess("Deleted");
     });
-  }
-
-
-
-  editCustomer(value, customer_id) {
-    this.customerService
-      .updateCustomer(value, customer_id)
-      .subscribe(customer => {
-        _.assign(this.customers.find(cus => cus.id === customer.id, customer));
-        // this.toastrService.SetMessageSuccess("Updated");
-      });
   }
 
   handleUpdateCustomer(customer) {
