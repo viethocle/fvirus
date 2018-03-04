@@ -51,10 +51,10 @@ export class CustomerService {
       .delete(deleteUrl)
   }
 
-  updateCustomer(customer: Customer, id: number): Observable<any> {
+  updateCustomer(value, id: number): Observable<any> {
     const updateUrl = `${this.url}/${id}.json`;
     return this.http
-      .put(updateUrl, customer)
+      .put(updateUrl, value)
       .map((res: any) => res.customer as any);
   }
 

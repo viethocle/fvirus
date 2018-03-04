@@ -1,6 +1,6 @@
 <bs-modal #modalEdit>
   <bs-modal-header [showDismiss]="true">
-    <h4 class="modal-title">Edit customer</h4>
+    <h4 class="modal-title">{{ 'customers.title_edit' | translate }}</h4>
   </bs-modal-header>
   <bs-modal-body>
     <div class="form-group">
@@ -18,9 +18,12 @@
     </div>
   </bs-modal-body>
   <bs-modal-footer>
-    <button class="btn btn-primary add-cus" [disabled]="formEditCustomer.invalid" data-dismiss="modal">
-      {{ 'customers.create' | translate }}</button>
     <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modalEdit.dismiss()">
       {{ 'customers.close' | translate }}</button>
+
+    <button 
+      class="btn btn-primary add-cus" [disabled]="formEditCustomer.invalid" data-dismiss="modal"
+      (click)="sendRequestEditCustomer()">
+      {{ 'customers.edit' | translate }}</button>
   </bs-modal-footer>
 </bs-modal>

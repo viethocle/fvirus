@@ -1,3 +1,4 @@
+import { CustomerService } from './../../customer.service';
 import { Subject } from 'rxjs/Subject';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, SimpleChange, EventEmitter, Output } from '@angular/core';
@@ -12,12 +13,14 @@ import { filter, tap } from 'rxjs/operators';
 export class EditCustomerComponent implements OnInit, OnChanges {
   @ViewChild("modalEdit") modalEdit: BsModalComponent;
   @Output() dismissModalEdit: EventEmitter<any> = new EventEmitter();
+  @Output() customerUpdated = new EventEmitter<Customer>();
   @Input('customerEdit') customer: Customer;
   private customer$ = new Subject<Customer>();
   formEditCustomer: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private customerService: CustomerService
   ) { }
 
   ngOnInit() {
@@ -34,6 +37,11 @@ export class EditCustomerComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.customer$.next(changes.customer.currentValue);
+  }
+
+  sendRequestEditCustomer() {
+    this.customerService.updateCustomer(this.formEditCustomer.value, this.customer.id)
+        .subscribe(cus => this.customerUpdated.next(cus));
   }
 
   private setFormValue(customer: Customer) {
