@@ -3,22 +3,24 @@
     <h4 class="modal-title">Edit customer</h4>
   </bs-modal-header>
   <bs-modal-body>
-    <app-input-field [attribute]="'Table.name' | translate" [control]="formEditCustomer.get('name')">
-    </app-input-field>
-
-    <app-input-field [attribute]="'Table.phone' | translate" [control]="formEditCustomer.get('phone')">
-    </app-input-field>
-
-    <app-input-field [attribute]="'Table.email' | translate" [control]="formEditCustomer.get('email')">
-    </app-input-field>
-
-    <app-input-field [attribute]="'Table.address' | translate" [control]="formEditCustomer.get('address')">
-    </app-input-field>
+    <div class="form-group">
+      <app-input-field [attribute]="'Table.name' | translate" [control]="formEditCustomer.get('name')">
+      </app-input-field>
+      
+      <app-input-field [attribute]="'Table.phone' | translate" [control]="formEditCustomer.get('phone')">
+      </app-input-field>
+      
+      <app-input-field [attribute]="'Table.email' | translate" [control]="formEditCustomer.get('email')">
+      </app-input-field>
+      
+      <app-input-field [attribute]="'Table.address' | translate" [control]="formEditCustomer.get('address')">
+      </app-input-field>
+    </div>
   </bs-modal-body>
   <bs-modal-footer>
     <button class="btn btn-primary add-cus" [disabled]="formEditCustomer.invalid" data-dismiss="modal">
       {{ 'customers.create' | translate }}</button>
-    <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modal.dismiss()">
+    <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modalEdit.dismiss()">
       {{ 'customers.close' | translate }}</button>
   </bs-modal-footer>
 </bs-modal>

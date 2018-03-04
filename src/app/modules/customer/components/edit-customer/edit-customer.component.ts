@@ -24,9 +24,9 @@ export class EditCustomerComponent implements OnInit, OnChanges {
     this.customer$
         .pipe(
           takeWhile(customer => customer != undefined),
-          tap(this.setFormValue)
+          tap(cus => this.setFormValue(cus))
         )
-        .subscribe(console.log);
+        .subscribe(_ => this.modalEdit.open());
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -34,7 +34,12 @@ export class EditCustomerComponent implements OnInit, OnChanges {
   }
 
   private setFormValue(customer: Customer) {
-
+    this.formEditCustomer.patchValue({
+      name: customer.name,
+      phone: customer.phone,
+      email: customer.email,
+      address: customer.address
+    })
   }
 
   private buildForm() {
