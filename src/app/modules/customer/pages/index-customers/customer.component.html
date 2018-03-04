@@ -130,5 +130,8 @@
   </bs-modal-footer>
 </bs-modal>
 
-<app-edit-customer [customerEdit]="customerToEdit"></app-edit-customer>
+<app-edit-customer 
+  [customerEdit]="customerToEdit"
+  (dismissModal)="customerToEdit = null"
+  ></app-edit-customer>
 
