@@ -1,10 +1,10 @@
-import { BsmodalService } from './../../bsmodal.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Order } from '../../order';
 import { DashboardService } from '../../dashboard.service';
 import { Subscription } from "rxjs/Subscription";
 import * as _ from 'lodash';
 import { FlyOut } from '../../flyInOut.animate';
+import { BsmodalService } from '@core/services/bsmodal.service';
 
 @Component({
   selector: "app-dashboard-table-orders",

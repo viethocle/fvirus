@@ -3,7 +3,6 @@ import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { tap } from 'rxjs/operators';
 import { CustomerService } from './../../../customer/customer.service';
 import { Order } from './../../order';
-import { BsmodalService } from './../../bsmodal.service';
 import { DashboardService } from './../../dashboard.service';
 import {
   Component,
@@ -23,6 +22,7 @@ import { Customer } from "@modules/customer/customer.model";
 import { FlyInOut } from '../../flyInOut.animate';
 import * as _ from 'lodash';
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import { BsmodalService } from '@core/services/bsmodal.service';
 
 
 @Component({

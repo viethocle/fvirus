@@ -10,6 +10,8 @@ export class BsmodalService {
   orderDelete$ = new Subject<Order>();
   orderEdit$ = new Subject<Order>();
 
+  customerEdit
+
   constructor() { }
 
   selectOrderToDelete(order: Order) {

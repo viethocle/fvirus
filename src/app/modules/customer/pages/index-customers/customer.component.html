@@ -130,27 +130,3 @@
   </bs-modal-footer>
 </bs-modal>
 
-<bs-modal #modalEdit>
-  <bs-modal-header [showDismiss]="true">
-    <h4 class="modal-title">{{ 'customers.titleModal' | translate }}</h4>
-  </bs-modal-header>
-  <bs-modal-body>
-    <app-input-field [attribute]="'Table.name' | translate" [control]="formEditCustomer.get('name')">
-    </app-input-field>
-
-    <app-input-field [attribute]="'Table.phone' | translate" [control]="formEditCustomer.get('phone')">
-    </app-input-field>
-
-    <app-input-field [attribute]="'Table.email' | translate" [control]="formEditCustomer.get('email')">
-    </app-input-field>
-
-    <app-input-field [attribute]="'Table.address' | translate" [control]="formEditCustomer.get('address')">
-    </app-input-field>
-  </bs-modal-body>
-  <bs-modal-footer>
-    <button class="btn btn-primary add-cus" (click)="editCustomer(formAdd.value)" [disabled]="formAdd.invalid" data-dismiss="modal">
-      {{ 'customers.create' | translate }}</button>
-    <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modal.dismiss()">
-      {{ 'customers.close' | translate }}</button>
-  </bs-modal-footer>
-</bs-modal>
