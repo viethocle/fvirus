@@ -13,7 +13,7 @@ import { filter, tap } from 'rxjs/operators';
 export class EditCustomerComponent implements OnInit, OnChanges {
   @ViewChild("modalEdit") modalEdit: BsModalComponent;
   @Output() dismissModalEdit: EventEmitter<any> = new EventEmitter();
-  @Output() customerUpdated = new EventEmitter<Customer>();
+  @Output() customerUpdatedEmit = new EventEmitter<Customer>();
   @Input('customerEdit') customer: Customer;
   private customer$ = new Subject<Customer>();
   formEditCustomer: FormGroup;
@@ -41,7 +41,10 @@ export class EditCustomerComponent implements OnInit, OnChanges {
 
   sendRequestEditCustomer() {
     this.customerService.updateCustomer(this.formEditCustomer.value, this.customer.id)
-        .subscribe(cus => this.customerUpdated.next(cus));
+      .pipe(
+        tap(_ => this.modalEdit.close())
+      )
+      .subscribe(cus => this.customerUpdatedEmit.next(cus));
   }
 
   private setFormValue(customer: Customer) {

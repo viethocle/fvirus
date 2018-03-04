@@ -133,5 +133,6 @@
 <app-edit-customer 
   [customerEdit]="customerToEdit"
   (dismissModalEdit)="customerToEdit = null"
+  (customerUpdatedEmit)="handleUpdateCustomer($event)"
   ></app-edit-customer>
 

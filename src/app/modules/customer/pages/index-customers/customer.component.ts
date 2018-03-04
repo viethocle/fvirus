@@ -106,6 +106,7 @@ export class CustomerComponent implements OnInit {
   }
 
   openModalEdit(customer: Customer) {
+    console.log(customer);
     this.customerToEdit = customer;
   }
 
@@ -126,9 +127,7 @@ export class CustomerComponent implements OnInit {
     });
   }
 
-  changeToEdit(customer: Customer) {
-    this.editing = customer.id;
-  }
+
 
   editCustomer(value, customer_id) {
     this.customerService
@@ -139,8 +138,9 @@ export class CustomerComponent implements OnInit {
       });
   }
 
-  revertEdit() {
-    this.editing = -1;
+  handleUpdateCustomer(customer) {
+    _.assign(this.customers.find(cus => cus.id === customer.id, customer));
+    this.customerToEdit = null;
   }
 
   addCustomer(value: any) {
