@@ -38,6 +38,7 @@ export class CustomerComponent implements OnInit {
   keyUpSearch = new Subject<string>();
   currentPerPage = 10;
   currentSearch = "";
+  customerToEdit: Customer;
 
   public configPagination = {
     id: "server",
@@ -90,12 +91,6 @@ export class CustomerComponent implements OnInit {
       email: [""],
       address: [""]
     });
-    this.formEditCustomer = this.formBuilder.group({
-      name: ["", Validators.required],
-      phone: [""],
-      email: [""],
-      address: [""]
-    });
   }
 
   getCustomers() {
@@ -111,7 +106,7 @@ export class CustomerComponent implements OnInit {
   }
 
   openModalEdit(customer: Customer) {
-
+    this.customerToEdit = customer;
   }
 
   openModalDelete(customer: Customer) {
