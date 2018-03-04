@@ -5,6 +5,9 @@ import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, SimpleCh
 import { Customer } from '@modules/customer/customer.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, tap } from 'rxjs/operators';
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+
+@Destroyable
 @Component({
   selector: 'app-edit-customer',
   templateUrl: './edit-customer.component.html',
@@ -27,6 +30,7 @@ export class EditCustomerComponent implements OnInit, OnChanges {
     this.buildForm();
     this.customer$
         .pipe(
+          takeUntilDestroy(this),
           filter (customer => customer != undefined),
           tap(cus => this.setFormValue(cus))
         )
@@ -42,6 +46,7 @@ export class EditCustomerComponent implements OnInit, OnChanges {
   sendRequestEditCustomer() {
     this.customerService.updateCustomer(this.formEditCustomer.value, this.customer.id)
       .pipe(
+        takeUntilDestroy(this),
         tap(_ => this.modalEdit.close())
       )
       .subscribe(cus => this.customerUpdatedEmit.next(cus));
