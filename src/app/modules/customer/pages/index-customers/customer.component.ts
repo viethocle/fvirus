@@ -59,7 +59,6 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.buildForm();
     this.getPage(1, 10);
     this.initEvent();
   }
@@ -93,15 +92,6 @@ export class CustomerComponent implements OnInit {
 
   navigateUrl(page, per_page, search_text) {
     this.router.navigate(['/customers'], { queryParams: { page: page, per_page: per_page, search: search_text } })
-  }
-
-  buildForm() {
-    this.formAdd = this.formBuilder.group({
-      name: ["", Validators.required],
-      phone: [""],
-      email: [""],
-      address: [""]
-    });
   }
 
   getCustomers() {
@@ -142,13 +132,7 @@ export class CustomerComponent implements OnInit {
     this.customerToEdit = null;
   }
 
-  addCustomer(value: any) {
-    this.customerService
-      .addCustomer(value)
-      .subscribe((customer: Customer) => {
-        this.customers.unshift(customer);
-        this.formAdd.reset();
-        // this.toastrService.SetMessageSuccess("Success");
-      });
+  handleAddNewCustomer(customer: Customer) {
+    this.customers.unshift(customer);
   }
 }

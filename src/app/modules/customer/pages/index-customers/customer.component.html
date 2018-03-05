@@ -1,7 +1,7 @@
 <div id="main-product" class="col-md-12">
 
   <div class="tableTools-container">
-    <app-create-customer></app-create-customer>
+    <app-create-customer (newCustomerOutput)="handleAddNewCustomer($event)"></app-create-customer>
   </div>
 
   <div id="dynamic-table_wrapper_wrapper" class="dataTables_wrapper form-inline no-footer">
