@@ -2,9 +2,9 @@
   <div>
     <div class="card-key"> #{{ order.id }}</div>
     <h5>
-      {{order.customer.name}}
+      <i class="fa fa-users  "></i> {{order.customer.name}}
     </h5>
-    <p>{{ order.description | truncateDescription }}</p>
+    <h6>{{ order.description | truncateDescription }}</h6>
     <h6>
       Deadline: {{ order.due_date | dateTimeVi}}
     </h6>
