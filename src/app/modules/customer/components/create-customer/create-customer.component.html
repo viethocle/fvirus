@@ -1,0 +1,26 @@
+<button type="button" class="btn btn-primary" (click)="modal.open()">{{ 'customers.create' | translate }}</button>
+
+<bs-modal #modal>
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">{{ 'customers.titleModal' | translate }}</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <app-input-field [attribute]="'Table.name' | translate" [control]="formAdd.get('name')">
+    </app-input-field>
+
+    <app-input-field [attribute]="'Table.phone' | translate" [control]="formAdd.get('phone')">
+    </app-input-field>
+
+    <app-input-field [attribute]="'Table.email' | translate" [control]="formAdd.get('email')">
+    </app-input-field>
+
+    <app-input-field [attribute]="'Table.address' | translate" [control]="formAdd.get('address')">
+    </app-input-field>
+  </bs-modal-body>
+  <bs-modal-footer>
+    <button class="btn btn-primary add-cus" (click)="addCustomer(formAdd.value)" (click)="modal.close()" [disabled]="formAdd.invalid" data-dismiss="modal">
+      {{ 'customers.create' | translate }}</button>
+    <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modal.dismiss()">
+      {{ 'customers.close' | translate }}</button>
+  </bs-modal-footer>
+</bs-modal>
