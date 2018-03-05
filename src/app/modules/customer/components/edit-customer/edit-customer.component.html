@@ -1,0 +1,29 @@
+<bs-modal #modalEdit>
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">{{ 'customers.title_edit' | translate }}</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <div class="form-group">
+      <app-input-field [attribute]="'Table.name' | translate" [control]="formEditCustomer.get('name')">
+      </app-input-field>
+      
+      <app-input-field [attribute]="'Table.phone' | translate" [control]="formEditCustomer.get('phone')">
+      </app-input-field>
+      
+      <app-input-field [attribute]="'Table.email' | translate" [control]="formEditCustomer.get('email')">
+      </app-input-field>
+      
+      <app-input-field [attribute]="'Table.address' | translate" [control]="formEditCustomer.get('address')">
+      </app-input-field>
+    </div>
+  </bs-modal-body>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modalEdit.dismiss()">
+      {{ 'customers.close' | translate }}</button>
+
+    <button 
+      class="btn btn-primary add-cus" [disabled]="formEditCustomer.invalid" data-dismiss="modal"
+      (click)="sendRequestEditCustomer()">
+      {{ 'customers.edit' | translate }}</button>
+  </bs-modal-footer>
+</bs-modal>

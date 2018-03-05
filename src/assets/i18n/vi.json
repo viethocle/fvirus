@@ -44,10 +44,12 @@
   "customers": {
 		"title": "Khách hàng",
 		"smallTitle": "Danh sách",
-		"create": "Tạo mới",
+		"create": "Tạo khách hàng mới",
 		"titleModal": "Tạo khách hàng mới",
     "close": "Đóng",
-    "selected_customer": "Khách hàng đã chọn"
+    "selected_customer": "Khách hàng đã chọn",
+    "title_edit": "Chỉnh sửa khách hàng",
+    "edit": "Chỉnh sửa"
 	},
 
   "sidebar": {

@@ -1,4 +1,3 @@
-import { BsmodalService } from './../../bsmodal.service';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { DashboardService } from '@modules/dashboard/dashboard.service';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
@@ -6,6 +5,7 @@ import { Order } from "@modules/dashboard/order";
 import { tap } from "rxjs/operators";
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
 import { skip } from "rxjs/operator/skip";
+import { BsmodalService } from '@core/services/bsmodal.service';
 @Destroyable
 @Component({
   selector: 'app-delete-order',

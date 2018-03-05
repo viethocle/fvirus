@@ -1,6 +1,7 @@
+import { tap, switchMap, map, debounceTime } from 'rxjs/operators';
 import { Customer } from '@modules/customer/customer.model';
 import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
-import { Http, Response } from "@angular/http";
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
@@ -11,17 +12,14 @@ import {
   FormBuilder
 } from "@angular/forms";
 import { BsModalComponent } from "ng2-bs3-modal";
-
-import "rxjs/add/observable/of";
-import "rxjs/add/operator/delay";
-// import { getLangUrl } from "../shared/get_url_lang";
-// import { environment } from "../../environments/environment";
-
 import * as _ from "lodash";
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
 import { CustomerService } from "@modules/customer/customer.service";
 import { ToastrService } from "@shared/toastr.service";
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import { fromEvent } from 'rxjs/observable/fromEvent';
 
+@Destroyable
 @Component({
   selector: "app-customer",
   templateUrl: "./customer.component.html",
@@ -32,21 +30,16 @@ export class CustomerComponent implements OnInit {
   @ViewChild("modalConfirm") modalConfirm: BsModalComponent;
 
   formAdd: FormGroup;
-  // dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
+  formEditCustomer: FormGroup;
   customers: Customer[];
-  customer: Customer = new Customer();
   cus: Customer = new Customer();
   lists: Array<any> = [];
   editing = -1;
-  addvalue = 0;
-  selectedValue = 0;
-  levels: Array<number> = [0, 1, 2, 3, 4, 5, 6];
   customerSelected: Customer;
-  loading: boolean;
   keyUpSearch = new Subject<string>();
-  perPage = 10;
+  currentPerPage = 10;
   currentSearch = "";
+  customerToEdit: Customer;
 
   public configPagination = {
     id: "server",
@@ -56,79 +49,65 @@ export class CustomerComponent implements OnInit {
   };
 
   constructor(
-    private http: Http,
     private customerService: CustomerService,
     private toastrService: ToastrService,
-    private toastr: ToastsManager,
-    vRef: ViewContainerRef,
-    fb: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    this.toastr.setRootViewContainerRef(vRef);
-    this.formAdd = fb.group({
-      name: ["", Validators.required],
-      phone: [""],
-      email: [""],
-      address: [""]
-    });
+   
   }
 
   ngOnInit() {
-    this.getPage(1);
+    this.getPage(1, 10);
+    this.initEvent();
+  }
 
-    const subscriptionSearch = this.keyUpSearch
-      .do(search => {
-        this.currentSearch = search;
-        this.loading = true;
-      })
-      .debounceTime(200)
-      .distinctUntilChanged()
-      .switchMap(search =>
-        this.customerService.getCustomersWithPage(
-          1,
-          this.perPage,
-          this.currentSearch
+  initEvent() {
+    this.route.queryParams
+        .pipe(
+          takeUntilDestroy(this),
+          tap(params => {
+            this.configPagination.currentPage = params.page;
+            this.configPagination.itemsPerPage = params.per_page;
+          }),
+          switchMap(params => 
+            this.customerService.getCustomersWithPage(params.page, params.per_page, params.search))
         )
-      )
-      .subscribe(res => {
-        this.configPagination.totalItems = res.total;
-        this.configPagination.currentPage = 1;
-        this.customers = res.customers;
-        this.loading = false;
-      });
+        .subscribe((res: any) => {
+          this.customers = res.customers;
+          this.configPagination.totalItems = res.total;
+        })
+
+
+    const inputSearch = document.getElementById('search-customer');
+    const inputSearch$ = fromEvent(inputSearch, 'keyup')
+        .pipe(
+          map((i: any) => i.currentTarget.value),
+          debounceTime(500),
+          tap(value => this.currentSearch = value)
+        )
+        .subscribe(value => this.navigateUrl(1, this.currentPerPage, value));
+  }
+
+  navigateUrl(page, per_page, search_text) {
+    this.router.navigate(['/customers'], { queryParams: { page: page, per_page: per_page, search: search_text } })
   }
 
   getCustomers() {
-    this.loading = true;
-    this.customerService.getCustomers().then(cus => {
-      this.customers = cus.json().customers as Customer[];
-      this.dtTrigger.next();
-      this.loading = false;
-    });
+    
   }
 
   onChangeCount($event) {
-    this.loading = true;
-    this.customerService
-      .getCustomersWithPage(1, this.perPage, this.currentSearch)
-      .subscribe(res => {
-        this.configPagination.totalItems = res.total;
-        this.configPagination.itemsPerPage = this.perPage;
-        this.configPagination.currentPage = 1;
-        this.customers = res.customers;
-        this.loading = false;
-      });
+    this.navigateUrl(1, this.currentPerPage, this.currentSearch);
   }
 
-  getPage(page: number) {
-    this.loading = true;
-    this.customerService
-      .getCustomersWithPage(page, this.perPage, this.currentSearch)
-      .subscribe(res => {
-        this.configPagination.totalItems = res.total;
-        this.configPagination.currentPage = page;
-        this.customers = res.customers;
-        this.loading = false;
-      });
+  getPage(page: number, per_page = this.currentPerPage, search = this.currentSearch) {
+    this.navigateUrl(page, per_page, search);
+  }
+
+  openModalEdit(customer: Customer) {
+    this.customerToEdit = customer;
   }
 
   openModalDelete(customer: Customer) {
@@ -142,54 +121,17 @@ export class CustomerComponent implements OnInit {
   }
 
   sendRequestDeleteCustomer(customer: Customer) {
-    this.customerService.deleteCustomer(customer).then(res => {
+    this.customerService.deleteCustomer(customer).subscribe(res => {
       this.customers = _.reject(this.customers, ["id", customer.id]);
-      this.toastrService.SetMessageSuccess("Deleted");
     });
   }
 
-  changeToEdit(customer: Customer) {
-    this.editing = customer.id;
+  handleUpdateCustomer(customer) {
+    _.assign(this.customers.find(cus => cus.id === customer.id, customer));
+    this.customerToEdit = null;
   }
 
-  editCustomer(
-    name: string,
-    email: string,
-    phone: string,
-    add: string,
-    id: number
-  ) {
-    this.customer.name = name;
-    this.customer.email = email;
-    this.customer.phone = phone;
-    this.customer.address = add;
-    this.customerService
-      .updateCustomer(this.customer, id)
-      .subscribe(customer => {
-        this.customers.find(cus => cus.id === customer.id).name = customer.name;
-        this.customers.find(cus => cus.id === customer.id).email =
-          customer.email;
-        this.customers.find(cus => cus.id === customer.id).phone =
-          customer.phone;
-        this.customers.find(cus => cus.id === customer.id).address =
-          customer.address;
-        this.revertEdit();
-        this.toastrService.SetMessageSuccess("Updated");
-      });
-  }
-
-  revertEdit() {
-    this.editing = -1;
-  }
-
-  addCustomer(value: any, selectedValue: number) {
-    this.customerService
-      .addCustomer(value, selectedValue)
-      .subscribe((customer: Customer) => {
-        this.customers.unshift(customer);
-        this.formAdd.reset();
-        this.addvalue = 0;
-        this.toastrService.SetMessageSuccess("Success");
-      });
+  handleAddNewCustomer(customer: Customer) {
+    this.customers.unshift(customer);
   }
 }
