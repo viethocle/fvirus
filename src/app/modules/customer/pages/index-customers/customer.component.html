@@ -52,7 +52,7 @@
             <button class="btn btn-xs btn-info" (click)="openModalEdit(customer)">
               <i class="ace-icon fa fa-pencil bigger-120"></i>
             </button>
-            <button class="btn btn-xs btn-danger">
+            <button class="btn btn-xs btn-danger" (click)="openModalDelete(customer)">
               <i class="ace-icon fa fa-trash-o bigger-120"></i>
             </button>
           </td>
@@ -100,8 +100,8 @@
     <h4 class="modal-title">{{ 'modal.confirm_remove_account' | translate }}</h4>
   </bs-modal-header>
   <bs-modal-footer>
-    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalConfirm.dismiss()">{{ 'button.cancel-btn' | translate }}</button>
-    <button type="button" class="btn btn-primary" (click)="deleteCustomer()">{{ 'button.delete' | translate }}</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalConfirm.dismiss()">{{ 'button.cancel' | translate }}</button>
+    <button type="button" class="btn btn-danger" (click)="deleteCustomer()">{{ 'button.delete' | translate }}</button>
   </bs-modal-footer>
 </bs-modal>
 
