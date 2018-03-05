@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 export class TruncateDescriptionPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    return _.truncate(value, { 'length': 24 });
+    return _.truncate(value, { 'length': 40 });
   }
 
 }
