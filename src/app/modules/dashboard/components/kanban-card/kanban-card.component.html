@@ -1,12 +1,16 @@
-<div class="card">
+<div class="card" >
   <div>
     <div class="card-key"> #{{ order.id }}</div>
     <h5>
       <i class="fa fa-users  "></i> {{order.customer.name}}
     </h5>
-    <h6>{{ order.description | truncateDescription }}</h6>
+    <h6 [tooltip]="kanbanCardToolTip">{{ order.description | truncateDescription }}</h6>
     <h6>
       Deadline: {{ order.due_date | dateTimeVi}}
     </h6>
   </div>
 </div>
+
+<tooltip-content #kanbanCardToolTip>
+  <span>{{ order.description }}</span>
+</tooltip-content>
