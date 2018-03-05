@@ -43,7 +43,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let customer of customers | paginate: configPagination">
+        <tr *ngFor="let customer of customers | paginate: configPagination" [@flyOut]="'in'">
           <td>{{ customer.name }}</td>
           <td>{{ customer.email }}</td>
           <td>{{ customer.phone }}</td>

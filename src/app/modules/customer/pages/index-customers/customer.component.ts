@@ -1,3 +1,4 @@
+import { FlyOut } from './../../../dashboard/flyInOut.animate';
 import { tap, switchMap, map, debounceTime } from 'rxjs/operators';
 import { Customer } from '@modules/customer/customer.model';
 import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
@@ -23,7 +24,10 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 @Component({
   selector: "app-customer",
   templateUrl: "./customer.component.html",
-  styleUrls: ["./customer.component.css"]
+  styleUrls: ["./customer.component.css"],
+  animations: [
+    FlyOut
+  ]
 })
 export class CustomerComponent implements OnInit {
   @ViewChild("modal") modal: BsModalComponent;
