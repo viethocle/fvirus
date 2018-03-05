@@ -5,17 +5,19 @@
     <h4 class="modal-title">{{ 'customers.titleModal' | translate }}</h4>
   </bs-modal-header>
   <bs-modal-body>
-    <app-input-field [attribute]="'Table.name' | translate" [control]="formAdd.get('name')">
-    </app-input-field>
-
-    <app-input-field [attribute]="'Table.phone' | translate" [control]="formAdd.get('phone')">
-    </app-input-field>
-
-    <app-input-field [attribute]="'Table.email' | translate" [control]="formAdd.get('email')">
-    </app-input-field>
-
-    <app-input-field [attribute]="'Table.address' | translate" [control]="formAdd.get('address')">
-    </app-input-field>
+    <div class="form-group">
+      <app-input-field [attribute]="'Table.name' | translate" [control]="formAdd.get('name')">
+      </app-input-field>
+      
+      <app-input-field [attribute]="'Table.phone' | translate" [control]="formAdd.get('phone')">
+      </app-input-field>
+      
+      <app-input-field [attribute]="'Table.email' | translate" [control]="formAdd.get('email')">
+      </app-input-field>
+      
+      <app-input-field [attribute]="'Table.address' | translate" [control]="formAdd.get('address')">
+      </app-input-field>
+    </div>
   </bs-modal-body>
   <bs-modal-footer>
     <button class="btn btn-primary add-cus" (click)="addCustomer(formAdd.value)" (click)="modal.close()" [disabled]="formAdd.invalid" data-dismiss="modal">
