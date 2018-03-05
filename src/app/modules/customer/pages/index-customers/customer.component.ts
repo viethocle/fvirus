@@ -127,7 +127,7 @@ export class CustomerComponent implements OnInit {
   }
 
   handleUpdateCustomer(customer) {
-    _.assign(this.customers.find(cus => cus.id === customer.id, customer));
+    _.assign(this.customers.find(cus => cus.id === customer.id), customer);
     this.customerToEdit = null;
   }
 
