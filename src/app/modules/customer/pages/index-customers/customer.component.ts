@@ -109,7 +109,7 @@ export class CustomerComponent implements OnInit {
   }
 
   onChangeCount($event) {
-    this.navigateUrl(1, this.currentPerPage, "");
+    this.navigateUrl(1, this.currentPerPage, this.currentSearch);
   }
 
   getPage(page: number, per_page = this.currentPerPage, search = this.currentSearch) {
