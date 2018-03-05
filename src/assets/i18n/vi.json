@@ -50,7 +50,12 @@
     "selected_customer": "Khách hàng đã chọn",
     "title_edit": "Chỉnh sửa khách hàng",
     "edit": "Chỉnh sửa"
-	},
+  },
+  
+  "orders": {
+    "description": "Mô tả", 
+    "due-date": "Thời hạn"
+  },
 
   "sidebar": {
 		"dashboard": "Trang chủ",

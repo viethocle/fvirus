@@ -6,11 +6,14 @@
     </h5>
     <h6 [tooltip]="kanbanCardToolTip">{{ order.description | truncateDescription }}</h6>
     <h6>
-      Deadline: {{ order.due_date | dateTimeVi}}
+       {{ 'orders.due-date' | translate }}: {{ order.due_date | dateTimeVi}}
     </h6>
   </div>
 </div>
 
 <tooltip-content #kanbanCardToolTip>
-  <span>{{ order.description }}</span>
+  <div class="box-tooltip">
+    <h5 class="title-tooltip text-left">{{ 'orders.description' | translate }}:</h5> 
+    <span class="text-left">{{order.description }}</span>
+  </div>
 </tooltip-content>
