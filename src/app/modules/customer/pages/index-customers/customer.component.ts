@@ -1,4 +1,4 @@
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, map, debounceTime } from 'rxjs/operators';
 import { Customer } from '@modules/customer/customer.model';
 import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,6 +17,7 @@ import { ToastsManager } from "ng2-toastr/ng2-toastr";
 import { CustomerService } from "@modules/customer/customer.service";
 import { ToastrService } from "@shared/toastr.service";
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import { fromEvent } from 'rxjs/observable/fromEvent';
 
 @Destroyable
 @Component({
@@ -60,10 +61,10 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.getPage(1, 10);
-    this.setGetPage();
+    this.initEvent();
   }
 
-  setGetPage() {
+  initEvent() {
     this.route.queryParams
         .pipe(
           takeUntilDestroy(this),
@@ -78,6 +79,16 @@ export class CustomerComponent implements OnInit {
           this.customers = res.customers;
           this.configPagination.totalItems = res.total;
         })
+
+
+    const inputSearch = document.getElementById('search-customer');
+    const inputSearch$ = fromEvent(inputSearch, 'keyup')
+        .pipe(
+          map((i: any) => i.currentTarget.value),
+          debounceTime(500),
+          tap(value => this.currentSearch = value)
+        )
+        .subscribe(value => this.navigateUrl(1, this.currentPerPage, value));
   }
 
   navigateUrl(page, per_page, search_text) {
