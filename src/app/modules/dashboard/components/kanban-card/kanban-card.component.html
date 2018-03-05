@@ -4,6 +4,7 @@
     <h5>
       {{order.customer.name}}
     </h5>
+    <p>{{ order.description | truncateDescription }}</p>
     <h6>
       Deadline: {{ order.due_date | dateTimeVi}}
     </h6>

@@ -18,7 +18,7 @@
       <tbody>
         <tr *ngFor="let order of orders | paginate: configPagination" [@flyOut]="'in'">
           <td>{{ order.id }}</td>
-          <td>{{ truncateDescription(order.description) }}</td>
+          <td>{{ order.description | truncateDescription }}</td>
           <td>{{ order.customer.name }}</td>
           <td>{{ order.due_date | dateTimeVi }}</td>
           <td>
