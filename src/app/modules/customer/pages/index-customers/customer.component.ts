@@ -123,7 +123,6 @@ export class CustomerComponent implements OnInit {
   sendRequestDeleteCustomer(customer: Customer) {
     this.customerService.deleteCustomer(customer).subscribe(res => {
       this.customers = _.reject(this.customers, ["id", customer.id]);
-      this.toastrService.SetMessageSuccess("Deleted");
     });
   }
 
