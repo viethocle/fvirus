@@ -10,7 +10,8 @@
           <th>Id </th>
           <th>Description</th>
           <th>Customer name </th>
-          <th>Due date</th>
+          <th>{{ 'table.created-at' | translate }}</th>
+          <th>{{ 'table.due-date' | translate }}</th>
           <th>Status</th>
           <th></th>
         </tr>
@@ -20,6 +21,7 @@
           <td>{{ order.id }}</td>
           <td>{{ order.description | truncateDescription }}</td>
           <td>{{ order.customer.name }}</td>
+          <td>{{ order.created_at | dateTimeVi }}</td>
           <td>{{ order.due_date | dateTimeVi }}</td>
           <td>
             <span class="label arrowed-right arrowed-in"

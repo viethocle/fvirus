@@ -7,10 +7,11 @@ export enum StatusOrder {
   closed      = 'closed'
 }
 
-export class Order {
+export interface Order {
   id: string;
   description: string;
   status: StatusOrder;
+  created_at: string;
   due_date: string;
-  customer: Customer
+  customer?: Customer
 }

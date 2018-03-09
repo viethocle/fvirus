@@ -1,15 +1,15 @@
 {
   "Title": "Hello",
-  "Table": {
+  "table": {
     "No": "Order No.",
     "address": "Địa chỉ",
     "amount": "Tiền",
-    "createdAt": "Thời gian tạo",
+    "created-at": "Ngày thêm",
     "customer": "Khách hàng",
     "code": "Mã sản phẩm",
     "date": "Ngày",
-    "dateAdded": "Ngày thêm",
     "debt": "Nợ",
+    "due-date": "Thời hạn",
     "discount": "Giảm giá",
     "discountedRate": "Tỷ giá chiết khấu",
     "discountedRateShort": "Tỷ giá",
