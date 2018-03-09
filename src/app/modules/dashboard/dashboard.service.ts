@@ -96,7 +96,6 @@ export class DashboardService {
 
 
   private received(data) {
-    console.log(data);
     this.orderChange.next(data as DataOrder);
   }
 

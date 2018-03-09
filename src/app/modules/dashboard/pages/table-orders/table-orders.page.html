@@ -8,11 +8,11 @@
       <thead>
         <tr>
           <th>Id </th>
-          <th>Description</th>
-          <th>Customer name </th>
+          <th>{{ 'table.description' | translate }}</th>
+          <th>{{ 'table.customer' | translate }}</th>
           <th>{{ 'table.created-at' | translate }}</th>
           <th>{{ 'table.due-date' | translate }}</th>
-          <th>Status</th>
+          <th>{{ 'table.status' | translate }}</th>
           <th></th>
         </tr>
       </thead>
@@ -28,7 +28,7 @@
             [ngClass]="{'label-danger': order.status == 'new',
                         'label-warning': order.status == 'inprogress',
                         'label-success': order.status == 'ready'}">
-              {{ order.status }}
+              {{ 'label.' + order.status | translate  }}
             </span>
           </td>
           <td>

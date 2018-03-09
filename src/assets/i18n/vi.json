@@ -11,6 +11,7 @@
     "debt": "Nợ",
     "due-date": "Thời hạn",
     "discount": "Giảm giá",
+    "description": "Mô tả",
     "discountedRate": "Tỷ giá chiết khấu",
     "discountedRateShort": "Tỷ giá",
     "discountedPrice": "Giá bán",
@@ -140,6 +141,12 @@
       "max-length-error": "Độ dài không được quá {{value}} ký tự",
       "min-length-error": "Độ dài phải nhiều hơn {{value}} ký tự"
     }
+  },
+  "label": {
+    "ready": "Sẵn sàng",
+    "new": "Mới", 
+    "inprogress": "Trong tiến trình",
+    "closed": "Kết thúc"
   },
   "notification": {
     "not-found": "Không tìm thấy kết quả"
