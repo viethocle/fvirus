@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'inprogress'
+  name: 'inprogress',
+  pure: false
 })
 export class InprogressPipe implements PipeTransform {
 

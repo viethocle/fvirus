@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '@environments/environment';
@@ -16,19 +17,19 @@ export interface IOrdersPaginate {
 }
 
 @Injectable()
-export class DashboardService  {
+export class DashboardService {
 
   private cable: ActionCable.Cable;
   private subscription: ActionCable.Channel;
 
-  orderChange = new BehaviorSubject<DataOrder>(null);
+  orderChange = new Subject<DataOrder>();
 
   readonly baseUrl = environment.baseUrl + '/orders.json';
 
   constructor(
     private http: HttpClient
   ) {
-    // this.setConnect();
+    this.setConnect();
   }
 
 
@@ -36,22 +37,21 @@ export class DashboardService  {
 
   getOrders(): Observable<Order[]> {
     return this.http.get(this.baseUrl)
-               .map((res: any) => res.orders as Order[]);
+      .map((res: any) => res.orders as Order[]);
   }
 
   /** GET orders with pagination */
 
   getOrdersWithPagination(page: number): Observable<IOrdersPaginate> {
     let params = new HttpParams().set('page', page.toString());
-    return this.http.get<IOrdersPaginate>(this.baseUrl, { params: params } );
+    return this.http.get<IOrdersPaginate>(this.baseUrl, { params: params });
   }
 
   /** POST new order */
   createOrder(value): Observable<Order> {
     // let params = new HttpParams().set('description', value.description
-    console.log(value);
     return this.http.post(this.baseUrl, value)
-               .map((res: any) => res.order as Order);
+      .map((res: any) => res.order as Order);
   }
 
   /** UPDATE status order */
@@ -59,14 +59,14 @@ export class DashboardService  {
     let url = `${environment.baseUrl}/orders/${order_id}/${status_to_change}.json`;
 
     return this.http.put(url, {})
-                    .map((res: any) => res.order as Order);
+      .map((res: any) => res.order as Order);
   }
 
   /** UPDATE order */
   updateOrder(order_id: string, value): Observable<Order> {
     let url = `${environment.baseUrl}/orders/${order_id}.json`;
     return this.http.put(url, value)
-                    .map((res: any) => res.order as Order)
+      .map((res: any) => res.order as Order)
   }
 
   /** DELETE order */
@@ -96,6 +96,7 @@ export class DashboardService  {
 
 
   private received(data) {
+    console.log(data);
     this.orderChange.next(data as DataOrder);
   }
 
@@ -105,7 +106,7 @@ export class DashboardService  {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

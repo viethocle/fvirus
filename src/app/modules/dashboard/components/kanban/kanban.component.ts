@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { DashboardService } from '../../dashboard.service';
 import { Order, StatusOrder } from '../../order';
 import { DatePipe } from "@angular/common";
 import * as _ from 'lodash';
-
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import { takeWhile } from "rxjs/operators";
+@Destroyable
 @Component({
   selector: "app-kanban",
   templateUrl: "./kanban.component.html",
@@ -17,18 +19,32 @@ export class KanbanComponent implements OnInit {
   constructor(
     private dragulaService: DragulaService,
     private dashboardService: DashboardService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.getOrders();
     this.setDropModelDragula();
-    this.dashboardService.orderChange.subscribe(dataOrder => {
-      if (dataOrder != undefined) {
-        this.orders.push(dataOrder.data);
-        console.log(dataOrder);
-      }
-    });
+    this.dashboardService.orderChange
+      .subscribe(dataOrder => {
+        console.log("SUB");
+        if (dataOrder.method == 'CREATE') {
+          this.orders.push(dataOrder.data);
+        }
+      
+        if (dataOrder.method == "UPDATE") {
+          
+          let index = this.orders.findIndex(order => order.id === dataOrder.data.id);
+          _.assign(this.orders[index], dataOrder.data);
+          console.log(this.orders);
+          this.cdRef.detectChanges();
+        }
+          
+        if (dataOrder.method == 'DELETE') {
+          this.orders.filter(order => order.id === dataOrder.data.id);
+        }
+      });
   }
 
   setDropModelDragula() {

@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'closed'
+  name: 'closed',
+  pure: false
 })
 export class ClosedPipe implements PipeTransform {
 
