@@ -5,7 +5,7 @@
         <!-- <div class="kb-header kb-header-new">
           New
         </div> -->
-        <h4>New</h4>          
+        <h4>{{ 'label.new' | translate }}</h4>          
         <div  class="bag-status  column-kanban"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.new"
@@ -21,7 +21,7 @@
         <!-- <div class="kb-header kb-header-working">
           Inprogress
         </div> -->
-        <h4>Inprogress</h4>
+        <h4>{{ 'label.inprogress' | translate }}</h4>
         <div  class="bag-status  column-kanban"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.inprogress"
@@ -33,7 +33,7 @@
       </div>
 
       <div class='col-md-3 kanban-column'>
-        <h4>Ready</h4>
+        <h4>{{ 'label.ready' | translate }}</h4>
         <div  class="bag-status column-kanban"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.ready"
@@ -45,7 +45,7 @@
       </div>
 
       <div class='col-md-3 kanban-column'>
-        <h4>Delivered</h4>
+        <h4>{{ 'label.delivered' | translate }}</h4>
         <div  class="bag-status  column-kanban"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.delivered"
