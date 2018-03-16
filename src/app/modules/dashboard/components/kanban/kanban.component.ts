@@ -1,3 +1,4 @@
+import { StatusOrder } from './../../order';
 import { AuthService } from './../../../auth/auth.service';
 import { Angular2TokenService } from 'angular2-token';
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
@@ -17,6 +18,10 @@ import { takeWhile } from "rxjs/operators";
 export class KanbanComponent implements OnInit {
   orders: Order[] = [];
   statusOrder = StatusOrder;
+  bagNew        = 'bag';
+  bagInprogres  = 'bag';
+  bagReady      = 'bag';
+  bagDelivered  = 'bag';
 
   constructor(
     private dragulaService: DragulaService,
@@ -54,8 +59,12 @@ export class KanbanComponent implements OnInit {
   private setRoleToDrag() {
     if (this.authService.isCurrentUserAccount) {
       this.dragulaService.setOptions('first-bag', {
-        moves: function(el, container, handle) {
-          return false;
+        accepts: function(el, target, source, sibling) {
+          let id_target = target.dataset.id;
+          let id_source = source.dataset.id;
+          if (id_source === StatusOrder.new || id_source == StatusOrder.inprogress) return false;
+          if (id_target == StatusOrder.inprogress) return false;
+          return true;
         }
       })
     }

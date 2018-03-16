@@ -65,6 +65,7 @@ export class AuthService {
   }
 
   get isCurrentUserAccount() {
+    console.log(_.get(this.authService.currentUserData, 'role') === RoleUser.accountant);
     return _.get(this.authService.currentUserData, 'role') === RoleUser.accountant;
   }
 
