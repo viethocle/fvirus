@@ -1,4 +1,3 @@
-import { StatusOrder } from './../../order';
 import { AuthService } from './../../../auth/auth.service';
 import { Angular2TokenService } from 'angular2-token';
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
