@@ -13,6 +13,17 @@
         <textarea class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formEditOrder.get('description')"></textarea>
 
       </div>
+
+      <div [class.has-error]="formEditOrder.get('price').errors && (formEditOrder.get('price').dirty || formEditOrder.get('price').touched)">
+        <label for="new-price" class="control-label">{{ 'orders.price' | translate }}:</label>
+        <div class="input-group">
+          <input class="form-control" id="new-price" type="number" [formControl]="formEditOrder.get('price')">
+          <span class="input-group-addon">
+            <i class="ace-icon fa fa-money"></i>
+          </span>
+        </div>
+      </div>
+
       <div class="input-wrapper">
         <label for="datetime-picker" class="control-label">Due date:</label>
         <input id="datetime-picker" class="form-control" [formControl]="formEditOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"

@@ -28,6 +28,7 @@
     "productName": "Tên hàng hóa",
     "products": "Các hàng hóa",
     "quantity": "Số lượng",
+    "price": "Giá trị đơn hàng",
     "salePrice": "Thành tiền",
     "status": "Trạng thái",
     "sold": "Đã bán",
@@ -55,7 +56,8 @@
   
   "orders": {
     "description": "Mô tả", 
-    "due-date": "Thời hạn"
+    "due-date": "Thời hạn",
+    "price": "Giá cả"
   },
 
   "sidebar": {
