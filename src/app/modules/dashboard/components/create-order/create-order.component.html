@@ -11,12 +11,23 @@
     <div class="col-md-6">
       <!-- description -->
       <div [class.has-error]="formNewOrder.get('description').errors && (formNewOrder.get('description').dirty || formNewOrder.get('description').touched)">
-        <label for="new-description" class="control-label">Description</label>
+        <label for="new-description" class="control-label">{{ 'orders.description' | translate }}:</label>
         <textarea class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formNewOrder.get('description')"></textarea>
       
       </div>
+
+      <div [class.has-error]="formNewOrder.get('price').errors && (formNewOrder.get('price').dirty || formNewOrder.get('price').touched)">
+        <label for="new-price" class="control-label">{{ 'orders.price' | translate }}:</label>
+        <div class="input-group">
+          <input class="form-control" id="new-price" type="number" [formControl]="formNewOrder.get('price')">
+          <span class="input-group-addon">
+            <i class="ace-icon fa fa-money"></i>
+          </span>
+        </div>
+      </div>
+
       <div class="input-wrapper">
-        <label for="datetime-picker" class="control-label">Due date:</label>
+        <label for="datetime-picker" class="control-label">{{ 'orders.due-date' | translate }}:</label>
         <input id="datetime-picker" class="form-control" [formControl]="formNewOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
           [owlDateTime]="dtPicker2" [min]="minDueDate">
         <owl-date-time #dtPicker2 [pickerType]="'calendar'"></owl-date-time>

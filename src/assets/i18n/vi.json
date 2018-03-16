@@ -55,7 +55,8 @@
   
   "orders": {
     "description": "Mô tả", 
-    "due-date": "Thời hạn"
+    "due-date": "Thời hạn",
+    "price": "Giá cả"
   },
 
   "sidebar": {

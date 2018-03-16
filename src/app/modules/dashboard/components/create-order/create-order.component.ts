@@ -66,6 +66,7 @@ export class CreateOrderComponent implements OnInit {
     this.formNewOrder = this.formBuilder.group({
       description: [""],
       due_date: ["", Validators.required],
+      price: [""],
       customer_id: [""]
     });
   }
