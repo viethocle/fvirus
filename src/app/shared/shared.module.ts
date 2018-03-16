@@ -82,7 +82,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     DateTimeViPipe,
-    TruncateDescriptionPipe
+    TruncateDescriptionPipe,
+    VndPipe
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },
