@@ -10,6 +10,12 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/publishReplay";
+import * as _ from 'lodash';
+
+export enum RoleUser {
+  admin = 'admin',
+  accountant = 'accountant'
+}
 
 
 
@@ -56,6 +62,10 @@ export class AuthService {
       .publishReplay(1)
       .refCount();
     return obs$;
+  }
+
+  get isCurrentUserAccount() {
+    return _.get(this.authService.currentUserData, 'role') === RoleUser.accountant;
   }
 
   logOut(): void {
