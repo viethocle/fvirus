@@ -23,6 +23,7 @@ import { ToastrService } from "./toastr.service";
 import { MySearchPipe } from './pipes/my-search.pipe';
 import { TooltipModule }       from 'ngx-tooltip';
 import { TruncateDescriptionPipe } from './pipes/truncate-description.pipe';
+import { VndPipe } from './pipes/vnd.pipe';
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -48,7 +49,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ClosedPipe,
     DateTimeViPipe,
     MySearchPipe,
-    TruncateDescriptionPipe
+    TruncateDescriptionPipe,
+    VndPipe
   ],
   imports: [
     FormsModule,

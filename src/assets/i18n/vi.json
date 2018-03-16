@@ -28,6 +28,7 @@
     "productName": "Tên hàng hóa",
     "products": "Các hàng hóa",
     "quantity": "Số lượng",
+    "price": "Giá cả",
     "salePrice": "Thành tiền",
     "status": "Trạng thái",
     "sold": "Đã bán",
