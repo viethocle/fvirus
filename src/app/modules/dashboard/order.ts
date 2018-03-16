@@ -13,5 +13,6 @@ export interface Order {
   status: StatusOrder;
   created_at: string;
   due_date: string;
+  price: number;
   customer?: Customer
 }
