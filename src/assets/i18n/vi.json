@@ -148,7 +148,8 @@
     "ready": "Sẵn sàng",
     "new": "Mới", 
     "inprogress": "Trong tiến trình",
-    "closed": "Kết thúc"
+    "closed": "Kết thúc",
+    "delivered": "Đã giao hàng"
   },
   "notification": {
     "not-found": "Không tìm thấy kết quả"

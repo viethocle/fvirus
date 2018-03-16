@@ -4,7 +4,7 @@ export enum StatusOrder {
   new         = 'new',
   ready       = 'ready',
   inprogress  = 'inprogress',
-  closed      = 'closed'
+  delivered   = 'delivered'
 }
 
 export interface Order {

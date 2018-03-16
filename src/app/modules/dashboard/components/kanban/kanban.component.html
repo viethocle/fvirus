@@ -45,12 +45,12 @@
       </div>
 
       <div class='col-md-3 kanban-column'>
-        <h4>Closed</h4>
+        <h4>Delivered</h4>
         <div  class="bag-status  column-kanban"
               [dragula]='"first-bag"'
-              [attr.data-id]="statusOrder.closed"
+              [attr.data-id]="statusOrder.delivered"
               #bagClosed>
-          <div *ngFor="let order of orders | closed;" [attr.data-id]="order.id">
+          <div *ngFor="let order of orders | delivered;" [attr.data-id]="order.id">
             <kanban-card [order]="order"></kanban-card>
           </div>
         </div>
