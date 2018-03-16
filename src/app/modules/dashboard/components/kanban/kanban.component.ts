@@ -63,7 +63,7 @@ export class KanbanComponent implements OnInit {
           let id_target = target.dataset.id;
           let id_source = source.dataset.id;
           if (id_source === StatusOrder.new || id_source == StatusOrder.inprogress) return false;
-          if (id_target == StatusOrder.inprogress) return false;
+          if (id_target == StatusOrder.inprogress || id_target == StatusOrder.new) return false;
           return true;
         }
       })
