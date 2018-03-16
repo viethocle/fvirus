@@ -105,6 +105,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.formEditOrder = this.formBuilder.group({
       description: [""],
       due_date: ["", Validators.required],
+      price: [""],
       customer_id: [""]
     });
 
@@ -114,6 +115,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.formEditOrder.patchValue({
       description: this.order.description,
       due_date: this.order.due_date,
+      price: this.order.price,
       customer_id: this.order.customer.id
     })
   }
