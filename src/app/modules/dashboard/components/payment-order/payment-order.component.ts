@@ -6,6 +6,7 @@ import { takeUntilDestroy } from 'take-until-destroy';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DashboardService } from '@modules/dashboard/dashboard.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-payment-order',
@@ -39,11 +40,15 @@ export class PaymentOrderComponent implements OnInit {
         });
   }
   payOrder() {
-    this.dashboardService.updateOrder(this.order.id, this.formPaymentOrder.value)
+    this.dashboardService.PaymentOrder(this.order.id, this.formPaymentOrder.value)
       .pipe(
         tap(console.log)
       )
-      .subscribe(order => tap(console.log));
+      .subscribe(order =>
+        this.dashboardService.updateStatusOrder(this.order.id, "done")
+            .subscribe((order1: Order) => {
+        })
+    );
     this.modalPayment.close();
   }
   private buildForm() {
