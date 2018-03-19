@@ -13,6 +13,11 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
+    path: "homepage",
+    loadChildren: "./modules/home/home.module#HomeModule",
+    canLoad: [LoggedInGuard]
+  },
+  {
     path: "dashboard",
     loadChildren: "./modules/dashboard/dashboard.module#DashboardModule",
     canLoad: [LoggedInGuard]

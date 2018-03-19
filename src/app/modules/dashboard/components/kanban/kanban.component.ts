@@ -56,7 +56,7 @@ export class KanbanComponent implements OnInit {
   }
 
   private setRoleToDrag() {
-    if (this.authService.isCurrentUserAccount) {
+    if (this.authService.isCurrentUserAccountant) {
       this.dragulaService.setOptions('first-bag', {
         accepts: function(el, target, source, sibling) {
           let id_target = target.dataset.id;

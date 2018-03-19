@@ -33,7 +33,9 @@ export class AuthService {
   ) {
     this.authService.init({ apiBase: environment.baseUrl});
     this.authService.validateToken().subscribe(
-      res => this.userSignedIn$.next(true),
+      res => { 
+        this.userSignedIn$.next(true);
+      },
       err => {
         this.router.navigate(["/login"]);
         this.userSignedIn$.next(false);
@@ -50,8 +52,8 @@ export class AuthService {
     return this.authService
       .signIn({ email: email, password: password })
       .map(res => {
-        this.router.navigate([""])
         this.userSignedIn$.next(true);
+        this.redirectAfterValidate();
         return res;
       });
   }
@@ -65,7 +67,16 @@ export class AuthService {
     return obs$;
   }
 
-  get isCurrentUserAccount() {
+  private redirectAfterValidate() {
+    if (this.isCurrentUserAccountant || this.isCurrentUserTechnician) {
+      this.router.navigate(["/dashboard/kanban"]);
+    }
+    if (this.isCurrentUserAdmin) {
+      this.router.navigate(["/homepage"]);
+    }
+  }
+
+  get isCurrentUserAccountant() {
     return _.get(this.authService.currentUserData, 'role') === RoleUser.accountant;
   }
 
