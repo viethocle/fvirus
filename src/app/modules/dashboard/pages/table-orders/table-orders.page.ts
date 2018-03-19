@@ -5,14 +5,13 @@ import { Subscription } from "rxjs/Subscription";
 import * as _ from 'lodash';
 import { FlyOut } from '../../flyInOut.animate';
 import { BsmodalService } from '@core/services/bsmodal.service';
+import { AuthService } from "./../../../auth/auth.service";
 
 @Component({
   selector: "app-dashboard-table-orders",
   templateUrl: "./table-orders.page.html",
   styleUrls: ["./table-orders.page.css"],
-  animations: [
-    FlyOut
-  ]
+  animations: [FlyOut]
 })
 export class TableOrdersPage implements OnInit, OnDestroy {
   orders: Order[];
@@ -27,7 +26,9 @@ export class TableOrdersPage implements OnInit, OnDestroy {
 
   constructor(
     private dashboardService: DashboardService,
-    private bsmodalService: BsmodalService) {}
+    private bsmodalService: BsmodalService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.getPage(1);
@@ -51,13 +52,13 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   }
 
   truncateDescription(des: string) {
-    return _.truncate(des, {'length': 24});
+    return _.truncate(des, { length: 24 });
   }
 
   returnHtmlDeleteOrder() {
     return `<button class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}">
                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
-              </button>`
+              </button>`;
   }
 
   openEditModal(order: Order) {
@@ -69,7 +70,7 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   }
 
   handleDeleteOrder(order: Order) {
-    _.remove(this.orders, (o) => o.id === order.id);
+    _.remove(this.orders, o => o.id === order.id);
     this.configPagination.totalItems -= 1;
   }
 
