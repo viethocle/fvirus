@@ -45,7 +45,7 @@ export class PaymentOrderComponent implements OnInit {
         tap(console.log)
       )
       .subscribe(order =>
-        this.dashboardService.updateStatusOrder(this.order.id, "done")
+        this.dashboardService.updateStatusOrder(this.order.id, "delivered")
             .subscribe((order1: Order) => {
         })
     );
