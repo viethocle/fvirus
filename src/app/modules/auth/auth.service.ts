@@ -14,7 +14,8 @@ import * as _ from 'lodash';
 
 export enum RoleUser {
   admin = 'admin',
-  accountant = 'accountant'
+  accountant = 'accountant',
+  technician = 'technician'
 }
 
 
@@ -65,8 +66,15 @@ export class AuthService {
   }
 
   get isCurrentUserAccount() {
-    console.log(_.get(this.authService.currentUserData, 'role') === RoleUser.accountant);
     return _.get(this.authService.currentUserData, 'role') === RoleUser.accountant;
+  }
+
+  get isCurrentUserAdmin() {
+    return _.get(this.authService.currentUserData, 'role') === RoleUser.admin;
+  }
+
+  get isCurrentUserTechnician() {
+    return _.get(this.authService.currentUserData, 'role') === RoleUser.technician;
   }
 
   logOut(): void {
