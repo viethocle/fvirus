@@ -1,4 +1,4 @@
-<button class="btn btn-primary" (click)="modalCreate.open()" >Tạo đơn hàng mới</button>
+<button *ngIf="!authService.isCurrentUserTechnician" class="btn btn-primary" (click)="modalCreate.open()" >Tạo đơn hàng mới</button>
 
 
 <bs-modal #modalCreate [size]="'lg'" >

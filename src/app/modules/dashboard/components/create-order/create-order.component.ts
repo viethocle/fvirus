@@ -1,3 +1,4 @@
+import { AuthService } from '@modules/auth/auth.service';
 import { tap } from 'rxjs/operators';
 import { 
   Component, 
@@ -49,7 +50,8 @@ export class CreateOrderComponent implements OnInit {
     private dashboardService: DashboardService,
     private customerService: CustomerService,
     private renderer2: Renderer2,
-    private cdRef: ChangeDetectorRef) { }
+    private cdRef: ChangeDetectorRef,
+    public authService: AuthService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -59,6 +61,10 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
+  }
+
+  get isTechnician() {
+    return this.authService.isCurrentUserTechnician;
   }
 
 
