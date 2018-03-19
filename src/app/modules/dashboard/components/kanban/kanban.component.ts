@@ -1,3 +1,5 @@
+import { AuthService } from './../../../auth/auth.service';
+import { Angular2TokenService } from 'angular2-token';
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { DashboardService } from '../../dashboard.service';
@@ -15,16 +17,22 @@ import { takeWhile } from "rxjs/operators";
 export class KanbanComponent implements OnInit {
   orders: Order[] = [];
   statusOrder = StatusOrder;
+  bagNew        = 'bag';
+  bagInprogres  = 'bag';
+  bagReady      = 'bag';
+  bagDelivered  = 'bag';
 
   constructor(
     private dragulaService: DragulaService,
     private dashboardService: DashboardService,
     private datePipe: DatePipe,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.getOrders();
+    this.setRoleToDrag();
     this.setDropModelDragula();
     this.dashboardService.orderChange
       .subscribe(dataOrder => {
@@ -45,6 +53,20 @@ export class KanbanComponent implements OnInit {
           this.orders.filter(order => order.id === dataOrder.data.id);
         }
       });
+  }
+
+  private setRoleToDrag() {
+    if (this.authService.isCurrentUserAccount) {
+      this.dragulaService.setOptions('first-bag', {
+        accepts: function(el, target, source, sibling) {
+          let id_target = target.dataset.id;
+          let id_source = source.dataset.id;
+          if (id_source === StatusOrder.new || id_source == StatusOrder.inprogress) return false;
+          if (id_target == StatusOrder.inprogress || id_target == StatusOrder.new) return false;
+          return true;
+        }
+      })
+    }
   }
 
   setDropModelDragula() {

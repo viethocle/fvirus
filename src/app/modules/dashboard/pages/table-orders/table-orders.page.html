@@ -1,6 +1,6 @@
 <div class="col-md-12" id="main-product">
   <app-create-order (newOrder)="handlerAddNewOrder($event)"></app-create-order>
-
+  <button (click)="OpenModelPaymentModal()">Thanh toan </button>
   <div id="dynamic-table_wrapper_wrapper" class="dataTables_wrapper form-inline no-footer">
 
     <!-- Start table -->
@@ -10,6 +10,7 @@
           <th>Id </th>
           <th>{{ 'table.description' | translate }}</th>
           <th>{{ 'table.customer' | translate }}</th>
+          <th class="text-right">{{ 'table.price' | translate }}</th>
           <th>{{ 'table.created-at' | translate }}</th>
           <th>{{ 'table.due-date' | translate }}</th>
           <th>{{ 'table.status' | translate }}</th>
@@ -21,6 +22,7 @@
           <td>{{ order.id }}</td>
           <td>{{ order.description | truncateDescription }}</td>
           <td>{{ order.customer.name }}</td>
+          <td class="text-right">{{ order.price | vnd }}</td>
           <td>{{ order.created_at | dateTimeVi }}</td>
           <td>{{ order.due_date | dateTimeVi }}</td>
           <td>
@@ -32,14 +34,14 @@
             </span>
           </td>
           <td>
-            <button 
-              class="btn btn-xs btn-info" 
-              tooltip="{{ 'tooltip.edit' | translate }}" 
+            <button
+              class="btn btn-xs btn-info"
+              tooltip="{{ 'tooltip.edit' | translate }}"
               (click)="openEditModal(order)">
               <i class="ace-icon fa fa-pencil bigger-120"></i>
             </button>
-            <button 
-              class="btn btn-xs btn-danger" 
+            <button
+              class="btn btn-xs btn-danger"
               tooltip="{{ 'tooltip.delete' | translate }}"
               (click)="openModalDelete(order)">
             <i class="ace-icon fa fa-trash-o bigger-120"></i>
@@ -87,3 +89,4 @@
 
 <app-delete-order (deleteOrderOutput)="handleDeleteOrder($event)"></app-delete-order>
 <app-edit-order (updateOrderOutput)="handleUpdateOrder($event)"></app-edit-order>
+<app-payment-order></app-payment-order>

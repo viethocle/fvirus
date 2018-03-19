@@ -12,6 +12,7 @@ import { KanbanCardComponent } from './components/kanban-card/kanban-card.compon
 import { MatchHeightDirective } from '@shared/directives/match-height.directive';
 import { DeleteOrderComponent } from './components/delete-order/delete-order.component';
 import { EditOrderComponent } from './components/edit-order/edit-order.component';
+import { PaymentOrderComponent } from './components/payment-order/payment-order.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,6 +28,7 @@ import { EditOrderComponent } from './components/edit-order/edit-order.component
     KanbanCardComponent,
     DeleteOrderComponent,
     EditOrderComponent,
+    PaymentOrderComponent,
   ]
 })
 export class DashboardModule { }

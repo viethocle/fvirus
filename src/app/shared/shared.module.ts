@@ -10,7 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NewPipe } from './pipes/new.pipe';
 import { InprogressPipe } from './pipes/inprogress.pipe';
 import { ReadyPipe } from './pipes/ready.pipe';
-import { ClosedPipe } from './pipes/closed.pipe';
+import { ClosedPipe } from './pipes/delivered.pipe';
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { PERFECT_SCROLLBAR_CONFIG } from "ngx-perfect-scrollbar";
 import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
@@ -23,6 +23,7 @@ import { ToastrService } from "./toastr.service";
 import { MySearchPipe } from './pipes/my-search.pipe';
 import { TooltipModule }       from 'ngx-tooltip';
 import { TruncateDescriptionPipe } from './pipes/truncate-description.pipe';
+import { VndPipe } from './pipes/vnd.pipe';
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -48,7 +49,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ClosedPipe,
     DateTimeViPipe,
     MySearchPipe,
-    TruncateDescriptionPipe
+    TruncateDescriptionPipe,
+    VndPipe
   ],
   imports: [
     FormsModule,
@@ -80,7 +82,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     DateTimeViPipe,
-    TruncateDescriptionPipe
+    TruncateDescriptionPipe,
+    VndPipe
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },

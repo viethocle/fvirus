@@ -4,7 +4,7 @@ export enum StatusOrder {
   new         = 'new',
   ready       = 'ready',
   inprogress  = 'inprogress',
-  closed      = 'closed'
+  delivered   = 'delivered'
 }
 
 export interface Order {
@@ -13,5 +13,7 @@ export interface Order {
   status: StatusOrder;
   created_at: string;
   due_date: string;
+  price: number;
+  paidAmount?: number;
   customer?: Customer
 }

@@ -34,7 +34,7 @@ import { BsmodalService } from '@core/services/bsmodal.service';
   ]
 })
 export class EditOrderComponent implements OnInit, OnDestroy {
-  
+
   @ViewChild("modalEdit") modalEdit: BsModalComponent;
   @ViewChild(PerfectScrollbarComponent) componentScroll: PerfectScrollbarComponent;
   @ViewChildren("listCustomers") listCustomers;
@@ -65,7 +65,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
         .pipe(
           takeUntilDestroy(this),
         )
-        .subscribe(order => { 
+        .subscribe(order => {
           if (order) {
             this.order = order;
             this.customerSelected = this.customers.find(cus => cus.id === this.order.customer.id);
@@ -86,13 +86,13 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.modalEdit.close();
     this.formEditOrder.patchValue({
       customer_id: this.customerSelected.id
-    })
-    
+    });
+
     this.dashboardService.updateOrder(this.order.id, this.formEditOrder.value)
         .pipe(
           takeUntilDestroy(this)
         )
-      .subscribe(order => this.updateOrderOutput.emit(order))
+      .subscribe(order => this.updateOrderOutput.emit(order));
 
   }
 
@@ -105,6 +105,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.formEditOrder = this.formBuilder.group({
       description: [""],
       due_date: ["", Validators.required],
+      price: [""],
       customer_id: [""]
     });
 
@@ -114,6 +115,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.formEditOrder.patchValue({
       description: this.order.description,
       due_date: this.order.due_date,
+      price: this.order.price,
       customer_id: this.order.customer.id
     })
   }
@@ -143,9 +145,9 @@ export class EditOrderComponent implements OnInit, OnDestroy {
 
   onChangeTermCustomer() {
     this.cdRef.detectChanges();
-    // See this issue to know reason why I added that code 
+    // See this issue to know reason why I added that code
     // https://github.com/angular/angular/issues/17572
-    this.currentFocusIndex = -1; // reset focus when typing new term 
+    this.currentFocusIndex = -1; // reset focus when typing new term
   }
 
 
