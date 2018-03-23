@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -24,6 +24,12 @@ export class FilterOrderComponent implements OnInit {
 
   ngOnInit() {
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: { page: 1, per_page: 10 } })
+  }
+
+  changeSortedBy(value) {
+    const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
+    queryParams['sortedBy'] = value;
+    this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams})
   }
 
 
