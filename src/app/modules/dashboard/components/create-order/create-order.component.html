@@ -1,4 +1,7 @@
-<button *ngIf="!authService.isCurrentUserTechnician" class="btn btn-primary" (click)="modalCreate.open()" >Tạo đơn hàng mới</button>
+<button
+  *ngIf="!authService.isCurrentUserTechnician"
+  class="create-order btn btn-primary"
+  (click)="modalCreate.open()" >Tạo đơn hàng mới</button>
 
 
 <bs-modal #modalCreate [size]="'lg'" >
@@ -13,7 +16,7 @@
       <div [class.has-error]="formNewOrder.get('description').errors && (formNewOrder.get('description').dirty || formNewOrder.get('description').touched)">
         <label for="new-description" class="control-label">{{ 'orders.description' | translate }}:</label>
         <textarea class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formNewOrder.get('description')"></textarea>
-      
+
       </div>
 
       <div [class.has-error]="formNewOrder.get('price').errors && (formNewOrder.get('price').dirty || formNewOrder.get('price').touched)">
@@ -33,7 +36,7 @@
         <owl-date-time #dtPicker2 [pickerType]="'calendar'"></owl-date-time>
       </div>
 
-    </div>    
+    </div>
 
     <div class="col-md-6">
       <label for="" class="control-label">
@@ -41,11 +44,11 @@
       </label>
 
       <div class="input-group">
-        <input type="search" class="form-control" [(ngModel)]="termCustomer" 
-              (input)="onChangeTermCustomer()" 
+        <input type="search" class="form-control" [(ngModel)]="termCustomer"
+              (input)="onChangeTermCustomer()"
               (keyup.enter)="chooseCustomer()"
-              (keyup.escape)="escapeSearch($event)" 
-              (keydown.arrowup)="shiftFocusUp($event)" 
+              (keyup.escape)="escapeSearch($event)"
+              (keydown.arrowup)="shiftFocusUp($event)"
               (keydown.arrowdown)="shiftFocusDown($event)">
         <span class="input-group-addon">
           <i class="ace-icon fa fa-search"></i>
@@ -84,13 +87,13 @@
               <dl class="dl-horizontal">
                 <dt>{{ 'Table.name' | translate }}</dt>
                 <dd>{{customerSelected?.name}}</dd>
-      
+
                 <dt>{{ 'Table.phone' | translate }}</dt>
                 <dd>{{customerSelected?.phone}}</dd>
-      
+
                 <dt>{{ 'Table.email' | translate }}</dt>
                 <dd>{{customerSelected?.email}}</dd>
-      
+
                 <dt>{{ 'Table.address' | translate }}</dt>
                 <dd>{{customerSelected?.address}}</dd>
               </dl>
@@ -100,7 +103,7 @@
       </div>
 
     </div>
-    
+
   </bs-modal-body>
 
   <bs-modal-footer>
