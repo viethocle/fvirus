@@ -1,5 +1,8 @@
+import { StatusOrder } from './../../order';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Component, OnInit, Output } from '@angular/core';
+import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
 
 @Component({
   selector: 'app-filter-order',
@@ -17,12 +20,27 @@ export class FilterOrderComponent implements OnInit {
     { key: 'Customer name (z - a)',      value: 'customer_desc'},
   ]
 
+  myOptions: IMultiSelectOption[];
+  optionsModel: number[];
+
+  status = [ StatusOrder.new, StatusOrder.inprogress, StatusOrder.inprogress, StatusOrder.delivered]
+
+  formStatus: FormGroup;
+
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.myOptions = [
+      { id: 1, name: 'Option 1' },
+      { id: 2, name: 'Option 2' },
+    ];
+    this.formStatus = this.formBuilder.group({
+      status: this.formBuilder.array([])
+    });
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: { page: 1, per_page: 10 } })
   }
 
@@ -31,6 +49,16 @@ export class FilterOrderComponent implements OnInit {
     queryParams['sortedBy'] = value;
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams})
   }
+
+  onChangeStatus(status, isChecked) {
+    console.log(status, isChecked);
+  }
+
+  onChange(e) {
+    console.log(e);
+  }
+
+
 
 
 
