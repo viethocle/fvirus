@@ -1,3 +1,15 @@
-<p>
-  filter-order works!
-</p>
+<div class="row  box-filter">
+  <div class="col-xs-3">
+    <div class="form-group">
+      <label for="search-order" class="control-label">Search:</label>
+      <input id="search-order" type="text" class="form-control input-sm" placeholder="" aria-controls="dynamic-table_wrapper">
+    </div>
+  </div>
+
+  <div class="col-xs-3">
+    <label for="">Sorted by</label>
+    <select name="" id="">
+      <option *ngFor="let e of sortedBy" [value]="e.value">{{ e.key }}</option>
+    </select>
+  </div>  
+</div>
