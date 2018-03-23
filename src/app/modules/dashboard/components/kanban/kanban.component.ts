@@ -27,7 +27,8 @@ export class KanbanComponent implements OnInit {
     private dashboardService: DashboardService,
     private datePipe: DatePipe,
     private cdRef: ChangeDetectorRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private angular2Token: Angular2TokenService
   ) {}
 
   ngOnInit() {
@@ -56,30 +57,32 @@ export class KanbanComponent implements OnInit {
   }
 
   private setRoleToDrag() {
-    if (this.authService.isCurrentUserAccountant) {
-      this.dragulaService.setOptions('first-bag', {
-        accepts: function(el, target, source, sibling) {
-          let id_target = target.dataset.id;
-          let id_source = source.dataset.id;
-          if (id_source === StatusOrder.new || id_source == StatusOrder.inprogress) return false;
-          if (id_target == StatusOrder.inprogress || id_target == StatusOrder.new) return false;
-          return true;
+    this.authService.userSignedIn$.subscribe(_ => {
+        if (this.authService.isCurrentUserAccountant) {
+          this.dragulaService.setOptions('first-bag', {
+            accepts: function(el, target, source, sibling) {
+              let id_target = target.dataset.id;
+              let id_source = source.dataset.id;
+              if (id_source === StatusOrder.new || id_source == StatusOrder.inprogress) return false;
+              if (id_target == StatusOrder.inprogress || id_target == StatusOrder.new) return false;
+              return true;
+            }
+          })
         }
-      })
-    }
-    if (this.authService.isCurrentUserTechnician) {
-      this.dragulaService.setOptions('first-bag', {
-        accepts: function (el, target, source, sibling) {
-          let id_target = target.dataset.id;
-          let id_source = source.dataset.id;
-          if (id_source == StatusOrder.delivered) return false;
-          if (id_source == StatusOrder.new && id_target == StatusOrder.ready) return false;
-          if (id_target == StatusOrder.new && id_source == StatusOrder.ready) return false;
-          if (id_target == StatusOrder.delivered) return false;
-          return true;
-        }
-      })
-    }
+        if (this.authService.isCurrentUserTechnician) {
+          this.dragulaService.setOptions('first-bag', {
+            accepts: function (el, target, source, sibling) {
+              let id_target = target.dataset.id;
+              let id_source = source.dataset.id;
+              if (id_source == StatusOrder.delivered) return false;
+              if (id_source == StatusOrder.new && id_target == StatusOrder.ready) return false;
+              if (id_target == StatusOrder.new && id_source == StatusOrder.ready) return false;
+              if (id_target == StatusOrder.delivered) return false;
+              return true;
+            }
+          })
+        } 
+      });
   }
 
   setDropModelDragula() {
