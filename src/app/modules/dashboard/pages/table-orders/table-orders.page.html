@@ -32,7 +32,10 @@
           <td>{{ order.created_at | dateTimeVi }}</td>
           <td>{{ order.due_date | dateTimeVi }}</td>
           <td>
-            <app-status [order]="order" ></app-status>
+            <app-status
+                [order]="order"
+                (statusOrderOutput)="handleUpdateOrder($event)">
+            </app-status>
             <!-- /.btn-group -->
             <!-- <span class="label arrowed-right arrowed-in"
             [ngClass]="{'label-danger': order.status == 'new',

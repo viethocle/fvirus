@@ -6,20 +6,23 @@
               'btn-warning': order.status == statusOrder.inprogress,
               'btn-success': order.status == statusOrder.ready}">
     {{ 'label.' + order.status | translate }}
-    <i *ngIf="order.status != 'delivered'" class="ace-icon fa fa-angle-down icon-on-right"></i>
+    <i *ngIf="order.status != statusOrder.delivered" class="ace-icon fa fa-angle-down icon-on-right"></i>
   </button>
 
-  <ul class="dropdown-menu dropdown-danger">
-    <li>
-      <a (click)="updateStatus(order, statusOrder.inprogress)">Trong tiến trình</a>
+  <ul *ngIf="order.status != statusOrder.delivered" class="dropdown-menu">
+    <li *ngIf="(order.status == statusOrder.new || order.status == statusOrder.ready) && !authService.isCurrentUserAccountant">
+      <a  class="btn-warning"
+          (click)="updateStatus(order, statusOrder.inprogress)">Trong tiến trình</a>
     </li>
 
-    <li>
-      <a (click)="updateStatus(order, statusOrder.ready)">Sẵn sàng</a>
+    <li *ngIf="order.status == statusOrder.inprogress && !authService.isCurrentUserAccountant">
+      <a  class="btn-success"
+          (click)="updateStatus(order, statusOrder.ready)">Sẵn sàng</a>
     </li>
 
-    <li>
-      <a (click)="updateStatus(order, statusOrder.delivered)">Đã giao hàng</a>
+    <li *ngIf="order.status == statusOrder.ready && !authService.isCurrentUserTechnician">
+      <a  class="btn-sm"
+          (click)="updateStatus(order, statusOrder.delivered)">Đã giao hàng</a>
     </li>
   </ul>
 </div>
