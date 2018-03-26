@@ -2,8 +2,8 @@
   <app-create-order
     *ngIf="authService.isCurrentUserAccountant || authService.isCurrentUserAdmin"
     (newOrder)="handlerAddNewOrder($event)"></app-create-order>
-
-  
+  <button (click)="OpenModelPaymentModal()">Thanh toan </button>
+  <div id="dynamic-table_wrapper_wrapper" class="dataTables_wrapper form-inline no-footer">
 
   <div id="dynamic-table_wrapper_wrapper" class="dataTables_wrapper form-inline no-footer">
     <app-filter-order></app-filter-order>
@@ -102,3 +102,4 @@
 
 <app-delete-order (deleteOrderOutput)="handleDeleteOrder($event)"></app-delete-order>
 <app-edit-order (updateOrderOutput)="handleUpdateOrder($event)"></app-edit-order>
+<app-payment-order></app-payment-order>

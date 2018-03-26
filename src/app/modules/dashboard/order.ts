@@ -14,5 +14,6 @@ export interface Order {
   created_at: string;
   due_date: string;
   price: number;
+  paidAmount?: number;
   customer?: Customer
 }

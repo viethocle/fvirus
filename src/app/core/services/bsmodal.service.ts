@@ -9,6 +9,7 @@ export class BsmodalService {
 
   orderDelete$ = new Subject<Order>();
   orderEdit$ = new Subject<Order>();
+  paymentOrder$ = new Subject<Order>();
 
   customerEdit
 
@@ -22,5 +23,8 @@ export class BsmodalService {
     this.orderEdit$.next(order);
   }
 
+  selectOrderToPayment(order: Order) {
+    this.paymentOrder$.next(order);
+  }
 
 }

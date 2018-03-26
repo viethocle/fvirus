@@ -6,7 +6,7 @@ import { DashboardService } from '../../dashboard.service';
 import { Order, StatusOrder } from '../../order';
 import { DatePipe } from "@angular/common";
 import * as _ from 'lodash';
-import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
 import { takeWhile } from "rxjs/operators";
 @Destroyable
 @Component({
@@ -41,15 +41,12 @@ export class KanbanComponent implements OnInit {
         if (dataOrder.method == 'CREATE') {
           this.orders.push(dataOrder.data);
         }
-      
         if (dataOrder.method == "UPDATE") {
-          
           let index = this.orders.findIndex(order => order.id === dataOrder.data.id);
           _.assign(this.orders[index], dataOrder.data);
           console.log(this.orders);
           this.cdRef.detectChanges();
         }
-          
         if (dataOrder.method == 'DELETE') {
           this.orders.filter(order => order.id === dataOrder.data.id);
         }
@@ -81,7 +78,7 @@ export class KanbanComponent implements OnInit {
               return true;
             }
           })
-        } 
+        }
       });
   }
 
@@ -95,8 +92,8 @@ export class KanbanComponent implements OnInit {
     let [e, el] = args;
     let order_id = e.dataset.id;
     let status_to_change = el.dataset.id;
-    
-    // call api to change status order 
+
+    // call api to change status order
     this.dashboardService.updateStatusOrder(order_id, status_to_change)
         .subscribe((order: Order) => {
           _.assign(this.orders.find(t => t.id === order.id), order);

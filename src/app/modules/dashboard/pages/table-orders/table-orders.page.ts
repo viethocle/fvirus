@@ -65,6 +65,10 @@ export class TableOrdersPage implements OnInit, OnDestroy {
     this.bsmodalService.selectOrderToEdit(order);
   }
 
+  OpenModelPaymentModal() {
+    this.bsmodalService.selectOrderToPayment(_.first(this.orders));
+  }
+
   openModalDelete(order: Order) {
     this.bsmodalService.selectOrderToDelete(order);
   }
