@@ -1,4 +1,5 @@
-import { DashboardService } from './../../dashboard.service';
+import { EventEmitter } from '@angular/core';
+import { DashboardService, IOrdersPaginate } from './../../dashboard.service';
 import { StatusOrder } from './../../order';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -13,6 +14,7 @@ import * as _ from 'lodash';
   styleUrls: ['./filter-order.component.css']
 })
 export class FilterOrderComponent implements OnInit {
+  @Output() listOrderOuput = new EventEmitter<IOrdersPaginate>();
 
   sortedBy = [
     { key: 'Created at (newest first)',  value: 'created_at_desc'},
@@ -78,8 +80,8 @@ export class FilterOrderComponent implements OnInit {
           }),
           switchMap(params => this.dashboardService.getOrderFilter(params))
         )
-        .subscribe(param => {
-          console.log(param);
+        .subscribe(res => {
+          this.listOrderOuput.emit(res);
         })
   }
 

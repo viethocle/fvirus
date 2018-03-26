@@ -1,3 +1,4 @@
+import { IOrdersPaginate } from './../../dashboard.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Order } from '../../order';
 import { DashboardService } from '../../dashboard.service';
@@ -31,7 +32,7 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.getPage(1);
+    
   }
 
   getPage(page: number) {
@@ -49,6 +50,13 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   handlerAddNewOrder(order) {
     this.orders.unshift(order);
     this.configPagination.totalItems += 1;
+  }
+
+  showListOrder(res: IOrdersPaginate) {
+    this.orders = res.orders;
+    this.configPagination.totalItems = res.total;
+    this.configPagination.currentPage = res.page;
+    this.configPagination.itemsPerPage = res.per_page;
   }
 
   truncateDescription(des: string) {
