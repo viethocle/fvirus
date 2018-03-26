@@ -30,11 +30,8 @@ import { FilterOrderComponent } from './components/filter-order/filter-order.com
     KanbanCardComponent,
     DeleteOrderComponent,
     EditOrderComponent,
-<<<<<<< HEAD
     StatusComponent,
-=======
     FilterOrderComponent,
->>>>>>> ddf7c25c9cfe753d0b32456f6c4291659b8ca848
   ]
 })
 export class DashboardModule { }
