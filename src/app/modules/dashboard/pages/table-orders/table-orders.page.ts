@@ -1,3 +1,4 @@
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IOrdersPaginate } from './../../dashboard.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Order } from '../../order';
@@ -28,7 +29,9 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   constructor(
     private dashboardService: DashboardService,
     private bsmodalService: BsmodalService,
-    public authService: AuthService
+    public authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -36,15 +39,9 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   }
 
   getPage(page: number) {
-    this.subscriptionGetOrders = this.dashboardService
-      .getOrdersWithPagination(page)
-      .do(res => {
-        this.configPagination.totalItems = res.total;
-        this.configPagination.currentPage = page;
-      })
-      .subscribe(res => {
-        this.orders = res.orders;
-      });
+    const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
+    queryParams['page'] = page;
+    this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
   }
 
   handlerAddNewOrder(order) {
