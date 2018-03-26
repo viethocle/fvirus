@@ -14,7 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
     public auth: Angular2TokenService
   ) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+    if (request.url.indexOf('assets') > -1) return next.handle(request);
     let headers = this.auth.currentAuthHeaders;
     request = request.clone({
       setHeaders: {

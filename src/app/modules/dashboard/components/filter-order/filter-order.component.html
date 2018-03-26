@@ -1,0 +1,26 @@
+<div class=" box-filter">
+  <div class="col-xs-3">
+    <div class="form-group">
+      <label for="search-order" class="control-label">Search:</label>
+      <input id="search-order" type="text" class="form-control input-sm" placeholder="" aria-controls="dynamic-table_wrapper">
+    </div>
+  </div>
+
+  <div class="col-xs-3">
+    <label for="">Sorted by</label>
+    <select name="" id="" (change)="changeSortedBy($event.target.value)">
+      <option *ngFor="let e of sortedBy" [value]="e.value">{{ e.key }}</option>
+    </select>
+  </div>  
+
+  <!-- <form [formGroup]="formStatus">
+    <div *ngFor="let s of status">
+      <input type="checkbox" [value]="s" (change)="onChangeStatus(s, $event.target.checked)">
+    </div>
+  </form> -->
+
+  <div class="col-xs-3">
+    <ss-multiselect-dropdown [options]="myOptions" [settings]="mySettings" [(ngModel)]="optionsModel" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>
+
+  </div>
+</div>

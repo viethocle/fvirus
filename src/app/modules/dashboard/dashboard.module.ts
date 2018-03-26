@@ -13,6 +13,8 @@ import { MatchHeightDirective } from '@shared/directives/match-height.directive'
 import { DeleteOrderComponent } from './components/delete-order/delete-order.component';
 import { EditOrderComponent } from './components/edit-order/edit-order.component';
 import { StatusComponent } from './components/status/status.component';
+import { FilterOrderComponent } from './components/filter-order/filter-order.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,14 +23,18 @@ import { StatusComponent } from './components/status/status.component';
   ],
   declarations: [
     MatchHeightDirective,
-    CreateOrderComponent, 
-    KanbanComponent, 
+    CreateOrderComponent,
+    KanbanComponent,
     DashboardPage,
     TableOrdersPage,
     KanbanCardComponent,
     DeleteOrderComponent,
     EditOrderComponent,
+<<<<<<< HEAD
     StatusComponent,
+=======
+    FilterOrderComponent,
+>>>>>>> ddf7c25c9cfe753d0b32456f6c4291659b8ca848
   ]
 })
 export class DashboardModule { }
