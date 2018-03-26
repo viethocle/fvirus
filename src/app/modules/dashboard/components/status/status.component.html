@@ -1,0 +1,28 @@
+<div class="btn-group">
+  <button data-toggle="dropdown"
+          class="btn btn-sm dropdown-toggle"
+          [ngClass]="{
+              'btn-danger': order.status == statusOrder.new,
+              'btn-warning': order.status == statusOrder.inprogress,
+              'btn-success': order.status == statusOrder.ready}">
+    {{ 'label.' + order.status | translate }}
+    <i *ngIf="order.status != statusOrder.delivered" class="ace-icon fa fa-angle-down icon-on-right"></i>
+  </button>
+
+  <ul *ngIf="order.status != statusOrder.delivered" class="dropdown-menu">
+    <li *ngIf="(order.status == statusOrder.new || order.status == statusOrder.ready) && !authService.isCurrentUserAccountant">
+      <a  class="btn-warning"
+          (click)="updateStatus(order, statusOrder.inprogress)">Trong tiến trình</a>
+    </li>
+
+    <li *ngIf="order.status == statusOrder.inprogress && !authService.isCurrentUserAccountant">
+      <a  class="btn-success"
+          (click)="updateStatus(order, statusOrder.ready)">Sẵn sàng</a>
+    </li>
+
+    <li *ngIf="order.status == statusOrder.ready && !authService.isCurrentUserTechnician">
+      <a  class="btn-sm"
+          (click)="updateStatus(order, statusOrder.delivered)">Đã giao hàng</a>
+    </li>
+  </ul>
+</div>
