@@ -5,8 +5,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Component, OnInit, Output } from '@angular/core';
 import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap, debounceTime } from 'rxjs/operators';
 import * as _ from 'lodash';
+import { fromEvent } from "rxjs/observable/fromEvent";
 
 @Component({
   selector: 'app-filter-order',
@@ -57,6 +58,7 @@ export class FilterOrderComponent implements OnInit {
     });
 
     this.setChangeRoute();
+    this.onSearchChange();
 
     this.formStatus.valueChanges 
         .pipe(
@@ -107,6 +109,22 @@ export class FilterOrderComponent implements OnInit {
     const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
     queryParams['status'] = statusParam;
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
+  }
+
+  onSearchChange() {
+    const input = document.getElementById('search-order');
+    const example = fromEvent(input, 'keyup')
+                    .pipe(
+                      map((i: any) => i.currentTarget.value),
+                      debounceTime(350)
+                    )
+                    .subscribe(query => {
+                      let paramSearch = null;
+                      if (query != "") paramSearch = query;
+                      const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
+                      queryParams['search_query'] = paramSearch;
+                      this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
+                    })
   }
 
 
