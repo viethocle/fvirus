@@ -3,8 +3,10 @@
     *ngIf="authService.isCurrentUserAccountant || authService.isCurrentUserAdmin"
     (newOrder)="handlerAddNewOrder($event)"></app-create-order>
 
-  <div id="dynamic-table_wrapper_wrapper" class="dataTables_wrapper form-inline no-footer">
+  
 
+  <div id="dynamic-table_wrapper_wrapper" class="dataTables_wrapper form-inline no-footer">
+    <app-filter-order></app-filter-order>
     <!-- Start table -->
     <table id="dynamic-table_wrapper" class="table table-striped table-bordered table-hover dataTable no-footer " cellspacing="0" width="100%">
       <thead>

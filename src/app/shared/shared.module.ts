@@ -24,6 +24,7 @@ import { MySearchPipe } from './pipes/my-search.pipe';
 import { TooltipModule }       from 'ngx-tooltip';
 import { TruncateDescriptionPipe } from './pipes/truncate-description.pipe';
 import { VndPipe } from './pipes/vnd.pipe';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -83,7 +84,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OwlNativeDateTimeModule,
     DateTimeViPipe,
     TruncateDescriptionPipe,
-    VndPipe
+    VndPipe,
+    MultiselectDropdownModule
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },
