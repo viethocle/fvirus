@@ -16,6 +16,7 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     let headers = this.auth.currentAuthHeaders;
+    if (request.url.indexOf('assets') > -1) return next.handle(request);
     request = request.clone({
       setHeaders: {
         'access-token': headers.get('access-token'),
