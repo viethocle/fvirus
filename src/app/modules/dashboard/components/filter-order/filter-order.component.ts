@@ -63,7 +63,9 @@ export class FilterOrderComponent implements OnInit {
           map(selectOptions => '(' + selectOptions.joins(',') + ')')
         )
         .subscribe((selectOptions) => {
-          console.log(selectOptions);
+          const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
+          queryParams['status'] = selectOptions;
+          this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
         })
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: { page: 1, per_page: 10 } })
   }
@@ -96,8 +98,12 @@ export class FilterOrderComponent implements OnInit {
   }
 
   onChange(selectOptions) {
-    selectOptions = _.map(selectOptions, e => '"' + e + '"');
-    let statusParam = '(' + _.join(selectOptions, ',') + ')';
+    let statusParam = null;
+    if (_.size(selectOptions) !== 0) {
+      selectOptions = _.map(selectOptions, e => "'" + e + "'");
+      statusParam = '(' + _.join(selectOptions, ',') + ')';
+      
+    }
     const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
     queryParams['status'] = statusParam;
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
