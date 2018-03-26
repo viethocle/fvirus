@@ -2,8 +2,6 @@
   <app-create-order
     *ngIf="authService.isCurrentUserAccountant || authService.isCurrentUserAdmin"
     (newOrder)="handlerAddNewOrder($event)"></app-create-order>
-  <button (click)="OpenModelPaymentModal()">Thanh toan </button>
-  <div id="dynamic-table_wrapper_wrapper" class="dataTables_wrapper form-inline no-footer">
 
   <div id="dynamic-table_wrapper_wrapper" class="dataTables_wrapper form-inline no-footer">
     <app-filter-order></app-filter-order>
@@ -38,13 +36,6 @@
                 [order]="order"
                 (statusOrderOutput)="handleUpdateOrder($event)">
             </app-status>
-            <!-- /.btn-group -->
-            <!-- <span class="label arrowed-right arrowed-in"
-            [ngClass]="{'label-danger': order.status == 'new',
-                        'label-warning': order.status == 'inprogress',
-                        'label-success': order.status == 'ready'}">
-              {{ 'label.' + order.status | translate  }}
-            </span> -->
           </td>
           <td>
             <button
@@ -102,4 +93,4 @@
 
 <app-delete-order (deleteOrderOutput)="handleDeleteOrder($event)"></app-delete-order>
 <app-edit-order (updateOrderOutput)="handleUpdateOrder($event)"></app-edit-order>
-<app-payment-order></app-payment-order>
+<app-payment-order (paymentOrderOutput)="handleUpdateOrder($event)"></app-payment-order>

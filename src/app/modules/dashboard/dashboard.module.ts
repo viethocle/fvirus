@@ -12,13 +12,10 @@ import { KanbanCardComponent } from './components/kanban-card/kanban-card.compon
 import { MatchHeightDirective } from '@shared/directives/match-height.directive';
 import { DeleteOrderComponent } from './components/delete-order/delete-order.component';
 import { EditOrderComponent } from './components/edit-order/edit-order.component';
-<<<<<<< HEAD
 import { StatusComponent } from './components/status/status.component';
 import { FilterOrderComponent } from './components/filter-order/filter-order.component';
 
-=======
 import { PaymentOrderComponent } from './components/payment-order/payment-order.component';
->>>>>>> payment
 @NgModule({
   imports: [
     CommonModule,
@@ -34,12 +31,9 @@ import { PaymentOrderComponent } from './components/payment-order/payment-order.
     KanbanCardComponent,
     DeleteOrderComponent,
     EditOrderComponent,
-<<<<<<< HEAD
     StatusComponent,
     FilterOrderComponent,
-=======
     PaymentOrderComponent,
->>>>>>> payment
   ]
 })
 export class DashboardModule { }

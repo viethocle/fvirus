@@ -14,12 +14,8 @@ import * as _ from 'lodash';
 
 export enum RoleUser {
   admin = 'admin',
-<<<<<<< HEAD
   accountant = 'accountant',
   technician = 'technician'
-=======
-  accountant = 'accountant'
->>>>>>> payment
 }
 
 
@@ -37,7 +33,7 @@ export class AuthService {
   ) {
     this.authService.init({ apiBase: environment.baseUrl});
     this.authService.validateToken().subscribe(
-      res => { 
+      res => {
         this.userSignedIn$.next(true);
       },
       err => {
@@ -71,7 +67,6 @@ export class AuthService {
     return obs$;
   }
 
-<<<<<<< HEAD
   private redirectAfterValidate() {
     if (this.isCurrentUserAccountant || this.isCurrentUserTechnician) {
       this.router.navigate(["/dashboard/kanban"]);
@@ -93,13 +88,6 @@ export class AuthService {
     return _.get(this.authService.currentUserData, 'role') === RoleUser.technician;
   }
 
-=======
-  get isCurrentUserAccount() {
-    console.log(_.get(this.authService.currentUserData, 'role') === RoleUser.accountant);
-    return _.get(this.authService.currentUserData, 'role') === RoleUser.accountant;
-  }
-
->>>>>>> payment
   logOut(): void {
     this.authService.signOut().subscribe(
       res => {
