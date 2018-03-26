@@ -57,7 +57,7 @@ export class KanbanComponent implements OnInit {
   }
 
   private setRoleToDrag() {
-    this.authService.userSignedIn$.subscribe(_ => {
+    this.authService.doneValidateToken$.subscribe(_ => {
         if (this.authService.isCurrentUserAccountant) {
           this.dragulaService.setOptions('first-bag', {
             accepts: function(el, target, source, sibling) {
