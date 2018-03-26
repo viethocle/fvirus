@@ -1,9 +1,10 @@
+import { DashboardService } from './../../dashboard.service';
 import { StatusOrder } from './../../order';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Component, OnInit, Output } from '@angular/core';
 import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 @Component({
@@ -38,7 +39,8 @@ export class FilterOrderComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dashboardService: DashboardService
   ) { }
 
   ngOnInit() {
@@ -52,6 +54,8 @@ export class FilterOrderComponent implements OnInit {
       status: this.formBuilder.array([])
     });
 
+    this.setChangeRoute();
+
     this.formStatus.valueChanges 
         .pipe(
           map(selectOptions => '(' + selectOptions.joins(',') + ')')
@@ -62,9 +66,26 @@ export class FilterOrderComponent implements OnInit {
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: { page: 1, per_page: 10 } })
   }
 
+  setChangeRoute() {
+    this.route.queryParams
+        .pipe(
+          map(params => { 
+            let pagination = {
+              pagination:
+              { page: params.page, per_page: params.per_page }
+            }
+            return _.assign(pagination, params); 
+          }),
+          switchMap(params => this.dashboardService.getOrderFilter(params))
+        )
+        .subscribe(param => {
+          console.log(param);
+        })
+  }
+
   changeSortedBy(value) {
     const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
-    queryParams['sortedBy'] = value;
+    queryParams['sorted_by'] = value;
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams})
   }
 
