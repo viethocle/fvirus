@@ -1,8 +1,32 @@
+import { CustomerDebt } from './customer-debt.model';
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { environment } from '@environments/environment';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { catchError, map } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
+
+
+export interface ICustomersDebt {
+  customers: CustomerDebt[];
+  total: number;
+}
 
 @Injectable()
 export class HomeService {
 
-  constructor() { }
+  readonly baseUrl = environment.baseUrl;
+    constructor(private http: HttpClient) {
+
+  }
+
+  getCustomersDebtWithPage(page: number, per_page: number, search_text: string): Observable<ICustomersDebt> {
+    const url = `${this.baseUrl}/customers_debt.json?page=${page}&search=${search_text}&per_page=${per_page}`;
+    return this.http
+      .get(url)
+      .map(res => res as ICustomersDebt);
+  }
 
 }

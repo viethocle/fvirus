@@ -23,7 +23,7 @@ export class CustomerService {
 
 
   constructor(private http: HttpClient) {
-    // this.options.headers = this.authService.currentAuthHeaders;
+
   }
 
 
