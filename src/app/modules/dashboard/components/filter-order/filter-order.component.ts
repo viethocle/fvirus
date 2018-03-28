@@ -34,6 +34,9 @@ export class FilterOrderComponent implements OnInit {
 
   myOptions: IMultiSelectOption[];
   optionsModel: number[];
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
 
   status = [ StatusOrder.new, StatusOrder.inprogress, StatusOrder.inprogress, StatusOrder.delivered]
 
@@ -53,6 +56,21 @@ export class FilterOrderComponent implements OnInit {
       { id: StatusOrder.ready, name: StatusOrder.ready },
       { id: StatusOrder.delivered, name: StatusOrder.delivered },
     ];
+
+    this.dropdownList = [
+      { id: StatusOrder.new, itemName: StatusOrder.new },
+      { id: StatusOrder.inprogress, itemName: StatusOrder.inprogress },
+      { id: StatusOrder.ready, itemName: StatusOrder.ready },
+      { id: StatusOrder.delivered, itemName: StatusOrder.delivered },
+    ]
+
+    this.dropdownSettings = {
+        singleSelection: false,
+        text: "Lựa chọn trạng thái",
+        selectAllText: 'Chọn tất cả',
+        unSelectAllText: 'Bỏ chọn tất cả',
+        classes: "select2 select2-container select2-container--default select2-container--focus"
+      };  
     this.formStatus = this.formBuilder.group({
       status: this.formBuilder.array([])
     });
