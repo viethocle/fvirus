@@ -69,25 +69,13 @@ export class FilterOrderComponent implements OnInit {
         text: "Lựa chọn trạng thái",
         selectAllText: 'Chọn tất cả',
         unSelectAllText: 'Bỏ chọn tất cả',
-        classes: "select2 select2-container select2-container--default select2-container--focus"
+        classes: "my-select"
       };  
-    this.formStatus = this.formBuilder.group({
-      status: this.formBuilder.array([])
-    });
 
     this.setChangeRoute();
     this.onSearchChange();
 
-    this.formStatus.valueChanges 
-        .pipe(
-          map(selectOptions => '(' + selectOptions.joins(',') + ')')
-        )
-        .subscribe((selectOptions) => {
-          const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
-          queryParams['status'] = selectOptions;
-          this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
-        })
-    this.router.navigate(['.'], { relativeTo: this.route, queryParams: { page: 1, per_page: 10 } })
+    // this.router.navigate(['.'], { relativeTo: this.route, queryParams: { page: 1, per_page: 10 } })
   }
 
   setChangeRoute() {
@@ -128,6 +116,18 @@ export class FilterOrderComponent implements OnInit {
     queryParams['status'] = statusParam;
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
   }
+
+  selectStatus(e) {
+    let selectOptions = _.map(this.selectedItems, "id");
+    let statusParam = null;
+    if (_.size(selectOptions) !== 0) {
+      selectOptions = _.map(selectOptions, e => "'" + e + "'");
+      statusParam = '(' + _.join(selectOptions, ',') + ')';
+
+    }
+    const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
+    queryParams['status'] = statusParam;
+    this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })  }
 
   onSearchChange() {
     const input = document.getElementById('search-order');
