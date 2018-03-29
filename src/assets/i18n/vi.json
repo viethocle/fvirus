@@ -53,9 +53,9 @@
     "title_edit": "Chỉnh sửa khách hàng",
     "edit": "Chỉnh sửa"
   },
-  
+
   "orders": {
-    "description": "Mô tả", 
+    "description": "Mô tả",
     "due-date": "Thời hạn",
     "price": "Giá cả"
   },
@@ -71,7 +71,8 @@
 		"customers": "Khách hàng",
     "discountedRate": "Tỷ suất chiết khấu",
     "user-management": "Quản lý nhân viên",
-    "return-invoice": "Trả hóa đơn"
+    "return-invoice": "Trả hóa đơn",
+    "kanban": "Kanban"
   },
 
 
@@ -146,7 +147,7 @@
   },
   "label": {
     "ready": "Sẵn sàng",
-    "new": "Mới", 
+    "new": "Mới",
     "inprogress": "Trong tiến trình",
     "closed": "Kết thúc",
     "delivered": "Đã giao hàng"

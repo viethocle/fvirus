@@ -23,7 +23,7 @@ export class CustomerDebtComponent implements OnInit {
   loading: boolean;
 
   public configPagination = {
-    id: "server",
+    id: "server1",
     itemsPerPage: 10,
     currentPage: 1,
     totalItems: 10

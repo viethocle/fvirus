@@ -1,3 +1,5 @@
+import { Customer } from "@modules/customer/customer.model";
+
 export interface DueDate {
   id: string;
   description: string;
