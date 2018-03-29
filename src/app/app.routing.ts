@@ -18,6 +18,11 @@ const routes: Routes = [
     canLoad: [LoggedInGuard]
   },
   {
+    path: "users",
+    loadChildren: "./modules/user/user.module#UserModule",
+    canLoad: [LoggedInGuard]
+  },
+  {
     path: "dashboard",
     loadChildren: "./modules/dashboard/dashboard.module#DashboardModule",
     canLoad: [LoggedInGuard]

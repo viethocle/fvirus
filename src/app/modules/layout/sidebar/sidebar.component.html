@@ -45,7 +45,7 @@
   </li>
   <li *ngIf="isManager" routerLinkActive="active">
     <a [routerLink]="['/dashboard/kanban']">
-      <i class="menu-icon fa fa-desktop"></i>
+      <i  class="menu-icon fa fa-credit-card "></i>
       <span class="menu-text"> {{ 'sidebar.kanban' | translate }} </span>
     </a>
   </li>
@@ -58,7 +58,12 @@
       </span>
     </a>
   </li>
-
+  <li *ngIf="isManager" routerLinkActive="active">
+    <a [routerLink]="['/users']">
+      <i class="menu-icon fa fa-user-plus"></i>
+      <span class="menu-text"> {{ 'sidebar.user-management' | translate }} </span>
+    </a>
+  </li>
   <li routerLinkActive="active">
     <a [routerLink]="['/customers']">
       <i class="menu-icon fa fa-users "></i>
