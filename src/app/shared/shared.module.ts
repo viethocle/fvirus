@@ -87,7 +87,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DateTimeViPipe,
     TruncateDescriptionPipe,
     VndPipe,
-    MultiselectDropdownModule
+    MultiselectDropdownModule,
+    SortableColumnComponent
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },

@@ -1,3 +1,5 @@
+import { takeUntilDestroy, Destroyable } from 'take-until-destroy';
+import { SortTableService } from './../../../../core/services/sort-table.service';
 import { EventEmitter } from '@angular/core';
 import { DashboardService, IOrdersPaginate } from './../../dashboard.service';
 import { StatusOrder } from './../../order';
@@ -9,6 +11,7 @@ import { map, switchMap, tap, debounceTime } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { fromEvent } from "rxjs/observable/fromEvent";
 
+@Destroyable
 @Component({
   selector: 'app-filter-order',
   templateUrl: './filter-order.component.html',
@@ -57,7 +60,8 @@ export class FilterOrderComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private sortService: SortTableService
   ) { }
 
   ngOnInit() {
@@ -85,8 +89,19 @@ export class FilterOrderComponent implements OnInit {
 
     this.setChangeRoute();
     this.onSearchChange();
+    this.setChangeSortedBy();
+  }
 
-    // this.router.navigate(['.'], { relativeTo: this.route, queryParams: { page: 1, per_page: 10 } })
+  setChangeSortedBy() {
+    this.sortService.columnSorted$
+        .pipe(
+          takeUntilDestroy(this),
+          map(event => event.sortColumn + "_" + event.sortDirection))
+        .subscribe(direction => {
+          const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
+          queryParams['sorted_by'] = direction;
+          this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
+        })
   }
 
   setChangeRoute() {
