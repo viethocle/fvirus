@@ -28,11 +28,15 @@
       <thead>
         <tr>
           <th>Id</th>
-          <th>Tên</th>
-          <th>Email</th>
-          <th>Địa chỉ</th>
-          <th>Số điện thoại</th>
-          <th>Tổng nợ</th>
+          <th>
+            <i class="ace-icon fa fa-users"></i>{{ 'table.name' | translate }}</th>
+          <th>
+            <i class="ace-icon fa fa-envelope "></i>{{ 'table.email' | translate }}</th>
+          <th>
+            <i class="ace-icon glyphicon glyphicon-map-marker"></i>{{ 'table.phone' | translate }}</th>
+          <th>
+            <i class="ace-icon glyphicon glyphicon-home"></i>{{ 'table.address' | translate }}</th>
+          <th><i class="ace-icon glyphicon-euro"></i>{{ 'table.debt' | translate }}</th>
         </tr>
       </thead>
 
@@ -41,9 +45,9 @@
           <td>{{customer.id}}</td>
           <td>{{customer.name}}</td>
           <td>{{customer.email}}</td>
-          <td>{{customer.adress}}</td>
           <td>{{customer.phone}}</td>
-          <td>{{customer.total_debt}}</td>
+          <td>{{customer.address}}</td>
+          <td>{{ customer.total_debt | vnd }}</td>
         </tr>
       </tbody>
 
