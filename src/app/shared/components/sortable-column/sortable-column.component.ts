@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, HostListener } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'app-sortable-column',
+  selector: '[sortable-column]',
   templateUrl: './sortable-column.component.html',
   styleUrls: ['./sortable-column.component.css']
 })
