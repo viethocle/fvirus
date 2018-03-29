@@ -32,6 +32,17 @@ export class FilterOrderComponent implements OnInit {
     containerClasses: 'multiselect-container dropdown-menu'
   };
 
+  due_date_begin: Date = new Date();
+  due_date_end: Date = new Date();
+
+  settingsDateTimePicker = {
+    bigBanner: false,
+    timePicker: false,
+    format: 'dd-MM-yyyy',
+    defaultOpen: false,
+    closeOnSelect: true
+  }
+
   myOptions: IMultiSelectOption[];
   optionsModel: number[];
   dropdownList = [];
@@ -114,6 +125,20 @@ export class FilterOrderComponent implements OnInit {
     }
     const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
     queryParams['status'] = statusParam;
+    this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
+  }
+
+  onDateSelectBegin(e) {
+    const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
+    let date = new Date(this.due_date_begin);
+    queryParams['due_date_gte'] = date.toISOString();
+    this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
+  }
+
+  onDateSelectEnd(e) {
+    const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
+    let date = new Date(this.due_date_end);
+    queryParams['due_date_lte'] = date.toISOString();
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
   }
 

@@ -333,6 +333,12 @@ angular-datatables@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/angular-datatables/-/angular-datatables-5.0.0.tgz#5264116d3e5f9a150403342db9eb91f91f9e06ca"
 
+angular2-datetimepicker@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/angular2-datetimepicker/-/angular2-datetimepicker-1.1.1.tgz#69c4d991c48a60dab80a20d87e85396c185f1f42"
+  dependencies:
+    font-awesome "*"
+
 angular2-multiselect-dropdown@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/angular2-multiselect-dropdown/-/angular2-multiselect-dropdown-2.6.0.tgz#657a3d1a16812ab8c449de70d64d1d5e44bde5a4"
@@ -4088,6 +4094,10 @@ ng2-search-filter@^0.4.7:
 ng2-toastr@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/ng2-toastr/-/ng2-toastr-4.1.2.tgz#1b452f07139961c38f866c6e24a06247efa21b11"
+
+ngx-mydatepicker@^2.4.5:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/ngx-mydatepicker/-/ngx-mydatepicker-2.4.5.tgz#110e97b548ec88aba78cd31538980e55d7a0a911"
 
 ngx-pagination@^3.0.3:
   version "3.0.3"

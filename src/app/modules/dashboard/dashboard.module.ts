@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
 import { SharedModule } from '@shared/shared.module';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
+import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 
 import { DashboardRoutes } from './dashboard.routing';
 import { KanbanComponent } from './components/kanban/kanban.component';
@@ -22,6 +23,7 @@ import { FilterOrderComponent } from './components/filter-order/filter-order.com
     SharedModule,
     RouterModule.forChild(DashboardRoutes),
     AngularMultiSelectModule,
+    AngularDateTimePickerModule
   ],
   declarations: [
     MatchHeightDirective,
