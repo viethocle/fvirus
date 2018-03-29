@@ -65,28 +65,7 @@ export class FilterOrderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.myOptions = [
-      { id: StatusOrder.new, name: StatusOrder.new },
-      { id: StatusOrder.inprogress, name: StatusOrder.inprogress },
-      { id: StatusOrder.ready, name: StatusOrder.ready },
-      { id: StatusOrder.delivered, name: StatusOrder.delivered },
-    ];
-
-    this.dropdownList = [
-      { id: StatusOrder.new, itemName: StatusOrder.new },
-      { id: StatusOrder.inprogress, itemName: StatusOrder.inprogress },
-      { id: StatusOrder.ready, itemName: StatusOrder.ready },
-      { id: StatusOrder.delivered, itemName: StatusOrder.delivered },
-    ]
-
-    this.dropdownSettings = {
-        singleSelection: false,
-        text: "Lựa chọn trạng thái",
-        selectAllText: 'Chọn tất cả',
-        unSelectAllText: 'Bỏ chọn tất cả',
-        classes: "my-select"
-      };  
-
+    this.initDropDownStatus();
     this.setChangeRoute();
     this.onSearchChange();
     this.setChangeSortedBy();
@@ -102,6 +81,24 @@ export class FilterOrderComponent implements OnInit {
           queryParams['sorted_by'] = direction;
           this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
         })
+  }
+
+  initDropDownStatus() {
+    this.dropdownList = [
+      { id: StatusOrder.new, itemName: StatusOrder.new },
+      { id: StatusOrder.inprogress, itemName: StatusOrder.inprogress },
+      { id: StatusOrder.ready, itemName: StatusOrder.ready },
+      { id: StatusOrder.delivered, itemName: StatusOrder.delivered },
+    ]
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      text: "Lựa chọn trạng thái",
+      selectAllText: 'Chọn tất cả',
+      unSelectAllText: 'Bỏ chọn tất cả',
+      classes: "my-select"
+    };  
+
   }
 
   setChangeRoute() {
@@ -121,27 +118,6 @@ export class FilterOrderComponent implements OnInit {
         })
   }
 
-  changeSortedBy(value) {
-    const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
-    queryParams['sorted_by'] = value;
-    this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams})
-  }
-
-  onChangeStatus(status, isChecked) {
-    console.log(status, isChecked);
-  }
-
-  onChange(selectOptions) {
-    let statusParam = null;
-    if (_.size(selectOptions) !== 0) {
-      selectOptions = _.map(selectOptions, e => "'" + e + "'");
-      statusParam = '(' + _.join(selectOptions, ',') + ')';
-      
-    }
-    const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
-    queryParams['status'] = statusParam;
-    this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
-  }
 
   onDateSelectBegin(e) {
     const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
@@ -184,9 +160,6 @@ export class FilterOrderComponent implements OnInit {
                       this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
                     })
   }
-
-
-
 
 
 }
