@@ -20,12 +20,6 @@ import { fromEvent } from "rxjs/observable/fromEvent";
 export class FilterOrderComponent implements OnInit {
   @Output() listOrderOuput = new EventEmitter<IOrdersPaginate>();
 
-  mySettings: IMultiSelectSettings = {
-    displayAllSelectedText: true,
-    checkedStyle: 'checkboxes',
-    containerClasses: 'multiselect-container dropdown-menu'
-  };
-
   due_date_begin: Date = new Date();
   due_date_end: Date = new Date();
 
