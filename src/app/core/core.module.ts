@@ -1,4 +1,4 @@
-import { SortService } from './services/sort-table.service';
+import { SortTableService } from './services/sort-table.service';
 import { Ng2SearchPipe } from 'ng2-search-filter';
 import { CustomerService } from './../modules/customer/customer.service';
 import { NgModule } from '@angular/core';
@@ -31,7 +31,7 @@ import { BsmodalService } from './services/bsmodal.service';
     CustomerService,
     Ng2SearchPipe,
     BsmodalService,
-    SortService
+    SortTableService
   ]
 })
 export class CoreModule { }
