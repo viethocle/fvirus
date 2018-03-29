@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 
 import { Injectable } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
@@ -26,6 +27,7 @@ export class AuthService {
   public userSignedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     true
   );
+  public doneValidateToken$ = new Subject();
 
   constructor(
     public authService: Angular2TokenService,
@@ -35,6 +37,7 @@ export class AuthService {
     this.authService.validateToken().subscribe(
       res => { 
         this.userSignedIn$.next(true);
+        this.doneValidateToken$.next();
       },
       err => {
         this.router.navigate(["/login"]);

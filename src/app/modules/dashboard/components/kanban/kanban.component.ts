@@ -1,6 +1,6 @@
 import { AuthService } from './../../../auth/auth.service';
 import { Angular2TokenService } from 'angular2-token';
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { DashboardService } from '../../dashboard.service';
 import { Order, StatusOrder } from '../../order';
@@ -12,9 +12,12 @@ import { takeWhile } from "rxjs/operators";
 @Component({
   selector: "app-kanban",
   templateUrl: "./kanban.component.html",
-  styleUrls: ["./kanban.component.css"]
+  styleUrls: ["./kanban.component.css"],
+  providers: [
+    DragulaService
+  ]
 })
-export class KanbanComponent implements OnInit {
+export class KanbanComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   statusOrder = StatusOrder;
   bagNew        = 'bag';
@@ -57,7 +60,8 @@ export class KanbanComponent implements OnInit {
   }
 
   private setRoleToDrag() {
-    this.authService.userSignedIn$.subscribe(_ => {
+    // this.angular2Token.validateToken().subscribe(_ => {
+      console.log(this.authService.isCurrentUserTechnician);
         if (this.authService.isCurrentUserAccountant) {
           this.dragulaService.setOptions('first-bag', {
             accepts: function(el, target, source, sibling) {
@@ -82,7 +86,7 @@ export class KanbanComponent implements OnInit {
             }
           })
         } 
-      });
+      // });
   }
 
   setDropModelDragula() {
@@ -109,18 +113,7 @@ export class KanbanComponent implements OnInit {
     });
   }
 
-  innerHtml(order: Order) {
-    let content = `
-    <div>
-        <div>
-          <h5>
-            ${order.description}
-          </h5>
-          <h6>
-            Deadline: ${this.datePipe.transform(order.due_date, "dd-MM-yyyy")}
-          </h6>
-        </div>
-    </div>`;
-    return content;
+  ngOnDestroy() {
+    this.dragulaService.destroy('first-bag');
   }
 }

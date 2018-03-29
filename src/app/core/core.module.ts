@@ -23,7 +23,6 @@ import { BsmodalService } from './services/bsmodal.service';
   providers: [
     SidebarService,
     DashboardService,
-    DragulaService,
     AuthService,
     LoggedInGuard,
     ManagementGuard,

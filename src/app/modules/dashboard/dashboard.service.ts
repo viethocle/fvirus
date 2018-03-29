@@ -1,10 +1,11 @@
+import { IOrdersPaginate } from './dashboard.service';
 import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { Order } from './order';
 import { DataOrder } from './data-order';
@@ -13,7 +14,9 @@ import * as ActionCable from 'actioncable';
 
 export interface IOrdersPaginate {
   total: number,
-  orders: Order[]
+  orders: Order[],
+  page?: number,
+  per_page?: number
 }
 
 @Injectable()
@@ -73,6 +76,12 @@ export class DashboardService {
   deleteOrder(order_id) {
     let url = `${environment.baseUrl}/orders/${order_id}.json`;
     return this.http.delete(url);
+  }
+
+
+  getOrderFilter(param: any): Observable<IOrdersPaginate> {
+    let url = `${environment.baseUrl}/orders-filteric.json`;
+    return this.http.post<IOrdersPaginate>(url, param);
   }
 
 
