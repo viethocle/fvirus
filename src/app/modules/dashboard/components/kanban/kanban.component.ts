@@ -8,6 +8,8 @@ import { DatePipe } from "@angular/common";
 import * as _ from 'lodash';
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
 import { takeWhile } from "rxjs/operators";
+import { BsmodalService } from "@core/services/bsmodal.service";
+
 @Destroyable
 @Component({
   selector: "app-kanban",
@@ -17,69 +19,88 @@ import { takeWhile } from "rxjs/operators";
 export class KanbanComponent implements OnInit {
   orders: Order[] = [];
   statusOrder = StatusOrder;
-  bagNew        = 'bag';
-  bagInprogres  = 'bag';
-  bagReady      = 'bag';
-  bagDelivered  = 'bag';
+  bagNew = "bag";
+  bagInprogres = "bag";
+  bagReady = "bag";
+  bagDelivered = "bag";
 
   constructor(
     private dragulaService: DragulaService,
     private dashboardService: DashboardService,
     private datePipe: DatePipe,
     private cdRef: ChangeDetectorRef,
+    private bsmodalService: BsmodalService,
     private authService: AuthService,
     private angular2Token: Angular2TokenService
-  ) {}
+  ) {
+      // this.dragulaService.setOptions("first-bag", {
+      //   moves:  (el, container, handle) => {
+      //     console.log("el: ", el.dataset, " \n cont: ", container.dataset.id, " \n han: ", handle.dataset);
+      //     // return true;
+      //     return container.dataset.id == StatusOrder.delivered;
+      // }});
+    }
 
   ngOnInit() {
     this.getOrders();
     this.setRoleToDrag();
     this.setDropModelDragula();
-    this.dashboardService.orderChange
-      .subscribe(dataOrder => {
-        console.log("SUB");
-        if (dataOrder.method == 'CREATE') {
-          this.orders.push(dataOrder.data);
-        }
-        if (dataOrder.method == "UPDATE") {
-          let index = this.orders.findIndex(order => order.id === dataOrder.data.id);
-          _.assign(this.orders[index], dataOrder.data);
-          console.log(this.orders);
-          this.cdRef.detectChanges();
-        }
-        if (dataOrder.method == 'DELETE') {
-          this.orders.filter(order => order.id === dataOrder.data.id);
-        }
-      });
+    this.dashboardService.orderChange.subscribe(dataOrder => {
+      console.log("SUB");
+      if (dataOrder.method == "CREATE") {
+        this.orders.push(dataOrder.data);
+      }
+      if (dataOrder.method == "UPDATE") {
+        let index = this.orders.findIndex(
+          order => order.id === dataOrder.data.id
+        );
+        _.assign(this.orders[index], dataOrder.data);
+        console.log(this.orders);
+        this.cdRef.detectChanges();
+      }
+      if (dataOrder.method == "DELETE") {
+        this.orders.filter(order => order.id === dataOrder.data.id);
+      }
+    });
   }
 
   private setRoleToDrag() {
     this.authService.userSignedIn$.subscribe(_ => {
-        if (this.authService.isCurrentUserAccountant) {
-          this.dragulaService.setOptions('first-bag', {
-            accepts: function(el, target, source, sibling) {
-              let id_target = target.dataset.id;
-              let id_source = source.dataset.id;
-              if (id_source === StatusOrder.new || id_source == StatusOrder.inprogress) return false;
-              if (id_target == StatusOrder.inprogress || id_target == StatusOrder.new) return false;
-              return true;
-            }
-          })
-        }
-        if (this.authService.isCurrentUserTechnician) {
-          this.dragulaService.setOptions('first-bag', {
-            accepts: function (el, target, source, sibling) {
-              let id_target = target.dataset.id;
-              let id_source = source.dataset.id;
-              if (id_source == StatusOrder.delivered) return false;
-              if (id_source == StatusOrder.new && id_target == StatusOrder.ready) return false;
-              if (id_target == StatusOrder.new && id_source == StatusOrder.ready) return false;
-              if (id_target == StatusOrder.delivered) return false;
-              return true;
-            }
-          })
-        }
-      });
+      if (this.authService.isCurrentUserAccountant) {
+        this.dragulaService.setOptions("first-bag", {
+          accepts: function(el, target, source, sibling) {
+            let id_target = target.dataset.id;
+            let id_source = source.dataset.id;
+            if (
+              id_source === StatusOrder.new ||
+              id_source == StatusOrder.inprogress
+            )
+              return false;
+            if (
+              id_target == StatusOrder.inprogress ||
+              id_target == StatusOrder.new
+            )
+              return false;
+            return true;
+          }
+        });
+      }
+      if (this.authService.isCurrentUserTechnician) {
+        this.dragulaService.setOptions("first-bag", {
+          accepts: function(el, target, source, sibling) {
+            let id_target = target.dataset.id;
+            let id_source = source.dataset.id;
+            if (id_source == StatusOrder.delivered) return false;
+            if (id_source == StatusOrder.new && id_target == StatusOrder.ready)
+              return false;
+            if (id_target == StatusOrder.new && id_source == StatusOrder.ready)
+              return false;
+            if (id_target == StatusOrder.delivered) return false;
+            return true;
+          }
+        });
+      }
+    });
   }
 
   setDropModelDragula() {
@@ -92,12 +113,17 @@ export class KanbanComponent implements OnInit {
     let [e, el] = args;
     let order_id = e.dataset.id;
     let status_to_change = el.dataset.id;
-
-    // call api to change status order
-    this.dashboardService.updateStatusOrder(order_id, status_to_change)
+    let order = this.orders.find(t => t.id === order_id);
+    if (status_to_change != this.statusOrder.delivered) {
+      // call api to change status order
+      this.dashboardService
+        .updateStatusOrder(order_id, status_to_change)
         .subscribe((order: Order) => {
           _.assign(this.orders.find(t => t.id === order.id), order);
         });
+    } else {
+      this.bsmodalService.selectOrderToPayment(order);
+    }
   }
 
   getOrders() {
@@ -119,5 +145,17 @@ export class KanbanComponent implements OnInit {
         </div>
     </div>`;
     return content;
+  }
+
+  handleUpdateOrder(order) {
+    console.log("Output: ", order);
+    if (order.status != StatusOrder.delivered) {
+      console.log("cancel");
+    }
+    // this.dragulaService.setOptions("first-bag", {
+    //   moves:  (el, container, handle) => {
+    //         console.log(el, "  ", container, "   ", handle);
+    //         return order.status == StatusOrder.delivered;
+    // }});
   }
 }

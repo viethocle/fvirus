@@ -47,6 +47,12 @@ export class PaymentOrderComponent implements OnInit {
       );
     this.modalPayment.close();
   }
+
+  cancelPayment(order) {
+    this.modalPayment.close();
+    this.paymentOrderOutput.emit(order);
+  }
+
   private buildForm() {
     this.formPaymentOrder = this.formBuilder.group({
       payAmount: [""]

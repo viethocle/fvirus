@@ -5,11 +5,11 @@
         <!-- <div class="kb-header kb-header-new">
           New
         </div> -->
-        <h4>{{ 'label.new' | translate }}</h4>          
+        <h4>{{ 'label.new' | translate }}</h4>
         <div  class="bag-status  column-kanban"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.new"
-              #bagNew>  
+              #bagNew>
 
           <div *ngFor="let order of orders | new;" [attr.data-id]="order.id">
             <kanban-card [order]="order" ></kanban-card>
@@ -58,3 +58,4 @@
       <!-- </perfect-scrollbar> -->
     </div>
 </div>
+<app-payment-order (paymentOrderOutput)="handleUpdateOrder($event)"></app-payment-order>

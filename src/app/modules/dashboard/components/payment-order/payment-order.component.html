@@ -1,5 +1,5 @@
 <bs-modal #modalPayment  [keyboard]="false">
-  <bs-modal-header [showDismiss]="true">
+  <bs-modal-header>
     <h4 class="modal-title">Thanh toán order</h4>
   </bs-modal-header>
 
@@ -12,6 +12,6 @@
   </bs-modal-body>
 
   <bs-modal-footer>
-    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalPayment.dismiss()">{{ 'button.cancel' | translate }}</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cancelPayment(order)">{{ 'button.cancel' | translate }}</button>
   </bs-modal-footer>
 </bs-modal>
