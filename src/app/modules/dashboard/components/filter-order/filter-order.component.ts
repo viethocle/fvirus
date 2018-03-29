@@ -20,15 +20,6 @@ import { fromEvent } from "rxjs/observable/fromEvent";
 export class FilterOrderComponent implements OnInit {
   @Output() listOrderOuput = new EventEmitter<IOrdersPaginate>();
 
-  sortedBy = [
-    { key: 'Created at (newest first)',  value: 'created_at_desc'},
-    { key: 'Created at (oldest first)',  value: 'created_at_asc'},
-    { key: 'Due Date (newest first)',    value: 'due_date_desc'},
-    { key: 'Due Date (oldest first)',    value: 'due_date_asc'},
-    { key: 'Customer name (a - z)',      value: 'customer_asc'},
-    { key: 'Customer name (z - a)',      value: 'customer_desc'},
-  ]
-
   mySettings: IMultiSelectSettings = {
     displayAllSelectedText: true,
     checkedStyle: 'checkboxes',
