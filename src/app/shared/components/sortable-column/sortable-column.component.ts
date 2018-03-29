@@ -1,5 +1,5 @@
 import { SortTableService } from './../../../core/services/sort-table.service';
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, HostListener, HostBinding } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./sortable-column.component.css']
 })
 export class SortableColumnComponent implements OnInit {
+  @HostBinding('class') classes = 'pointer sorting';
 
   constructor(private sortService: SortTableService) { }
 
