@@ -21,3 +21,11 @@
 .pointer {
     cursor: pointer;
 }
+
+.order-recent-expire {
+    background-color: lemonchiffon !important;
+}
+
+.order-expired {
+    background-color: red !important;
+}
