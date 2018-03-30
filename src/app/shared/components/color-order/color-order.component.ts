@@ -1,3 +1,4 @@
+import { StatusOrder } from './../../../modules/dashboard/order';
 import { Order } from '@modules/dashboard/order';
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 import * as moment from 'moment';
@@ -12,6 +13,8 @@ export class ColorOrderComponent implements OnInit {
   @Input('color-order')
     dueDate: string;
 
+  @Input('status-order') status = "";
+
   constructor() { }
 
   ngOnInit() {
@@ -19,7 +22,7 @@ export class ColorOrderComponent implements OnInit {
     // if ( tomorrow === dateOrder) {
     //   this.classes = 'order-recent-expire';
     // }
-    if ( moment().isAfter(due_date) ) {
+    if ( moment().isAfter(due_date) && this.status != StatusOrder.delivered) {
       this.classes = 'order-expired';
     }
   }
