@@ -44,7 +44,7 @@
           <td>{{ order.id }}</td>
           <td>{{ order.description | truncateDescription }}</td>
           <td>{{ order.customer.name }}</td>
-          <td>{{ order.price | vnd }}</td>
+          <td class="text-right">{{ order.price | vnd }}</td>
           <td>{{ order.created_at | dateTimeVi }}</td>
           <td>{{ order.due_date | dateTimeVi }}</td>
           <td><span class="label arrowed-right arrowed-in"
