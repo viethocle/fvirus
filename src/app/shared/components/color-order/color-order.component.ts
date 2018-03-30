@@ -1,6 +1,6 @@
 import { Order } from '@modules/dashboard/order';
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
-import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
   selector: '[color-order]',
@@ -10,20 +10,16 @@ import * as _ from 'lodash';
 export class ColorOrderComponent implements OnInit {
   @HostBinding('class') classes = "";
   @Input('color-order')
-    colorOrder: Order ;
+    dueDate: string;
 
   constructor() { }
 
   ngOnInit() {
-    // let ONE_DAY = 24 * 60 * 60 * 1000; // ms /
-    let dateOrder = new Date(this.colorOrder.due_date);
-    // let today  = new Date().getTime();
-    let today = _.now();
-    // if ( today - dateOrder < ONE_DAY) {
+    let due_date = new Date(this.dueDate);
+    // if ( tomorrow === dateOrder) {
     //   this.classes = 'order-recent-expire';
     // }
-    console.log(today);
-    if ( today > dateOrder ) {
+    if ( moment().isAfter(due_date) ) {
       this.classes = 'order-expired';
     }
   }

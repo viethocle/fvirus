@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders | paginate: configPagination" [@flyOut]="'in'" color-order="order">
+        <tr *ngFor="let order of orders | paginate: configPagination" [@flyOut]="'in'" color-order="{{ order.due_date }}">
           <td>{{ order.id }}</td>
           <td>{{ order.description | truncateDescription }}</td>
           <td>{{ order.customer.name }}</td>
