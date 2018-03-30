@@ -10,6 +10,7 @@ export class BsmodalService {
   orderDelete$ = new Subject<Order>();
   orderEdit$ = new Subject<Order>();
   paymentOrder$ = new Subject<Order>();
+  cancelDrop$ = new Subject();
 
   constructor() { }
 
@@ -23,6 +24,10 @@ export class BsmodalService {
 
   selectOrderToPayment(order: Order) {
     this.paymentOrder$.next(order);
+  }
+
+  cancelDrop() {
+    this.cancelDrop$.next();
   }
 
 }

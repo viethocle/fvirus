@@ -50,7 +50,7 @@ export class PaymentOrderComponent implements OnInit {
 
   cancelPayment(order) {
     this.modalPayment.close();
-    this.paymentOrderOutput.emit(order);
+    this.bsmodalService.cancelDrop();
   }
 
   private buildForm() {

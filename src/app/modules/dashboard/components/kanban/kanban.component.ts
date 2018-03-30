@@ -7,8 +7,10 @@ import { Order, StatusOrder } from '../../order';
 import { DatePipe } from "@angular/common";
 import * as _ from 'lodash';
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
-import { takeWhile } from "rxjs/operators";
+import { takeWhile, tap } from "rxjs/operators";
 import { BsmodalService } from "@core/services/bsmodal.service";
+import { Observable } from "rxjs/Observable";
+import { switchMap } from 'rxjs/operators/switchMap';
 
 @Destroyable
 @Component({
@@ -122,7 +124,16 @@ export class KanbanComponent implements OnInit {
           _.assign(this.orders.find(t => t.id === order.id), order);
         });
     } else {
-      this.bsmodalService.selectOrderToPayment(order);
+      this.dragulaService.drop
+        .pipe(
+          tap((e) => this.bsmodalService.selectOrderToPayment(order)),
+          switchMap((e) => this.bsmodalService.cancelDrop$)
+        )
+        .subscribe((v: any) => {
+            this.dragulaService.find("first-bag").drake.cancel(true);
+
+          // // any additional drop processing
+        });
     }
   }
 
