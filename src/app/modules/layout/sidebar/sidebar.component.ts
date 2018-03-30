@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import * as _ from "lodash";
 import { Observable } from "rxjs/Observable";
+import { AuthService } from "@modules/auth/auth.service";
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,7 +12,9 @@ import { Observable } from "rxjs/Observable";
 export class SidebarComponent implements OnInit {
   public isManager: boolean;
   menu_min = false;
-  constructor() {}
+  constructor(
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.isManager = true;
