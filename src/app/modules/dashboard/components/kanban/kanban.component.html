@@ -11,7 +11,7 @@
               [attr.data-id]="statusOrder.new"
               #bagNew>
 
-          <div *ngFor="let order of orders | new;" [attr.data-id]="order.id">
+          <div *ngFor="let order of orders | new;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order" ></kanban-card>
           </div>
         </div>
@@ -26,7 +26,7 @@
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.inprogress"
               #bagInprogress>
-          <div *ngFor="let order of orders | inprogress;" [attr.data-id]="order.id">
+          <div *ngFor="let order of orders | inprogress;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order"></kanban-card>
           </div>
         </div>
@@ -38,7 +38,7 @@
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.ready"
               #bagReady>
-          <div *ngFor="let order of orders | ready;" [attr.data-id]="order.id">
+          <div *ngFor="let order of orders | ready;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order"></kanban-card>
           </div>
         </div>
@@ -50,7 +50,7 @@
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.delivered"
               #bagClosed>
-          <div *ngFor="let order of orders | delivered;" [attr.data-id]="order.id">
+          <div *ngFor="let order of orders | delivered;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order"></kanban-card>
           </div>
         </div>

@@ -6,6 +6,7 @@ import { DashboardService } from '../../dashboard.service';
 import { Order, StatusOrder } from '../../order';
 import { DatePipe } from "@angular/common";
 import * as _ from 'lodash';
+import * as $ from 'jquery';
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
 import { takeWhile, tap } from "rxjs/operators";
 import { BsmodalService } from "@core/services/bsmodal.service";
@@ -51,6 +52,9 @@ export class KanbanComponent implements OnInit {
         )
         .subscribe(order => {
           this.orders.push(order);
+          $(".card-kanban").filter(function() {
+            return $(this).data("id") == order.id;
+          }).remove();
         })
     this.setRoleToDrag();
     this.setDropModelDragula();
