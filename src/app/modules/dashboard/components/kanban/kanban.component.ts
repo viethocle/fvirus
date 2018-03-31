@@ -46,18 +46,13 @@ export class KanbanComponent implements OnInit {
 
   ngOnInit() {
     this.getOrders();
-    this.bsmodalService.cancelDrop$
-        .pipe(
-          takeUntilDestroy(this)
-        )
-        .subscribe(order => {
-          this.orders.push(order);
-          $(".card-kanban").filter(function() {
-            return $(this).data("id") == order.id;
-          }).remove();
-        })
+    this.setCancelPayment();
     this.setRoleToDrag();
     this.setDropModelDragula();
+    this.setLiveUpdate();
+  }
+
+  setLiveUpdate() {
     this.dashboardService.orderChange.subscribe(dataOrder => {
       console.log("SUB");
       if (dataOrder.method == "CREATE") {
@@ -75,6 +70,19 @@ export class KanbanComponent implements OnInit {
         this.orders.filter(order => order.id === dataOrder.data.id);
       }
     });
+  }
+
+  setCancelPayment() {
+    this.bsmodalService.cancelDrop$
+      .pipe(
+        takeUntilDestroy(this)
+      )
+      .subscribe(order => {
+        this.orders.push(order);
+        $(".card-kanban").filter(function () {
+          return $(this).data("id") == order.id;
+        }).remove();
+      })
   }
 
   private setRoleToDrag() {
