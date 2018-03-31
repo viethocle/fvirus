@@ -72,6 +72,7 @@ export class KanbanComponent implements OnInit {
         takeUntilDestroy(this)
       )
       .subscribe(order => {
+        this.orders.filter(o => o.id === order.id);
         this.orders.push(order);
         $(".card-kanban").filter(function () {
           return $(this).data("id") == order.id;
