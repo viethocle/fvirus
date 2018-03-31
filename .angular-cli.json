@@ -23,7 +23,7 @@
         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
       ],
       "scripts": [
-        "./assets/js/jquery.min.js",
+        "../node_modules/jquery/dist/jquery.min.js",
         "./assets/js/bootstrap.min.js",
         "./assets/js/jquery.dataTables.js",
         "./assets/dist/js/ace.min.js",

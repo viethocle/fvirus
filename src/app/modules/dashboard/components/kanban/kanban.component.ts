@@ -45,6 +45,13 @@ export class KanbanComponent implements OnInit {
 
   ngOnInit() {
     this.getOrders();
+    this.bsmodalService.cancelDrop$
+        .pipe(
+          takeUntilDestroy(this)
+        )
+        .subscribe(order => {
+          this.orders.push(order);
+        })
     this.setRoleToDrag();
     this.setDropModelDragula();
     this.dashboardService.orderChange.subscribe(dataOrder => {
@@ -124,16 +131,7 @@ export class KanbanComponent implements OnInit {
           _.assign(this.orders.find(t => t.id === order.id), order);
         });
     } else {
-      this.dragulaService.drop
-        .pipe(
-          tap((e) => this.bsmodalService.selectOrderToPayment(order)),
-          switchMap((e) => this.bsmodalService.cancelDrop$)
-        )
-        .subscribe((v: any) => {
-            this.dragulaService.find("first-bag").drake.cancel(true);
-
-          // // any additional drop processing
-        });
+      this.bsmodalService.selectOrderToPayment(order);
     }
   }
 
