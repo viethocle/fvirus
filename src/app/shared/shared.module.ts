@@ -25,6 +25,9 @@ import { TooltipModule }       from 'ngx-tooltip';
 import { TruncateDescriptionPipe } from './pipes/truncate-description.pipe';
 import { VndPipe } from './pipes/vnd.pipe';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import { SortableColumnComponent } from './components/sortable-column/sortable-column.component';
+import { ColorOrderComponent } from './components/color-order/color-order.component';
+import { MyDatePickerModule } from 'mydatepicker';
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -51,7 +54,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DateTimeViPipe,
     MySearchPipe,
     TruncateDescriptionPipe,
-    VndPipe
+    VndPipe,
+    SortableColumnComponent,
+    ColorOrderComponent
   ],
   imports: [
     FormsModule,
@@ -85,7 +90,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DateTimeViPipe,
     TruncateDescriptionPipe,
     VndPipe,
-    MultiselectDropdownModule
+    MultiselectDropdownModule,
+    SortableColumnComponent,
+    ColorOrderComponent,
+    MyDatePickerModule
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },

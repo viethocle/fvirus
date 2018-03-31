@@ -13,18 +13,18 @@
         <tr>
           <th>Id </th>
           <th>{{ 'table.description' | translate }}</th>
-          <th>{{ 'table.customer' | translate }}</th>
+          <th sortable-column="customer">{{ 'table.customer' | translate }}</th>
           <th
             *ngIf="authService.isCurrentUserAccountant || authService.isCurrentUserAdmin"
             class="text-right">{{ 'table.price' | translate }}</th>
-          <th>{{ 'table.created-at' | translate }}</th>
-          <th>{{ 'table.due-date' | translate }}</th>
+          <th sortable-column="created_at" sort-direction="desc">{{ 'table.created-at' | translate }}</th>
+          <th sortable-column="due_date">{{ 'table.due-date' | translate }}</th>
           <th>{{ 'table.status' | translate }}</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders | paginate: configPagination" [@flyOut]="'in'">
+        <tr *ngFor="let order of orders | paginate: configPagination" [@flyOut]="'in'" color-order="{{ order.due_date }}" status-order="{{ order.status }}">
           <td>{{ order.id }}</td>
           <td>{{ order.description | truncateDescription }}</td>
           <td>{{ order.customer.name }}</td>

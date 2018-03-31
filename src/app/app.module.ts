@@ -7,6 +7,7 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { Angular2TokenService } from 'angular2-token';
 import { HttpModule } from '@angular/http';
+import { DataTablesModule } from 'angular-datatables';
 
 import { AppRoutingModule } from './app.routing';
 import { SharedModule } from '@shared/shared.module';
@@ -42,6 +43,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     HttpModule,
+    DataTablesModule,
     LoadingBarHttpClientModule,
     TranslateModule.forRoot({
       loader: {

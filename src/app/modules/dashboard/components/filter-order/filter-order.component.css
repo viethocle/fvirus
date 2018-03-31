@@ -9,3 +9,7 @@
 .c-btn {
   padding: 5 inherit;
 }
+
+.input-daterange {
+  width: 380px;
+}
