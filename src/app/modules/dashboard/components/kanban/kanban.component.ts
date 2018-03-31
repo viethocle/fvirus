@@ -36,13 +36,7 @@ export class KanbanComponent implements OnInit {
     private authService: AuthService,
     private angular2Token: Angular2TokenService
   ) {
-      // this.dragulaService.setOptions("first-bag", {
-      //   moves:  (el, container, handle) => {
-      //     console.log("el: ", el.dataset, " \n cont: ", container.dataset.id, " \n han: ", handle.dataset);
-      //     // return true;
-      //     return container.dataset.id == StatusOrder.delivered;
-      // }});
-    }
+  }
 
   ngOnInit() {
     this.getOrders();
@@ -153,30 +147,4 @@ export class KanbanComponent implements OnInit {
     });
   }
 
-  innerHtml(order: Order) {
-    let content = `
-    <div>
-        <div>
-          <h5>
-            ${order.description}
-          </h5>
-          <h6>
-            Deadline: ${this.datePipe.transform(order.due_date, "dd-MM-yyyy")}
-          </h6>
-        </div>
-    </div>`;
-    return content;
-  }
-
-  handleUpdateOrder(order) {
-    console.log("Output: ", order);
-    if (order.status != StatusOrder.delivered) {
-      console.log("cancel");
-    }
-    // this.dragulaService.setOptions("first-bag", {
-    //   moves:  (el, container, handle) => {
-    //         console.log(el, "  ", container, "   ", handle);
-    //         return order.status == StatusOrder.delivered;
-    // }});
-  }
 }
