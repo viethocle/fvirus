@@ -35,7 +35,7 @@ export class AuthService {
   ) {
     this.authService.init({ apiBase: environment.baseUrl});
     this.authService.validateToken().subscribe(
-      res => { 
+      res => {
         this.userSignedIn$.next(true);
         this.doneValidateToken$.next();
       },

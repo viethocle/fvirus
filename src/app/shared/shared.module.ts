@@ -101,8 +101,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    { 
-      provide: OWL_DATE_TIME_LOCALE, 
+    {
+      provide: OWL_DATE_TIME_LOCALE,
       useValue: 'vi' },
     DatePipe,
     ToastrService

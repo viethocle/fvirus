@@ -1,0 +1,17 @@
+<bs-modal #modalPayment  [keyboard]="false">
+  <bs-modal-header>
+    <h4 class="modal-title">Thanh toán order</h4>
+  </bs-modal-header>
+
+  <bs-modal-body class="container-fluid">
+    <h3> Id: {{order?.id}}</h3>
+    <h3> Mô tả: {{order?.description}} </h3>
+    <input type=number [formControl]= "formPaymentOrder.get('payAmount')" >
+    <button class="btn btn-info btn-sm" type="button" (click)="payOrder()">
+      <i class="ace-icon fa fa-money bigger-110"></i>Thanh toán</button>
+  </bs-modal-body>
+
+  <bs-modal-footer>
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cancelPayment(order)">{{ 'button.cancel' | translate }}</button>
+  </bs-modal-footer>
+</bs-modal>

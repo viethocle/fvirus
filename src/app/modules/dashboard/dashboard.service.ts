@@ -78,6 +78,14 @@ export class DashboardService {
     return this.http.delete(url);
   }
 
+  /** PayMent order */
+  PaymentOrder(order_id: string, value): Observable<Order> {
+    console.log(value);
+    let url = `${environment.baseUrl}/orders/${order_id}/payOrder.json`;
+    return this.http.put(url, value)
+      .map((res: any) => res.order as Order);
+  }
+
 
   getOrderFilter(param: any): Observable<IOrdersPaginate> {
     let url = `${environment.baseUrl}/orders-filteric.json`;

@@ -1,23 +1,23 @@
 <div class="kanban kanban-column">
     <div class='wrapper container-fluid' myMatchHeight="kanban-column">
       <!-- <perfect-scrollbar class="scroller"> -->
-      <div class='col-md-3 kanban-column'>
+      <div class='col-md-3 col-sm-3 kanban-column'>
         <!-- <div class="kb-header kb-header-new">
           New
         </div> -->
-        <h4>{{ 'label.new' | translate }}</h4>          
+        <h4>{{ 'label.new' | translate }}</h4>
         <div  class="bag-status  column-kanban"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.new"
-              #bagNew>  
+              #bagNew>
 
-          <div *ngFor="let order of orders | new;" [attr.data-id]="order.id">
+          <div *ngFor="let order of orders | new;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order" ></kanban-card>
           </div>
         </div>
       </div>
 
-      <div class='col-md-3 kanban-column'>
+      <div class='col-md-3 col-sm-3 kanban-column'>
         <!-- <div class="kb-header kb-header-working">
           Inprogress
         </div> -->
@@ -26,31 +26,31 @@
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.inprogress"
               #bagInprogress>
-          <div *ngFor="let order of orders | inprogress;" [attr.data-id]="order.id">
+          <div *ngFor="let order of orders | inprogress;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order"></kanban-card>
           </div>
         </div>
       </div>
 
-      <div class='col-md-3 kanban-column'>
+      <div class='col-md-3 col-sm-3 kanban-column'>
         <h4>{{ 'label.ready' | translate }}</h4>
         <div  class="bag-status column-kanban"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.ready"
               #bagReady>
-          <div *ngFor="let order of orders | ready;" [attr.data-id]="order.id">
+          <div *ngFor="let order of orders | ready;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order"></kanban-card>
           </div>
         </div>
       </div>
 
-      <div class='col-md-3 kanban-column'>
+      <div class='col-md-3 col-sm-3 kanban-column'>
         <h4>{{ 'label.delivered' | translate }}</h4>
         <div  class="bag-status  column-kanban"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.delivered"
               #bagClosed>
-          <div *ngFor="let order of orders | delivered;" [attr.data-id]="order.id">
+          <div *ngFor="let order of orders | delivered;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order"></kanban-card>
           </div>
         </div>
@@ -58,3 +58,4 @@
       <!-- </perfect-scrollbar> -->
     </div>
 </div>
+<app-payment-order (paymentOrderOutput)="handleUpdateOrder($event)"></app-payment-order>

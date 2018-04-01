@@ -3,6 +3,7 @@ import { Destroyable, takeUntilDestroy } from "take-until-destroy";
 import { Order, StatusOrder } from "../../order";
 import { DashboardService } from "../../dashboard.service";
 import { AuthService } from "./../../../auth/auth.service";
+import { BsmodalService } from "@core/services/bsmodal.service";
 
 @Destroyable
 @Component({
@@ -17,6 +18,7 @@ export class StatusComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
+    private bsmodalService: BsmodalService,
     public authService: AuthService
   ) {}
 
@@ -29,8 +31,9 @@ export class StatusComponent implements OnInit {
       .updateStatusOrder(order_id, status_to_change)
       .pipe(takeUntilDestroy(this))
       .subscribe(ord => this.statusOrderOutput.emit(ord));
-    //   .subscribe((or: Order) => {
-    //     _.assign(this.orders.find(t => t.id === order.id), order);
-    //   });
+  }
+
+  OpenPaymentModal(order) {
+    this.bsmodalService.selectOrderToPayment(order);
   }
 }

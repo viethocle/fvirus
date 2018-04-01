@@ -9,8 +9,8 @@ export class BsmodalService {
 
   orderDelete$ = new Subject<Order>();
   orderEdit$ = new Subject<Order>();
-
-  customerEdit
+  paymentOrder$ = new Subject<Order>();
+  cancelDrop$ = new Subject<Order>();
 
   constructor() { }
 
@@ -22,5 +22,12 @@ export class BsmodalService {
     this.orderEdit$.next(order);
   }
 
+  selectOrderToPayment(order: Order) {
+    this.paymentOrder$.next(order);
+  }
+
+  cancelDrop(order) {
+    this.cancelDrop$.next(order);
+  }
 
 }

@@ -17,6 +17,7 @@ import { EditOrderComponent } from './components/edit-order/edit-order.component
 import { StatusComponent } from './components/status/status.component';
 import { FilterOrderComponent } from './components/filter-order/filter-order.component';
 
+import { PaymentOrderComponent } from './components/payment-order/payment-order.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -36,6 +37,7 @@ import { FilterOrderComponent } from './components/filter-order/filter-order.com
     EditOrderComponent,
     StatusComponent,
     FilterOrderComponent,
+    PaymentOrderComponent,
   ]
 })
 export class DashboardModule { }

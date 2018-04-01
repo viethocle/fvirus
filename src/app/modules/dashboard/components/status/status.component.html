@@ -22,7 +22,7 @@
 
     <li *ngIf="order.status == statusOrder.ready && !authService.isCurrentUserTechnician">
       <a  class="btn-sm"
-          (click)="updateStatus(order, statusOrder.delivered)">Đã giao hàng</a>
+          (click)="OpenPaymentModal(order)">Đã giao hàng</a>
     </li>
   </ul>
 </div>
