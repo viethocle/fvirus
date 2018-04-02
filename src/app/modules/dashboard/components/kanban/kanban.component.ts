@@ -149,9 +149,21 @@ export class KanbanComponent implements OnInit, OnDestroy {
   }
 
   private onDrag(args) {
-    let [e, el] = args;
+    let [el, source] = args;
+    let current_status = source.dataset.id;
     if (this.authService.isCurrentUserTechnician) {
       this.notDragDelivered = true;
+    }
+    if (this.authService.isCurrentUserAccountant) {
+      if (current_status === StatusOrder.new) {
+        this.notDragDelivered = true;
+        this.notDragInprogress = true;
+        this.notDragReady = true;
+      }
+      if (current_status === StatusOrder.ready) {
+        this.notDragNew = true;
+        this.notDragInprogress = true;
+      }
     }
   }
 
