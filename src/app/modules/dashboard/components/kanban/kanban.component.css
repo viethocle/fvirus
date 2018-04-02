@@ -247,7 +247,7 @@ nested-repeat-example .container span {
 
 
 .zone-drag {
-  background: #ffe5cc;
+  background: #ebf2f9;
   border: 2px dashed red;
   transition: background 250ms ease-in-out;
 }

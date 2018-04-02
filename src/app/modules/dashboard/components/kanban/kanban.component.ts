@@ -23,12 +23,12 @@ import { switchMap } from 'rxjs/operators/switchMap';
   ]
 })
 export class KanbanComponent implements OnInit, OnDestroy {
-  orders: Order[] = [];
-  statusOrder = StatusOrder;
-  bagNew = "bag";
-  bagInprogres = "bag";
-  bagReady = "bag";
-  bagDelivered = "bag";
+  orders: Order[]    = [];
+  statusOrder        = StatusOrder;
+  notDragNew         = false;
+  notDragInprogress  = false;
+  notDragReady       = false;
+  notDragDelivered   = false;
 
   constructor(
     private dragulaService: DragulaService,
@@ -43,10 +43,24 @@ export class KanbanComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getOrders();
+    this.setOnDragDragula();
     this.setCancelPayment();
     this.setRoleToDrag();
     this.setDropModelDragula();
     this.setLiveUpdate();
+  }
+
+  setOnDragDragula() {
+    this.dragulaService.drag.subscribe((value) => {
+      this.onDrag(value.slice(1));
+    });
+    this.dragulaService.out.subscribe((value) => {
+      this.onOut(value.slice(1));
+    });
+
+    this.dragulaService.dragend.subscribe((value) => {
+      this.resetNotDragValue();
+    });
   }
 
   setLiveUpdate() {
@@ -117,6 +131,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
   }
 
   private onDrop(args) {
+    this.resetNotDragValue();
     let [e, el] = args;
     let order_id = e.dataset.id;
     let status_to_change = el.dataset.id;
@@ -131,6 +146,24 @@ export class KanbanComponent implements OnInit, OnDestroy {
     } else {
       this.bsmodalService.selectOrderToPayment(order);
     }
+  }
+
+  private onDrag(args) {
+    let [e, el] = args;
+    if (this.authService.isCurrentUserTechnician) {
+      this.notDragDelivered = true;
+    }
+  }
+
+  private onOut(args) {
+    // this.resetNotDragValue();
+  }
+
+  resetNotDragValue() {
+    this.notDragNew         = false;
+    this.notDragInprogress  = false;
+    this.notDragReady       = false;
+    this.notDragDelivered   = false;
   }
 
   getOrders() {
