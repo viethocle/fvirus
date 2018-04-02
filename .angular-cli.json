@@ -20,7 +20,8 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
+        "../node_modules/datatables.net-dt/css/jquery.dataTables.css"
       ],
       "scripts": [
         "./assets/js/jquery.min.js",
@@ -29,7 +30,9 @@
         "./assets/dist/js/ace.min.js",
         "./assets/dist/js/ace-small.min.js",
         "./assets/dist/js/ace-elements.min.js",
-        "./assets/js/src/ace.sidebar.js"
+        "./assets/js/src/ace.sidebar.js",
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/datatables.net/js/jquery.dataTables.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -2,17 +2,23 @@ import { UserService } from './../../user.service';
 import { User } from './../../../user.model';
 import { Subject } from 'rxjs/Subject';
 import { Component, OnInit } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { DataTablesModule } from 'angular-datatables';
+import { NgModule } from '@angular/core';
+
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
-  providers: [UserService]
+  providers: [UserService],
 })
 export class UserComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   users: User[] = [];
+
   loading: boolean;
   getUsers$: any;
 

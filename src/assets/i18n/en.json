@@ -183,7 +183,7 @@
     "matched": "password confirmation doesn't match",
     "required": "This field is required"
   },
-  "user-management": {
+  "user": {
     "title": "Users Management",
     "small-title": "List",
     "instruc1": "You succeed to create new user with: ",

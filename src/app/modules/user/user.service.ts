@@ -18,6 +18,6 @@ export class UserService {
       const getUrl = `${this.baseUrl}/users.json`;
     return this.http
             .get(getUrl)
-            .map(res => res as User[]);
+            .map((res: any) => res.users as User[]);
     }
 }
