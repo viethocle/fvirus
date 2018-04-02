@@ -160,7 +160,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
         this.notDragInprogress = true;
         this.notDragReady = true;
       }
-      if (current_status === StatusOrder.ready) {
+      if (current_status === StatusOrder.ready || current_status === StatusOrder.delivered) {
         this.notDragNew = true;
         this.notDragInprogress = true;
       }
