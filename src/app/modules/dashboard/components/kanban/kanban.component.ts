@@ -85,7 +85,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
 
   private setRoleToDrag() {
     // this.angular2Token.validateToken().subscribe(_ => {
-      console.log(this.authService.isCurrentUserTechnician);
+      // console.log(this.authService.isCurrentUserTechnician);
         if (this.authService.isCurrentUserAccountant) {
           this.dragulaService.setOptions('first-bag', {
             accepts: function(el, target, source, sibling) {
@@ -109,7 +109,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
               return true;
             }
           })
-        } 
+        }
       // });
   }
 

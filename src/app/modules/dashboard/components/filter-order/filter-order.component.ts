@@ -20,8 +20,8 @@ import { fromEvent } from "rxjs/observable/fromEvent";
 export class FilterOrderComponent implements OnInit {
   @Output() listOrderOuput = new EventEmitter<IOrdersPaginate>();
 
-  due_date_begin: Date = new Date();
-  due_date_end: Date = new Date();
+  due_date_begin: Date = null;
+  due_date_end: Date;
 
   settingsDateTimePicker = {
     bigBanner: false,
@@ -82,19 +82,19 @@ export class FilterOrderComponent implements OnInit {
       selectAllText: 'Chọn tất cả',
       unSelectAllText: 'Bỏ chọn tất cả',
       classes: "my-select"
-    };  
+    };
 
   }
 
   setChangeRoute() {
     this.route.queryParams
         .pipe(
-          map(params => { 
+          map(params => {
             let pagination = {
               pagination:
               { page: params.page, per_page: params.per_page }
             }
-            return _.assign(pagination, params); 
+            return _.assign(pagination, params);
           }),
           switchMap(params => this.dashboardService.getOrderFilter(params))
         )
