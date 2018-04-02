@@ -251,5 +251,17 @@
   },
   "notification": {
     "not-found": "Not found"
+  },
+  "user-management": {
+    "title": "Users Management",
+    "small-title": "List",
+    "instruc1": "You succeed to create new user with: ",
+    "instruc2": "Remember it!.",
+    "instruc3": " This note will not be longer.",
+    "modal-title": "Create New User",
+    "modal-update-title": "Update User",
+    "manager": "manager",
+    "tech": "technician",
+    "account": "accountant"
   }
 }

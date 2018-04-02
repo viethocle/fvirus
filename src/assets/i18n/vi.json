@@ -101,7 +101,8 @@
     "modal-title": "Tạo người dùng mới",
     "modal-update-title": "Cập nhật thông tin",
     "manager": "Quản lý",
-    "staff": "Nhân viên"
+    "tech": "Quản đốc",
+    "account": "Thư ký"
   },
   "modal": {
     "create-btn": "Tạo mới",

@@ -1,7 +1,7 @@
 import { UserService } from './../../user.service';
 import { User } from './../../../user.model';
 import { Subject } from 'rxjs/Subject';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
 import { NgModule } from '@angular/core';
@@ -18,7 +18,6 @@ export class UserComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   users: User[] = [];
-
   loading: boolean;
   getUsers$: any;
 
@@ -33,7 +32,7 @@ export class UserComponent implements OnInit {
     this.getUsers();
   }
 
-   getUsers() {
+  getUsers() {
     this.loading = true;
     this.usersService.getUsers().subscribe(users => {
       this.users = users;
@@ -41,6 +40,10 @@ export class UserComponent implements OnInit {
       this.dtTrigger.next();
       this.loading = false;
     });
+  }
+
+  updateUsers(user: User) {
+    this.users.unshift(user);
   }
 
 }

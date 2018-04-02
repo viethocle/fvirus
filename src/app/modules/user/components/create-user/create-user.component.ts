@@ -1,8 +1,8 @@
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { User } from './../../../user.model';
 import { ToastrService } from './../../../../shared/toastr.service';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { UserService } from './../../user.service';
 import * as _ from 'lodash';
 
@@ -13,10 +13,11 @@ import * as _ from 'lodash';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
-  // @ViewChild("modal") modal: BsModalComponent;
+  @ViewChild("modal") modal: BsModalComponent;
   form: FormGroup;
   users: User[]= [];
   role: any;
+   @Output() newUser = new EventEmitter<User>();
   constructor(
     private usersService: UserService,
     private fb: FormBuilder,
@@ -28,23 +29,12 @@ export class CreateUserComponent implements OnInit {
   }
 
   addUser(value: any) {
-    // console.log(this.role);
-    // const signUpData = {
-    //   email: value.email,
-    //   name: value.name,
-    //   password: value.password,
-    //   password_confirmation: value.password_confirmation,
-    //   role: this.role ? "manager" : "staff"
-    // };
-
-    // this.usersService.addUser(signUpData).subscribe(user => {
-    //   this.users.push(user);
-    //   this.modal.close();
-    //   this.emailJustAdded = value.email;
-    //   this.passwordJustAdded = value.password;
-    //   this.showAlert = true;
-    //   this.form.reset();
-    // });
+    console.log(value);
+    this.usersService.addUser(value).subscribe(user => {
+      this.newUser.emit(user);
+      this.modal.close();
+      this.form.reset();
+    });
   }
 
   buildForm() {
@@ -60,7 +50,7 @@ export class CreateUserComponent implements OnInit {
           Validators.compose([Validators.required, Validators.minLength(8)])
         ],
         password_confirmation: ["", Validators.required],
-        role: [false]
+        role: []
       },
       { validator: this.passwordConfirming }
     );
