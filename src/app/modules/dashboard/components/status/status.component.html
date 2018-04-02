@@ -6,23 +6,48 @@
               'btn-warning': order.status == statusOrder.inprogress,
               'btn-success': order.status == statusOrder.ready}">
     {{ 'label.' + order.status | translate }}
-    <i *ngIf="order.status != statusOrder.delivered" class="ace-icon fa fa-angle-down icon-on-right"></i>
+    <i *ngIf="(authService.isCurrentUserAccountant && order.status != statusOrder.new && order.status != statusOrder.inprogress)
+              || (authService.isCurrentUserTechnician && order.status != statusOrder.delivered)"
+        class="ace-icon fa fa-angle-down icon-on-right"></i>
   </button>
 
-  <ul *ngIf="order.status != statusOrder.delivered" class="dropdown-menu">
-    <li *ngIf="(order.status == statusOrder.new || order.status == statusOrder.ready) && !authService.isCurrentUserAccountant">
-      <a  class="btn-warning"
-          (click)="updateStatus(order, statusOrder.inprogress)">Trong tiến trình</a>
+  <!-- ADMIN -->
+  <ul *ngIf="authService.isCurrentUserAdmin" class="dropdown-menu">
+    <li *ngIf="order.status != statusOrder.new">
+      <a class="btn-danger" (click)="updateStatus(order, statusOrder.new)">Mới</a>
     </li>
-
-    <li *ngIf="order.status == statusOrder.inprogress && !authService.isCurrentUserAccountant">
-      <a  class="btn-success"
-          (click)="updateStatus(order, statusOrder.ready)">Sẵn sàng</a>
+    <li *ngIf="order.status != statusOrder.inprogress">
+      <a class="btn-warning" (click)="updateStatus(order, statusOrder.inprogress)">Trong tiến trình</a>
     </li>
+    <li *ngIf="order.status != statusOrder.ready">
+      <a class="btn-success" (click)="updateStatus(order, statusOrder.ready)">Sẵn sàng</a>
+    </li>
+    <li *ngIf="order.status != statusOrder.delivered">
+      <a class="btn-sm" (click)="OpenPaymentModal(order)">Đã giao hàng</a>
+    </li>
+  </ul>
 
-    <li *ngIf="order.status == statusOrder.ready && !authService.isCurrentUserTechnician">
-      <a  class="btn-sm"
-          (click)="OpenPaymentModal(order)">Đã giao hàng</a>
+  <!-- ACCOUNTANT -->
+  <ul *ngIf="authService.isCurrentUserAccountant && order.status != statusOrder.new && order.status != statusOrder.inprogress"
+      class="dropdown-menu">
+    <li *ngIf="order.status != statusOrder.ready">
+      <a class="btn-success" (click)="updateStatus(order, statusOrder.ready)">Sẵn sàng</a>
+    </li>
+    <li *ngIf="order.status != statusOrder.delivered">
+      <a class="btn-sm" (click)="OpenPaymentModal(order)">Đã giao hàng</a>
+    </li>
+  </ul>
+
+  <!-- TECHNICIAN -->
+  <ul *ngIf="authService.isCurrentUserTechnician && order.status != statusOrder.delivered" class="dropdown-menu">
+    <li *ngIf="order.status != statusOrder.new">
+      <a class="btn-danger" (click)="updateStatus(order, statusOrder.new)">Mới</a>
+    </li>
+    <li *ngIf="order.status != statusOrder.inprogress">
+      <a class="btn-warning" (click)="updateStatus(order, statusOrder.inprogress)">Trong tiến trình</a>
+    </li>
+    <li *ngIf="order.status != statusOrder.ready">
+      <a class="btn-success" (click)="updateStatus(order, statusOrder.ready)">Sẵn sàng</a>
     </li>
   </ul>
 </div>
