@@ -164,6 +164,11 @@ export class KanbanComponent implements OnInit, OnDestroy {
         this.notDragNew = true;
         this.notDragInprogress = true;
       }
+      if (current_status === StatusOrder.inprogress) {
+        this.notDragNew = true;
+        this.notDragReady = true;
+        this.notDragDelivered = true;
+      }
     }
   }
 
