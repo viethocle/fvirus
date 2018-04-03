@@ -20,7 +20,7 @@ import { fromEvent } from "rxjs/observable/fromEvent";
 export class FilterOrderComponent implements OnInit {
   @Output() listOrderOuput = new EventEmitter<IOrdersPaginate>();
 
-  due_date_begin: Date = null;
+  due_date_begin: Date;
   due_date_end: Date;
 
   settingsDateTimePicker = {
@@ -106,15 +106,15 @@ export class FilterOrderComponent implements OnInit {
 
   onDateSelectBegin(e) {
     const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
-    let date = new Date(this.due_date_begin);
-    queryParams['due_date_gte'] = date.toISOString();
+    // let date = new Date(this.due_date_begin);
+    queryParams['due_date_gte'] = e;
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
   }
 
   onDateSelectEnd(e) {
     const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
-    let date = new Date(this.due_date_end);
-    queryParams['due_date_lte'] = date.toISOString();
+    // let date = new Date(this.due_date_end);
+    queryParams['due_date_lte'] = e;
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
   }
 
@@ -144,6 +144,10 @@ export class FilterOrderComponent implements OnInit {
                       queryParams['search_query'] = paramSearch;
                       this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
                     })
+  }
+
+  changeNew(event) {
+    console.log(this.due_date_begin);
   }
 
 
