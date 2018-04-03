@@ -3,7 +3,7 @@
 </div>
 <bs-modal #modal>
   <bs-modal-header [showDismiss]="true">
-    <h4 class="modal-title">{{ 'user-management.modal-update-title' | translate}}</h4>
+    <h4 class="modal-title">{{ 'user-management.modal-title' | translate}}</h4>
   </bs-modal-header>
   <bs-modal-body>
     <app-input-field [attribute]="'table.name' | translate" [control]="form.get('name')">
@@ -52,7 +52,7 @@
 
   </bs-modal-body>
   <bs-modal-footer>
-    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modal.dismiss()">{{ 'Products.Modal.Cancel' | translate }}</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modal.dismiss()">{{ 'button.cancel' | translate }}</button>
     <button id="btn-create-user" class="btn btn-primary add-product" [disabled]="form.invalid" (click)="addUser(form.value)">{{ 'button.create' | translate }}</button>
   </bs-modal-footer>
 </bs-modal>
