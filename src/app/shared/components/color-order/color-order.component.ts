@@ -9,7 +9,7 @@ import * as moment from 'moment';
   styleUrls: ['./color-order.component.css']
 })
 export class ColorOrderComponent implements OnInit {
-  @HostBinding('class') classes = "";
+  @HostBinding('class') classes = "card ";
   @Input('color-order')
     dueDate: string;
 
@@ -23,7 +23,7 @@ export class ColorOrderComponent implements OnInit {
     //   this.classes = 'order-recent-expire';
     // }
     if ( moment().isAfter(due_date) && this.status != StatusOrder.delivered) {
-      this.classes = 'order-expired';
+      this.classes = 'order-expired card';
     }
   }
 

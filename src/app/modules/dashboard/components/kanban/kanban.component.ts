@@ -23,12 +23,12 @@ import { switchMap } from 'rxjs/operators/switchMap';
   ]
 })
 export class KanbanComponent implements OnInit, OnDestroy {
-  orders: Order[] = [];
-  statusOrder = StatusOrder;
-  bagNew = "bag";
-  bagInprogres = "bag";
-  bagReady = "bag";
-  bagDelivered = "bag";
+  orders: Order[]    = [];
+  statusOrder        = StatusOrder;
+  notDragNew         = false;
+  notDragInprogress  = false;
+  notDragReady       = false;
+  notDragDelivered   = false;
 
   constructor(
     private dragulaService: DragulaService,
@@ -43,10 +43,24 @@ export class KanbanComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getOrders();
+    this.setOnDragDragula();
     this.setCancelPayment();
     this.setRoleToDrag();
     this.setDropModelDragula();
     this.setLiveUpdate();
+  }
+
+  setOnDragDragula() {
+    this.dragulaService.drag.subscribe((value) => {
+      this.onDrag(value.slice(1));
+    });
+    this.dragulaService.out.subscribe((value) => {
+      this.onOut(value.slice(1));
+    });
+
+    this.dragulaService.dragend.subscribe((value) => {
+      this.resetNotDragValue();
+    });
   }
 
   setLiveUpdate() {
@@ -84,33 +98,30 @@ export class KanbanComponent implements OnInit, OnDestroy {
   }
 
   private setRoleToDrag() {
-    // this.angular2Token.validateToken().subscribe(_ => {
-      // console.log(this.authService.isCurrentUserTechnician);
-        if (this.authService.isCurrentUserAccountant) {
-          this.dragulaService.setOptions('first-bag', {
-            accepts: function(el, target, source, sibling) {
-              let id_target = target.dataset.id;
-              let id_source = source.dataset.id;
-              if (id_source === StatusOrder.new || id_source == StatusOrder.inprogress) return false;
-              if (id_target == StatusOrder.inprogress || id_target == StatusOrder.new) return false;
-              return true;
-            }
-          })
+    if (this.authService.isCurrentUserAccountant) {
+      this.dragulaService.setOptions('first-bag', {
+        accepts: function(el, target, source, sibling) {
+          let id_target = target.dataset.id;
+          let id_source = source.dataset.id;
+          if (id_source === StatusOrder.new || id_source == StatusOrder.inprogress) return false;
+          if (id_target == StatusOrder.inprogress || id_target == StatusOrder.new) return false;
+          return true;
         }
-        if (this.authService.isCurrentUserTechnician) {
-          this.dragulaService.setOptions('first-bag', {
-            accepts: function (el, target, source, sibling) {
-              let id_target = target.dataset.id;
-              let id_source = source.dataset.id;
-              if (id_source == StatusOrder.delivered) return false;
-              if (id_source == StatusOrder.new && id_target == StatusOrder.ready) return false;
-              if (id_target == StatusOrder.new && id_source == StatusOrder.ready) return false;
-              if (id_target == StatusOrder.delivered) return false;
-              return true;
-            }
-          })
+      })
+    }
+    if (this.authService.isCurrentUserTechnician) {
+      this.dragulaService.setOptions('first-bag', {
+        accepts: function (el, target, source, sibling) {
+          let id_target = target.dataset.id;
+          let id_source = source.dataset.id;
+          if (id_source == StatusOrder.delivered) return false;
+          if (id_source == StatusOrder.new && id_target == StatusOrder.ready) return false;
+          if (id_target == StatusOrder.new && id_source == StatusOrder.ready) return false;
+          if (id_target == StatusOrder.delivered) return false;
+          return true;
         }
-      // });
+      })
+    } 
   }
 
   setDropModelDragula() {
@@ -120,6 +131,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
   }
 
   private onDrop(args) {
+    this.resetNotDragValue();
     let [e, el] = args;
     let order_id = e.dataset.id;
     let status_to_change = el.dataset.id;
@@ -134,6 +146,36 @@ export class KanbanComponent implements OnInit, OnDestroy {
     } else {
       this.bsmodalService.selectOrderToPayment(order);
     }
+  }
+
+  private onDrag(args) {
+    let [el, source] = args;
+    let current_status = source.dataset.id;
+    if (this.authService.isCurrentUserTechnician) {
+      this.notDragDelivered = true;
+    }
+    if (this.authService.isCurrentUserAccountant) {
+      if (current_status === StatusOrder.new) {
+        this.notDragDelivered = true;
+        this.notDragInprogress = true;
+        this.notDragReady = true;
+      }
+      if (current_status === StatusOrder.ready || current_status === StatusOrder.delivered) {
+        this.notDragNew = true;
+        this.notDragInprogress = true;
+      }
+    }
+  }
+
+  private onOut(args) {
+    // this.resetNotDragValue();
+  }
+
+  resetNotDragValue() {
+    this.notDragNew         = false;
+    this.notDragInprogress  = false;
+    this.notDragReady       = false;
+    this.notDragDelivered   = false;
   }
 
   getOrders() {
