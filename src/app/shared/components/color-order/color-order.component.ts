@@ -18,10 +18,11 @@ export class ColorOrderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let due_date = new Date(this.dueDate);
-    // if ( tomorrow === dateOrder) {
-    //   this.classes = 'order-recent-expire';
-    // }
+    let due_date = moment(this.dueDate);
+    let tomorrow = moment(new Date()).add(1, 'days');
+    if (tomorrow.isSame(due_date, 'day') && this.status != StatusOrder.delivered) {
+      this.classes = 'order-recent-expire card';
+    }
     if ( moment().isAfter(due_date) && this.status != StatusOrder.delivered) {
       this.classes = 'order-expired card';
     }
