@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { Observable } from "rxjs/Observable";
 import { SidebarComponent } from './modules/layout/sidebar/sidebar.component';
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
+import '../assets/js/jquery.dataTables.js';
+import '../assets/js/jquery.dataTables.bootstrap.js';
 
 @Component({
   selector: "app-root",

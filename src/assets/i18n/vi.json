@@ -101,7 +101,8 @@
     "modal-title": "Tạo người dùng mới",
     "modal-update-title": "Cập nhật thông tin",
     "manager": "Quản lý",
-    "staff": "Nhân viên"
+    "tech": "Quản đốc",
+    "account": "Thư ký"
   },
   "modal": {
     "create-btn": "Tạo mới",
@@ -154,5 +155,16 @@
   },
   "notification": {
     "not-found": "Không tìm thấy kết quả"
+  },
+  "user": {
+    "title": "Quản lý nhân viên",
+    "small-title": "Danh sách",
+    "instruc1": "Bạn đã tạo mới thành công: ",
+    "instruc2": "Ghi nhớ lại! ",
+    "instruc3": "Vì ghi chú này sẽ bị xóa.",
+    "modal-title": "Tạo người dùng mới",
+    "modal-update-title": "Cập nhật thông tin",
+    "manager": "Quản lý",
+    "staff": "Nhân viên"
   }
 }

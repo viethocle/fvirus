@@ -5,7 +5,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { UserComponent } from './pages/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { LockUserComponent } from './components/lock-user/lock-user.component';
-
+import { DataTablesModule } from 'angular-datatables';
 
 export const UserRoutes: Routes = [
   {
@@ -18,7 +18,8 @@ export const UserRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild(UserRoutes)
+    RouterModule.forChild(UserRoutes),
+    DataTablesModule
   ],
   declarations: [UserComponent, CreateUserComponent, LockUserComponent]
 })
