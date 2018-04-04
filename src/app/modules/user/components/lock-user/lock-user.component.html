@@ -1,8 +1,38 @@
 <bs-modal #modalDelete>
-  <bs-modal-header [showDismiss]="true">
-    <h2>{{ user?.id }}</h2>
-    <h4 class="modal-title">{{ 'modal.confirm_remove_order' | translate }}</h4>
+
+  <bs-modal-header>
+    <h2 class="modal-title">Xóa tài khoản</h2>
   </bs-modal-header>
+    <bs-modal-body class="container-fluid">
+      <div class="profile-user-info profile-user-info-striped">
+        <div class="profile-info-row">
+          <div class="profile-info-name"> Id </div>
+
+          <div class="profile-info-value">
+            <span class="editable editable-click" id="username">{{user?.id}}</span>
+          </div>
+        </div>
+
+        <div class="profile-info-row">
+          <div class="profile-info-name"> Tên </div>
+
+          <div class="profile-info-value">
+            <span class="editable editable-click" id="country">{{user?.name}}</span>
+          </div>
+        </div>
+
+        <div class="profile-info-row">
+          <div class="profile-info-name"> Vai trò </div>
+
+          <div class="profile-info-value">
+            <span class="editable editable-click" id="age">{{user?.role}}</span>
+          </div>
+        </div>
+      </div>
+    <br>
+    <div><h4 class="modal-title">{{ 'modal.confirm_remove_account' | translate }}</h4></div>
+    </bs-modal-body>
+
   <bs-modal-footer>
     <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalDelete.dismiss()">{{ 'button.cancel' | translate }}</button>
     <button type="button" class="btn btn-danger" (click)="modalDelete.close()" (click)="deteteUser()">{{ 'button.delete' | translate }}</button>
