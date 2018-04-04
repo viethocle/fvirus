@@ -121,7 +121,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
           return true;
         }
       })
-    } 
+    }
   }
 
   setDropModelDragula() {
@@ -144,7 +144,9 @@ export class KanbanComponent implements OnInit, OnDestroy {
           _.assign(this.orders.find(t => t.id === order.id), order);
         });
     } else {
-      this.bsmodalService.selectOrderToPayment(order);
+      if (order.status != this.statusOrder.delivered) {
+        this.bsmodalService.selectOrderToPayment(order);
+      }
     }
   }
 
