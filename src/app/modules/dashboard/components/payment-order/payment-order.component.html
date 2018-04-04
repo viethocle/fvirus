@@ -1,17 +1,76 @@
-<bs-modal #modalPayment  [keyboard]="false">
+<bs-modal #modalPayment [keyboard]="false">
   <bs-modal-header>
-    <h4 class="modal-title">Thanh toán order</h4>
+    <h2 class="modal-title">Thanh toán order</h2>
   </bs-modal-header>
 
   <bs-modal-body class="container-fluid">
-    <h3> Id: {{order?.id}}</h3>
-    <h3> Mô tả: {{order?.description}} </h3>
-    <input type=number [formControl]= "formPaymentOrder.get('payAmount')" >
-    <button class="btn btn-info btn-sm" type="button" (click)="payOrder()">
-      <i class="ace-icon fa fa-money bigger-110"></i>Thanh toán</button>
+    <div class="profile-user-info profile-user-info-striped">
+      <div class="profile-info-row">
+        <div class="profile-info-name"> Id </div>
+
+        <div class="profile-info-value">
+          <span class="editable editable-click" id="username">{{order?.id}}</span>
+        </div>
+      </div>
+
+      <div class="profile-info-row">
+        <div class="profile-info-name"> Mô tả </div>
+
+        <div class="profile-info-value">
+          <span class="editable editable-click" id="country">{{order?.description}}</span>
+        </div>
+      </div>
+
+      <div class="profile-info-row">
+        <div class="profile-info-name"> Khách hàng </div>
+
+        <div class="profile-info-value">
+          <span class="editable editable-click" id="age">{{order?.customer.name}}</span>
+        </div>
+      </div>
+
+      <div class="profile-info-row">
+        <div class="profile-info-name">Ngày tạo </div>
+
+        <div class="profile-info-value">
+          <span class="editable editable-click" id="signup">{{order?.created_at}}</span>
+        </div>
+      </div>
+
+      <div class="profile-info-row">
+        <div class="profile-info-name">Thời hạn </div>
+
+        <div class="profile-info-value">
+          <span class="editable editable-click" id="login">{{order?.due_date}}</span>
+        </div>
+      </div>
+
+      <div class="profile-info-row">
+        <div class="profile-info-name"> Số tiền </div>
+
+        <div class="profile-info-value">
+          <span class="editable editable-click" id="about">{{order?.price | vnd}}</span>
+        </div>
+      </div>
+
+      <div class="profile-info-row">
+        <div class="profile-info-name"> Số tiền thanh toán</div>
+
+        <div class="profile-info-value">
+          <span class="editable editable-click" id="about">{{order?.price | vnd}}</span>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div>
+      <h3>Nhập số tiền muốn thanh toán:       <input id="inp-payment" type=number [formControl]="formPaymentOrder.get('payAmount')"></h3>
+    </div>
   </bs-modal-body>
 
   <bs-modal-footer>
-    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cancelPayment(order)">{{ 'button.cancel' | translate }}</button>
+    <button id="btn-cancel" type="button" class="btn btn-default" data-dismiss="modal" (click)="cancelPayment(order)">{{ 'button.cancel' | translate }}</button>
+    <button class="btn btn-info btn-sm" type="button" (click)="payOrder()">
+      <i class="ace-icon fa fa-money bigger-110"></i>Thanh toán</button>
   </bs-modal-footer>
 </bs-modal>
+
