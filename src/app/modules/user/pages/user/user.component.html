@@ -1,7 +1,6 @@
 <div id="main-product" class="col-md-12">
   <div>
     <app-create-user (newUser)="updateUsers($event)"></app-create-user>
-
   </div>
   <h1>{{'user.title' | translate}}</h1>
   <div>
@@ -23,9 +22,14 @@
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
-          <td><app-lock-user></app-lock-user></td>
+          <td>
+            <button class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}" (click)="openModalDelete(user)">
+              <i class="ace-icon fa fa-trash-o bigger-120"></i>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+<app-lock-user (deleteUserOutput)="handleDeleteUser($event)"></app-lock-user>

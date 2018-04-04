@@ -28,4 +28,9 @@ export class UserService {
       .post(postUrl, value)
       .map((res: any) => res.data as User);
     }
+
+  deleteUser(id: any) {
+    const deleteUrl = `${this.baseUrl}/users/${id}.json`;
+    return this.http.delete(deleteUrl);
+  }
 }

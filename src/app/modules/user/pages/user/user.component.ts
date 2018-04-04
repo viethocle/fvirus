@@ -7,6 +7,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { NgModule } from '@angular/core';
 
 import 'rxjs/add/operator/map';
+import { BsmodalService } from '@core/services/bsmodal.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-user',
@@ -22,7 +24,8 @@ export class UserComponent implements OnInit {
   getUsers$: any;
 
   constructor(
-    private usersService: UserService
+    private usersService: UserService,
+    private bsmodalService: BsmodalService
   ) { }
 
   ngOnInit() {
@@ -46,4 +49,12 @@ export class UserComponent implements OnInit {
     this.users.unshift(user);
   }
 
+  openModalDelete(user: User) {
+    this.bsmodalService.selectUserToDelete(user);
+  }
+
+  handleDeleteUser(user: User) {
+    console.log(user);
+    _.remove(this.users, o => o.id === user.id);
+  }
 }

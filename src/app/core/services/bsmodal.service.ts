@@ -1,3 +1,4 @@
+import { User } from './../../modules/user.model';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Order } from '@modules/dashboard/order';
 import { Subject } from 'rxjs/Subject';
@@ -11,9 +12,10 @@ export class BsmodalService {
   orderEdit$ = new Subject<Order>();
   paymentOrder$ = new Subject<Order>();
   cancelDrop$ = new Subject<Order>();
+  userDelete$ = new Subject<User>();
 
   constructor() { }
-
+  // order
   selectOrderToDelete(order: Order) {
     this.orderDelete$.next(order);
   }
@@ -30,4 +32,8 @@ export class BsmodalService {
     this.cancelDrop$.next(order);
   }
 
+  // user
+  selectUserToDelete(user: User) {
+    this.userDelete$.next(user);
+  }
 }

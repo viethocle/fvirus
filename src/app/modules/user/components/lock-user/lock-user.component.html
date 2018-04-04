@@ -1,4 +1,10 @@
-<button class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}" >
-  <i class="ace-icon fa fa-trash-o bigger-120"></i>
-</button>
-
+<bs-modal #modalDelete>
+  <bs-modal-header [showDismiss]="true">
+    <h2>{{ user?.id }}</h2>
+    <h4 class="modal-title">{{ 'modal.confirm_remove_order' | translate }}</h4>
+  </bs-modal-header>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalDelete.dismiss()">{{ 'button.cancel' | translate }}</button>
+    <button type="button" class="btn btn-danger" (click)="modalDelete.close()" (click)="deteteUser()">{{ 'button.delete' | translate }}</button>
+  </bs-modal-footer>
+</bs-modal>
