@@ -7,7 +7,8 @@
               'btn-success': order.status == statusOrder.ready}">
     {{ 'label.' + order.status | translate }}
     <i *ngIf="(authService.isCurrentUserAccountant && order.status != statusOrder.new && order.status != statusOrder.inprogress)
-              || (authService.isCurrentUserTechnician && order.status != statusOrder.delivered)"
+              || (authService.isCurrentUserTechnician && order.status != statusOrder.delivered)
+              || authService.isCurrentUserAdmin"
         class="ace-icon fa fa-angle-down icon-on-right"></i>
   </button>
 
