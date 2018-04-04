@@ -15,13 +15,11 @@
     <div class="col-xs-6">
       <label for="">Phạm vi ngày kết thúc:</label>
       <div class="input-daterange input-group">
-        <angular2-date-picker class="" aria-placeholder="" (onDateSelect)="onDateSelectBegin($event)" [(ngModel)]="due_date_begin" [settings]="settingsDateTimePicker">
-        </angular2-date-picker>
+        <input type="date" [(ngModel)]="due_date_begin" class="form-control" (ngModelChange)="onDateSelectBegin($event)">
         <span class="input-group-addon">
           <i class="fa fa-exchange"></i>
         </span>
-        <angular2-date-picker class="" (onDateSelect)="onDateSelectEnd($event)" [(ngModel)]="due_date_end" [settings]="settingsDateTimePicker">
-        </angular2-date-picker>
+        <input type="date" [(ngModel)]="due_date_end" class="form-control" (ngModelChange)="onDateSelectEnd($event)">
       </div>
     </div>
 

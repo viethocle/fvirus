@@ -6,7 +6,7 @@
           New
         </div> -->
         <h4>{{ 'label.new' | translate }}</h4>
-        <div  class="bag-status  column-kanban"
+        <div  class="bag-status  column-kanban" [class.zone-drag]="notDragNew"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.new"
               #bagNew>
@@ -22,7 +22,7 @@
           Inprogress
         </div> -->
         <h4>{{ 'label.inprogress' | translate }}</h4>
-        <div  class="bag-status  column-kanban"
+        <div  class="bag-status  column-kanban" [class.zone-drag]="notDragInprogress"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.inprogress"
               #bagInprogress>
@@ -34,7 +34,7 @@
 
       <div class='col-md-3 col-sm-3 kanban-column'>
         <h4>{{ 'label.ready' | translate }}</h4>
-        <div  class="bag-status column-kanban"
+        <div  class="bag-status column-kanban" [class.zone-drag]="notDragReady"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.ready"
               #bagReady>
@@ -46,7 +46,7 @@
 
       <div class='col-md-3 col-sm-3 kanban-column'>
         <h4>{{ 'label.delivered' | translate }}</h4>
-        <div  class="bag-status  column-kanban"
+        <div  class="bag-status  column-kanban" [class.zone-drag]="notDragDelivered"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.delivered"
               #bagClosed>

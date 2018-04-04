@@ -87,7 +87,6 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.formEditOrder.patchValue({
       customer_id: this.customerSelected.id
     });
-
     this.dashboardService.updateOrder(this.order.id, this.formEditOrder.value)
         .pipe(
           takeUntilDestroy(this)

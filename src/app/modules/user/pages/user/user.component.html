@@ -1,3 +1,31 @@
-<p>
-  user works!
-</p>
+<div id="main-product" class="col-md-12">
+  <div>
+    <app-create-user (newUser)="updateUsers($event)"></app-create-user>
+
+  </div>
+  <h1>{{'user.title' | translate}}</h1>
+  <div>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dynamic-table_wrapper" class="table table-striped table-bordered
+              table-hover dataTable no-footer" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>
+            <i class="ace-icon fa fa-user"></i>{{ 'table.user' | translate }}</th>
+          <th>
+            <i>@</i> {{ 'table.email' | translate }}</th>
+          <th>
+            <i class="ace-icon fa fa-id-card-o"></i> {{ 'table.role' | translate }}</th>
+          <th class="sorting_disabled"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td><app-lock-user></app-lock-user></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

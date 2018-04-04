@@ -9,7 +9,7 @@ import * as moment from 'moment';
   styleUrls: ['./color-order.component.css']
 })
 export class ColorOrderComponent implements OnInit {
-  @HostBinding('class') classes = "";
+  @HostBinding('class') classes = "card ";
   @Input('color-order')
     dueDate: string;
 
@@ -18,12 +18,13 @@ export class ColorOrderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let due_date = new Date(this.dueDate);
-    // if ( tomorrow === dateOrder) {
-    //   this.classes = 'order-recent-expire';
-    // }
+    let due_date = moment(this.dueDate);
+    let tomorrow = moment(new Date()).add(1, 'days');
+    if (tomorrow.isSame(due_date, 'day') && this.status != StatusOrder.delivered) {
+      this.classes = 'order-recent-expire card';
+    }
     if ( moment().isAfter(due_date) && this.status != StatusOrder.delivered) {
-      this.classes = 'order-expired';
+      this.classes = 'order-expired card';
     }
   }
 
