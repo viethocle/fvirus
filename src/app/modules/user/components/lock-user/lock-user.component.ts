@@ -27,10 +27,6 @@ export class LockUserComponent implements OnInit {
 
   ngOnInit() {
     this.bsmodalService.userDelete$
-        .pipe(
-          takeUntilDestroy(this),
-          tap(console.log)
-        )
         .subscribe(user => {
           if (user) {
             this.user = user;
@@ -45,7 +41,10 @@ export class LockUserComponent implements OnInit {
 
     deteteUser() {
       this.userService.deleteUser(this.user.id)
-        .subscribe( _  => this.deleteUserOutput.emit(this.user));
+        .subscribe( _  => {
+          this.user.active = !this.user.active;
+          this.deleteUserOutput.emit(this.user);
+        });
       }
 }
 

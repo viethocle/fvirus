@@ -23,8 +23,11 @@
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
           <td>
-            <button class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}" (click)="openModalDelete(user)">
+            <button *ngIf="user.active === true"  class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}" (click)="openModalDelete(user)">
               <i class="ace-icon fa fa-trash-o bigger-120"></i>
+            </button>
+            <button *ngIf="user.active === false" class="btn-success" tooltip="{{ 'tooltip.reactive' | translate }}" (click)="unDelete(user)">
+              <i class="ace-icon fa fa-undo bigger-120"></i>
             </button>
           </td>
         </tr>

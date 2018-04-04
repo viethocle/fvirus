@@ -54,7 +54,12 @@ export class UserComponent implements OnInit {
   }
 
   handleDeleteUser(user: User) {
-    console.log(user);
-    _.remove(this.users, o => o.id === user.id);
+   this.users.find(res => res.id === user.id).active = false;
+  }
+  unDelete(user: User) {
+    this.usersService.deleteUser(user.id)
+        .subscribe( _  => {
+          this.users.find(res => res.id === user.id).active = true;
+        });
   }
 }
