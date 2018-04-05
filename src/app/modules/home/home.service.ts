@@ -43,10 +43,10 @@ export class HomeService {
       .map(res => res as IOrdersDueDate);
   }
 
-  getOrderdebt(id: number): Observable<Order[]>{
+  getOrderdebt(id: number): Observable<any> {
      const url = `${this.baseUrl}/dashboards/${id}/orders_debt.json?`;
      return this.http
         .get(url)
-        .map(res => res.orders as Order[]);
+        .map(res => res as any);
   }
 }

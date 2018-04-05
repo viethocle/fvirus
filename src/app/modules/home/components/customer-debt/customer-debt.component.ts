@@ -90,9 +90,9 @@ export class CustomerDebtComponent implements OnInit {
   openCustomerDebt(customer: any) {
     this.modal.open();
     this.homeService.getOrderdebt(customer.id)
+        .map(res => res.orders)
         .subscribe(res => {
           this.orders = res;
-          console.log(this.orders);
         } );
   }
 }
