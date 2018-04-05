@@ -1,13 +1,14 @@
+import { Observable } from 'rxjs/Observable';
 import { DueDate } from './order-due-date.model';
 import { CustomerDebt } from './customer-debt.model';
 import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '@environments/environment';
-import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { Order } from '@modules/dashboard/order';
 
 
 export interface ICustomersDebt {
@@ -40,5 +41,12 @@ export class HomeService {
     return this.http
       .get(url)
       .map(res => res as IOrdersDueDate);
+  }
+
+  getOrderdebt(id: number): Observable<Order[]>{
+     const url = `${this.baseUrl}/dashboards/${id}/orders_debt.json?`;
+     return this.http
+        .get(url)
+        .map(res => res.orders as Order[]);
   }
 }

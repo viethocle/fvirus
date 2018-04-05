@@ -1,6 +1,8 @@
+import { Order } from './../../../dashboard/order';
+import { BsModalComponent } from 'ng2-bs3-modal';
 import { HomeService } from './../../home.service';
 import { CustomerDebt } from './../../customer-debt.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
@@ -13,6 +15,7 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
   providers: [HomeService]
 })
 export class CustomerDebtComponent implements OnInit {
+  @ViewChild("modal") modal: BsModalComponent;
   keyUpSearch = new Subject<string>();
 
   currentPage = 1;
@@ -20,6 +23,7 @@ export class CustomerDebtComponent implements OnInit {
   showCount = 10;
 
   customerDebt: CustomerDebt[];
+  orders: Order[];
   loading: boolean;
 
   public configPagination = {
@@ -83,5 +87,12 @@ export class CustomerDebtComponent implements OnInit {
       });
     }
 
-
+  openCustomerDebt(customer: any) {
+    this.modal.open();
+    this.homeService.getOrderdebt(customer.id)
+        .subscribe(res => {
+          this.orders = res;
+          console.log(this.orders);
+        } );
+  }
 }

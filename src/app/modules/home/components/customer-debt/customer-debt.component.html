@@ -43,7 +43,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let customer of customerDebt| paginate: configPagination">
+        <tr *ngFor="let customer of customerDebt| paginate: configPagination" (click)="openCustomerDebt(customer)">
           <td>{{customer.id}}</td>
           <td>{{customer.name}}</td>
           <td>{{customer.email}}</td>
@@ -86,3 +86,53 @@
     <!-- end pagination -->
   </div>
 </div>
+
+<bs-modal #modal [size]="'lg'">
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">
+      {{ 'customers_in_debt.ListOrders.Title' | translate }}
+    </h4>
+  </bs-modal-header>
+
+  <bs-modal-body>
+    <table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>{{ 'table.No' | translate }}</th>
+          <th>{{ 'table.description' | translate }}</th>
+          <th>{{ 'table.due-date' | translate }}</th>
+          <th>{{ 'table.createdAt' | translate }}</th>
+          <th>{{ 'table.totalAmount' | translate }}</th>
+          <th>{{ 'table.debt' | translate }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>
+            #{{ order.id }}
+          </td>
+          <td class="text-right">
+            {{ order.description }}
+          </td>
+          <td class="debt bigger-110 text-right">
+            {{ order.due_date | dateTimeVi}}
+          </td>
+          <td>
+            {{ order.created_at | dateTimeVi}}
+          </td>
+          <td class="debt bigger-110 text-right">
+            {{ order.price | vnd}}
+          </td>
+          <td class="debt bigger-110 text-right">
+            {{ order.price - order.paid_amount | vnd}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </bs-modal-body>
+
+  <bs-modal-footer>
+    <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modal.dismiss()">{{ 'customers_in_debt.ListOrders.Button.Close' | translate }}</button>
+  </bs-modal-footer>
+</bs-modal>
