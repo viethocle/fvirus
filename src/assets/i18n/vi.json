@@ -1,5 +1,23 @@
 {
   "Title": "Hello",
+  "customers_in_debt": {
+    "HeaderTable": "Danh sách khách hàng đang nợ hóa đơn",
+    "ListOrders": {
+      "Title": "Danh sách đơn hàng",
+      "THead": {
+        "No": "Order No.",
+        "TotalAmount": "Tổng tiền",
+        "Debt": "Nợ",
+        "CreatedAt": "Ngày tạo",
+        "PayDebt": "Trả nợ"
+      },
+      "Button": {
+        "Pay": "Thanh toán",
+        "Close": "Đóng"
+      }
+    }
+  },
+
   "table": {
     "No": "Order No.",
     "address": "Địa chỉ",
@@ -41,7 +59,8 @@
     "user": "Người dùng",
     "passwordConfirmation": "Xác nhận mật khẩu",
     "password": "Mật khẩu",
-    "role": "Vai trò"
+    "role": "Vai trò",
+    "debt_date": "Ngày trả nợ"
   },
   "customers": {
 		"title": "Khách hàng",

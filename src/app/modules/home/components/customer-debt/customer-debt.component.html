@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <h1>Danh sách khách hàng nợ</h1>
+  <h1>customers_in_debt.HeaderTable</h1>
   <div id="dynamic-table_wrapper_wrapper" class="dataTables_wrapper form-inline no-footer">
     <div class="row">
       <div class="col-xs-6">
@@ -101,7 +101,7 @@
           <th>{{ 'table.No' | translate }}</th>
           <th>{{ 'table.description' | translate }}</th>
           <th>{{ 'table.due-date' | translate }}</th>
-          <th>{{ 'table.createdAt' | translate }}</th>
+          <th>{{ 'table.debt_date' | translate }}</th>
           <th>{{ 'table.totalAmount' | translate }}</th>
           <th>{{ 'table.debt' | translate }}</th>
         </tr>
@@ -119,7 +119,7 @@
             {{ order.due_date | dateTimeVi}}
           </td>
           <td>
-            {{ order.created_at | dateTimeVi}}
+            {{ order.delivered_at | dateTimeVi}}
           </td>
           <td class="debt bigger-110 text-right">
             {{ order.price | vnd}}

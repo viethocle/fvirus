@@ -13,6 +13,7 @@ export interface Order {
   status: StatusOrder;
   created_at: string;
   due_date: string;
+  delivered_at: string;
   price: number;
   paidAmount?: number;
   customer?: Customer;
