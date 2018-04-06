@@ -9,6 +9,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 import { map, switchMap, tap, debounceTime } from 'rxjs/operators';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import { fromEvent } from "rxjs/observable/fromEvent";
 
 @Destroyable
@@ -29,6 +30,11 @@ export class FilterOrderComponent implements OnInit {
     format: 'dd-MM-yyyy',
     defaultOpen: false,
     closeOnSelect: true
+  }
+
+  datePickerConfig = {
+    locale: 'vi',
+    format: "DD-MM-YYYY"
   }
 
   myOptions: IMultiSelectOption[];
@@ -107,14 +113,14 @@ export class FilterOrderComponent implements OnInit {
   onDateSelectBegin(e) {
     const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
     // let date = new Date(this.due_date_begin);
-    queryParams['due_date_gte'] = e;
+    queryParams['due_date_gte'] = moment(e).toISOString();
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
   }
 
   onDateSelectEnd(e) {
     const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
     // let date = new Date(this.due_date_end);
-    queryParams['due_date_lte'] = e;
+    queryParams['due_date_lte'] = moment(e).toISOString();
     this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
   }
 
