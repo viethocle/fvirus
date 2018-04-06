@@ -5,6 +5,8 @@ import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from './pages/home/home.component';
 import { CustomerDebtComponent } from './components/customer-debt/customer-debt.component';
 import { OrderDueDateComponent } from './components/order-due-date/order-due-date.component';
+import { StatisticalComponent } from './components/statistical/statistical.component';
+import { ChartsModule } from 'ng2-charts';
 
 export const HomeRoutes: Routes = [
   {
@@ -18,8 +20,9 @@ export const HomeRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
+    ChartsModule,
     RouterModule.forChild(HomeRoutes)
   ],
-  declarations: [HomeComponent, CustomerDebtComponent, OrderDueDateComponent]
+  declarations: [HomeComponent, CustomerDebtComponent, OrderDueDateComponent, StatisticalComponent]
 })
 export class HomeModule { }
