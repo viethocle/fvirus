@@ -16,7 +16,9 @@
       <div [class.has-error]="formEditOrder.get('price').errors && (formEditOrder.get('price').dirty || formEditOrder.get('price').touched)">
         <label for="new-price" class="control-label">{{ 'orders.price' | translate }}:</label>
         <div class="input-group">
-          <input class="form-control" id="new-price" type="number" [formControl]="formEditOrder.get('price')">
+          <input class="form-control right-align" id="new-price" type="text" 
+                [formControl]="formEditOrder.get('price')" [textMask]="priceMask"
+                numeric>
           <span class="input-group-addon">
             <i class="ace-icon fa fa-money"></i>
           </span>
@@ -26,7 +28,7 @@
       <div>
         <label for="paid_amount" class="control-label">Paid amount</label>
         <div class="input-group">
-          <input type="text" class="form-control" id="paid_amount" [value]="order?.paid_amount" readonly=true >
+          <input type="text" class="form-control right-align" id="paid_amount" [value]="order?.paid_amount" readonly=true >
           <span class="input-group-addon">
             <i class="ace-icon fa fa-money"></i>
           </span>
