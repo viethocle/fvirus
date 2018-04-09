@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InputFieldComponent, ErrorLabelComponent, ErrorMessagesPipe } from './components/';
 import { ClickOutsideModule } from "ng-click-outside";
-import { DragulaModule } from "ng2-dragula";
 import { BsModalModule } from "ng2-bs3-modal";
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -73,7 +72,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormsModule,
     ReactiveFormsModule,
     ClickOutsideModule,
-    DragulaModule,
     InputFieldComponent,
     ErrorLabelComponent,
     BsModalModule,
