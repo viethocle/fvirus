@@ -23,7 +23,7 @@
       <!-- choose manager -->
       <div class="radio">
         <label>
-          <input [formControl]="formEdit.get('role')" type="radio" class="ace" name="form-field-radio" [value]="'admin'">
+          <input [formControl]="formEdit.get('role')" type="radio" class="ace" name="edit-user-radio" [value]="'admin'">
           <span class="lbl">
             {{ 'user-management.manager' | translate }}
           </span>
@@ -32,7 +32,7 @@
       <!-- Choose staff -->
       <div class="radio">
         <label>
-          <input [formControl]="formEdit.get('role')" type="radio" class="ace" name="form-field-radio" [value]="'technician'">
+          <input [formControl]="formEdit.get('role')" type="radio" class="ace" name="edit-user-radio" [value]="'technician'">
           <span class="lbl">
             {{ 'user-management.tech' | translate }}
           </span>
@@ -41,7 +41,7 @@
       <!-- Choose staff -->
       <div class="radio">
         <label>
-          <input [formControl]="formEdit.get('role')" type="radio" class="ace" name="form-field-radio" [value]="'accountant'">
+          <input [formControl]="formEdit.get('role')" type="radio" class="ace" name="edit-user-radio" [value]="'accountant'">
           <span class="lbl">
             {{ 'user-management.account' | translate }}
           </span>
@@ -52,6 +52,6 @@
 
   <bs-modal-footer>
     <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalEdit.dismiss()">{{ 'button.cancel' | translate }}</button>
-    <button id="btn-create-user" class="btn btn-primary add-product" [disabled]="formEdit.invalid">{{ 'button.update' | translate }}</button>
+    <button id="btn-create-user" class="btn btn-primary add-product" [disabled]="formEdit.invalid" (click)="updateUser(formEdit.value)">{{ 'button.update' | translate }}</button>
   </bs-modal-footer>
 </bs-modal>

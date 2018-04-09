@@ -60,6 +60,11 @@ export class UserComponent implements OnInit {
   handleDeleteUser(user: User) {
    this.users.find(res => res.id === user.id).active = false;
   }
+
+  handleUpdateUser(user: User) {
+    _.assign(this.users.find(t => t.id === user.id), user);
+  }
+
   unDelete(user: User) {
     this.usersService.deleteUser(user.id)
         .subscribe( _  => {

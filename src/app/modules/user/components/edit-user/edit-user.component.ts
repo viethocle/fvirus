@@ -16,6 +16,7 @@ import { RoleUser } from '@modules/auth/auth.service';
 })
 export class EditUserComponent implements OnInit {
   @ViewChild('modalEdit') modalEdit: BsModalComponent;
+  @Output() UpdateUserOutput = new EventEmitter<User>(); 
   user: User;
   formEdit: FormGroup;
 
@@ -28,6 +29,7 @@ export class EditUserComponent implements OnInit {
     this.bsmodalService.userEdit$
         .subscribe(user => {
           this.modalEdit.open(); 
+          this.user = user;
           this.setValueForm(user);
         });
 
@@ -47,6 +49,16 @@ export class EditUserComponent implements OnInit {
       email: user.email, 
       role: user.role
     });
+  }
+
+  updateUser(value) {
+   
+    value = _.pickBy(value);
+    this.userService.updateUser(this.user.id, value)
+        .subscribe(user => {
+          this.modalEdit.close();
+          this.UpdateUserOutput.emit(user);
+        })
   }
 
 
