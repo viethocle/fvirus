@@ -6,7 +6,7 @@
 
 <bs-modal #modalCreate [size]="'lg'" >
   <bs-modal-header [showDismiss]="true">
-    <h4 class="modal-title">Tao order</h4>
+    <h4 class="modal-title">{{ 'orders.create-order' | translate }}</h4>
   </bs-modal-header>
 
   <bs-modal-body class="container-fluid">
@@ -22,7 +22,8 @@
       <div [class.has-error]="formNewOrder.get('price').errors && (formNewOrder.get('price').dirty || formNewOrder.get('price').touched)">
         <label for="new-price" class="control-label">{{ 'orders.price' | translate }}:</label>
         <div class="input-group">
-          <input class="form-control" id="new-price" type="number" [formControl]="formNewOrder.get('price')">
+          <input class="form-control right-align" id="new-price" type="text" [formControl]="formNewOrder.get('price')"
+                 [textMask]="priceMask" numeric >
           <span class="input-group-addon">
             <i class="ace-icon fa fa-money"></i>
           </span>

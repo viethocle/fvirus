@@ -73,6 +73,7 @@
   },
 
   "orders": {
+    "create-order": "Tạo đơn hàng mới",
     "edit-order": "Chỉnh sửa đơn hàng",
     "description": "Mô tả",
     "due-date": "Thời hạn",
