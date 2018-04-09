@@ -23,6 +23,8 @@ import { CustomerService } from "@modules/customer/customer.service";
 import { PerfectScrollbarComponent } from "ngx-perfect-scrollbar";
 import * as _ from 'lodash';
 import { FlyInOut } from '../../flyInOut.animate';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+
 
 @Component({
   selector: 'app-create-order',
@@ -44,6 +46,14 @@ export class CreateOrderComponent implements OnInit {
   termCustomer = "";
   currentFocusIndex: number = -1;
   customerSelected: Customer;
+  priceMask = Object.freeze({
+    mask: createNumberMask({
+      allowDecimal: false,
+      integerLimit: 10,
+      prefix: '',
+      thousandsSeparatorSymbol: ','
+    })
+  });
 
   constructor(
     private formBuilder: FormBuilder,

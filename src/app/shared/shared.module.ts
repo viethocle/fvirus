@@ -28,6 +28,8 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { SortableColumnComponent } from './components/sortable-column/sortable-column.component';
 import { ColorOrderComponent } from './components/color-order/color-order.component';
 import { MyDatePickerModule } from 'mydatepicker';
+import { NumericDirective } from './directives/numeric.directive';
+import { TextMaskModule } from 'angular2-text-mask'
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -93,7 +95,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MultiselectDropdownModule,
     SortableColumnComponent,
     ColorOrderComponent,
-    MyDatePickerModule
+    MyDatePickerModule,
+    TextMaskModule
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },

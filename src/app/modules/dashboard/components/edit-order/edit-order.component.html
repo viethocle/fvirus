@@ -1,7 +1,6 @@
-
 <bs-modal #modalEdit [size]="'lg'" [keyboard]="false">
   <bs-modal-header [showDismiss]="true">
-    <h4 class="modal-title">Tao order</h4>
+    <h4 class="modal-title"> {{ 'orders.edit-order' | translate }}</h4>
   </bs-modal-header>
 
   <bs-modal-body class="container-fluid">
@@ -9,7 +8,7 @@
     <div class="col-md-6">
       <!-- description -->
       <div [class.has-error]="formEditOrder.get('description').errors && (formEditOrder.get('description').dirty || formEditOrder.get('description').touched)">
-        <label for="new-description" class="control-label">Description</label>
+        <label for="new-description" class="control-label">{{ 'orders.description' | translate }}</label>
         <textarea class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formEditOrder.get('description')"></textarea>
 
       </div>
@@ -17,7 +16,19 @@
       <div [class.has-error]="formEditOrder.get('price').errors && (formEditOrder.get('price').dirty || formEditOrder.get('price').touched)">
         <label for="new-price" class="control-label">{{ 'orders.price' | translate }}:</label>
         <div class="input-group">
-          <input class="form-control" id="new-price" type="number" [formControl]="formEditOrder.get('price')">
+          <input class="form-control right-align" id="new-price" type="text" 
+                [formControl]="formEditOrder.get('price')" [textMask]="priceMask"
+                numeric>
+          <span class="input-group-addon">
+            <i class="ace-icon fa fa-money"></i>
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <label for="paid_amount" class="control-label">{{ 'orders.paid_amount' | translate }}</label>
+        <div class="input-group">
+          <input type="text" class="form-control right-align" id="paid_amount" [value]="order?.paid_amount" readonly=true [textMask]="priceMask">
           <span class="input-group-addon">
             <i class="ace-icon fa fa-money"></i>
           </span>
@@ -25,9 +36,9 @@
       </div>
 
       <div class="input-wrapper">
-        <label for="datetime-picker" class="control-label">Due date:</label>
+        <label for="datetime-picker" class="control-label">{{ 'orders.due-date' | translate }}:</label>
         <input id="datetime-picker" class="form-control" [formControl]="formEditOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
-          [owlDateTime]="dtPicker2" >
+          [owlDateTime]="dtPicker2">
         <owl-date-time #dtPicker2 [pickerType]="'calendar'" [startAt]="startAt"></owl-date-time>
       </div>
 
@@ -35,7 +46,7 @@
 
     <div class="col-md-6">
       <label for="" class="control-label">
-        Customer:
+         {{ 'customers.title' | translate }}:
       </label>
 
       <div class="input-group">
