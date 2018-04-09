@@ -73,9 +73,11 @@
   },
 
   "orders": {
+    "edit-order": "Chỉnh sửa đơn hàng",
     "description": "Mô tả",
     "due-date": "Thời hạn",
-    "price": "Giá cả"
+    "price": "Giá trị đơn hàng",
+    "paid_amount": "Số tiền đã thanh toán"
   },
 
   "sidebar": {
