@@ -18,6 +18,7 @@ import { StatusComponent } from './components/status/status.component';
 import { FilterOrderComponent } from './components/filter-order/filter-order.component';
 
 import { PaymentOrderComponent } from './components/payment-order/payment-order.component';
+import { NumericDirective } from '@shared/directives/numeric.directive';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,6 +29,7 @@ import { PaymentOrderComponent } from './components/payment-order/payment-order.
   ],
   declarations: [
     MatchHeightDirective,
+    NumericDirective,
     CreateOrderComponent,
     KanbanComponent,
     DashboardPage,

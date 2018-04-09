@@ -58,8 +58,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TruncateDescriptionPipe,
     VndPipe,
     SortableColumnComponent,
-    ColorOrderComponent,
-    NumericDirective
+    ColorOrderComponent
   ],
   imports: [
     FormsModule,
