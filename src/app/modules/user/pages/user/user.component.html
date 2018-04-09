@@ -21,7 +21,7 @@
         <tr *ngFor="let user of users">
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
+          <td>{{ 'user-management.' + user.role | translate }}</td>
           <td>
             <button *ngIf="user.active === true"  class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}" (click)="openModalDelete(user)">
               <i class="ace-icon fa fa-trash-o bigger-120"></i>
