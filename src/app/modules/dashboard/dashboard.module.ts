@@ -19,11 +19,13 @@ import { FilterOrderComponent } from './components/filter-order/filter-order.com
 
 import { PaymentOrderComponent } from './components/payment-order/payment-order.component';
 import { NumericDirective } from '@shared/directives/numeric.directive';
+import { DragulaModule } from 'ng2-dragula';
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(DashboardRoutes),
+    DragulaModule,
     AngularMultiSelectModule,
     DpDatePickerModule
   ],

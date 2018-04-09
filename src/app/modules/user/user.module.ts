@@ -6,6 +6,7 @@ import { UserComponent } from './pages/user/user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { LockUserComponent } from './components/lock-user/lock-user.component';
 import { DataTablesModule } from 'angular-datatables';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 export const UserRoutes: Routes = [
   {
@@ -21,6 +22,6 @@ export const UserRoutes: Routes = [
     RouterModule.forChild(UserRoutes),
     DataTablesModule
   ],
-  declarations: [UserComponent, CreateUserComponent, LockUserComponent]
+  declarations: [UserComponent, CreateUserComponent, LockUserComponent, EditUserComponent]
 })
 export class UserModule { }

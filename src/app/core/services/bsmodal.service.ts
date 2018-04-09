@@ -13,6 +13,7 @@ export class BsmodalService {
   paymentOrder$ = new Subject<Order>();
   cancelDrop$ = new Subject<Order>();
   userDelete$ = new Subject<User>();
+  userEdit$ = new Subject<User>();
 
   constructor() { }
   // order
@@ -35,5 +36,9 @@ export class BsmodalService {
   // user
   selectUserToDelete(user: User) {
     this.userDelete$.next(user);
+  }
+
+  selectUserToEdit(user: User) {
+    this.userEdit$.next(user);
   }
 }

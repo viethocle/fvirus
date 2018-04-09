@@ -1,0 +1,57 @@
+<bs-modal #modalEdit>
+   <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">{{ 'user-management.modal-update-title' | translate}}</h4>
+  </bs-modal-header>
+
+  <bs-modal-body>
+    
+    <app-input-field [attribute]="'table.name' | translate" [control]="formEdit.get('name')">
+    </app-input-field>
+    
+    <app-input-field [attribute]="'table.email' | translate" [control]="formEdit.get('email')">
+    </app-input-field>
+
+    <app-input-field [attribute]="'table.password_can_slack' | translate" [control]="formEdit.get('password')" [type]="'password'">
+    </app-input-field>
+    
+    <app-input-field [attribute]="'table.passwordConfirmation' | translate" [control]="formEdit.get('password_confirmation')" [type]="'password'">
+    </app-input-field>
+    <app-error-label [control]="formEdit"></app-error-label>
+
+    <div class="control-group">
+      <label for="">{{ 'table.role' | translate }}</label>
+      <!-- choose manager -->
+      <div class="radio">
+        <label>
+          <input [formControl]="formEdit.get('role')" type="radio" class="ace" name="edit-user-radio" [value]="'admin'">
+          <span class="lbl">
+            {{ 'user-management.manager' | translate }}
+          </span>
+        </label>
+      </div>
+      <!-- Choose staff -->
+      <div class="radio">
+        <label>
+          <input [formControl]="formEdit.get('role')" type="radio" class="ace" name="edit-user-radio" [value]="'technician'">
+          <span class="lbl">
+            {{ 'user-management.tech' | translate }}
+          </span>
+        </label>
+      </div>
+      <!-- Choose staff -->
+      <div class="radio">
+        <label>
+          <input [formControl]="formEdit.get('role')" type="radio" class="ace" name="edit-user-radio" [value]="'accountant'">
+          <span class="lbl">
+            {{ 'user-management.account' | translate }}
+          </span>
+        </label>
+      </div>
+    </div>
+  </bs-modal-body>
+
+  <bs-modal-footer>
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalEdit.dismiss()">{{ 'button.cancel' | translate }}</button>
+    <button id="btn-create-user" class="btn btn-primary add-product" [disabled]="formEdit.invalid" (click)="updateUser(formEdit.value)">{{ 'button.update' | translate }}</button>
+  </bs-modal-footer>
+</bs-modal>
