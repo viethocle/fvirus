@@ -21,7 +21,23 @@
         <tr *ngFor="let user of users">
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ 'user-management.' + user.role | translate }}</td>
+          <td>
+            <ng-container *ngIf="user.role == roleUser.admin">
+              <span class="label label-info arrowed-in arrowed-in-right">
+                {{ 'user-management.' + user.role | translate }}
+              </span>
+            </ng-container>
+            <ng-container *ngIf="user.role == roleUser.technician">
+              <span class="label label-yellow arrowed-in">
+                {{ 'user-management.' + user.role | translate }}
+              </span>
+            </ng-container>
+            <ng-container *ngIf="user.role == roleUser.accountant">
+              <span class="label label-success arrowed-in">
+                {{ 'user-management.' + user.role | translate }}
+              </span>
+            </ng-container>
+          </td>
           <td>
             <button class="btn btn-xs btn-info" tooltip="{{ 'tooltip.edit' | translate }}" (click)="openModalEdit(user)">
               <i class="ace-icon fa fa-pencil bigger-120"></i>
