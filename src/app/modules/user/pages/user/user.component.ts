@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { BsmodalService } from '@core/services/bsmodal.service';
 import * as _ from 'lodash';
+import { RoleUser } from '@modules/auth/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -22,6 +23,7 @@ export class UserComponent implements OnInit {
   users: User[] = [];
   loading: boolean;
   getUsers$: any;
+  roleUser = RoleUser;
 
   constructor(
     private usersService: UserService,
@@ -53,9 +55,18 @@ export class UserComponent implements OnInit {
     this.bsmodalService.selectUserToDelete(user);
   }
 
+  openModalEdit(user: User) {
+    this.bsmodalService.selectUserToEdit(user);
+  }
+
   handleDeleteUser(user: User) {
    this.users.find(res => res.id === user.id).active = false;
   }
+
+  handleUpdateUser(user: User) {
+    _.assign(this.users.find(t => t.id === user.id), user);
+  }
+
   unDelete(user: User) {
     this.usersService.deleteUser(user.id)
         .subscribe( _  => {

@@ -29,6 +29,14 @@ export class UserService {
       .map((res: any) => res.data as User);
     }
 
+
+  updateUser(id, value: any): Observable<User> {
+    const putUrl = `${this.baseUrl}/users/${id}.json`;
+    return this.http
+               .put(putUrl, value)
+               .map((res: any) => res.data as User);
+  }
+
   deleteUser(id: any) {
     const deleteUrl = `${this.baseUrl}/users/${id}.json`;
     return this.http.delete(deleteUrl);

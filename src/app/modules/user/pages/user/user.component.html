@@ -21,14 +21,33 @@
         <tr *ngFor="let user of users">
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ 'user-management.' + user.role | translate }}</td>
           <td>
+            <ng-container *ngIf="user.role == roleUser.admin">
+              <span class="label label-info arrowed-in arrowed-in-right">
+                {{ 'user-management.' + user.role | translate }}
+              </span>
+            </ng-container>
+            <ng-container *ngIf="user.role == roleUser.technician">
+              <span class="label label-yellow arrowed-in">
+                {{ 'user-management.' + user.role | translate }}
+              </span>
+            </ng-container>
+            <ng-container *ngIf="user.role == roleUser.accountant">
+              <span class="label label-success arrowed-in">
+                {{ 'user-management.' + user.role | translate }}
+              </span>
+            </ng-container>
+          </td>
+          <td>
+            <button class="btn btn-xs btn-info" tooltip="{{ 'tooltip.edit' | translate }}" (click)="openModalEdit(user)">
+              <i class="ace-icon fa fa-pencil bigger-120"></i>
+            </button>
             <button *ngIf="user.active === true"  class="btn btn-xs btn-danger" tooltip="{{ 'tooltip.delete' | translate }}" (click)="openModalDelete(user)">
               <i class="ace-icon fa fa-trash-o bigger-120"></i>
             </button>
-            <button *ngIf="user.active === false" class="btn-success" tooltip="{{ 'tooltip.reactive' | translate }}" (click)="unDelete(user)">
+            <!-- <button *ngIf="user.active === false" class="btn-success" tooltip="{{ 'tooltip.reactive' | translate }}" (click)="unDelete(user)">
               <i class="ace-icon fa fa-undo bigger-120"></i>
-            </button>
+            </button> -->
           </td>
         </tr>
       </tbody>
@@ -36,3 +55,4 @@
   </div>
 </div>
 <app-lock-user (deleteUserOutput)="handleDeleteUser($event)"></app-lock-user>
+<app-edit-user (UpdateUserOutput)="handleUpdateUser($event)"></app-edit-user>

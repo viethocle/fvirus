@@ -58,6 +58,7 @@
     "user": "Người dùng",
     "passwordConfirmation": "Xác nhận mật khẩu",
     "password": "Mật khẩu",
+    "password_can_slack": "Mật khẩu ( bỏ trống nếu không thay đổi )",
     "role": "Vai trò",
     "debt_date": "Ngày trả nợ"
   },
@@ -73,9 +74,12 @@
   },
 
   "orders": {
+    "create-order": "Tạo đơn hàng mới",
+    "edit-order": "Chỉnh sửa đơn hàng",
     "description": "Mô tả",
     "due-date": "Thời hạn",
-    "price": "Giá cả"
+    "price": "Giá trị đơn hàng",
+    "paid_amount": "Số tiền đã thanh toán"
   },
 
   "sidebar": {

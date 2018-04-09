@@ -29,3 +29,7 @@
 .order-expired {
     background-color: bisque !important;
 }
+
+.right-align {
+  text-align: right;
+}

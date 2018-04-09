@@ -76,10 +76,10 @@ export class FilterOrderComponent implements OnInit {
 
   initDropDownStatus() {
     this.dropdownList = [
-      { id: StatusOrder.new, itemName: StatusOrder.new },
-      { id: StatusOrder.inprogress, itemName: StatusOrder.inprogress },
-      { id: StatusOrder.ready, itemName: StatusOrder.ready },
-      { id: StatusOrder.delivered, itemName: StatusOrder.delivered },
+      { id: StatusOrder.new, itemName: "Mới" },
+      { id: StatusOrder.inprogress, itemName: "Trong tiến trình" },
+      { id: StatusOrder.ready, itemName: "Sẵn sàng" },
+      { id: StatusOrder.delivered, itemName: "Đã giao hàng" },
     ]
 
     this.dropdownSettings = {

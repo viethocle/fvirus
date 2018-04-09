@@ -23,6 +23,7 @@ import { FlyInOut } from '../../flyInOut.animate';
 import * as _ from 'lodash';
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
 import { BsmodalService } from '@core/services/bsmodal.service';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 
 @Component({
@@ -47,6 +48,15 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   termCustomer = "";
   currentFocusIndex: number = -1;
   customerSelected: Customer;
+
+  priceMask = Object.freeze({
+    mask: createNumberMask({
+      allowDecimal: false,
+      integerLimit: 10,
+      prefix: '',
+      thousandsSeparatorSymbol: ','
+    })
+  });
 
 
   constructor(

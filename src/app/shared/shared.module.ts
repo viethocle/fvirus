@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InputFieldComponent, ErrorLabelComponent, ErrorMessagesPipe } from './components/';
 import { ClickOutsideModule } from "ng-click-outside";
-import { DragulaModule } from "ng2-dragula";
 import { BsModalModule } from "ng2-bs3-modal";
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -28,6 +27,8 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { SortableColumnComponent } from './components/sortable-column/sortable-column.component';
 import { ColorOrderComponent } from './components/color-order/color-order.component';
 import { MyDatePickerModule } from 'mydatepicker';
+import { NumericDirective } from './directives/numeric.directive';
+import { TextMaskModule } from 'angular2-text-mask'
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -71,7 +72,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormsModule,
     ReactiveFormsModule,
     ClickOutsideModule,
-    DragulaModule,
     InputFieldComponent,
     ErrorLabelComponent,
     BsModalModule,
@@ -93,7 +93,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MultiselectDropdownModule,
     SortableColumnComponent,
     ColorOrderComponent,
-    MyDatePickerModule
+    MyDatePickerModule,
+    TextMaskModule
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },
