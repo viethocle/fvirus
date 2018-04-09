@@ -53,6 +53,10 @@ export class UserComponent implements OnInit {
     this.bsmodalService.selectUserToDelete(user);
   }
 
+  openModalEdit(user: User) {
+    this.bsmodalService.selectUserToEdit(user);
+  }
+
   handleDeleteUser(user: User) {
    this.users.find(res => res.id === user.id).active = false;
   }

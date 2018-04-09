@@ -58,6 +58,7 @@
     "user": "Người dùng",
     "passwordConfirmation": "Xác nhận mật khẩu",
     "password": "Mật khẩu",
+    "password_can_slack": "Mật khẩu ( bỏ trống nếu không thay đổi )",
     "role": "Vai trò",
     "debt_date": "Ngày trả nợ"
   },
