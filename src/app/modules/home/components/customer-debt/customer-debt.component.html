@@ -91,6 +91,7 @@
   <bs-modal-header [showDismiss]="true">
     <h4 class="modal-title">
       {{ 'customers_in_debt.ListOrders.Title' | translate }}
+      <a href="mailto:{{currentCustomer.email}}">{{currentCustomer.name}}</a>
     </h4>
   </bs-modal-header>
 

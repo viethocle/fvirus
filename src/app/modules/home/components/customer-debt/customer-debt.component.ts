@@ -18,6 +18,7 @@ export class CustomerDebtComponent implements OnInit {
   @ViewChild("modal") modal: BsModalComponent;
   keyUpSearch = new Subject<string>();
 
+  currentCustomer: any;
   currentPage = 1;
   currentSearch = "";
   showCount = 10;
@@ -88,6 +89,7 @@ export class CustomerDebtComponent implements OnInit {
     }
 
   openCustomerDebt(customer: any) {
+    this.currentCustomer = customer;
     this.modal.open();
     this.homeService.getOrderdebt(customer.id)
         .map(res => res.orders)

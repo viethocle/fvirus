@@ -3,7 +3,7 @@
   "customers_in_debt": {
     "HeaderTable": "Danh sách khách hàng đang nợ hóa đơn",
     "ListOrders": {
-      "Title": "Danh sách đơn hàng",
+      "Title": "Danh sách đơn hàng nợ của: ",
       "THead": {
         "No": "Order No.",
         "TotalAmount": "Tổng tiền",
