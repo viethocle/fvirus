@@ -15,6 +15,6 @@ export interface Order {
   due_date: string;
   delivered_at: string;
   price: number;
-  paidAmount?: number;
+  paid_amount?: number;
   customer?: Customer;
 }

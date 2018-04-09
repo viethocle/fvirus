@@ -1,4 +1,3 @@
-
 <bs-modal #modalEdit [size]="'lg'" [keyboard]="false">
   <bs-modal-header [showDismiss]="true">
     <h4 class="modal-title">Tao order</h4>
@@ -24,10 +23,20 @@
         </div>
       </div>
 
+      <div>
+        <label for="paid_amount" class="control-label">Paid amount</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="paid_amount" [value]="order?.paid_amount" readonly=true >
+          <span class="input-group-addon">
+            <i class="ace-icon fa fa-money"></i>
+          </span>
+        </div>
+      </div>
+
       <div class="input-wrapper">
         <label for="datetime-picker" class="control-label">Due date:</label>
         <input id="datetime-picker" class="form-control" [formControl]="formEditOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
-          [owlDateTime]="dtPicker2" >
+          [owlDateTime]="dtPicker2">
         <owl-date-time #dtPicker2 [pickerType]="'calendar'" [startAt]="startAt"></owl-date-time>
       </div>
 
