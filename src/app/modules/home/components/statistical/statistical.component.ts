@@ -1,6 +1,9 @@
-import { HomeService } from './../../home.service';
-import { Component, OnInit } from '@angular/core';
-
+import { HomeService } from '@modules/home/home.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subject } from "rxjs/Subject";
+import { Observable } from "rxjs/Observable";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-statistical',
@@ -8,6 +11,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./statistical.component.css']
 })
 export class StatisticalComponent implements OnInit {
+  day: any;
+  week: any;
+  month: any;
+  Labels: any;
+  Data: any;
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true,
@@ -23,40 +31,41 @@ export class StatisticalComponent implements OnInit {
       borderWidth: 2,
     }
   ];
-  public colors1 = [
-    {
-      backgroundColor: '#00FF00',
-      borderWidth: 2,
-    }
-  ];
-  public colors2 = [
-    {
-      backgroundColor: '#FF3300',
-      borderWidth: 2,
-    }
-  ];
-  public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+
+  public barChartLabels: string[] = [];
+  public barChartLabels1: string[] = [];
+  public barChartLabels2: string[] = [];
   public barChartType: string = 'bar';
   public barChartLegend: boolean = true;
 
-  public barChartData: any[] = [
-    {data: [65, 34, 80, 81, 56, 55, 40], label: 'Doanh thu theo ngày'}
-  ]
-
-  public barChartData1: any[] = [
-    {data: [65, 59, 80, 81, 56, 33, 40], label: 'Doanh thu theo tuần'}
-  ];
-
-  public barChartData2: any[] = [
-    {data: [24, 51, 45, 81, 56, 56, 40], label: 'Doanh thu theo tháng'}
-  ];
-
+  public barChartData: any[] = [];
+  public barChartData1: any[] = [];
+  public barChartData2: any[] = [];
 
   constructor(
      private homeService: HomeService
   ) {}
 
   ngOnInit() {
-  }
+    this.homeService.getRevenue()
+    .subscribe(res => {
+      this.day = res["0"].per_day;
+      this.barChartLabels = this.day.map(day => moment(day.day).format('DD-MM'));
+      this.barChartData = [
+      {data: this.day.map(day => day.total), label: 'Doanh thu theo ngày'}
+      ];
 
+      this.week = res["1"].per_week;
+      this.barChartLabels1 = this.week.map(week => moment(week.week).format('DD-MM'));
+      this.barChartData1 = [
+      {data: this.week.map(week => week.total), label: 'Doanh thu theo tuần'}
+      ];
+
+      this.month = res["2"].per_month;
+      this.barChartLabels2 = this.month.map(month => moment(month.month).format('MM-YY') );
+      this.barChartData2 = [
+      {data: this.month.map(month => month.total), label: 'Doanh thu theo tháng'}
+      ];
+    });
+  }
 }

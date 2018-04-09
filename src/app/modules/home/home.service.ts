@@ -49,4 +49,11 @@ export class HomeService {
         .get(url)
         .map(res => res as any);
   }
+
+  getRevenue(): Observable<any> {
+     const url = `${this.baseUrl}/revenue.json?`;
+     return this.http
+        .get(url)
+        .map(res => res as any);
+  }
 }

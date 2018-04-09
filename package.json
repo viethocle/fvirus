@@ -42,7 +42,7 @@
     "jquery": "^3.3.1",
     "ladda": "^1.0.5",
     "lodash": "^4.17.4",
-    "moment": "^2.21.0",
+    "moment": "^2.22.0",
     "mydatepicker": "^2.6.3",
     "ng-click-outside": "^3.2.0",
     "ng-loading-bar": "^0.0.10",

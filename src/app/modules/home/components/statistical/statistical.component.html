@@ -19,28 +19,35 @@
     </div>
   </div>
 
-  <div class="widget-body container col-md-8">
+  <div class="widget-body container col-md-8" >
     <div class="widget-main padding-4">
       <div class="tab-content padding-8">
         <div id="task-tab" class="tab-pane active ">
           <div style="display: block">
-            <canvas baseChart  [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-              [chartType]="barChartType"  [colors]="colors" ></canvas>
+            <div *ngIf="barChartLabels.length > 0">
+              <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                [chartType]="barChartType" [colors]="colors"></canvas>
+            </div>
           </div>
         </div>
 
         <div id="member-tab" class="tab-pane">
           <div style="display: block">
-            <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-              [chartType]="barChartType"  [colors]="colors1" ></canvas>
+            <div *ngIf="barChartLabels1.length > 0">
+              <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend"
+                [chartType]="barChartType" [colors]="colors"></canvas>
+            </div>
+
           </div>
         </div>
         <!-- /.#member-tab -->
 
         <div id="comment-tab" class="tab-pane">
           <div style="display: block">
-            <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-              [chartType]="barChartType"  [colors]="colors2" ></canvas>
+            <div *ngIf="barChartLabels2.length > 0">
+              <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend"
+                [chartType]="barChartType" [colors]="colors"></canvas>
+            </div>
           </div>
         </div>
       </div>
