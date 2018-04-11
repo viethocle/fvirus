@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs/Observable';
-import { Observable } from 'rxjs/Observable';
 import { DueDate } from './order-due-date.model';
 import { CustomerDebt } from './customer-debt.model';
 import { Subject } from 'rxjs/Subject';
