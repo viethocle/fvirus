@@ -56,4 +56,10 @@ export class HomeService {
         .get(url)
         .map(res => res as any);
   }
+
+  sendPaymentDebt(customer_id, payment): Observable<CustomerDebt> {
+    const url = `${this.baseUrl}/customers/${customer_id}/payTotalDebt`;
+    return this.http.put(url, { payment: payment})
+                    .map((res: any) => res.customer as CustomerDebt);
+  }
 }

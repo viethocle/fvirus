@@ -23,6 +23,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 import { TokenInterceptor } from './modules/auth/token.interceptor';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { NumericDirective } from '@shared/directives/numeric.directive';
 
 
 export function HttpLoaderFactory(http: HttpClient) {

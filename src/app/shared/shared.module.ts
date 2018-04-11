@@ -58,7 +58,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TruncateDescriptionPipe,
     VndPipe,
     SortableColumnComponent,
-    ColorOrderComponent
+    ColorOrderComponent,
+    NumericDirective
   ],
   imports: [
     FormsModule,
@@ -95,7 +96,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SortableColumnComponent,
     ColorOrderComponent,
     MyDatePickerModule,
-    TextMaskModule
+    TextMaskModule,
+    NumericDirective
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },
