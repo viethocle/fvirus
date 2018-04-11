@@ -1,3 +1,4 @@
+import { AdminRouteGuard } from './guard/admin-route.guard';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { SortTableService } from './services/sort-table.service';
 import { Ng2SearchPipe } from 'ng2-search-filter';
@@ -10,7 +11,7 @@ import { DragulaService } from 'ng2-dragula';
 import { AuthService } from '@modules/auth/auth.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {
-  ManagementGuard,
+  AdminRouteGuard,
   LoggedInGuard,
   LogoutGuard
 } from './guard/';
@@ -27,7 +28,7 @@ import { BsmodalService } from './services/bsmodal.service';
     DashboardService,
     AuthService,
     LoggedInGuard,
-    ManagementGuard,
+    AdminRouteGuard,
     LogoutGuard,
     CustomerService,
     Ng2SearchPipe,

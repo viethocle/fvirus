@@ -1,3 +1,3 @@
 export { LoggedInGuard } from './logged-in.guard';
-export { ManagementGuard } from './management.guard';
 export { LogoutGuard } from './logout.guard';
+export { AdminRouteGuard } from './admin-route.guard';

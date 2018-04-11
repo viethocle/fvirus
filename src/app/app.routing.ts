@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {
-  ManagementGuard,
+  AdminRouteGuard,
   LoggedInGuard,
   LogoutGuard
 } from './core/guard/';
@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: "homepage",
     loadChildren: "./modules/home/home.module#HomeModule",
-    canLoad: [LoggedInGuard]
+    canLoad: [LoggedInGuard, AdminRouteGuard]
   },
   {
     path: "users",
@@ -33,7 +33,8 @@ const routes: Routes = [
   },
   {
     path: "customers",
-    loadChildren: "./modules/customer/customer.module#CustomerModule"
+    loadChildren: "./modules/customer/customer.module#CustomerModule",
+    canLoad: [LoggedInGuard]
   }
 ];
 

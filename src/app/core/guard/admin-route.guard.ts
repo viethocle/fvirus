@@ -12,22 +12,19 @@ import * as _ from 'lodash';
 import { AuthService } from '@modules/auth/auth.service';
 
 @Injectable()
-export class ManagementGuard implements CanActivate, CanLoad {
+export class AdminRouteGuard implements CanActivate, CanLoad {
 
   constructor(
     private router: Router,
-    private authTokenService: Angular2TokenService,
     private authService: AuthService
   ) { }
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authTokenService.validateToken().map(() => {
-      if (_.get(this.authTokenService.currentUserData, 'role') === 'manager') {
-        return true;
-      }
-      this.router.navigate(['/new-order']);
-      return false;
-    });
+    if (this.authService.isCurrentUserAdmin) {
+      return true;
+    }
+    this.router.navigate(['dashboard/kanban']);
+    return false;
   }
 
   canLoad(): Observable<boolean> | Promise<boolean> | boolean {
