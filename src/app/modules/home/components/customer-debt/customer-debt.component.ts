@@ -18,7 +18,7 @@ export class CustomerDebtComponent implements OnInit {
   @ViewChild("modal") modal: BsModalComponent;
   keyUpSearch = new Subject<string>();
 
-  currentCustomer: any;
+  currentCustomer: CustomerDebt;
   currentPage = 1;
   currentSearch = "";
   showCount = 10;
