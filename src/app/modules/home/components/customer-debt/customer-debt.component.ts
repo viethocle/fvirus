@@ -6,6 +6,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { FormControl } from '@angular/forms';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+
 
 
 @Component({
@@ -26,6 +29,16 @@ export class CustomerDebtComponent implements OnInit {
   customerDebt: CustomerDebt[];
   orders: Order[];
   loading: boolean;
+  payment = new FormControl("");
+
+  priceMask = Object.freeze({
+    mask: createNumberMask({
+      allowDecimal: false,
+      integerLimit: 10,
+      prefix: '',
+      thousandsSeparatorSymbol: ','
+    })
+  });
 
   public configPagination = {
     id: "server1",

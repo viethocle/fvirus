@@ -31,7 +31,6 @@ import { DragulaModule } from 'ng2-dragula';
   ],
   declarations: [
     MatchHeightDirective,
-    NumericDirective,
     CreateOrderComponent,
     KanbanComponent,
     DashboardPage,

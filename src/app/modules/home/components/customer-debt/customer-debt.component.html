@@ -96,6 +96,27 @@
   </bs-modal-header>
 
   <bs-modal-body>
+    <div class="space-10"></div>
+    <div class="widget-box">
+      <div class="widget-header">
+        <h4 class="widget-title">Thanh toán tiền nợ </h4>
+      </div>
+    
+      <div class="widget-body">
+        <div class="widget-main no-padding">
+
+          <form class="form-inline">
+            <h3>Tổng số tiền nợ: {{ currentCustomer?.total_debt | vnd }}</h3>
+            <input type="text" class="right-align" [formControl]="payment" [textMask]="priceMask" numeric>
+            <button type="button" class="btn btn-primary btn-sm">
+              <i class="ace-icon fa fa-money bigger-110"></i> Thanh toán
+            </button>
+          </form>
+
+          <div class="space-10"></div>
+        </div>
+      </div>
+    </div>
     <table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
       <thead>
         <tr>
@@ -103,7 +124,7 @@
           <th>{{ 'table.description' | translate }}</th>
           <th>{{ 'table.due-date' | translate }}</th>
           <th>{{ 'table.debt_date' | translate }}</th>
-          <th>{{ 'table.totalAmount' | translate }}</th>
+          <th>{{ 'orders.price' | translate }}</th>
           <th>{{ 'table.debt' | translate }}</th>
         </tr>
       </thead>
