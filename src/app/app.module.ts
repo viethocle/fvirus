@@ -46,7 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     HttpModule,
     LoadingBarHttpClientModule,
-    NgxPermissionsModule.forRoot(),
+    // NgxPermissionsModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
