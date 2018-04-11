@@ -8,6 +8,7 @@ import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { FormControl } from '@angular/forms';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import * as _ from 'lodash';
 
 
 
@@ -70,7 +71,11 @@ export class CustomerDebtComponent implements OnInit {
   }
 
   payCustomerDebt(payment) {
-    console.log(payment);
+    this.homeService.sendPaymentDebt(this.currentCustomer.id, payment)
+                    .subscribe(customer => {
+                      _.assign(this.customerDebt.find(t => t.id === customer.id), customer);
+                      this.modal.close();
+                    })
   }
 
 
@@ -106,6 +111,7 @@ export class CustomerDebtComponent implements OnInit {
     }
 
   openCustomerDebt(customer: any) {
+    this.payment.reset();
     this.currentCustomer = customer;
     this.modal.open();
     this.homeService.getOrderdebt(customer.id)
