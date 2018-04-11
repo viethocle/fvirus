@@ -1,4 +1,3 @@
-import { AdminRouteGuard } from './guard/admin-route.guard';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { SortTableService } from './services/sort-table.service';
 import { Ng2SearchPipe } from 'ng2-search-filter';
