@@ -32,8 +32,7 @@ export class AuthService implements OnInit{
 
   constructor(
     public authService: Angular2TokenService,
-    private router: Router,
-    private permissionsService: NgxPermissionsService
+    private router: Router
   ) {
     this.authService.init({ apiBase: environment.baseUrl });
 
@@ -61,15 +60,15 @@ export class AuthService implements OnInit{
   }
 
   private addPermission() {
-    if (this.isCurrentUserAdmin) {
-      this.permissionsService.addPermission(RoleUser.admin);
-    }
-    if (this.isCurrentUserAccountant) {
-      this.permissionsService.addPermission(RoleUser.accountant);
-    }
-    if (this.isCurrentUserTechnician) {
-      this.permissionsService.addPermission(RoleUser.technician);
-    }
+    // if (this.isCurrentUserAdmin) {
+    //   this.permissionsService.addPermission(RoleUser.admin);
+    // }
+    // if (this.isCurrentUserAccountant) {
+    //   this.permissionsService.addPermission(RoleUser.accountant);
+    // }
+    // if (this.isCurrentUserTechnician) {
+    //   this.permissionsService.addPermission(RoleUser.technician);
+    // }
   }
 
   logIn(
