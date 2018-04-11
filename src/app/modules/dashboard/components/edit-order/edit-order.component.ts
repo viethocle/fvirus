@@ -1,3 +1,4 @@
+import { RoleUser, AuthService } from './../../../auth/auth.service';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { tap } from 'rxjs/operators';
@@ -26,6 +27,7 @@ import { BsmodalService } from '@core/services/bsmodal.service';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 
+
 @Component({
   selector: 'app-edit-order',
   templateUrl: './edit-order.component.html',
@@ -48,6 +50,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   termCustomer = "";
   currentFocusIndex: number = -1;
   customerSelected: Customer;
+  roleUser: RoleUser;
 
   priceMask = Object.freeze({
     mask: createNumberMask({
@@ -65,7 +68,8 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     private bsmodalService: BsmodalService,
     private customerService: CustomerService,
     private cdRef: ChangeDetectorRef,
-    private renderer2: Renderer2
+    private renderer2: Renderer2,
+    public authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -115,6 +119,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
       description: [""],
       due_date: ["", Validators.required],
       price: [""],
+      paid_amount: [""],
       customer_id: [""]
     });
 
@@ -125,6 +130,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
       description: this.order.description,
       due_date: this.order.due_date,
       price: this.order.price,
+      paid_amount: this.order.paid_amount,
       customer_id: this.order.customer.id
     })
   }

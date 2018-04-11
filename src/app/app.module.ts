@@ -22,6 +22,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 
 import { TokenInterceptor } from './modules/auth/token.interceptor';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -45,6 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     HttpModule,
     LoadingBarHttpClientModule,
+    // NgxPermissionsModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
