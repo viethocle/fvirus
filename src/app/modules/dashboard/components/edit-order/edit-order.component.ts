@@ -119,6 +119,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
       description: [""],
       due_date: ["", Validators.required],
       price: [""],
+      paid_amount: [""],
       customer_id: [""]
     });
 
@@ -129,6 +130,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
       description: this.order.description,
       due_date: this.order.due_date,
       price: this.order.price,
+      paid_amount: this.order.paid_amount,
       customer_id: this.order.customer.id
     })
   }

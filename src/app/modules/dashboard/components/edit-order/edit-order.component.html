@@ -35,6 +35,19 @@
         </div>
       </div>
 
+      <div 
+         *ngIf="authService.isCurrentUserAdmin || authService.isCurrentUserAccountant"
+        [class.has-error]="formEditOrder.get('paid_amount').errors && (formEditOrder.get('paid_amount').dirty || formEditOrder.get('paid_amount').touched)">
+        <label for="paid_amount" class="control-label">{{ 'orders.paid_amount' | translate }}:</label>
+        <div class="input-group">
+          <input class="form-control right-align" id="paid_amount" type="text" [formControl]="formEditOrder.get('paid_amount')" [textMask]="priceMask"
+            numeric>
+          <span class="input-group-addon">
+            <i class="ace-icon fa fa-money"></i>
+          </span>
+        </div>
+      </div>
+
       <div class="input-wrapper">
         <label for="datetime-picker" class="control-label">{{ 'orders.due-date' | translate }}:</label>
         <input id="datetime-picker" class="form-control" [formControl]="formEditOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
