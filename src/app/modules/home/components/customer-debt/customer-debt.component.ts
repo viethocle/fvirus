@@ -69,6 +69,10 @@ export class CustomerDebtComponent implements OnInit {
       });
   }
 
+  payCustomerDebt(payment) {
+    console.log(payment);
+  }
+
 
   getPage(page: number) {
     this.currentPage = page;

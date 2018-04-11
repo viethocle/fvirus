@@ -108,7 +108,7 @@
           <form class="form-inline">
             <h3>Tổng số tiền nợ: {{ currentCustomer?.total_debt | vnd }}</h3>
             <input type="text" class="right-align" [formControl]="payment" [textMask]="priceMask" numeric>
-            <button type="button" class="btn btn-primary btn-sm">
+            <button type="button" class="btn btn-primary btn-sm" (click)="payCustomerDebt(payment.value)">
               <i class="ace-icon fa fa-money bigger-110"></i> Thanh toán
             </button>
           </form>
