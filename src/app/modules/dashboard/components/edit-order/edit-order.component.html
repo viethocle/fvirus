@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div>
+      <div *ngIf="authService.isCurrentUserTechnician">
         <label for="paid_amount" class="control-label">{{ 'orders.paid_amount' | translate }}</label>
         <div class="input-group">
           <input type="text" class="form-control right-align" id="paid_amount" [value]="order?.paid_amount" readonly=true [textMask]="priceMask">

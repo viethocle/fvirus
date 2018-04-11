@@ -1,3 +1,4 @@
+import { NgxPermissionsService } from 'ngx-permissions';
 import { SortTableService } from './services/sort-table.service';
 import { Ng2SearchPipe } from 'ng2-search-filter';
 import { CustomerService } from './../modules/customer/customer.service';
@@ -31,7 +32,8 @@ import { BsmodalService } from './services/bsmodal.service';
     CustomerService,
     Ng2SearchPipe,
     BsmodalService,
-    SortTableService
+    SortTableService,
+    // NgxPermissionsService
   ]
 })
 export class CoreModule { }

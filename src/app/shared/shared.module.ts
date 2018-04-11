@@ -29,6 +29,7 @@ import { ColorOrderComponent } from './components/color-order/color-order.compon
 import { MyDatePickerModule } from 'mydatepicker';
 import { NumericDirective } from './directives/numeric.directive';
 import { TextMaskModule } from 'angular2-text-mask'
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
