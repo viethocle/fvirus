@@ -8,20 +8,20 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="dataTables_length" id="dynamic-table_wrapper_length">
-          <label>Show
+          <label>Hiển thị
             <select [(ngModel)]="currentPerPage" (change)="onChangeCount($event)" name="dynamic-table_wrapper_length" aria-controls="dynamic-table_wrapper"
               class="form-control input-sm">
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
               <option value="100">100</option>
-            </select> entries</label>
+            </select> dòng</label>
         </div>
       </div>
       <div class="col-xs-6">
         <div id="dynamic-table_wrapper_filter" class="dataTables_filter">
-          <label>Search:
-            <input id="search-customer" type="text" class="form-control input-sm" placeholder="" aria-controls="dynamic-table_wrapper">
+          <label>Tìm kiếm:
+            <input id="search-customer" type="text" class="form-control input-sm" placeholder="Tìm kiếm theo tên, địa chỉ, điện thoại, .." aria-controls="dynamic-table_wrapper">
           </label>
         </div>
       </div>
@@ -71,7 +71,7 @@
           <div class="dataTables_paginate paging_full_numbers">
             <ul class="pagination">
               <li class="paginate_button first pointer" [class.disabled]="p.isFirstPage()">
-                <a (click)="p.previous()"> Previous </a>
+                <a (click)="p.previous()"> Trước </a>
               </li>
               <li *ngFor="let page of p.pages" class="paginate_button pointer" [class.active]="p.getCurrent() === page.value">
                 <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
@@ -82,7 +82,7 @@
                 </ng-container>
               </li>
               <li class="paginate_button last pointer" [class.disabled]="p.isLastPage()">
-                <a (click)="p.next()"> Next </a>
+                <a (click)="p.next()"> Sau </a>
               </li>
             </ul>
           </div>
