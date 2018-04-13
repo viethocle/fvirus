@@ -64,7 +64,6 @@ export class OrderDueDateComponent implements OnInit {
       .map(res => res.orders)
       .subscribe(res => {
         this.orders = res;
-        console.log(this.orders);
       });
   }
 

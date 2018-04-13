@@ -32,9 +32,14 @@ export class CustomerService {
     per_page: number,
     search_text: string
   ): Observable<ICustomersTotal> {
-    const url = `${this.url}.json?page=${page}&search_text=${search_text}&per_page=${per_page}`;
+    const params = {
+      page: page, 
+      per_page: per_page, 
+      search_query: search_text
+    }
+    const url = `${this.baseUrl}/customers-filteric.json`;
     return this.http
-      .get(url)
+      .post(url, params)
       .map(res => res as ICustomersTotal);
   }
 
