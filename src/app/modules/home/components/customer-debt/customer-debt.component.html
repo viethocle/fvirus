@@ -39,17 +39,21 @@
             <i class="ace-icon glyphicon glyphicon-home"></i>{{ 'table.address' | translate }}</th>
           <th>
             <i class="ace-icon glyphicon-euro"></i>{{ 'table.debt' | translate }}</th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let customer of customerDebt| paginate: configPagination" (click)="openCustomerDebt(customer)">
+        <tr *ngFor="let customer of customerDebt| paginate: configPagination" >
           <td>{{customer.id}}</td>
           <td>{{customer.name}}</td>
           <td>{{customer.email}}</td>
           <td>{{customer.phone}}</td>
           <td>{{customer.address}}</td>
           <td class="text-right">{{ customer.total_debt | vnd }}</td>
+          <td>
+            <button (click)="openCustomerDebt(customer)" class="btn btn-primary btn-sm">Trả nợ</button>
+          </td>
         </tr>
       </tbody>
 
@@ -101,7 +105,7 @@
       <div class="widget-header">
         <h4 class="widget-title">Thanh toán tiền nợ </h4>
       </div>
-    
+
       <div class="widget-body">
         <div class="widget-main no-padding">
 
