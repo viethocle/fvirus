@@ -41,7 +41,6 @@ export class UserComponent implements OnInit {
     this.loading = true;
     this.usersService.getUsers().subscribe(users => {
       this.users = users;
-      console.log(this.users);
       this.dtTrigger.next();
       this.loading = false;
     });
