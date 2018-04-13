@@ -1,3 +1,4 @@
+import { VndPipe } from './../shared/pipes/vnd.pipe';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { SortTableService } from './services/sort-table.service';
 import { Ng2SearchPipe } from 'ng2-search-filter';
@@ -33,6 +34,7 @@ import { BsmodalService } from './services/bsmodal.service';
     Ng2SearchPipe,
     BsmodalService,
     SortTableService,
+    VndPipe
     // NgxPermissionsService
   ]
 })

@@ -4,6 +4,8 @@ import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import * as moment from 'moment';
+import { VndPipe } from '@shared/pipes/vnd.pipe';
+
 
 @Component({
   selector: 'app-statistical',
@@ -43,10 +45,28 @@ export class StatisticalComponent implements OnInit {
   public barChartData2: any[] = [];
 
   constructor(
-     private homeService: HomeService
+     private homeService: HomeService,
+     private vnd: VndPipe
   ) {}
 
   ngOnInit() {
+    const self = this;
+    this.barChartOptions = {
+      scaleShowVerticalLines: false,
+      responsive: true,
+       scales: {
+        xAxes: [{
+            barPercentage: 0.5
+        }]
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItems, data) {
+            const amount = self.vnd.transform(tooltipItems.yLabel);
+            return  data.datasets[tooltipItems.datasetIndex].label + ": " + amount;
+          }
+        } } };
+
     this.homeService.getRevenue()
     .subscribe(res => {
       this.day = res["0"].per_day;
