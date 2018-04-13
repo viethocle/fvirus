@@ -186,8 +186,15 @@ export class KanbanComponent implements OnInit, OnDestroy {
   }
 
   getOrders() {
-    this.dashboardService.getOrders().subscribe(orders => {
-      this.orders = orders;
+    let params = {
+      show_all: "false", 
+      pagination: {
+        page: 1, 
+        per_page: 10000
+      }
+    }
+    this.dashboardService.getOrderFilter(params).subscribe(ordersPaginate => {
+      this.orders = ordersPaginate.orders;
     });
   }
 
