@@ -68,7 +68,7 @@
           <div class="dataTables_paginate paging_full_numbers">
             <ul class="pagination">
               <li class="paginate_button first pointer" [class.disabled]="p.isFirstPage()">
-                <a (click)="p.previous()"> Previous </a>
+                <a (click)="p.previous()"> Trước </a>
               </li>
               <li *ngFor="let page of p.pages" class="paginate_button pointer" [class.active]="p.getCurrent() === page.value">
                 <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
@@ -79,7 +79,7 @@
                 </ng-container>
               </li>
               <li class="paginate_button last pointer" [class.disabled]="p.isLastPage()">
-                <a (click)="p.next()"> Next </a>
+                <a (click)="p.next()"> Sau </a>
               </li>
             </ul>
           </div>

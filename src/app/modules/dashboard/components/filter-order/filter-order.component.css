@@ -13,3 +13,11 @@
 .input-daterange {
   width: auto;
 }
+
+#date >>> dp-date-picker.dp-material .dp-picker-input {
+  width: auto;
+}
+
+#select >>> .selected-list .c-btn{
+  padding: 5px;
+}

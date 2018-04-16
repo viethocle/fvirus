@@ -11,6 +11,7 @@ import { BsmodalService } from '@core/services/bsmodal.service';
 import * as _ from 'lodash';
 import { RoleUser } from '@modules/auth/auth.service';
 
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -32,8 +33,17 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.dtOptions = {
-      pagingType: "full_numbers"
-    };
+      pagingType: "simple_numbers",
+      language: {
+            paginate: {
+            first:      "Đầu",
+            previous:  "Trước",
+            next:       "Tiếp",
+            last:        "Cuối"
+        }
+      }
+      };
+
     this.getUsers();
   }
 
