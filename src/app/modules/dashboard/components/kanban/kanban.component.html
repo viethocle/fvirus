@@ -1,10 +1,11 @@
 <div *ngIf="orders.length > 0">
+    <ul class="grid-headers">
+      <h4>{{ 'label.new' | translate }}</h4>
+      <h4>{{ 'label.inprogress' | translate }}</h4>
+      <h4>{{ 'label.ready' | translate }}</h4>
+      <h4>{{ 'label.delivered' | translate }}</h4>
+    </ul>
     <ul class='col-container' >
-      <!-- <perfect-scrollbar class="scroller"> -->
-      <!-- <div class='col'> -->
-        <!-- <div class="kb-header kb-header-new">
-          New
-        </div> -->
         <li  class="bag-status  column-kanban col" [class.zone-drag]="notDragNew"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.new"
@@ -17,9 +18,7 @@
       <!-- </div> -->
 
       <!-- <div class='col'> -->
-        <!-- <div class="kb-header kb-header-working">
-          Inprogress
-        </div> -->
+        
         <li  class="bag-status  column-kanban col" [class.zone-drag]="notDragInprogress"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.inprogress"
@@ -51,7 +50,6 @@
           </div>
         </li>
       <!-- </div> -->
-      <!-- </perfect-scrollbar> -->
-      </ul>
+    </ul>
 </div>
 <app-payment-order></app-payment-order>
