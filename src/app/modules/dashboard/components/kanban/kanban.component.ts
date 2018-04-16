@@ -193,6 +193,7 @@ export class KanbanComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.dragulaService.destroy('first-bag');
+    if (this.dragulaService.find('first-bag') !== undefined)
+      this.dragulaService.destroy('first-bag');
   }
 }

@@ -251,13 +251,16 @@ nested-repeat-example .container span {
   height: 70vh;
   overflow: hidden;
   overflow-y: scroll;
+  box-sizing: border-box;
+  table-layout: fixed;  
 }
 
 .col {
   display: table-cell;
-  table-layout: fixed;
   list-style: none;
   box-sizing: border-box;
+  vertical-align: top;
+  position: relative;
 }
 
 .column-kanban {
@@ -271,8 +274,11 @@ nested-repeat-example .container span {
   
 }
 
-.grid-headers {
+.headers {
   padding-left: 10px;
+}
+
+.grids {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
