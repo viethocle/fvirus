@@ -37,7 +37,8 @@ export class OrderDueDateComponent implements OnInit {
     show_all: false, 
     status: "('new','ready','inprogress')",
     due_date_lte: moment(),
-    search_query: ""
+    search_query: "",
+    sorted_by: "due_date_asc"
   }
 
   constructor(
