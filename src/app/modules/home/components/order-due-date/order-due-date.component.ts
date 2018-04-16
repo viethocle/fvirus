@@ -1,10 +1,12 @@
+import { Order } from '@modules/dashboard/order';
+import { DashboardService } from '@modules/dashboard/dashboard.service';
 import { DueDate } from './../../order-due-date.model';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { HomeService } from '@modules/home/home.service';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-order-due-date',
@@ -18,7 +20,7 @@ export class OrderDueDateComponent implements OnInit {
   currentSearch = "";
   showCount = 10;
 
-  orders: DueDate[];
+  orders: Order[];
   loading: boolean;
 
   public configPagination = {
@@ -27,18 +29,34 @@ export class OrderDueDateComponent implements OnInit {
     currentPage: 1,
     totalItems: 10
   };
+
+  params = {
+    pagination: {
+      page: 1,
+      per_page: 10, 
+    },
+    show_all: false, 
+    status: "('new','ready','inprogress')",
+    due_date_lte: moment(),
+    search_query: ""
+  }
+
   constructor(
-    private homeService: HomeService
+    private homeService: HomeService,
+    private dashboardService: DashboardService
   ) { }
 
   ngOnInit() {
     this.getPage(1);
 
      const subscriptionSearch = this.keyUpSearch
-      .do(search => (this.currentSearch = search))
+      .do(search => {
+        this.currentSearch = search;
+        Object.assign(this.params, { pagination: { page: 1, per_page: this.showCount }, search_query: this.currentSearch });
+      })
       .debounceTime(200)
       .distinctUntilChanged()
-      .switchMap(search => this.homeService.getOrderDueDateWithPage(1, this.showCount, search))
+      .switchMap(search => this.dashboardService.getOrderFilter(this.params))
       .do(res => {
         this.configPagination.totalItems = res.total;
         this.configPagination.currentPage = 1;
@@ -53,9 +71,9 @@ export class OrderDueDateComponent implements OnInit {
 
   getPage(page: number) {
     this.currentPage = page;
-    this.loading = true;
-    this.homeService
-      .getOrderDueDateWithPage(page, this.showCount, this.currentSearch)
+    Object.assign(this.params, { pagination: { page: this.currentPage, per_page: this.showCount }});
+    this.dashboardService
+      .getOrderFilter(this.params)
       .do(res => {
         this.configPagination.totalItems = res.total;
         this.configPagination.currentPage = page;
@@ -68,18 +86,19 @@ export class OrderDueDateComponent implements OnInit {
   }
 
     onChangeCount($event) {
-    this.homeService
-      .getOrderDueDateWithPage(this.currentPage, this.showCount, this.currentSearch)
-      .do(res => {
-        this.configPagination.totalItems = res.total;
-        this.configPagination.currentPage = 1;
-        this.loading = false;
-      })
-      .map(res => res.orders)
-      .subscribe(res => {
-        this.orders = res;
-        this.configPagination.itemsPerPage = this.showCount;
-      });
+      Object.assign(this.params, { pagination: { page: this.currentPage, per_page: this.showCount } });
+      this.dashboardService
+        .getOrderFilter(this.params)
+        .do(res => {
+          this.configPagination.totalItems = res.total;
+          this.configPagination.currentPage = 1;
+          this.loading = false;
+        })
+        .map(res => res.orders)
+        .subscribe(res => {
+          this.orders = res;
+          this.configPagination.itemsPerPage = this.showCount;
+        });
     }
 
 
