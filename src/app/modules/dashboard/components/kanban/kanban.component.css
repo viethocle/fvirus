@@ -185,7 +185,6 @@ nested-repeat-example .container span {
 
 .bag-status {
   height: inherit;
-  min-height: 300px;
 }
 
 .scroller {
@@ -206,10 +205,7 @@ nested-repeat-example .container span {
 }
 
 
-.column-kanban {
-  padding-top: 8px;
-  background: #f5f5f5;
-}
+
 
 .header-new {
   color: #82AF6F;
@@ -239,13 +235,6 @@ nested-repeat-example .container span {
   border: 1px solid #F4CE46;
 }
 
-.wrapper.container-fluid {
-  height: 70vh;
-  overflow: hidden;
-  overflow-y: scroll;
-}
-
-
 .zone-drag {
   background: #ebf2f9;
   border: 2px dashed red;
@@ -253,4 +242,27 @@ nested-repeat-example .container span {
 }
 .zone-drag > .card-kanban {
   visibility: hidden;
+}
+
+.col-container {
+  display: table;
+  width: 100%;
+  border-spacing: 10px 0;
+}
+
+.col {
+  display: table-cell;
+}
+
+.col.column-kanban {
+  height: 100%;
+  padding-top: 8px;
+  background: #f5f5f5;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+.box-card {
+  height: inherit;
+  
 }

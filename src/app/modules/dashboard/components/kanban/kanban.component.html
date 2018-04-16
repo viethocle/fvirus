@@ -1,12 +1,11 @@
-<div class="kanban kanban-column">
-    <div class='wrapper container-fluid' myMatchHeight="kanban-column">
+<div *ngIf="orders.length > 0">
+    <ul class='col-container' >
       <!-- <perfect-scrollbar class="scroller"> -->
-      <div class='col-md-3 col-sm-3 kanban-column'>
+      <!-- <div class='col'> -->
         <!-- <div class="kb-header kb-header-new">
           New
         </div> -->
-        <h4>{{ 'label.new' | translate }}</h4>
-        <div  class="bag-status  column-kanban" [class.zone-drag]="notDragNew"
+        <li  class="bag-status  column-kanban col" [class.zone-drag]="notDragNew"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.new"
               #bagNew>
@@ -14,48 +13,45 @@
           <div *ngFor="let order of orders | new;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order" ></kanban-card>
           </div>
-        </div>
-      </div>
+        </li>
+      <!-- </div> -->
 
-      <div class='col-md-3 col-sm-3 kanban-column'>
+      <!-- <div class='col'> -->
         <!-- <div class="kb-header kb-header-working">
           Inprogress
         </div> -->
-        <h4>{{ 'label.inprogress' | translate }}</h4>
-        <div  class="bag-status  column-kanban" [class.zone-drag]="notDragInprogress"
+        <li  class="bag-status  column-kanban col" [class.zone-drag]="notDragInprogress"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.inprogress"
               #bagInprogress>
           <div *ngFor="let order of orders | inprogress;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order"></kanban-card>
           </div>
-        </div>
-      </div>
+        </li>
+      <!-- </div> -->
 
-      <div class='col-md-3 col-sm-3 kanban-column'>
-        <h4>{{ 'label.ready' | translate }}</h4>
-        <div  class="bag-status column-kanban" [class.zone-drag]="notDragReady"
+      <!-- <div class='col'> -->
+        <li  class="bag-status column-kanban col" [class.zone-drag]="notDragReady"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.ready"
               #bagReady>
           <div *ngFor="let order of orders | ready;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order"></kanban-card>
           </div>
-        </div>
-      </div>
+        </li>
+      <!-- </div> -->
 
-      <div class='col-md-3 col-sm-3 kanban-column'>
-        <h4>{{ 'label.delivered' | translate }}</h4>
-        <div  class="bag-status  column-kanban" [class.zone-drag]="notDragDelivered"
+      <!-- <div class='col'> -->
+        <li  class="bag-status  column-kanban col" [class.zone-drag]="notDragDelivered"
               [dragula]='"first-bag"'
               [attr.data-id]="statusOrder.delivered"
               #bagClosed>
           <div *ngFor="let order of orders | delivered;" [attr.data-id]="order.id" class="card-kanban">
             <kanban-card [order]="order"></kanban-card>
           </div>
-        </div>
-      </div>
+        </li>
+      <!-- </div> -->
       <!-- </perfect-scrollbar> -->
-    </div>
+      </ul>
 </div>
 <app-payment-order></app-payment-order>
