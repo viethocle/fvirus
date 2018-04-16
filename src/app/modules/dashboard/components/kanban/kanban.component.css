@@ -244,13 +244,16 @@ nested-repeat-example .container span {
   visibility: hidden;
 }
 
+.box-kanban {
+  height: 70vh;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
 .col-container {
   display: table;
   width: 100%;
   border-spacing: 10px 0;
-  height: 70vh;
-  overflow: hidden;
-  overflow-y: scroll;
   box-sizing: border-box;
   table-layout: fixed;  
 }
