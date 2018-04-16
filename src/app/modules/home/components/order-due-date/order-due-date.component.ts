@@ -1,6 +1,5 @@
 import { Order } from '@modules/dashboard/order';
 import { DashboardService } from '@modules/dashboard/dashboard.service';
-import { DueDate } from './../../order-due-date.model';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
