@@ -4,19 +4,19 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="dataTables_length" id="dynamic-table_wrapper_length">
-          <label>Show
+          <label>Hiển thị
             <select [(ngModel)]="showCount" (change)="onChangeCount($event)" name="dynamic-table_wrapper_length" aria-controls="dynamic-table_wrapper"
               class="form-control input-sm">
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
               <option value="100">100</option>
-            </select> entries</label>
+            </select> dòng</label>
         </div>
       </div>
       <div class="col-xs-6">
         <div id="dynamic-table_wrapper_filter" class="dataTables_filter">
-          <label>Search:
+          <label>Tìm kiếm:
             <input (keyup)="keyUpSearch.next($event.target.value)" type="text" class="form-control input-sm" placeholder="" aria-controls="dynamic-table_wrapper">
           </label>
         </div>
@@ -37,7 +37,7 @@
             <i class="ace-icon glyphicon glyphicon-map-marker"></i>{{ 'table.phone' | translate }}</th>
           <th>
             <i class="ace-icon glyphicon glyphicon-home"></i>{{ 'table.address' | translate }}</th>
-          <th>
+          <th class="text-right">
             <i class="ace-icon glyphicon-euro"></i>{{ 'table.debt' | translate }}</th>
           <th></th>
         </tr>
@@ -69,7 +69,7 @@
           <div class="dataTables_paginate paging_full_numbers">
             <ul class="pagination">
               <li class="paginate_button first pointer" [class.disabled]="p.isFirstPage()">
-                <a (click)="p.previous()"> Previous </a>
+                <a (click)="p.previous()"> Trước </a>
               </li>
               <li *ngFor="let page of p.pages" class="paginate_button pointer" [class.active]="p.getCurrent() === page.value">
                 <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
@@ -80,7 +80,7 @@
                 </ng-container>
               </li>
               <li class="paginate_button last pointer" [class.disabled]="p.isLastPage()">
-                <a (click)="p.next()"> Next </a>
+                <a (click)="p.next()"> Sau </a>
               </li>
             </ul>
           </div>
@@ -128,8 +128,8 @@
           <th>{{ 'table.description' | translate }}</th>
           <th>{{ 'table.due-date' | translate }}</th>
           <th>{{ 'table.debt_date' | translate }}</th>
-          <th>{{ 'orders.price' | translate }}</th>
-          <th>{{ 'table.debt' | translate }}</th>
+          <th class="text-right">{{ 'orders.price' | translate }}</th>
+          <th class="text-right">{{ 'table.debt' | translate }}</th>
         </tr>
       </thead>
 

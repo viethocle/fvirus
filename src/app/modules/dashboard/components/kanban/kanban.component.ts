@@ -65,7 +65,6 @@ export class KanbanComponent implements OnInit, OnDestroy {
 
   setLiveUpdate() {
     this.dashboardService.orderChange.subscribe(dataOrder => {
-      console.log("SUB");
       if (dataOrder.method == "CREATE") {
         this.orders.push(dataOrder.data);
       }
@@ -74,8 +73,6 @@ export class KanbanComponent implements OnInit, OnDestroy {
           order => order.id === dataOrder.data.id
         );
         _.assign(this.orders[index], dataOrder.data);
-        console.log(this.orders);
-        this.cdRef.detectChanges();
       }
       if (dataOrder.method == "DELETE") {
         this.orders.filter(order => order.id === dataOrder.data.id);
