@@ -1,17 +1,14 @@
-import { AuthService } from './../../../auth/auth.service';
+import { DatePipe } from "@angular/common";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { BsmodalService } from "@core/services/bsmodal.service";
 import { Angular2TokenService } from 'angular2-token';
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import * as $ from 'jquery';
+import * as _ from 'lodash';
 import { DragulaService } from 'ng2-dragula';
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
 import { DashboardService } from '../../dashboard.service';
 import { Order, StatusOrder } from '../../order';
-import { DatePipe } from "@angular/common";
-import * as _ from 'lodash';
-import * as $ from 'jquery';
-import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
-import { takeWhile, tap } from "rxjs/operators";
-import { BsmodalService } from "@core/services/bsmodal.service";
-import { Observable } from "rxjs/Observable";
-import { switchMap } from 'rxjs/operators/switchMap';
+import { AuthService } from './../../../auth/auth.service';
 
 @Destroyable
 @Component({
