@@ -5,7 +5,7 @@ $.extend( true, $.fn.dataTable.defaults, {
 		"t"+
 		"<'row'<'col-xs-6'i><'col-xs-6'p>>",
 	"oLanguage": {
-		"sLengthMenu": "Display _MENU_ records"
+		"sLengthMenu": "Hiển thị _MENU_ dòng"
 	}
 } );
 
@@ -209,7 +209,7 @@ else {
 					} else {
 						$('li.prev', an[i]).removeClass('disabled');
 					}
-	 
+
 					if ( oPaging.iPage === oPaging.iTotalPages-1 || oPaging.iTotalPages === 0 ) {
 						$('li.next', an[i]).addClass('disabled');
 					} else {
