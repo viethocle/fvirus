@@ -73,6 +73,9 @@ export class KanbanComponent implements OnInit, OnDestroy {
       }
       if (dataOrder.method == "DELETE") {
         this.orders.filter(order => order.id === dataOrder.data.id);
+        $(".card-kanban").filter(function () {
+          return $(this).data("id") == dataOrder.data.id;
+        }).remove();
       }
     });
   }
