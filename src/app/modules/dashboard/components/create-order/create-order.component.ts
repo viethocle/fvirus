@@ -80,7 +80,7 @@ export class CreateOrderComponent implements OnInit {
 
   buildForm() {
     this.formNewOrder = this.formBuilder.group({
-      description: [""],
+      description: ["", Validators.required],
       due_date: ["", Validators.required],
       price: [""],
       customer_id: [""]
@@ -94,9 +94,6 @@ export class CreateOrderComponent implements OnInit {
 
   createOrder() {
     this.modalCreate.close();
-    this.formNewOrder.patchValue({
-      customer_id: this.customerSelected.id
-    })
     this.dashboardService.createOrder(this.formNewOrder.value)
         .pipe(
           tap(_ => { 
@@ -119,6 +116,9 @@ export class CreateOrderComponent implements OnInit {
   // * handle event keyup enter andn click customer
   selectCustomer(cus: Customer) {
     this.customerSelected = cus;
+    this.formNewOrder.patchValue({
+      customer_id: this.customerSelected.id
+    })
     this.termCustomer = "";
   }
 
