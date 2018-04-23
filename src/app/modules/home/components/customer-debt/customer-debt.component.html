@@ -37,7 +37,7 @@
             <i class="ace-icon glyphicon glyphicon-map-marker"></i>{{ 'table.phone' | translate }}</th>
           <th>
             <i class="ace-icon glyphicon glyphicon-home"></i>{{ 'table.address' | translate }}</th>
-            <th class="text-right">
+            <th>
               <i class="ace-icon fa fa-calendar"></i>Ngày nợ</th>
           <th class="text-right">
             <i class="ace-icon glyphicon-euro"></i>{{ 'table.debt' | translate }}</th>
@@ -52,7 +52,7 @@
           <td>{{customer.email}}</td>
           <td>{{customer.phone}}</td>
           <td>{{customer.address}}</td>
-          <td>{{customer.date_debt | dateTimeVi }}</td>
+          <td>{{customer.date_debt | dateHumanize }}</td>
           <td class="text-right">{{ customer.total_debt | vnd }}</td>
           <td>
             <button (click)="openCustomerDebt(customer)" class="btn btn-primary btn-sm">Trả nợ</button>
