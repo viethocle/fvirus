@@ -12,7 +12,8 @@ import {
   FormGroup,
   Validators,
   FormBuilder,
-  AbstractControl
+  AbstractControl,
+  FormArray
 } from '@angular/forms';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { DashboardService } from '../../dashboard.service';
@@ -24,6 +25,8 @@ import { PerfectScrollbarComponent } from "ngx-perfect-scrollbar";
 import * as _ from 'lodash';
 import { FlyInOut } from '../../flyInOut.animate';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+
+
 
 
 @Component({
@@ -46,6 +49,8 @@ export class CreateOrderComponent implements OnInit {
   termCustomer = "";
   currentFocusIndex: number = -1;
   customerSelected: Customer;
+
+  contents: any;
   priceMask = Object.freeze({
     mask: createNumberMask({
       allowDecimal: false,
@@ -81,12 +86,31 @@ export class CreateOrderComponent implements OnInit {
   buildForm() {
     this.formNewOrder = this.formBuilder.group({
       description: ["", Validators.required],
+      contents: this.formBuilder.array([this.createContent()]),
       due_date: ["", Validators.required],
       price: [""],
       customer_id: [""]
     });
+
   }
 
+  createContent(): FormGroup {
+    return this.formBuilder.group({
+      content: '',
+      unit: '',
+      quantity: ''
+    });
+  }
+
+  addRowContent(): void {
+    this.contents = this.formNewOrder.get('contents') as FormArray;
+    this.contents.push(this.createContent());
+    console.log(this.contents.length);
+
+  }
+  deleteRow(index: number) {
+
+}
   initDatetime(): any {
     let d = new Date();
     this.minDueDate = new Date(new Date().setDate(new Date().getDate() - 1)); // mean yesterday

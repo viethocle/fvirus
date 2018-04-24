@@ -36,3 +36,7 @@ dd {
   font-size: 1.3em;
 
 }
+
+>>> .modal-lg {
+  width: 80%;
+}

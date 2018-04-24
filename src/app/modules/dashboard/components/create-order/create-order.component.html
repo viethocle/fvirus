@@ -1,29 +1,58 @@
-<button
-  *ngIf="!authService.isCurrentUserTechnician"
-  class="create-order btn btn-primary"
-  (click)="modalCreate.open()" >Tạo đơn hàng mới</button>
+<button *ngIf="!authService.isCurrentUserTechnician" class="create-order btn btn-primary" (click)="modalCreate.open()">Tạo đơn hàng mới</button>
 
 
-<bs-modal #modalCreate [size]="'lg'" >
+<bs-modal #modalCreate cssClass="modal-lg">
   <bs-modal-header [showDismiss]="true">
     <h4 class="modal-title">{{ 'orders.create-order' | translate }}</h4>
   </bs-modal-header>
 
   <bs-modal-body class="container-fluid">
 
-    <div class="col-md-6">
-      <!-- description -->
-      <div [class.has-error]="formNewOrder.get('description').errors && (formNewOrder.get('description').dirty || formNewOrder.get('description').touched)">
-        <label for="new-description" class="control-label">{{ 'orders.description' | translate }} *</label>
-        <textarea class="form-control" rows="4" id="new-description" maxlength="200" [formControl]="formNewOrder.get('description')"></textarea>
+    <div class="col-md-8">
+      <div [formGroup]="formNewOrder">
+        <table id="dynamic-table_wrapper" class="table table-striped table-bordered table-hover dataTable no-footer " cellspacing="0"
+          width="100%">
+          <thead>
+            <tr>
+              <th>Stt</th>
+              <th>Nội dung</th>
+              <th>Đơn vị</th>
+              <th>Số lượng</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr formArrayName="contents" *ngFor="let item of contents; let i = index;">
+              <td [formGroupName]="i"> {{i}}</td>
+              <td [formGroupName]="i">
+                <input formControlName="content" placeholder="Nội dung">
+              </td>
+              <td [formGroupName]="i">
+                <input formControlName="unit" placeholder="Đơn vị ">
+              </td>
+              <td [formGroupName]="i">
+                <input formControlName="quantity" placeholder="Số lượng">
+              </td>
+<td>
+<button *ngIf="contents?.length > 1"  class="btn btn-danger">Delete Button</button>
+
+
+
+
+             </td>
+            </tr>
+<button (click)=" addRowContent()">Thêm</button>
+
+          </tbody>
+        </table>
 
       </div>
 
       <div [class.has-error]="formNewOrder.get('price').errors && (formNewOrder.get('price').dirty || formNewOrder.get('price').touched)">
         <label for="new-price" class="control-label">{{ 'orders.price' | translate }}:</label>
         <div class="input-group">
-          <input class="form-control right-align" id="new-price" type="text" [formControl]="formNewOrder.get('price')"
-                 [textMask]="priceMask" numeric >
+          <input class="form-control right-align" id="new-price" type="text" [formControl]="formNewOrder.get('price')" [textMask]="priceMask"
+            numeric>
           <span class="input-group-addon">
             <i class="ace-icon fa fa-money"></i>
           </span>
@@ -39,18 +68,14 @@
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
       <label for="" class="control-label">
         {{ 'customers.title' | translate}} *
       </label>
 
       <div class="input-group">
-        <input type="search" class="form-control" [(ngModel)]="termCustomer"
-              (input)="onChangeTermCustomer()"
-              (keyup.enter)="chooseCustomer()"
-              (keyup.escape)="escapeSearch($event)"
-              (keydown.arrowup)="shiftFocusUp($event)"
-              (keydown.arrowdown)="shiftFocusDown($event)">
+        <input type="search" class="form-control" [(ngModel)]="termCustomer" (input)="onChangeTermCustomer()" (keyup.enter)="chooseCustomer()"
+          (keyup.escape)="escapeSearch($event)" (keydown.arrowup)="shiftFocusUp($event)" (keydown.arrowdown)="shiftFocusDown($event)">
         <span class="input-group-addon">
           <i class="ace-icon fa fa-search"></i>
         </span>
@@ -76,12 +101,12 @@
 
       <!-- show customer selected -->
       <div *ngIf="customerSelected && termCustomer == ''" [@flyInOut]="'in'">
-        <div class="widget-box widget-color-green2" >
+        <div class="widget-box widget-color-green2">
           <div class="widget-header">
             <h5 class="widget-title bigger lighter">
               <i class="ace-icon fa fa-users"></i> {{ 'customers.selected_customer' | translate }}
             </h5>
-            <i class="ace-icon fa fa-times close-btn pointer"  tooltip="{{ 'tooltip.close' | translate }}" (click)="customerSelected=null"></i>
+            <i class="ace-icon fa fa-times close-btn pointer" tooltip="{{ 'tooltip.close' | translate }}" (click)="customerSelected=null"></i>
           </div>
           <div class="widget-body">
             <div class="widget-main">
