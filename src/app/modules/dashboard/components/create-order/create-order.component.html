@@ -22,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr formArrayName="contents" *ngFor="let item of contents; let i = index;">
+            <tr formArrayName="contents" *ngFor="let item of formNewOrder.get('contents').controls; let i = index;">
               <td [formGroupName]="i"> {{i}}</td>
               <td [formGroupName]="i">
                 <input formControlName="content" placeholder="Nội dung">
@@ -33,15 +33,9 @@
               <td [formGroupName]="i">
                 <input formControlName="quantity" placeholder="Số lượng">
               </td>
-<td>
-<button *ngIf="contents?.length > 1"  class="btn btn-danger">Delete Button</button>
-
-
-
-
+              <td><button (click)=" addRowContent()">Thêm</button>
              </td>
             </tr>
-<button (click)=" addRowContent()">Thêm</button>
 
           </tbody>
         </table>

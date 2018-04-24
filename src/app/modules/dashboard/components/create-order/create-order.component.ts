@@ -108,9 +108,7 @@ export class CreateOrderComponent implements OnInit {
     console.log(this.contents.length);
 
   }
-  deleteRow(index: number) {
 
-}
   initDatetime(): any {
     let d = new Date();
     this.minDueDate = new Date(new Date().setDate(new Date().getDate() - 1)); // mean yesterday
