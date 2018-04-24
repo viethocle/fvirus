@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Group } from './../../group.model';
 import { GroupsService } from './../../groups.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index-groups.component.css']
 })
 export class IndexGroupsComponent implements OnInit {
-
+  
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
   groups: Group[] = [];
 
   constructor(
@@ -16,8 +19,17 @@ export class IndexGroupsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: "simple_numbers",
+      language: {
+        url: '../../assets/i18n/datatables/vi.json'
+      }
+    };
     this.groupService.getGroups()
-        .subscribe(groups => this.groups = groups);
+        .subscribe(groups => { 
+          this.groups = groups;
+          this.dtTrigger.next();
+        });
   }
 
 }
