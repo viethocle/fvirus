@@ -22,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr formArrayName="contents" *ngFor="let item of formNewOrder.get('contents').controls; let i = index;">
+            <tr formArrayName="contents" *ngFor="let item of contents; let i = index;">
               <td [formGroupName]="i"> {{i}}</td>
               <td [formGroupName]="i">
                 <input formControlName="content" placeholder="Nội dung">
