@@ -1,3 +1,19 @@
-<p>
-  index-groups works!
-</p>
+<div id="main-product" class="col-md-12">
+  <div>
+    <table >
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Tên nhóm</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let group of groups">
+          <td>{{ group.id }}</td>
+          <td>{{ group.title }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

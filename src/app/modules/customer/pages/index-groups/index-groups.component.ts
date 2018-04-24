@@ -1,3 +1,5 @@
+import { Group } from './../../group.model';
+import { GroupsService } from './../../groups.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexGroupsComponent implements OnInit {
 
-  constructor() { }
+  groups: Group[] = [];
+
+  constructor(
+    private groupService: GroupsService
+  ) { }
 
   ngOnInit() {
+    this.groupService.getGroups()
+        .subscribe(groups => this.groups = groups);
   }
 
 }
