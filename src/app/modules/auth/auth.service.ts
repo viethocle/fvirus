@@ -44,7 +44,7 @@ export class AuthService implements OnInit{
       res => {
         this.userSignedIn$.next(true);
         this.doneValidateToken$.next();
-        this.redirectAfterValidate();
+        // this.redirectAfterValidate();
       },
       err => {
         this.router.navigate(["/login"]);
