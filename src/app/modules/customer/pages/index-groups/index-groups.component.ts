@@ -32,4 +32,8 @@ export class IndexGroupsComponent implements OnInit {
         });
   }
 
+  handleAddNewGroup(group: Group) {
+    this.groups.unshift(group);
+  }
+
 }

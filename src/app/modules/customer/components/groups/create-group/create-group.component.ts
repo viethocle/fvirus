@@ -1,6 +1,9 @@
+import { EventEmitter } from '@angular/core';
+import { GroupsService } from './../../../groups.service';
 import { FormGroupComponent } from './../form-group/form-group.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { BsModalComponent } from 'ng2-bs3-modal';
+import { Group } from "@modules/customer/group.model";
 
 @Component({
   selector: 'app-create-group',
@@ -12,14 +15,19 @@ export class CreateGroupComponent implements OnInit {
   @ViewChild(BsModalComponent) modal: BsModalComponent;  
   @ViewChild(FormGroupComponent) formComponent: FormGroupComponent; 
 
-  constructor() { }
+  @Output('newGroup') newGroup = new EventEmitter<Group>();
+
+  constructor(
+    private groupService: GroupsService
+  ) { }
 
   ngOnInit() {
   }
 
   sendRequestCreateGroup() {
     this.modal.close();
-    console.log(this.formComponent.GetValueForm())
+    this.groupService.addGroup(this.formComponent.GetValueForm())
+        .subscribe(group => this.newGroup.next(group));
   }
 
 }

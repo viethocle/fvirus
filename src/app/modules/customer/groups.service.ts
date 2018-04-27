@@ -21,4 +21,10 @@ export class GroupsService {
                 .map((res: any) => res.groups as Group[]);
   }
 
+  addGroup(value): Observable<Group> {
+    const addUrl = this.url + '.json';
+    return this.http.post(addUrl, value)
+                    .map((res: any) => res.group as Group);
+  }
+
 }
