@@ -54,7 +54,7 @@ export class CreateOrderComponent implements OnInit {
   priceMask = Object.freeze({
     mask: createNumberMask({
       allowDecimal: false,
-      integerLimit: 8,
+      // integerLimit: 8,
       prefix: '',
       thousandsSeparatorSymbol: ','
     })
@@ -88,7 +88,7 @@ export class CreateOrderComponent implements OnInit {
       description: ["", Validators.required],
       contents: this.formBuilder.array([this.createContent()]),
       due_date: ["", Validators.required],
-      price: [""],
+      price: ["",  Validators.max(99999999)],
       customer_id: [""]
     });
 

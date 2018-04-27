@@ -33,8 +33,9 @@
               <td [formGroupName]="i">
                 <input formControlName="quantity" placeholder="Số lượng">
               </td>
-              <td><button (click)=" addRowContent()">Thêm</button>
-             </td>
+              <td>
+                <button (click)=" addRowContent()">Thêm</button>
+              </td>
             </tr>
 
           </tbody>
@@ -51,6 +52,9 @@
             <i class="ace-icon fa fa-money"></i>
           </span>
         </div>
+        <div *ngIf="formNewOrder.get('price').dirty && formNewOrder.get('price').errors">
+            <p class="alert alert-danger" *ngIf="formNewOrder.get('price')?.errors">Giá nhập quá lớn!</p>
+          </div>
       </div>
 
       <div class="input-wrapper">
