@@ -22,7 +22,17 @@ export class FormGroupComponent implements OnInit {
   }
 
   GetValueForm() {
-    return this.form.value();
+    return this.form.value;
+  }
+
+  ResetForm() {
+    this.form.reset();
+  }
+
+  SetValue(title: string) {
+    this.form.patchValue({
+      title: title
+    });
   }
 
 }
