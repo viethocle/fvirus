@@ -21,4 +21,8 @@ export class FormGroupComponent implements OnInit {
     })
   }
 
+  getValueForm() {
+    return this.form.value();
+  }
+
 }
