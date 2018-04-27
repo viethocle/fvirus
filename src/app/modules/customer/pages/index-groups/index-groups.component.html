@@ -2,12 +2,13 @@
   <app-create-group (newGroup)="handleAddNewGroup($event)"></app-create-group>
   <h1>Quản lý nhóm khách hàng</h1>
   
-  <div class="col-md-12">
+  <div class="col-md-12 col-lg-8">
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dynamic-table_wrapper" class="table table-striped table-bordered table-hover dataTable no-footer">
       <thead>
         <tr>
           <th>Id</th>
           <th>Tên nhóm</th>
+          <th>Hành động</th>
         </tr>
       </thead>
 
@@ -15,8 +16,18 @@
         <tr *ngFor="let group of groups">
           <td>{{ group.id }}</td>
           <td>{{ group.title }}</td>
+          <td class="action-buttons center">
+            <button class="btn btn-xs btn-info" (click)="openModalEdit(group)">
+              <i class="ace-icon fa fa-pencil bigger-120"></i>
+            </button>
+            <button class="btn btn-xs btn-danger" (click)="openModalDelete(group)">
+              <i class="ace-icon fa fa-trash-o bigger-120"></i>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<app-edit-group><app-edit-group>

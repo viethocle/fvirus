@@ -27,7 +27,10 @@ export class CreateGroupComponent implements OnInit {
   sendRequestCreateGroup() {
     this.modal.close();
     this.groupService.addGroup(this.formComponent.GetValueForm())
-        .subscribe(group => this.newGroup.next(group));
+        .subscribe(group => { 
+          this.newGroup.next(group); 
+          this.formComponent.ResetForm();
+        });
   }
 
 }

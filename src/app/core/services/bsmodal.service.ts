@@ -4,6 +4,7 @@ import { Order } from '@modules/dashboard/order';
 import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from "rxjs/ReplaySubject";
+import { Group } from "@modules/customer/group.model";
 
 @Injectable()
 export class BsmodalService {
@@ -14,6 +15,9 @@ export class BsmodalService {
   cancelDrop$ = new Subject<Order>();
   userDelete$ = new Subject<User>();
   userEdit$ = new Subject<User>();
+
+  groupEdit$    = new Subject<Group>();
+  groupDelete$  = new Subject<Group>();
 
   constructor() { }
   // order
@@ -41,4 +45,14 @@ export class BsmodalService {
   selectUserToEdit(user: User) {
     this.userEdit$.next(user);
   }
+
+  selectGroupToEdit(group: Group) {
+    this.groupEdit$.next(group);
+  }
+
+  selectGroupToDelete(group: Group) {
+    this.groupDelete$.next(group);
+  }
+
+
 }

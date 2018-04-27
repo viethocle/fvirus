@@ -2,6 +2,7 @@ import { Subject } from 'rxjs/Subject';
 import { Group } from './../../group.model';
 import { GroupsService } from './../../groups.service';
 import { Component, OnInit } from '@angular/core';
+import { BsmodalService } from '@core/services/bsmodal.service';
 
 @Component({
   selector: 'app-index-groups',
@@ -15,7 +16,8 @@ export class IndexGroupsComponent implements OnInit {
   groups: Group[] = [];
 
   constructor(
-    private groupService: GroupsService
+    private groupService: GroupsService,
+    private bsModalService: BsmodalService
   ) { }
 
   ngOnInit() {
@@ -34,6 +36,14 @@ export class IndexGroupsComponent implements OnInit {
 
   handleAddNewGroup(group: Group) {
     this.groups.unshift(group);
+  }
+
+  openModalEdit(group) {
+    this.bsModalService.selectGroupToEdit(group);
+  }
+
+  openModalDelete(group) {
+    this.bsModalService.selectGroupToDelete(group);
   }
 
 }
