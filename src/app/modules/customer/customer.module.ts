@@ -7,6 +7,8 @@ import { SharedModule } from "@shared/shared.module";
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
 import { IndexGroupsComponent } from './pages/index-groups/index-groups.component';
+import { CreateGroupComponent } from './components/groups/create-group/create-group.component';
+import { FormGroupComponent } from './components/groups/form-group/form-group.component';
 export const CustomerRoutes: Routes = [
   {
     path: "groups",
@@ -25,7 +27,7 @@ export const CustomerRoutes: Routes = [
     RouterModule.forChild(CustomerRoutes),
     DataTablesModule
   ],
-  declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent]
+  declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent, CreateGroupComponent, FormGroupComponent]
 })
 
 export class CustomerModule { }
