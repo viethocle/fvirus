@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BsModalComponent } from 'ng2-bs3-modal';
 
 @Component({
   selector: 'app-create-group',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-group.component.css']
 })
 export class CreateGroupComponent implements OnInit {
+
+  @ViewChild(BsModalComponent) modal: BsModalComponent;  
 
   constructor() { }
 
