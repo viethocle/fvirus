@@ -10,9 +10,9 @@
     <app-form-group></app-form-group>
   </bs-modal-body>
   <bs-modal-footer>
-    <button class="btn btn-primary add-cus"  (click)="sendRequestUpdateGroup()" >
-      Cập nhật</button>
     <button type="button" class="btn btn-grey" (click)="modalEdit.dismiss()">
       {{ 'customers.close' | translate }}</button>
+    <button class="btn btn-primary add-cus" (click)="sendRequestUpdateGroup()">
+      Cập nhật</button>
   </bs-modal-footer>
 </bs-modal>

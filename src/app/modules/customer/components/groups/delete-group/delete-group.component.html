@@ -1,3 +1,17 @@
-<p>
-  delete-group works!
-</p>
+<button class="btn btn-xs btn-danger" (click)="modalDelete.open()">
+  <i class="ace-icon fa fa-trash-o bigger-120"></i>
+</button>
+
+<bs-modal #modalDelete>
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">Xóa nhóm khách hàng</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <h5>Bạn có chắc là muốn xóa nhóm có tên là:</h5>
+    <h5>{{ group?.title }}</h5>
+  </bs-modal-body>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-default" (click)="modalDelete.dismiss()">{{ 'button.cancel' | translate }}</button>
+    <button type="button" class="btn btn-danger" (click)="modalDelete.close()" (click)="deleteGroup()">{{ 'button.delete' | translate }}</button>
+  </bs-modal-footer>
+</bs-modal>
