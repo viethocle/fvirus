@@ -43,6 +43,10 @@ export class IndexGroupsComponent implements OnInit {
      _.assign(this.groups.find(g => g.id === group.id), group);
   }
 
+  handleDeleteGroup(group: Group) {
+    _.remove(this.groups, o => o.id === group.id);
+  }
+
   openModalEdit(group) {
     this.bsModalService.selectGroupToEdit(group);
   }

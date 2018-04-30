@@ -33,4 +33,10 @@ export class GroupsService {
                     .map((res: any) => res.group as Group);
   }
 
+  deleteGroup(group_id): Observable<Group> {
+    const deleteUrl = this.url + '/' + group_id + '.json';
+    return this.http.delete(deleteUrl)
+                    .map((res: any) => res.group as Group);
+  }
+
 }
