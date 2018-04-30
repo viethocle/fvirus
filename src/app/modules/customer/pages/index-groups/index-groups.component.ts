@@ -4,7 +4,9 @@ import { GroupsService } from './../../groups.service';
 import { Component, OnInit } from '@angular/core';
 import { BsmodalService } from '@core/services/bsmodal.service';
 import * as _ from 'lodash';
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
 
+@Destroyable
 @Component({
   selector: 'app-index-groups',
   templateUrl: './index-groups.component.html',
@@ -29,6 +31,9 @@ export class IndexGroupsComponent implements OnInit {
       }
     };
     this.groupService.getGroups()
+        .pipe(
+          takeUntilDestroy(this)
+        )
         .subscribe(groups => { 
           this.groups = groups;
           this.dtTrigger.next();
@@ -46,13 +51,4 @@ export class IndexGroupsComponent implements OnInit {
   handleDeleteGroup(group: Group) {
     _.remove(this.groups, o => o.id === group.id);
   }
-
-  openModalEdit(group) {
-    this.bsModalService.selectGroupToEdit(group);
-  }
-
-  openModalDelete(group) {
-    this.bsModalService.selectGroupToDelete(group);
-  }
-
 }
