@@ -10,6 +10,7 @@ import { IndexGroupsComponent } from './pages/index-groups/index-groups.componen
 import { CreateGroupComponent } from './components/groups/create-group/create-group.component';
 import { FormGroupComponent } from './components/groups/form-group/form-group.component';
 import { EditGroupComponent } from './components/groups/edit-group/edit-group.component';
+import { DeleteGroupComponent } from './components/groups/delete-group/delete-group.component';
 export const CustomerRoutes: Routes = [
   {
     path: "groups",
@@ -28,7 +29,7 @@ export const CustomerRoutes: Routes = [
     RouterModule.forChild(CustomerRoutes),
     DataTablesModule
   ],
-  declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent, CreateGroupComponent, FormGroupComponent, EditGroupComponent]
+  declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent, CreateGroupComponent, FormGroupComponent, EditGroupComponent, DeleteGroupComponent]
 })
 
 export class CustomerModule { }
