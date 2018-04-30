@@ -39,7 +39,7 @@ export class EditGroupComponent implements OnInit {
 
   sendRequestUpdateGroup() {
     this.modalEdit.close();
-    this.groupService.updateGroup(this.groupSelected.id, this.formComponent.GetValueForm())
+    this.groupService.updateGroup(this.groupEdit.id, this.formComponent.GetValueForm())
         .pipe(
           takeUntilDestroy(this)
         )
