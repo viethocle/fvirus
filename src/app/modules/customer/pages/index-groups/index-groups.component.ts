@@ -3,6 +3,7 @@ import { Group } from './../../group.model';
 import { GroupsService } from './../../groups.service';
 import { Component, OnInit } from '@angular/core';
 import { BsmodalService } from '@core/services/bsmodal.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-index-groups',
@@ -36,6 +37,10 @@ export class IndexGroupsComponent implements OnInit {
 
   handleAddNewGroup(group: Group) {
     this.groups.unshift(group);
+  }
+
+  handleUpdateGroup(group: Group) {
+     _.assign(this.groups.find(g => g.id === group.id), group);
   }
 
   openModalEdit(group) {

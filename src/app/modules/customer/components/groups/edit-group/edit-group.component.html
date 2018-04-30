@@ -1,4 +1,8 @@
-<bs-modal #modal>
+<button class="btn btn-xs btn-info" (click)="modalEdit.open()">
+  <i class="ace-icon fa fa-pencil bigger-120"></i>
+</button>
+
+<bs-modal #modalEdit>
   <bs-modal-header [showDismiss]="true">
     <h4 class="modal-title">Chỉnh sửa</h4>
   </bs-modal-header>
@@ -6,10 +10,9 @@
     <app-form-group></app-form-group>
   </bs-modal-body>
   <bs-modal-footer>
-    <button class="btn btn-primary add-cus"  (click)="sendRequestUpdateGroup()" 
-      data-dismiss="modal">
+    <button class="btn btn-primary add-cus"  (click)="sendRequestUpdateGroup()" >
       Cập nhật</button>
-    <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modal.dismiss()">
+    <button type="button" class="btn btn-grey" (click)="modalEdit.dismiss()">
       {{ 'customers.close' | translate }}</button>
   </bs-modal-footer>
 </bs-modal>

@@ -27,4 +27,10 @@ export class GroupsService {
                     .map((res: any) => res.group as Group);
   }
 
+  updateGroup(group_id, value): Observable<Group> {
+    const addUrl = this.url + '/' + group_id + '.json';
+    return this.http.put(addUrl, value)
+                    .map((res: any) => res.group as Group);
+  }
+
 }

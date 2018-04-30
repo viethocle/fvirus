@@ -9,12 +9,13 @@ import { Group } from "@modules/customer/group.model";
 @Injectable()
 export class BsmodalService {
 
-  orderDelete$ = new Subject<Order>();
-  orderEdit$ = new Subject<Order>();
+  orderDelete$  = new Subject<Order>();
+  orderEdit$    = new Subject<Order>();
   paymentOrder$ = new Subject<Order>();
-  cancelDrop$ = new Subject<Order>();
-  userDelete$ = new Subject<User>();
-  userEdit$ = new Subject<User>();
+  cancelDrop$   = new Subject<Order>();
+  
+  userDelete$   = new Subject<User>();
+  userEdit$     = new Subject<User>();
 
   groupEdit$    = new Subject<Group>();
   groupDelete$  = new Subject<Group>();
@@ -47,6 +48,7 @@ export class BsmodalService {
   }
 
   selectGroupToEdit(group: Group) {
+    console.log("CALL ALL");
     this.groupEdit$.next(group);
   }
 

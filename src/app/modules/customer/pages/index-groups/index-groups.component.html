@@ -17,9 +17,7 @@
           <td>{{ group.id }}</td>
           <td>{{ group.title }}</td>
           <td class="action-buttons center">
-            <button class="btn btn-xs btn-info" (click)="openModalEdit(group)">
-              <i class="ace-icon fa fa-pencil bigger-120"></i>
-            </button>
+            <app-edit-group [groupEdit]="group" (updateGroup)="handleUpdateGroup($event)"></app-edit-group>
             <button class="btn btn-xs btn-danger" (click)="openModalDelete(group)">
               <i class="ace-icon fa fa-trash-o bigger-120"></i>
             </button>
@@ -30,4 +28,3 @@
   </div>
 </div>
 
-<app-edit-group><app-edit-group>
