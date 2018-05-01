@@ -16,6 +16,7 @@ import {
   LogoutGuard
 } from './guard/';
 import { BsmodalService } from './services/bsmodal.service';
+import { GroupsService } from '../modules/customer/groups.service';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { BsmodalService } from './services/bsmodal.service';
     Ng2SearchPipe,
     BsmodalService,
     SortTableService,
-    VndPipe
+    VndPipe,
+    GroupsService
     // NgxPermissionsService
   ]
 })

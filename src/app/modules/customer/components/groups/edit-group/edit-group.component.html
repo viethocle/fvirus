@@ -1,0 +1,18 @@
+<button class="btn btn-xs btn-info" (click)="modalEdit.open()">
+  <i class="ace-icon fa fa-pencil bigger-120"></i>
+</button>
+
+<bs-modal #modalEdit>
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">Chỉnh sửa</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <app-form-group></app-form-group>
+  </bs-modal-body>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-grey" (click)="modalEdit.dismiss()">
+      {{ 'customers.close' | translate }}</button>
+    <button class="btn btn-primary add-cus" (click)="sendRequestUpdateGroup()">
+      Cập nhật</button>
+  </bs-modal-footer>
+</bs-modal>

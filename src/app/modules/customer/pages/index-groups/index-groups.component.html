@@ -1,0 +1,28 @@
+<div id="main-product" class="col-md-12">
+  <app-create-group (newGroup)="handleAddNewGroup($event)"></app-create-group>
+  <h1>Quản lý nhóm khách hàng</h1>
+  
+  <div class="col-md-12 col-lg-8">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dynamic-table_wrapper" class="table table-striped table-bordered table-hover dataTable no-footer">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Tên nhóm</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let group of groups">
+          <td>{{ group.id }}</td>
+          <td>{{ group.title }}</td>
+          <td class="action-buttons center">
+            <app-edit-group [groupEdit]="group" (updateGroup)="handleUpdateGroup($event)"></app-edit-group>
+            <app-delete-group [groupDelete]="group" (deleteGroupOutput)="handleDeleteGroup($event)"></app-delete-group>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
