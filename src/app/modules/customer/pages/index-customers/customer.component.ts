@@ -95,7 +95,7 @@ export class CustomerComponent implements OnInit {
   }
 
   navigateUrl(page, per_page, search_text) {
-    this.router.navigate(['/customers'], { queryParams: { page: page, per_page: per_page, search: search_text } })
+    this.router.navigate(['/customers/list'], { queryParams: { page: page, per_page: per_page, search: search_text } })
   }
 
   getCustomers() {

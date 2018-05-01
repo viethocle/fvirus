@@ -17,7 +17,7 @@ export const CustomerRoutes: Routes = [
     component: IndexGroupsComponent
   },
   {
-    path: "",
+    path: "list",
     component: CustomerComponent
   }
 ];

@@ -28,7 +28,8 @@ export class IndexGroupsComponent implements OnInit {
       pagingType: "simple_numbers",
       language: {
         url: '../../assets/i18n/datatables/vi.json'
-      }
+      },
+      order: [[ 1, "asc"]]
     };
     this.groupService.getGroups()
         .pipe(
