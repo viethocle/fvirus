@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from "@angular/router";
 import { CustomerComponent } from './pages/index-customers/customer.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from "@shared/shared.module";
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
@@ -27,7 +28,8 @@ export const CustomerRoutes: Routes = [
     CommonModule,
     SharedModule,
     RouterModule.forChild(CustomerRoutes),
-    DataTablesModule
+    DataTablesModule,
+    NgSelectModule
   ],
   declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent, CreateGroupComponent, FormGroupComponent, EditGroupComponent, DeleteGroupComponent]
 })
