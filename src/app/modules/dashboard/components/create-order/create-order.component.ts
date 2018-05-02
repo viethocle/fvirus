@@ -82,6 +82,7 @@ export class CreateOrderComponent implements OnInit {
     return this.authService.isCurrentUserTechnician;
   }
 
+  get formData() { return <FormArray>this.formNewOrder.get('contents'); }
 
   buildForm() {
     this.formNewOrder = this.formBuilder.group({

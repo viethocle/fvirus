@@ -26,6 +26,7 @@ import { TruncateDescriptionPipe } from './pipes/truncate-description.pipe';
 import { VndPipe } from './pipes/vnd.pipe';
 import { ToastrService } from "./toastr.service";
 import { DateHumanizePipe } from './pipes/date-humanize.pipe';
+import { ParseContentOrderPipe } from './pipes/parse-content-order.pipe';
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -56,7 +57,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SortableColumnComponent,
     ColorOrderComponent,
     NumericDirective,
-    DateHumanizePipe
+    DateHumanizePipe,
+    ParseContentOrderPipe
   ],
   imports: [
     FormsModule,
@@ -95,7 +97,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ColorOrderComponent,
     MyDatePickerModule,
     TextMaskModule,
-    NumericDirective
+    NumericDirective,
+    ParseContentOrderPipe
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },

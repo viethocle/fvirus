@@ -10,7 +10,7 @@
       <thead>
         <tr>
           <th>Id </th>
-          <th>{{ 'table.description' | translate }}</th>
+          <th>{{ 'table.contents' | translate }}</th>
           <th sortable-column="customer">{{ 'table.customer' | translate }}</th>
           <th
             *ngIf="authService.isCurrentUserAccountant || authService.isCurrentUserAdmin"
@@ -24,7 +24,7 @@
       <tbody>
         <tr *ngFor="let order of orders | paginate: configPagination" [@flyOut]="'in'" color-order="{{ order.due_date }}" status-order="{{ order.status }}">
           <td>{{ order.id }}</td>
-          <td>{{ order.description | truncateDescription }}</td>
+          <td>{{ order.contents | parseContentOrder }}</td>
           <td>{{ order.customer.name }}</td>
           <td
             *ngIf="authService.isCurrentUserAccountant || authService.isCurrentUserAdmin"

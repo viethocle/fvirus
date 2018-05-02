@@ -18,6 +18,7 @@
     }
   },
   "table": {
+    "contents": "Nội dung",
     "No": "Order No.",
     "address": "Địa chỉ",
     "amount": "Tiền",
