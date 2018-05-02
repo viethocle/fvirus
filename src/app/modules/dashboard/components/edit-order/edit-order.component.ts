@@ -17,7 +17,8 @@ import {
   FormGroup,
   Validators,
   FormBuilder,
-  AbstractControl
+  AbstractControl,
+  FormArray
 } from '@angular/forms';
 import { Customer } from "@modules/customer/customer.model";
 import { FlyInOut } from '../../flyInOut.animate';
@@ -43,19 +44,20 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   @ViewChildren("listCustomers") listCustomers;
   @Output() updateOrderOutput = new EventEmitter<Order>();
   order: Order;
-  formEditOrder: FormGroup;
+  formEditOrder: FormGroup = null;
   startAt: Date;
   minDueDate: Date;
-  customers: Customer[] = [];
+  customers: Customer[];
   termCustomer = "";
   currentFocusIndex: number = -1;
   customerSelected: Customer;
   roleUser: RoleUser;
+  contents: any;
+  control: any;
 
   priceMask = Object.freeze({
     mask: createNumberMask({
       allowDecimal: false,
-      integerLimit: 10,
       prefix: '',
       thousandsSeparatorSymbol: ','
     })
@@ -90,6 +92,8 @@ export class EditOrderComponent implements OnInit, OnDestroy {
         });
     this.customerService.getCustomersWithObservable()
         .subscribe(customers => this.customers = customers);
+    this.modalEdit.onDismiss.subscribe ( _ => this.exitEdit());
+    console.log(this.formEditOrder);
   }
 
   ngOnDestroy() {
@@ -97,6 +101,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   }
 
   updateOrder() {
+    this.exitEdit();
     this.modalEdit.close();
     this.formEditOrder.patchValue({
       customer_id: this.customerSelected.id
@@ -117,12 +122,36 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   private buildForm() {
     this.formEditOrder = this.formBuilder.group({
       description: [""],
+      contents: this.formBuilder.array([this.createContent()]),
       due_date: ["", Validators.required],
-      price: [""],
+      price: ["",  Validators.max(99999999)],
       paid_amount: [""],
       customer_id: [""]
     });
 
+  }
+
+  createContent(): FormGroup {
+    return this.formBuilder.group({
+      content: '',
+      unit: '',
+      quantity: ''
+    });
+  }
+
+  get formData() { return <FormArray>this.formEditOrder.get('contents'); }
+
+  addRowContent(): void {
+    this.contents = this.formEditOrder.get('contents') as FormArray;
+    this.contents.push(this.createContent());
+  }
+
+  exitEdit() {
+    this.formEditOrder.reset();
+    JSON.parse(this.order.contents).forEach(cont => {
+      this.control.removeAt(cont);
+    });
+    this.modalEdit.dismiss();
   }
 
   private setFormValue() {
@@ -132,9 +161,23 @@ export class EditOrderComponent implements OnInit, OnDestroy {
       price: this.order.price,
       paid_amount: this.order.paid_amount,
       customer_id: this.order.customer.id
-    })
+    });
+    this.setContents();
+    console.log(this.formEditOrder);
   }
 
+  setContents() {
+    this.control = <FormArray>this.formEditOrder.controls.contents;
+    JSON.parse(this.order.contents).forEach(cont => {
+      this.control.removeAt(cont);
+    });
+    JSON.parse(this.order.contents).forEach(cont => {
+      this.control.push(this.formBuilder.group({content: cont.content,
+      unit: cont.unit,
+      quantity: cont.quantity}));
+      console.log(cont);
+    });
+  }
   // * handle event keyup enter andn click customer
   selectCustomer(cus: Customer) {
     this.customerSelected = cus;
