@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '@environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import * as _ from 'lodash';
 @Injectable()
 export class GroupsService {
 
@@ -38,5 +38,4 @@ export class GroupsService {
     return this.http.delete(deleteUrl)
                     .map((res: any) => res.group as Group);
   }
-
 }
