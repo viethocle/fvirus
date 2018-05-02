@@ -79,7 +79,6 @@ export class CustomerService {
       customer: value,
       group_ids: group_ids
     }
-    console.log(result);
     return result;
   }
 
