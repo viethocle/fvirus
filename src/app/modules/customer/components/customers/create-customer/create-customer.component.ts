@@ -1,9 +1,9 @@
-import { FormCustomerComponent } from './../form-customer/form-customer.component';
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { BsModalComponent } from 'ng2-bs3-modal';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Customer } from '@modules/customer/customer.model';
-import { CustomerService } from "@modules/customer/customer.service";
+import { CustomerService } from '@modules/customer/customer.service';
+import { BsModalComponent } from 'ng2-bs3-modal';
+
+import { FormCustomerComponent } from './../form-customer/form-customer.component';
 
 @Component({
   selector: 'app-create-customer',
@@ -21,8 +21,7 @@ export class CreateCustomerComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
+  
   addCustomer() {
     this.customerService
       .addCustomer(this.formCustomer.getValueForm())
@@ -31,7 +30,4 @@ export class CreateCustomerComponent implements OnInit {
         this.formCustomer.resetForm();
       });
   }
-
-
-
 }

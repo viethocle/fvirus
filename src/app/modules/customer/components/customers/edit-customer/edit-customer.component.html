@@ -3,14 +3,14 @@
     <h4 class="modal-title">{{ 'customers.title_edit' | translate }}</h4>
   </bs-modal-header>
   <bs-modal-body>
-    
+    <app-form-customer></app-form-customer>
   </bs-modal-body>
   <bs-modal-footer>
     <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modalEdit.dismiss()">
       {{ 'customers.close' | translate }}</button>
 
     <button
-      class="btn btn-primary add-cus" [disabled]="formEditCustomer.invalid" data-dismiss="modal"
+      class="btn btn-primary add-cus"  data-dismiss="modal"
       (click)="sendRequestEditCustomer()">
       {{ 'customers.edit' | translate }}</button>
   </bs-modal-footer>
