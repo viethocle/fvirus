@@ -5,19 +5,7 @@
     <h4 class="modal-title">{{ 'customers.titleModal' | translate }}</h4>
   </bs-modal-header>
   <bs-modal-body>
-    <div class="form-group">
-      <app-input-field [attribute]="'table.name' | translate" [control]="formAdd.get('name')">
-      </app-input-field>
-
-      <app-input-field [attribute]="'table.phone' | translate" [control]="formAdd.get('phone')">
-      </app-input-field>
-
-      <app-input-field [attribute]="'table.email' | translate" [control]="formAdd.get('email')">
-      </app-input-field>
-
-      <app-input-field [attribute]="'table.address' | translate" [control]="formAdd.get('address')">
-      </app-input-field>
-    </div>
+    <app-form-customer></app-form-customer>
   </bs-modal-body>
   <bs-modal-footer>
     <button class="btn btn-primary add-cus" (click)="addCustomer(formAdd.value)" (click)="modal.close()" [disabled]="formAdd.invalid" data-dismiss="modal">

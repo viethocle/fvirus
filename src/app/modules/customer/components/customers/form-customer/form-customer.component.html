@@ -1,3 +1,13 @@
-<p>
-  form-customer works!
-</p>
+<div class="form-group">
+  <app-input-field [attribute]="'table.name' | translate" [control]="form.get('name')">
+  </app-input-field>
+
+  <app-input-field [attribute]="'table.phone' | translate" [control]="form.get('phone')">
+  </app-input-field>
+
+  <app-input-field [attribute]="'table.email' | translate" [control]="form.get('email')">
+  </app-input-field>
+
+  <app-input-field [attribute]="'table.address' | translate" [control]="form.get('address')">
+  </app-input-field>
+</div>

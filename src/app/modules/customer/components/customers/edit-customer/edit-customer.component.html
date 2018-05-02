@@ -3,19 +3,7 @@
     <h4 class="modal-title">{{ 'customers.title_edit' | translate }}</h4>
   </bs-modal-header>
   <bs-modal-body>
-    <div class="form-group">
-      <app-input-field [attribute]="'table.name' | translate" [control]="formEditCustomer.get('name')">
-      </app-input-field>
-
-      <app-input-field [attribute]="'table.phone' | translate" [control]="formEditCustomer.get('phone')">
-      </app-input-field>
-
-      <app-input-field [attribute]="'table.email' | translate" [control]="formEditCustomer.get('email')">
-      </app-input-field>
-
-      <app-input-field [attribute]="'table.address' | translate" [control]="formEditCustomer.get('address')">
-      </app-input-field>
-    </div>
+    
   </bs-modal-body>
   <bs-modal-footer>
     <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modalEdit.dismiss()">
