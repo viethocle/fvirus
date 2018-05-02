@@ -10,4 +10,13 @@
 
   <app-input-field [attribute]="'table.address' | translate" [control]="form.get('address')">
   </app-input-field>
+
+  <label for="">Nhóm khách hàng: </label>
+
+  <ng-select [items]="groups$ | async"
+           bindLabel="title"
+           bindValue="id"
+           [multiple]="true"
+           [formControl]="form.get('group_ids')">
+  </ng-select>
 </div>

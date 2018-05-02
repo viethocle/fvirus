@@ -1,6 +1,9 @@
+import { GroupsService } from './../../../groups.service';
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customer } from '@modules/customer/customer.model';
+import { Group } from "@modules/customer/group.model";
 
 @Component({
   selector: 'app-form-customer',
@@ -11,12 +14,16 @@ export class FormCustomerComponent implements OnInit {
 
   form: FormGroup;
 
+  groups$: Observable<Group[]>;
+
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private groupService: GroupsService
   ) { }
 
   ngOnInit() {
     this.buildForm();
+    this.groups$ = this.groupService.getGroups();
   }
 
   private buildForm() {
