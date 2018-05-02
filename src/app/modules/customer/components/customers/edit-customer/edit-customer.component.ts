@@ -1,4 +1,3 @@
-import { CustomerService } from './../../customer.service';
 import { Subject } from 'rxjs/Subject';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, SimpleChange, EventEmitter, Output } from '@angular/core';
@@ -6,6 +5,7 @@ import { Customer } from '@modules/customer/customer.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, tap } from 'rxjs/operators';
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import { CustomerService } from "@modules/customer/customer.service";
 
 @Destroyable
 @Component({

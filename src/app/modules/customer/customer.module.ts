@@ -12,6 +12,7 @@ import { CreateGroupComponent } from './components/groups/create-group/create-gr
 import { FormGroupComponent } from './components/groups/form-group/form-group.component';
 import { EditGroupComponent } from './components/groups/edit-group/edit-group.component';
 import { DeleteGroupComponent } from './components/groups/delete-group/delete-group.component';
+import { FormCustomerComponent } from './components/customers/form-customer/form-customer.component';
 export const CustomerRoutes: Routes = [
   {
     path: "groups",
@@ -31,7 +32,7 @@ export const CustomerRoutes: Routes = [
     DataTablesModule,
     NgSelectModule
   ],
-  declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent, CreateGroupComponent, FormGroupComponent, EditGroupComponent, DeleteGroupComponent]
+  declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent, CreateGroupComponent, FormGroupComponent, EditGroupComponent, DeleteGroupComponent, FormCustomerComponent]
 })
 
 export class CustomerModule { }

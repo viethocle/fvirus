@@ -1,8 +1,8 @@
-import { CustomerService } from './../../customer.service';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customer } from '@modules/customer/customer.model';
+import { CustomerService } from "@modules/customer/customer.service";
 
 @Component({
   selector: 'app-create-customer',
