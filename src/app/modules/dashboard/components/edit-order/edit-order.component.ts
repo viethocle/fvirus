@@ -101,7 +101,6 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   }
 
   updateOrder() {
-    this.exitEdit();
     this.modalEdit.close();
     this.formEditOrder.patchValue({
       customer_id: this.customerSelected.id
@@ -147,7 +146,6 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   }
 
   exitEdit() {
-    this.formEditOrder.reset();
     JSON.parse(this.order.contents).forEach(cont => {
       this.control.removeAt(cont);
     });
