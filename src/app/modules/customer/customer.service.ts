@@ -58,6 +58,7 @@ export class CustomerService {
 
   updateCustomer(value, id: number): Observable<any> {
     const updateUrl = `${this.url}/${id}.json`;
+    value = this.changeParam(value);
     return this.http
       .put(updateUrl, value)
       .map((res: any) => res.customer as any);
@@ -65,9 +66,21 @@ export class CustomerService {
 
   addCustomer(value: any): Observable<Customer> {
     const addUrl = `${this.url}.json`;
+    value = this.changeParam(value);
     return this.http
       .post(addUrl, value)
       .map((res: any) => res.customer as Customer);
+  }
+
+  changeParam(value: any) {
+    let group_ids = value.group_ids;
+    value = _.omit(value, 'group_ids');
+    let result = {
+      customer: value,
+      group_ids: group_ids
+    }
+    console.log(result);
+    return result;
   }
 
 }
