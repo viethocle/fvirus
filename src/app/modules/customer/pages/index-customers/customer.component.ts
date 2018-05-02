@@ -98,6 +98,14 @@ export class CustomerComponent implements OnInit {
     this.router.navigate(['/customers/list'], { queryParams: { page: page, per_page: per_page, search: search_text } })
   }
 
+
+  showGroups(customer: Customer, truncate: boolean) {
+    let content = customer.groups.map(g => g.title).join(", ");
+    if (truncate) 
+      return _.truncate(content, 30);
+    return content;
+  }
+
   getCustomers() {
     
   }
