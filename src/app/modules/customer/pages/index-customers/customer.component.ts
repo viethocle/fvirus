@@ -1,3 +1,4 @@
+import { GroupsService } from './../../groups.service';
 import { FlyOut } from './../../../dashboard/flyInOut.animate';
 import { tap, switchMap, map, debounceTime } from 'rxjs/operators';
 import { Customer } from '@modules/customer/customer.model';
@@ -19,6 +20,7 @@ import { CustomerService } from "@modules/customer/customer.service";
 import { ToastrService } from "@shared/toastr.service";
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
 import { fromEvent } from 'rxjs/observable/fromEvent';
+import { Group } from "@modules/customer/group.model";
 
 @Destroyable
 @Component({
@@ -33,6 +35,7 @@ export class CustomerComponent implements OnInit {
   @ViewChild("modalConfirm") modalConfirm: BsModalComponent;
 
   customers: Customer[];
+  groups$: Observable<Group[]>;
   cus: Customer = new Customer();
   customerSelected: Customer;
   keyUpSearch = new Subject<string>();
@@ -49,6 +52,7 @@ export class CustomerComponent implements OnInit {
     private customerService: CustomerService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
+    private groupService: GroupsService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -58,6 +62,7 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
     this.getPage(1);
     this.initEvent();
+    this.groups$ = this.groupService.getGroups();
   }
 
   initEvent() {
@@ -96,6 +101,12 @@ export class CustomerComponent implements OnInit {
     if (truncate) 
       return _.truncate(content, 30);
     return content;
+  }
+
+  onChangeFilter(selected_groups) {
+    selected_groups = selected_groups.map(s => s.id);
+    this.changeQueryParam([{ name_query: 'with_any_group_ids', value: selected_groups },
+                           { name_query: 'page', value: 1 }]);
   }
 
   changeQueryParam(query_params: [{ name_query: string, value: any}]) {

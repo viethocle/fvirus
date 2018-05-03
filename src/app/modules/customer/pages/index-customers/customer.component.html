@@ -8,7 +8,7 @@
 
   <div id="dynamic-table_wrapper_wrapper" class="dataTables_wrapper form-inline no-footer">
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-md-3">
         <div class="dataTables_length" id="dynamic-table_wrapper_length">
           <label>Hiển thị
             <select (change)="onChangeCount($event)" name="dynamic-table_wrapper_length" aria-controls="dynamic-table_wrapper"
@@ -20,7 +20,16 @@
             </select> dòng</label>
         </div>
       </div>
-      <div class="col-xs-6">
+      <div class="col-md-5 filter-group">
+        <ng-select 
+          placeholder="Bộ lọc theo nhóm khách hàng"
+          [items]="groups$ | async"
+          bindLabel="title"
+          bindValue="id"
+          [multiple]="true"
+          (change)="onChangeFilter($event)"></ng-select>
+      </div>
+      <div class="col-md-4">
         <div id="dynamic-table_wrapper_filter" class="dataTables_filter">
           <label>Tìm kiếm:
             <input id="search-customer" type="text" class="form-control input-sm" placeholder="Theo tên, địa chỉ, điện thoại, .." aria-controls="dynamic-table_wrapper">
