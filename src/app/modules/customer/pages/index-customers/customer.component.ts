@@ -1,24 +1,22 @@
-import { FlyOut } from './../../../dashboard/flyInOut.animate';
-import { tap, switchMap, map, debounceTime } from 'rxjs/operators';
+import 'rxjs/add/operator/map';
+
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Customer } from '@modules/customer/customer.model';
-import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from "rxjs/Subject";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  FormBuilder
-} from "@angular/forms";
-import { BsModalComponent } from "ng2-bs3-modal";
-import * as _ from "lodash";
-import { ToastsManager } from "ng2-toastr/ng2-toastr";
-import { CustomerService } from "@modules/customer/customer.service";
-import { ToastrService } from "@shared/toastr.service";
-import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import { CustomerService } from '@modules/customer/customer.service';
+import { Group } from '@modules/customer/group.model';
+import { ToastrService } from '@shared/toastr.service';
+import * as _ from 'lodash';
+import { BsModalComponent } from 'ng2-bs3-modal';
+import { Observable } from 'rxjs/Observable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
+import { debounceTime, map, switchMap, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
+
+import { FlyOut } from './../../../dashboard/flyInOut.animate';
+import { GroupsService } from './../../groups.service';
 
 @Destroyable
 @Component({
@@ -30,19 +28,13 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
   ]
 })
 export class CustomerComponent implements OnInit {
-  @ViewChild("modal") modal: BsModalComponent;
   @ViewChild("modalConfirm") modalConfirm: BsModalComponent;
 
-  formAdd: FormGroup;
-  formEditCustomer: FormGroup;
   customers: Customer[];
+  groups$: Observable<Group[]>;
   cus: Customer = new Customer();
-  lists: Array<any> = [];
-  editing = -1;
   customerSelected: Customer;
   keyUpSearch = new Subject<string>();
-  currentPerPage = 10;
-  currentSearch = "";
   customerToEdit: Customer;
 
   public configPagination = {
@@ -56,6 +48,7 @@ export class CustomerComponent implements OnInit {
     private customerService: CustomerService,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
+    private groupService: GroupsService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -63,8 +56,9 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPage(1, 10);
+    this.getPage(1);
     this.initEvent();
+    this.groups$ = this.groupService.getGroups();
   }
 
   initEvent() {
@@ -76,7 +70,7 @@ export class CustomerComponent implements OnInit {
             this.configPagination.itemsPerPage = params.per_page;
           }),
           switchMap(params => 
-            this.customerService.getCustomersWithPage(params.page, params.per_page, params.search))
+            this.customerService.getCustomersWithPage(params))
         )
         .subscribe((res: any) => {
           this.customers = res.customers;
@@ -88,10 +82,9 @@ export class CustomerComponent implements OnInit {
     const inputSearch$ = fromEvent(inputSearch, 'keyup')
         .pipe(
           map((i: any) => i.currentTarget.value),
-          debounceTime(500),
-          tap(value => this.currentSearch = value)
+          debounceTime(500)
         )
-        .subscribe(value => this.navigateUrl(1, this.currentPerPage, value));
+        .subscribe(value => this.changeQueryParam([{name_query: 'page', value: 1}, {name_query: 'search_query', value: value}]));
   }
 
   navigateUrl(page, per_page, search_text) {
@@ -106,16 +99,26 @@ export class CustomerComponent implements OnInit {
     return content;
   }
 
-  getCustomers() {
-    
+  onChangeFilter(selected_groups) {
+    selected_groups = selected_groups.map(s => s.id);
+    this.changeQueryParam([{ name_query: 'with_any_group_ids', value: selected_groups },
+                           { name_query: 'page', value: 1 }]);
+  }
+
+  changeQueryParam(query_params: [{ name_query: string, value: any}]) {
+    const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
+    query_params.forEach(query => {
+      queryParams[query.name_query] = query.value;
+    })
+    this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
   }
 
   onChangeCount($event) {
-    this.navigateUrl(1, this.currentPerPage, this.currentSearch);
+    this.changeQueryParam([{name_query: 'page', value: 1}, {name_query: 'per_page', value: $event.target.value}]);
   }
 
-  getPage(page: number, per_page = this.currentPerPage, search = this.currentSearch) {
-    this.navigateUrl(page, per_page, search);
+  getPage(page: number) {
+    this.changeQueryParam([{name_query: 'page', value: page}]);
   }
 
   openModalEdit(customer: Customer) {
