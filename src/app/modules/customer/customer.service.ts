@@ -27,16 +27,7 @@ export class CustomerService {
   }
 
 
-  getCustomersWithPage(
-    page: number,
-    per_page: number,
-    search_text: string
-  ): Observable<ICustomersTotal> {
-    const params = {
-      page: page, 
-      per_page: per_page, 
-      search_query: search_text
-    }
+  getCustomersWithPage(params): Observable<ICustomersTotal> {
     const url = `${this.baseUrl}/customers-filteric.json`;
     return this.http
       .post(url, params)

@@ -2,7 +2,7 @@ import { FlyOut } from './../../../dashboard/flyInOut.animate';
 import { tap, switchMap, map, debounceTime } from 'rxjs/operators';
 import { Customer } from '@modules/customer/customer.model';
 import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
@@ -63,7 +63,7 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPage(1, 10);
+    this.getPage(1);
     this.initEvent();
   }
 
@@ -76,7 +76,7 @@ export class CustomerComponent implements OnInit {
             this.configPagination.itemsPerPage = params.per_page;
           }),
           switchMap(params => 
-            this.customerService.getCustomersWithPage(params.page, params.per_page, params.search))
+            this.customerService.getCustomersWithPage(params))
         )
         .subscribe((res: any) => {
           this.customers = res.customers;
@@ -91,7 +91,7 @@ export class CustomerComponent implements OnInit {
           debounceTime(500),
           tap(value => this.currentSearch = value)
         )
-        .subscribe(value => this.navigateUrl(1, this.currentPerPage, value));
+        .subscribe(value => this.changeQueryParam([{name_query: 'page', value: 1}, {name_query: 'search_query', value: value}]));
   }
 
   navigateUrl(page, per_page, search_text) {
@@ -106,16 +106,20 @@ export class CustomerComponent implements OnInit {
     return content;
   }
 
-  getCustomers() {
-    
+  changeQueryParam(query_params: [{ name_query: string, value: any}]) {
+    const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
+    query_params.forEach(query => {
+      queryParams[query.name_query] = query.value;
+    })
+    this.router.navigate(['.'], { relativeTo: this.route, queryParams: queryParams })
   }
 
   onChangeCount($event) {
-    this.navigateUrl(1, this.currentPerPage, this.currentSearch);
+    this.changeQueryParam([{name_query: 'page', value: 1}, {name_query: 'per_page', value: $event.target.value}]);
   }
 
-  getPage(page: number, per_page = this.currentPerPage, search = this.currentSearch) {
-    this.navigateUrl(page, per_page, search);
+  getPage(page: number) {
+    this.changeQueryParam([{name_query: 'page', value: page}]);
   }
 
   openModalEdit(customer: Customer) {
