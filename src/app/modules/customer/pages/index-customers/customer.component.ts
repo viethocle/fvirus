@@ -1,26 +1,22 @@
-import { GroupsService } from './../../groups.service';
-import { FlyOut } from './../../../dashboard/flyInOut.animate';
-import { tap, switchMap, map, debounceTime } from 'rxjs/operators';
+import 'rxjs/add/operator/map';
+
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Customer } from '@modules/customer/customer.model';
-import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
-import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Subject } from "rxjs/Subject";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  FormBuilder
-} from "@angular/forms";
-import { BsModalComponent } from "ng2-bs3-modal";
-import * as _ from "lodash";
-import { ToastsManager } from "ng2-toastr/ng2-toastr";
-import { CustomerService } from "@modules/customer/customer.service";
-import { ToastrService } from "@shared/toastr.service";
-import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import { CustomerService } from '@modules/customer/customer.service';
+import { Group } from '@modules/customer/group.model';
+import { ToastrService } from '@shared/toastr.service';
+import * as _ from 'lodash';
+import { BsModalComponent } from 'ng2-bs3-modal';
+import { Observable } from 'rxjs/Observable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
-import { Group } from "@modules/customer/group.model";
+import { debounceTime, map, switchMap, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
+
+import { FlyOut } from './../../../dashboard/flyInOut.animate';
+import { GroupsService } from './../../groups.service';
 
 @Destroyable
 @Component({
