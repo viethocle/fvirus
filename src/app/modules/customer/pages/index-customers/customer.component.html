@@ -11,7 +11,7 @@
       <div class="col-xs-6">
         <div class="dataTables_length" id="dynamic-table_wrapper_length">
           <label>Hiển thị
-            <select [(ngModel)]="currentPerPage" (change)="onChangeCount($event)" name="dynamic-table_wrapper_length" aria-controls="dynamic-table_wrapper"
+            <select (change)="onChangeCount($event)" name="dynamic-table_wrapper_length" aria-controls="dynamic-table_wrapper"
               class="form-control input-sm">
               <option value="10">10</option>
               <option value="25">25</option>

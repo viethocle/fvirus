@@ -30,19 +30,12 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
   ]
 })
 export class CustomerComponent implements OnInit {
-  @ViewChild("modal") modal: BsModalComponent;
   @ViewChild("modalConfirm") modalConfirm: BsModalComponent;
 
-  formAdd: FormGroup;
-  formEditCustomer: FormGroup;
   customers: Customer[];
   cus: Customer = new Customer();
-  lists: Array<any> = [];
-  editing = -1;
   customerSelected: Customer;
   keyUpSearch = new Subject<string>();
-  currentPerPage = 10;
-  currentSearch = "";
   customerToEdit: Customer;
 
   public configPagination = {
@@ -88,8 +81,7 @@ export class CustomerComponent implements OnInit {
     const inputSearch$ = fromEvent(inputSearch, 'keyup')
         .pipe(
           map((i: any) => i.currentTarget.value),
-          debounceTime(500),
-          tap(value => this.currentSearch = value)
+          debounceTime(500)
         )
         .subscribe(value => this.changeQueryParam([{name_query: 'page', value: 1}, {name_query: 'search_query', value: value}]));
   }
