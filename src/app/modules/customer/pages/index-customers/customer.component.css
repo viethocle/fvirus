@@ -1,5 +1,9 @@
 #search-customer {
-  width: 250px;
+  margin-right: 0px;
+}
+
+.form-search-query {
+  text-align: right;
 }
 
 .filter-group >>> ng-select.ng-select .ng-select-container .ng-value-container .ng-input>input{
