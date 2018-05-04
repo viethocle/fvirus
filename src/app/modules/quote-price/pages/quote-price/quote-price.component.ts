@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-quote-price',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuotePriceComponent implements OnInit {
 
+  today_formatLL: any;
+
   constructor() { }
 
   ngOnInit() {
+    this.today_formatLL = moment().locale('vi').format('LL');
   }
 
 }
