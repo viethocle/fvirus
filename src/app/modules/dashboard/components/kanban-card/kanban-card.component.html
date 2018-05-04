@@ -1,9 +1,6 @@
 <div  class="card" color-order="{{ order.due_date }}" status-order="{{ order.status }}">
   <div>
-    <div class="card-key" (click)="openDetailModal(order)"> #{{ order.id }}</div>
-    <h5>
-      <i class="fa fa-users  "></i> {{order.customer?.name}}
-    </h5>
+    <div class="card-key" (click)="openDetailModal(order)"> <i class="fa fa-users  "></i> {{order.customer?.name}}</div>
     <h6 [tooltip]="kanbanCardToolTip">{{ order.contents | parseContentOrder }}</h6>
     <h6>
        {{ 'orders.due-date' | translate }}: {{ order.due_date | dateTimeVi}}
@@ -13,8 +10,8 @@
 
 <tooltip-content #kanbanCardToolTip>
   <div class="box-tooltip">
-    <h5 class="title-tooltip text-left">{{ 'orders.description' | translate }}:</h5>
-    <span class="text-left">{{order.description }}</span>
+<h5 class="title-tooltip text-left">{{ 'orders.content' | translate }}:</h5>
+    <span class="text-left">{{order.contents }}</span>
   </div>
 </tooltip-content>
 
