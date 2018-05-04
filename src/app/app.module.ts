@@ -24,6 +24,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { TokenInterceptor } from './modules/auth/token.interceptor';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { NumericDirective } from '@shared/directives/numeric.directive';
+import { DetailOrderComponent } from './modules/dashboard/components/detail-order/detail-order.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -35,7 +36,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     SidebarComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    DetailOrderComponent
   ],
   imports: [
     BrowserModule,
