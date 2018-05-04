@@ -55,16 +55,15 @@
 
     <div class="col-md-4">
       <label for="" class="control-label">
-        Khách Hàng
+        {{ 'customers.title' | translate }}:
       </label>
       <!-- show customer selected -->
       <div>
         <div class="widget-box widget-color-green2">
           <div class="widget-header">
             <h5 class="widget-title bigger lighter">
-              <i class="ace-icon fa fa-users" tooltip="{{ 'tooltip.close' | translate }}"></i> {{ 'customers.selected_customer' | translate }}
+              <i class="ace-icon fa fa-users" tooltip="{{ 'tooltip.close' | translate }}"></i> Thông tin khách hàng
             </h5>
-            <i class="ace-icon fa fa-times close-btn pointer"></i>
           </div>
           <div class="widget-body">
             <div class="widget-main">
