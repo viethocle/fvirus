@@ -17,3 +17,13 @@ table {
 th {
   font-weight: normal;
 }
+
+.id-user {
+  float: right;
+  width: 50%;
+}
+
+.table-row {
+  table-layout: fixed;
+  background-color: #ffffff;
+}
