@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="col-md-5 filter-group">
-        <ng-select 
+        <ng-select
           placeholder="Bộ lọc theo nhóm khách hàng"
           [items]="groups$ | async"
           bindLabel="title"
@@ -57,11 +57,11 @@
 
       <tbody>
         <tr *ngFor="let customer of customers | paginate: configPagination" [@flyOut]="'in'">
-          <td>{{ customer.name }}</td>
-          <td>{{ customer.email }}</td>
-          <td>{{ customer.phone }}</td>
-          <td>{{ customer.address }}</td>
-          <td>{{ showGroups(customer, true) }}</td>
+          <td (click)="openModalDetail(customer)">{{ customer.name }}</td>
+          <td (click)="openModalDetail(customer)">{{ customer.email }}</td>
+          <td (click)="openModalDetail(customer)">{{ customer.phone }}</td>
+          <td (click)="openModalDetail(customer)">{{ customer.address }}</td>
+          <td (click)="openModalDetail(customer)">{{ showGroups(customer, true) }}</td>
           <td class="action-buttons center">
             <button class="btn btn-xs btn-info" (click)="openModalEdit(customer)">
               <i class="ace-icon fa fa-pencil bigger-120"></i>
@@ -124,4 +124,3 @@
   (dismissModalEdit)="customerToEdit = null"
   (customerUpdatedEmit)="handleUpdateCustomer($event)"
   ></app-edit-customer>
-

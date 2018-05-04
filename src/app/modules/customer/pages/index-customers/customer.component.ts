@@ -37,6 +37,7 @@ export class CustomerComponent implements OnInit {
   keyUpSearch = new Subject<string>();
   customerToEdit: Customer;
 
+
   public configPagination = {
     id: "server",
     itemsPerPage: 10,
@@ -119,6 +120,10 @@ export class CustomerComponent implements OnInit {
 
   getPage(page: number) {
     this.changeQueryParam([{name_query: 'page', value: page}]);
+  }
+
+  openModalDetail(customer: Customer) {
+    this.router.navigate([`/customers/${customer.id}`]);
   }
 
   openModalEdit(customer: Customer) {

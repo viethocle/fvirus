@@ -14,6 +14,7 @@ import { EditGroupComponent } from './components/groups/edit-group/edit-group.co
 import { FormGroupComponent } from './components/groups/form-group/form-group.component';
 import { CustomerComponent } from './pages/index-customers/customer.component';
 import { IndexGroupsComponent } from './pages/index-groups/index-groups.component';
+import { DetailCustomerComponent } from './components/customers/detail-customer/detail-customer.component';
 
 export const CustomerRoutes: Routes = [
   {
@@ -23,6 +24,10 @@ export const CustomerRoutes: Routes = [
   {
     path: "list",
     component: CustomerComponent
+  },
+  {
+    path: ":id",
+    component: DetailCustomerComponent
   }
 ];
 
@@ -34,7 +39,7 @@ export const CustomerRoutes: Routes = [
     DataTablesModule,
     NgSelectModule
   ],
-  declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent, CreateGroupComponent, FormGroupComponent, EditGroupComponent, DeleteGroupComponent, FormCustomerComponent]
+  declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent, CreateGroupComponent, FormGroupComponent, EditGroupComponent, DeleteGroupComponent, FormCustomerComponent, DetailCustomerComponent]
 })
 
 export class CustomerModule { }

@@ -41,10 +41,17 @@ export class CustomerService {
       .map((res: any) => res.customers as Customer[]);
   }
 
+  getCustomer(id: Number): Observable<Customer> {
+    const getUrl = `${this.url}/${id}.json`;
+    return this.http
+      .get(getUrl)
+      .map((res: any) => res.customer as Customer);
+  }
+
   deleteCustomer(customer: Customer): Observable<any> {
     const deleteUrl = `${this.url}/${customer.id}.json`;
     return this.http
-      .delete(deleteUrl)
+      .delete(deleteUrl);
   }
 
   updateCustomer(value, id: number): Observable<any> {
