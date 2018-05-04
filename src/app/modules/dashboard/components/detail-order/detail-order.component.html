@@ -1,3 +1,96 @@
-<p>
-  detail-order works!
-</p>
+<bs-modal #modalDetail [size]="'lg'" [keyboard]="false">
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title"> Chi tiết đơn hàng</h4>
+  </bs-modal-header>
+
+  <bs-modal-body class="container-fluid">
+
+    <div class="col-md-8">
+      <!-- description -->
+      <div>
+        <table id="dynamic-table_wrapper" class="table table-striped table-bordered table-hover dataTable no-footer table-description"
+          cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th class="stt">Stt</th>
+              <th class="content">Nội dung</th>
+              <th class="unit">Đơn vị</th>
+              <th>Số lượng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of contents; let i = index;">
+              <td> {{i}}</td>
+              <td>
+                {{item.content}}
+              </td>
+              <td>
+                {{item.unit}}
+              </td>
+              <td>
+                {{item.quantity}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="authService.isCurrentUserAdmin || authService.isCurrentUserAccountant">
+        <label class="control-label">{{ 'orders.price' | translate }}:</label>
+        <strong>{{order?.price | vnd}}</strong>
+      </div>
+
+      <div *ngIf="authService.isCurrentUserAdmin || authService.isCurrentUserAccountant">
+        <label for="paid_amount" class="control-label">{{ 'orders.paid_amount' | translate }}:</label>
+        <strong>{{order?.paid_amount | vnd}}</strong>
+      </div>
+
+      <div class="input-wrapper">
+        <label for="datetime-picker" class="control-label">{{ 'orders.due-date' | translate }}:</label>
+        <strong>{{order?.due_date | dateTimeVi}}</strong>
+      </div>
+
+
+    </div>
+
+    <div class="col-md-4">
+      <label for="" class="control-label">
+        {{ 'customers.title' | translate }}:
+      </label>
+      <!-- show customer selected -->
+      <div>
+        <div class="widget-box widget-color-green2">
+          <div class="widget-header">
+            <h5 class="widget-title bigger lighter">
+              <i class="ace-icon fa fa-users" tooltip="{{ 'tooltip.close' | translate }}"></i> {{ 'customers.selected_customer' | translate }}
+            </h5>
+            <i class="ace-icon fa fa-times close-btn pointer" (click)="customerSelected=null"></i>
+          </div>
+          <div class="widget-body">
+            <div class="widget-main">
+              <dl class="dl-horizontal">
+                <dt>{{ 'table.name' | translate }}</dt>
+                <dd>{{order?.customer.name}}</dd>
+
+                <dt>{{ 'table.phone' | translate }}</dt>
+                <dd>{{order?.customer.phone}}</dd>
+
+                <dt>{{ 'table.email' | translate }}</dt>
+                <dd>{{order?.customer.email}}</dd>
+
+                <dt>{{ 'table.address' | translate }}</dt>
+                <dd>{{order?.customer.address}}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </bs-modal-body>
+
+  <bs-modal-footer>
+    <button type="button" class="btn btn-default" (click)="exitView()">{{ 'button.cancel' | translate }}</button>
+  </bs-modal-footer>
+</bs-modal>

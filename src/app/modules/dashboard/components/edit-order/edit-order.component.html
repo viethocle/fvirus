@@ -51,16 +51,6 @@
         </div>
       </div>
 
-      <div *ngIf="authService.isCurrentUserTechnician">
-        <label for="paid_amount" class="control-label">{{ 'orders.paid_amount' | translate }}</label>
-        <div class="input-group">
-          <input type="text" class="form-control right-align" id="paid_amount" [value]="order?.paid_amount" readonly=true [textMask]="priceMask">
-          <span class="input-group-addon">
-            <i class="ace-icon fa fa-money"></i>
-          </span>
-        </div>
-      </div>
-
       <div
          *ngIf="authService.isCurrentUserAdmin || authService.isCurrentUserAccountant"
         [class.has-error]="formEditOrder.get('paid_amount').errors && (formEditOrder.get('paid_amount').dirty || formEditOrder.get('paid_amount').touched)">
@@ -71,6 +61,9 @@
           <span class="input-group-addon">
             <i class="ace-icon fa fa-money"></i>
           </span>
+        </div>
+        <div *ngIf="formEditOrder.get('price').dirty && formEditOrder.get('price').errors">
+          <p class="alert alert-danger" *ngIf="formEditOrder.get('price')?.errors">Giá nhập quá lớn!</p>
         </div>
       </div>
 

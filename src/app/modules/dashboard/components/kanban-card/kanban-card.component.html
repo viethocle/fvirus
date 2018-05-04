@@ -1,6 +1,6 @@
-<div class="card" color-order="{{ order.due_date }}" status-order="{{ order.status }}">
+<div  class="card" color-order="{{ order.due_date }}" status-order="{{ order.status }}">
   <div>
-    <div class="card-key"> #{{ order.id }}</div>
+    <div class="card-key" (click)="openDetailModal(order)"> #{{ order.id }}</div>
     <h5>
       <i class="fa fa-users  "></i> {{order.customer?.name}}
     </h5>
@@ -17,3 +17,4 @@
     <span class="text-left">{{order.description }}</span>
   </div>
 </tooltip-content>
+

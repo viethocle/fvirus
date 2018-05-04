@@ -52,7 +52,7 @@ export class CustomerComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-   
+
   }
 
   ngOnInit() {
@@ -69,7 +69,7 @@ export class CustomerComponent implements OnInit {
             this.configPagination.currentPage = params.page;
             this.configPagination.itemsPerPage = params.per_page;
           }),
-          switchMap(params => 
+          switchMap(params =>
             this.customerService.getCustomersWithPage(params))
         )
         .subscribe((res: any) => {
@@ -94,8 +94,8 @@ export class CustomerComponent implements OnInit {
 
   showGroups(customer: Customer, truncate: boolean) {
     let content = customer.groups.map(g => g.title).join(", ");
-    if (truncate) 
-      return _.truncate(content, 30);
+    if (truncate)
+      return _.truncate(content);
     return content;
   }
 

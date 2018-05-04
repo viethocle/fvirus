@@ -9,11 +9,12 @@ import { Group } from "@modules/customer/group.model";
 @Injectable()
 export class BsmodalService {
 
+  orderDetail$  = new Subject<Order>();
   orderDelete$  = new Subject<Order>();
   orderEdit$    = new Subject<Order>();
   paymentOrder$ = new Subject<Order>();
   cancelDrop$   = new Subject<Order>();
-  
+
   userDelete$   = new Subject<User>();
   userEdit$     = new Subject<User>();
 
@@ -22,6 +23,10 @@ export class BsmodalService {
 
   constructor() { }
   // order
+  selectOrderToView(order: Order) {
+    this.orderDetail$.next(order);
+  }
+
   selectOrderToDelete(order: Order) {
     this.orderDelete$.next(order);
   }

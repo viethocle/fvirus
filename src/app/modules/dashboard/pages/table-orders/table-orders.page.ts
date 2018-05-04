@@ -66,6 +66,10 @@ export class TableOrdersPage implements OnInit, OnDestroy {
               </button>`;
   }
 
+  openDetailModal(order: Order) {
+    this.bsmodalService.selectOrderToView(order);
+  }
+
   openEditModal(order: Order) {
     this.bsmodalService.selectOrderToEdit(order);
   }
