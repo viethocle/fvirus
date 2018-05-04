@@ -52,6 +52,7 @@
         <tr>
           <th>
             <i class="ace-icon fa fa-users"></i>{{ 'table.name' | translate }}</th>
+          <th>Nhóm</th>
           <th>
             <i class="ace-icon fa fa-envelope "></i>{{ 'table.email' | translate }}</th>
           <th>
@@ -59,7 +60,7 @@
           <th>
             <i class="ace-icon glyphicon glyphicon-home"></i>{{ 'table.address' | translate }}</th>
 
-          <th>Nhóm</th>
+          
           <th class="sorting_disabled"></th>
         </tr>
       </thead>
@@ -67,10 +68,10 @@
       <tbody>
         <tr *ngFor="let customer of customers | paginate: configPagination" [@flyOut]="'in'">
           <td>{{ customer.name }}</td>
+          <td>{{ showGroups(customer, true) }}</td>
           <td>{{ customer.email }}</td>
           <td>{{ customer.phone }}</td>
           <td>{{ customer.address }}</td>
-          <td>{{ showGroups(customer, true) }}</td>
           <td class="action-buttons center">
             <button class="btn btn-xs btn-info" (click)="openModalEdit(customer)">
               <i class="ace-icon fa fa-pencil bigger-120"></i>
