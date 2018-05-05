@@ -26,7 +26,7 @@ export class FormQuotePriceComponent implements OnInit {
     this.form = this.fb.group({
       contents: this.fb.array([this.initItemRows()]),
       to_customer: [''],
-      spend_day: [''],
+      spend_day: ['04 ngày'],
       user_quote: ['']
     });
 
