@@ -3,7 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 import { distinctUntilChanged, debounceTime, switchMap, tap, map } from 'rxjs/operators'
 import { Subject } from 'rxjs/Subject';
 import { Customer } from "@modules/customer/customer.model";
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-search-customer',
   templateUrl: './search-customer.component.html',
@@ -42,6 +42,18 @@ export class SearchCustomerComponent implements OnInit {
       this.customerLoading = false;
       this.cd.markForCheck();
     })
+  }
+
+  onChange(event) {
+    if (_.isNil(event)) {
+      console.log("");
+    }
+    if (_.isString(event)) {
+      console.log(event);
+    }
+    if (_.isObject(event)) {
+      console.log(event.name);
+    }
   }
 
 }

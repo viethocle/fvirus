@@ -1,9 +1,11 @@
 <ng-select [items]="customers"
            bindLabel="name"
+           bindValue="name"
            [addTag]="true"
            [loading]="customerLoading"
            [typeahead]="customerTypeahead"
-           [typeToSearchText]="typeToSearchText">
+           [typeToSearchText]="typeToSearchText"
+           (change)="onChange($event)">
   <ng-template ng-option-tmp let-item="item">
     <strong>{{item.name}}</strong> - {{item.phone}}
   </ng-template>
