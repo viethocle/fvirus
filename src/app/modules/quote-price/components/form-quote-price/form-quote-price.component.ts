@@ -1,5 +1,5 @@
 import { priceMask } from './../../../../shared/masks/price.masks';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import * as moment from 'moment';
 @Component({
@@ -8,6 +8,7 @@ import * as moment from 'moment';
   styleUrls: ['./form-quote-price.component.css']
 })
 export class FormQuotePriceComponent implements OnInit {
+  @Output() dataQuotePrice = new EventEmitter();
 
   today_formatLL: any;
 
@@ -60,6 +61,10 @@ export class FormQuotePriceComponent implements OnInit {
     this.form.patchValue({
       to_customer: name
     })
+  }
+
+  quotePrice() {
+    this.dataQuotePrice.next(this.form.value);
   }
 
 }
