@@ -15,6 +15,7 @@ export class SearchCustomerComponent implements OnInit {
   customers: Customer[] = [];
   customerLoading = false;
   customerTypeahead = new Subject<String>();
+  typeToSearchText: string;
 
   constructor(
     private customerService: CustomerService,
@@ -22,6 +23,8 @@ export class SearchCustomerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.typeToSearchText = "Gõ để tìm kiếm hoặc enter tạo mới";
+
     this.customerTypeahead.pipe(
       tap(() => this.customerLoading = true),
       distinctUntilChanged(),

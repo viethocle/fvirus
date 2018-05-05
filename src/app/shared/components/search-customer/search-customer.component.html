@@ -2,8 +2,9 @@
            bindLabel="name"
            [addTag]="true"
            [loading]="customerLoading"
-           [typeahead]="customerTypeahead">
+           [typeahead]="customerTypeahead"
+           [typeToSearchText]="typeToSearchText">
   <ng-template ng-option-tmp let-item="item">
-    <strong>{{item.name}}</strong>-{{item.phone}}
+    <strong>{{item.name}}</strong> - {{item.phone}}
   </ng-template>
 </ng-select>
