@@ -24,4 +24,8 @@ export class QuotePriceComponent implements OnInit {
     this.showPrint = true;
   } 
 
+  getBackEdit() {
+    this.showPrint = false;
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
@@ -8,6 +8,7 @@ import * as _ from 'lodash';
   styleUrls: ['./template-quote-price.component.css']
 })
 export class TemplateQuotePriceComponent implements OnInit {
+  @Output() outputGetBack = new EventEmitter();
   @Input() dataQuote: any;
   today_formatLL: any;
 
@@ -19,6 +20,10 @@ export class TemplateQuotePriceComponent implements OnInit {
 
   get showAmount() {
     return _.sumBy(this.dataQuote.contents, (e) => e.quantity * e.price);
+  }
+
+  getBackEdit() {
+    this.outputGetBack.next();
   }
 
 }
