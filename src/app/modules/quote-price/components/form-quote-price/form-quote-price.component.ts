@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-form-quote-price',
   templateUrl: './form-quote-price.component.html',
@@ -8,6 +8,7 @@ import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 })
 export class FormQuotePriceComponent implements OnInit {
 
+  today_formatLL: any;
 
   form: FormGroup; 
 
@@ -22,14 +23,27 @@ export class FormQuotePriceComponent implements OnInit {
       spend_day: [''],
       user_quote: ['']
     }) 
+
+    this.today_formatLL = moment().locale('vi').format('LL');
   }
 
   initItemRows() {
     return this.fb.group({
       content: [''],
       quantity: [''],
-      unit: ['']
+      unit: [''],
+      price: ['']
     })
+  }
+
+  addNewRow() {
+    let control = <FormArray>this.form.get('contents');
+    control.push(this.initItemRows());
+  }
+
+  deleteRow(index: number) {
+    let control = <FormArray>this.form.get('contents');
+    control.removeAt(index);
   }
 
 }
