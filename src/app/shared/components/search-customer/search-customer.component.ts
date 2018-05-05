@@ -1,5 +1,5 @@
 import { CustomerService } from './../../../modules/customer/customer.service';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { distinctUntilChanged, debounceTime, switchMap, tap, map } from 'rxjs/operators'
 import { Subject } from 'rxjs/Subject';
 import { Customer } from "@modules/customer/customer.model";
@@ -11,6 +11,8 @@ import * as _ from 'lodash';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class SearchCustomerComponent implements OnInit {
+
+  @Output() selectCustomerOutput = new EventEmitter<String>();
 
   customers: Customer[] = [];
   customerLoading = false;
@@ -46,13 +48,13 @@ export class SearchCustomerComponent implements OnInit {
 
   onChange(event) {
     if (_.isNil(event)) {
-      console.log("");
+      this.selectCustomerOutput.next("");
     }
     if (_.isString(event)) {
-      console.log(event);
+      this.selectCustomerOutput.next(event);
     }
     if (_.isObject(event)) {
-      console.log(event.name);
+      this.selectCustomerOutput.next(event.name);
     }
   }
 
