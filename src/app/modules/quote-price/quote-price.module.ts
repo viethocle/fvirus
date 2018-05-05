@@ -1,3 +1,4 @@
+import { SharedModule } from '@shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,13 +8,14 @@ import { FormQuotePriceComponent } from './components/form-quote-price/form-quot
 export const routes: Routes = [
   {
     path: "",
-    component: QuotePriceComponent
+    component: FormQuotePriceComponent
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ],
   declarations: [QuotePriceComponent, FormQuotePriceComponent]

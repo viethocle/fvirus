@@ -10,6 +10,8 @@ export class FormQuotePriceComponent implements OnInit {
 
   today_formatLL: any;
 
+  contents: FormArray;
+
   form: FormGroup; 
 
   constructor(
@@ -17,17 +19,18 @@ export class FormQuotePriceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.contents = this.fb.array([this.initItemRows()])
     this.form = this.fb.group({
       contents: this.fb.array([this.initItemRows()]),
       to_customer: [''],
       spend_day: [''],
       user_quote: ['']
-    }) 
+    });
 
     this.today_formatLL = moment().locale('vi').format('LL');
   }
 
-  initItemRows() {
+  initItemRows(): FormGroup {
     return this.fb.group({
       content: [''],
       quantity: [''],
