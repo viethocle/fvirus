@@ -13,7 +13,7 @@
   <div align="right">Hà Nội, {{ today_formatLL }} </div>
 
   <div align="left">
-    <strong>Kính gửi: Công ty In SAM & TDB.</strong>
+    <strong>Kính gửi: {{ dataQuote.to_customer }}</strong>
   </div>
   <br>
   <p>Công ty TNHH Rulô Nam Hải xin trân trọng báo giá mặt hàng theo yêu cầu của Quý đơn vị như sau:</p>
@@ -21,40 +21,29 @@
     <thead>
       <tr>
         <th>STT</th>
-        <th>Quy cách bản vẽ</th>
-        <th>SL</th>
+        <th width="40%">Quy cách bản vẽ</th>
+        <th width="10%">SL</th>
+        <th width="15%">Đơn vị</th>
         <th align="right">Giá VND </th>
         <th align="right">Thành tiền </th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Bọc PU 90A cho lô in, </td>
-        <td>04 Qua</td>
-        <td align="right">850,000</td>
-        <td align="right">3,400,000</td>
+      <tr *ngFor="let item of dataQuote.contents; let i = index">
+        <td>{{ i + 1}}</td>
+        <td>{{ item.content }} </td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.unit }}</td>
+        <td align="right">{{ item.price | vnd }}</td>
+        <td align="right">{{ item.quantity * item.price | vnd}}</td>
       </tr>
+      
       <tr>
-        <td>1</td>
-        <td>Bọc PU 90A cho lô in, </td>
-        <td>04 Qua</td>
-        <td align="right">850,000</td>
-        <td align="right">3,400,000</td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Bọc PU 90A cho lô in, </td>
-        <td>04 Qua</td>
-        <td align="right">850,000</td>
-        <td align="right">3,400,000</td>
-      </tr>
-      <tr>
-        <td colspan="4">
+        <td colspan="5" align="center">
           <strong>Tổng cộng</strong>
         </td>
         <td align="right">
-          <strong>6,950,000</strong>
+          <strong>{{ showAmount | vnd }}</strong>
         </td>
       </tr>
     </tbody>
@@ -64,7 +53,7 @@
   <p>
     <strong>- Giá trên chưa bao gồm thuế VAT.</strong>
     <br> - Công ty TNHH Rulo Nam Hải xin đáp ứng đầy đủ về chất lượng, chủng loại mặt hàng mà Quý khách yêu cầu.
-    <br> - Thời gian hoàn thành: 04 ngày khi nhận được đơn đặt hàng.
+    <br> - Thời gian hoàn thành: {{ dataQuote.spend_day }} khi nhận được đơn đặt hàng.
     <br> - Bảo hành: 06 tháng đối với lỗi nhà sản xuất.
     <br> - Thanh toán bằng tiền mặt hoặc chuyển khoản trước khi nhận hàng vào Tài khoản: Công ty TNHH Ru lô Nam Hải-TK 2111 000000
     1541 tại Ngân hàng TMCP Đầu tư và Phát triển Việt nam-Chi nhánh Hà nội.
@@ -86,7 +75,7 @@
           <br>
           <br>
           <br>
-          <strong>Nguyễn Thị H.Anh</strong>
+          <strong>{{ dataQuote.user_quote }}</strong>
         </td>
       </tr>
     </tbody>

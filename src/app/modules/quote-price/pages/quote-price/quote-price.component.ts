@@ -9,11 +9,19 @@ import * as moment from 'moment';
 export class QuotePriceComponent implements OnInit {
 
   today_formatLL: any;
+  dataQuote: any
+
+  showPrint = false;
 
   constructor() { }
 
   ngOnInit() {
     this.today_formatLL = moment().locale('vi').format('LL');
   }
+
+  handleShowQuote(data) {
+    this.dataQuote = data;
+    this.showPrint = true;
+  } 
 
 }

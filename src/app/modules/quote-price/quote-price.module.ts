@@ -9,7 +9,7 @@ import { TemplateQuotePriceComponent } from './components/template-quote-price/t
 export const routes: Routes = [
   {
     path: "",
-    component: FormQuotePriceComponent
+    component: QuotePriceComponent
   }
 ];
 
