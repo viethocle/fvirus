@@ -42,8 +42,8 @@ export class FormQuotePriceComponent implements OnInit {
     })
   }
 
-  get formContents() {
-    return this.form.controls.contents;
+  get formContents(): FormArray {
+    return <FormArray>this.form.controls.contents;
   }
 
   addNewRow() {
