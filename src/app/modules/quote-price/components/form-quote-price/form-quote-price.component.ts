@@ -1,3 +1,4 @@
+import { priceMask } from './../../../../shared/masks/price.masks';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import * as moment from 'moment';
@@ -9,6 +10,8 @@ import * as moment from 'moment';
 export class FormQuotePriceComponent implements OnInit {
 
   today_formatLL: any;
+
+  priceMask = priceMask;
 
   contents: FormArray;
 
@@ -33,10 +36,14 @@ export class FormQuotePriceComponent implements OnInit {
   initItemRows(): FormGroup {
     return this.fb.group({
       content: [''],
-      quantity: [''],
+      quantity: [1],
       unit: [''],
-      price: ['']
+      price: [0]
     })
+  }
+
+  get formContents() {
+    return this.form.controls.contents;
   }
 
   addNewRow() {

@@ -21,33 +21,42 @@
     <thead>
       <tr>
         <th>STT</th>
-        <th>Quy cách bản vẽ</th>
-        <th>SL</th>
-        <th>Đơn vị</th>
+        <th width="40%">Quy cách bản vẽ</th>
+        <th width="10%">SL</th>
+        <th width="15%">Đơn vị</th>
         <th align="right">Giá VND </th>
-        <th align="right">Thành tiền </th>
+        <!-- <th align="right">Thành tiền </th> -->
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let itemRow of contents.controls; let i = index;">
+      <tr *ngFor="let itemRow of formContents.controls; let i = index;">
         <td>{{ i + 1 }}</td>
-        <td><input type="text" [formControl]="itemRow.get('content')"></td>
-        <td><input type="text" [formControl]="itemRow.get('quantity')"></td>
-        <td><input type="text" [formControl]="itemRow.get('unit')"></td>
-        <td><input type="text" [formControl]="itemRow.get('price')"></td>
-        <td>1000000</td>
+        <td><input type="text" class="form-control" [formControl]="itemRow.get('content')"></td>
+        <td><input type="text" class="form-control" [formControl]="itemRow.get('quantity')"></td>
+        <td><input type="text" class="form-control" [formControl]="itemRow.get('unit')"></td>
+        <td><input type="text right-align" class="form-control" [formControl]="itemRow.get('price')" [textMask]="priceMask" numeric></td>
+        <!-- <td>{{ itemRow.get('quantity') * itemRow.get('price') | vnd }}</td> -->
+        <td>
+          <button class="btn btn-xs btn-danger" (click)="deleteRow(i)">
+            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+          </button>
+        </td>
       </tr>
-      
       <tr>
         <td colspan="5">
-          <strong>Tổng cộng</strong>
+          
         </td>
-        <td align="right">
-          <strong>6,950,000</strong>
+        <td align="right" >
+          <button class="btn btn-success no-border btn-add" (click)="addNewRow()">
+            Thêm
+            <i class="ace-icon glyphicon glyphicon-plus"></i>
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
+  
 
 
   <p>
