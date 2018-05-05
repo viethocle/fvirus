@@ -56,4 +56,10 @@ export class FormQuotePriceComponent implements OnInit {
     control.removeAt(index);
   }
 
+  handleSelectCustomer(name: string) {
+    this.form.patchValue({
+      to_customer: name
+    })
+  }
+
 }
