@@ -71,6 +71,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ClickOutsideModule,
     BsModalModule,
     TranslateModule,
+    NgSelectModule,
     ToastModule.forRoot()
   ],
   exports: [
@@ -103,7 +104,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TextMaskModule,
     NumericDirective,
     ParseContentOrderPipe,
-    NgSelectModule
+    NgSelectModule,
+    SearchCustomerComponent
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },

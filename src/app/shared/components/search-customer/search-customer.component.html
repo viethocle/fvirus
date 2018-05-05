@@ -1,3 +1,9 @@
-<p>
-  search-customer works!
-</p>
+<ng-select [items]="customers"
+           bindLabel="name"
+           [addTag]="true"
+           [loading]="customerLoading"
+           [typeahead]="customerTypeahead">
+  <ng-template ng-option-tmp let-item="item">
+    <strong>{{item.name}}</strong>-{{item.phone}}
+  </ng-template>
+</ng-select>
