@@ -67,19 +67,11 @@
 
       <tbody>
         <tr *ngFor="let customer of customers | paginate: configPagination" [@flyOut]="'in'">
-<<<<<<< HEAD
           <td (click)="openModalDetail(customer)">{{ customer.name }}</td>
           <td (click)="openModalDetail(customer)">{{ customer.email }}</td>
           <td (click)="openModalDetail(customer)">{{ customer.phone }}</td>
           <td (click)="openModalDetail(customer)">{{ customer.address }}</td>
           <td (click)="openModalDetail(customer)">{{ showGroups(customer, true) }}</td>
-=======
-          <td>{{ customer.name }}</td>
-          <td>{{ showGroups(customer, true) }}</td>
-          <td>{{ customer.email }}</td>
-          <td>{{ customer.phone }}</td>
-          <td>{{ customer.address }}</td>
->>>>>>> template-quote-price
           <td class="action-buttons center">
             <button class="btn btn-xs btn-info" (click)="openModalEdit(customer)">
               <i class="ace-icon fa fa-pencil bigger-120"></i>
