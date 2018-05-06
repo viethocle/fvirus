@@ -25,9 +25,9 @@ export class TemplateQuotePriceComponent implements OnInit {
     this.today_formatLL = moment().locale('vi').format('LL');
   }
 
-  get showAmount() {
-    return _.sumBy(this.dataQuote.contents, (e) => e.quantity * e.price);
-  }
+  // get showAmount() {
+  //   return _.sumBy(this.dataQuote.contents, (e) => e.quantity * e.price);
+  // }
 
   getBackEdit() {
     this.outputGetBack.next();

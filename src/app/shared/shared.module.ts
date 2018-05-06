@@ -29,13 +29,8 @@ import { TruncateDescriptionPipe } from './pipes/truncate-description.pipe';
 import { VndPipe } from './pipes/vnd.pipe';
 import { ToastrService } from "./toastr.service";
 import { ParseContentOrderPipe } from './pipes/parse-content-order.pipe';
-<<<<<<< HEAD
 import { DetailOrderComponent } from '@modules/dashboard/components/detail-order/detail-order.component';
-
-=======
 import { SearchCustomerComponent } from './components/search-customer/search-customer.component';
->>>>>>> 426cc666db0ab3d7438798839ae1a9a18509f3da
-
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
   newestOnTop = false;
@@ -67,11 +62,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NumericDirective,
     DateHumanizePipe,
     ParseContentOrderPipe,
-<<<<<<< HEAD
-    DetailOrderComponent
-=======
+    DetailOrderComponent,
     SearchCustomerComponent
->>>>>>> 426cc666db0ab3d7438798839ae1a9a18509f3da
   ],
   imports: [
     FormsModule,
@@ -113,13 +105,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TextMaskModule,
     NumericDirective,
     ParseContentOrderPipe,
-<<<<<<< HEAD
     DetailOrderComponent,
-    TooltipModule
-=======
+    TooltipModule,
     NgSelectModule,
     SearchCustomerComponent
->>>>>>> 426cc666db0ab3d7438798839ae1a9a18509f3da
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },
