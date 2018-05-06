@@ -39,7 +39,16 @@ export const CustomerRoutes: Routes = [
     DataTablesModule,
     NgSelectModule
   ],
-  declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent, CreateGroupComponent, FormGroupComponent, EditGroupComponent, DeleteGroupComponent, FormCustomerComponent, DetailCustomerComponent]
+  declarations: [CustomerComponent,
+    EditCustomerComponent,
+    CreateCustomerComponent,
+    IndexGroupsComponent,
+    CreateGroupComponent,
+    FormGroupComponent,
+    EditGroupComponent,
+    DeleteGroupComponent,
+    FormCustomerComponent,
+    DetailCustomerComponent]
 })
 
 export class CustomerModule { }

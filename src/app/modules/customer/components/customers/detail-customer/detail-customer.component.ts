@@ -1,6 +1,6 @@
 import { FormCustomerComponent } from './../form-customer/form-customer.component';
 import { Subject } from 'rxjs/Subject';
-import { BsModalComponent } from 'ng2-bs3-modal';
+import { BsModalComponent, BsModalService } from 'ng2-bs3-modal';
 import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, SimpleChange, EventEmitter, Output } from '@angular/core';
 import { Customer } from '@modules/customer/customer.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,18 +11,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { DashboardService } from '@modules/dashboard/dashboard.service';
 import { Order } from '@modules/dashboard/order';
+import { DataTablesModule } from 'angular-datatables';
+import { BsmodalService } from '@core/services/bsmodal.service';
+
 @Component({
   selector: 'app-detail-customer',
   templateUrl: './detail-customer.component.html',
   styleUrls: ['./detail-customer.component.css']
 })
 export class DetailCustomerComponent implements OnInit, OnChanges {
-  @ViewChild("modalDetail") modalDetail: BsModalComponent;
+ @ViewChild("modalDetail") modalDetail: BsModalComponent;
   customer_id: number;
   orders: Order[];
   customer: Customer;
   loading: boolean;
-
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
   param = {
     pagination: {
       page: 1,
@@ -37,7 +41,8 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
     private route: ActivatedRoute,
     private router: Router,
     private dashboardService: DashboardService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private bsmodalService: BsmodalService
   ) { }
 
   ngOnInit() {
@@ -55,9 +60,10 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
   }
   getCustomer(id: number) {
     this.customerService.getCustomer(id)
-        .map(res => res.customer)
+        .map(res => res)
         .subscribe(res => {
           this.customer = res;
+          console.log(this.customer);
         });
   }
   getPage() {
@@ -67,6 +73,14 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
       .map(res => res.orders)
       .subscribe(res => {
         this.orders = res;
+        this.dtTrigger.next();
+        console.log(res);
       });
   }
+
+  openDetailModal(order: Order) {
+    console.log(order);
+    this.bsmodalService.selectOrderToView(order);
+  }
+
 }

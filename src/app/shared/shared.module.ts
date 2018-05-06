@@ -28,6 +28,8 @@ import { TruncateDescriptionPipe } from './pipes/truncate-description.pipe';
 import { VndPipe } from './pipes/vnd.pipe';
 import { ToastrService } from "./toastr.service";
 import { ParseContentOrderPipe } from './pipes/parse-content-order.pipe';
+import { DetailOrderComponent } from '@modules/dashboard/components/detail-order/detail-order.component';
+
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -59,7 +61,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ColorOrderComponent,
     NumericDirective,
     DateHumanizePipe,
-    ParseContentOrderPipe
+    ParseContentOrderPipe,
+    DetailOrderComponent
   ],
   imports: [
     FormsModule,
@@ -68,6 +71,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ClickOutsideModule,
     BsModalModule,
     TranslateModule,
+    TooltipModule,
     ToastModule.forRoot()
   ],
   exports: [
@@ -99,7 +103,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MyDatePickerModule,
     TextMaskModule,
     NumericDirective,
-    ParseContentOrderPipe
+    ParseContentOrderPipe,
+    DetailOrderComponent,
+    TooltipModule
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },

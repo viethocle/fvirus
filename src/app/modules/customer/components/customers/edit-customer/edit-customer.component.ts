@@ -36,7 +36,7 @@ export class EditCustomerComponent implements OnInit, OnChanges {
         )
         .subscribe(_ => this.modalEdit.open());
     this.modalEdit.onDismiss
-      .subscribe(_ => this.dismissModalEdit.next())
+      .subscribe(_ => this.dismissModalEdit.next());
   }
 
   ngOnChanges(changes: SimpleChanges) {

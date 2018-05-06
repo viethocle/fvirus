@@ -1,13 +1,69 @@
-<bs-modal #modalDetail>
-  <bs-modal-header [showDismiss]="true">
-    <h4 class="modal-title">{{ 'customers.title_edit' | translate }}</h4>
-  </bs-modal-header>
-  <bs-modal-body>
+<div class="user-profile row">
+  <div class="col-xs-12 col-sm-3 center">
+    <h2>Thông tin khách hàng</h2>
+    <div>
+      <span class="profile-picture">
+        <img id="avatar" class="editable img-responsive editable-click editable-empty" alt="Alex's Avatar" src="../../../../../../assets/avatars/profile-pic.jpg">
+      </span>
 
-  </bs-modal-body>
-  <bs-modal-footer>
-    <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modalDetail.dismiss()">
-      {{ 'customers.close' | translate }}</button>
-  </bs-modal-footer>
-</bs-modal>
-Thuan
+      <div class="space-4"></div>
+
+      <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+        <div class="inline position-relative">
+          <a href="#" class="user-title-label dropdown-toggle" data-toggle="dropdown">
+            <i class="ace-icon fa fa-circle light-green"></i>
+            &nbsp;
+            <span class="white">Tên: {{customer?.name}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-6"></div>
+
+    <div class="profile-contact-info">
+      <div class="profile-contact-links align-left">
+        <div>
+          <i class="ace-icon fa fa-plus-circle bigger-120 green"></i>
+          Sđt: {{customer?.phone}}
+        </div>
+
+        <div>
+          <i class="ace-icon fa fa-envelope bigger-120 pink"></i>
+          Email: {{customer?.email}}
+        </div>
+
+        <div>
+          <i class="ace-icon fa fa-globe bigger-125 blue"></i>
+          Địa chỉ: {{customer?.address}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-8 center">
+    <h2>Lịch sử khách hàng</h2>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dynamic-table_wrapper" class="table table-striped table-bordered
+              table-hover dataTable no-footer" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nội dung</th>
+          <th>Giá trị đơn hàng</th>
+          <th>Ngày thêm</th>
+          <th>Ngày hết hạn</th>
+          <th>Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td (click)="openDetailModal(order)">{{order?.id}}</td>
+          <td (click)="openDetailModal(order)">{{order?.contents | parseContentOrder}}</td>
+          <td (click)="openDetailModal(order)">{{order?.price | vnd}}</td>
+          <td (click)="openDetailModal(order)">{{order?.created_at | dateTimeVi}}</td>
+          <td (click)="openDetailModal(order)">{{order?.due_date | dateTimeVi}}</td>
+          <td (click)="openDetailModal(order)">{{order?.status}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-detail-order></app-detail-order>
