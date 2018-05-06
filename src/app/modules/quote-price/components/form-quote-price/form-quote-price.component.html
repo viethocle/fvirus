@@ -1,0 +1,114 @@
+<div class="container">
+  <div id="main-product" class="col-md-offset-2 col-md-8 border-template">
+    <div class="info-company">
+      <p>
+        Công ty TNHH Ru lô Nam Hải.
+        <br> 13A2 Đầm Trấu-Hai Bà Trưng-Hà nội.
+        <br> ĐT:043.9715987-tel/fax:043.9721538.
+        <br> namhairoller@gmail.com
+        <br>
+      </p>
+    </div>
+
+    <h3 align="middle">PHIẾU BÁO GIÁ</h3>
+    <div align="right">Hà Nội, {{ today_formatLL }} </div>
+
+    <div align="left">
+      <strong>Kính gửi: {{ form.value.to_customer }}</strong>
+      <app-search-customer (selectCustomerOutput)="handleSelectCustomer($event)"></app-search-customer>
+    </div>
+    <br>
+    <p>Công ty TNHH Rulô Nam Hải xin trân trọng báo giá mặt hàng theo yêu cầu của Quý đơn vị như sau:</p>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th width="40%">Quy cách bản vẽ</th>
+          <th width="10%">SL</th>
+          <th width="15%">Đơn vị</th>
+          <th align="right">Giá VND </th>
+          <!-- <th align="right">Thành tiền </th> -->
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let itemRow of formContents.controls; let i = index;">
+          <td>{{ i + 1 }}</td>
+          <td>
+            <input type="text" class="form-control" [formControl]="itemRow.get('content')">
+          </td>
+          <td>
+            <input type="text" class="form-control" [formControl]="itemRow.get('quantity')">
+          </td>
+          <td>
+            <input type="text" class="form-control" [formControl]="itemRow.get('unit')">
+          </td>
+          <td>
+            <input type="text right-align" class="form-control" [formControl]="itemRow.get('price')" [textMask]="priceMask" numeric>
+          </td>
+          <!-- <td>{{ itemRow.get('quantity') * itemRow.get('price') | vnd }}</td> -->
+          <td>
+            <button class="btn btn-xs btn-danger" (click)="deleteRow(i)">
+              <i class="ace-icon fa fa-trash-o bigger-120"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5">
+
+          </td>
+          <td align="right">
+            <button class="btn btn-success no-border btn-add" (click)="addNewRow()">
+              Thêm
+              <i class="ace-icon glyphicon glyphicon-plus"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+    <p>
+      <strong>- Giá trên chưa bao gồm thuế VAT.</strong>
+      <br> - Công ty TNHH Rulo Nam Hải xin đáp ứng đầy đủ về chất lượng, chủng loại mặt hàng mà Quý khách yêu cầu.
+      <br> - Thời gian hoàn thành:
+      <input type="text" [formControl]="form.get('spend_day')"> khi nhận được đơn đặt hàng.
+      <br> - Bảo hành: 06 tháng đối với lỗi nhà sản xuất.
+      <br> - Thanh toán bằng tiền mặt hoặc chuyển khoản trước khi nhận hàng vào Tài khoản: Công ty TNHH Ru lô Nam Hải-TK 2111 000000
+      1541 tại Ngân hàng TMCP Đầu tư và Phát triển Việt nam-Chi nhánh Hà nội.
+      <br>
+      <strong>Xin chân thành cảm ơn và mong nhận được sự cộng tác của Quý đơn vị.</strong>
+      <br>
+    </p>
+
+    <table class="table-row" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tbody>
+        <tr>
+          <td width="50%"></td>
+          <td align="center">
+            <strong>
+              TM Công ty Ru lô Nam Hải.
+            </strong>
+            <br> Người báo giá
+            <br>
+            <br>
+            <input type="text" [formControl]="form.get('user_quote')">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    
+  </div>
+ 
+</div>
+
+<hr>
+<div class="wizard-actions">
+
+  <button class="btn btn-success btn-next" (click)="quotePrice()">
+    Tạo mẫu báo giá
+    <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+  </button>
+</div>

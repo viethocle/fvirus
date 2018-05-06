@@ -24,6 +24,16 @@
       </span>
     </a>
   </li>
+
+  <li routerLinkActive="active">
+    <a [routerLink]="['/quote-price']" >
+      <i class="menu-icon fa fa-envelope "></i>
+      <span class="menu-text">
+        Gửi báo giá
+      </span>
+    </a>
+  </li>
+  
   <li *ngIf="isManager  && authService.isCurrentUserAdmin" routerLinkActive="active">
     <a [routerLink]="['/users']">
       <i class="menu-icon fa fa-user-plus"></i>
