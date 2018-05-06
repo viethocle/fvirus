@@ -1,3 +1,4 @@
+import { QuoteService } from './../../quote.service';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment';
@@ -16,7 +17,9 @@ export class TemplateQuotePriceComponent implements OnInit {
   today_formatLL: any;
   email_to_send: string;
 
-  constructor() { }
+  constructor(
+    private quoteService: QuoteService
+  ) { }
 
   ngOnInit() {
     this.today_formatLL = moment().locale('vi').format('LL');
@@ -31,7 +34,14 @@ export class TemplateQuotePriceComponent implements OnInit {
   }
 
   sendEmail() {
-    this.modalEmail.open();
+    this.modalEmail.close();
+    let params = {
+      email: this.email_to_send,
+      html: (this.template.nativeElement as HTMLElement).innerHTML
+    }
+
+    this.quoteService.sendEmail(params)
+        .subscribe(_ => {});
   }
 
 }

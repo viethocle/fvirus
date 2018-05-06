@@ -85,7 +85,7 @@
 </div>
 <hr>
 <div class="wizard-actions">
-  <button class="btn btn-primary add-order" (click)="sendEmail()">
+  <button class="btn btn-primary add-order" (click)="modalEmail.open()">
     Gửi báo giá
     <i class="ace-icon fa fa-paper-plane-o icon-on-right"></i>
   </button>
@@ -109,7 +109,8 @@
   <bs-modal-footer>
     <button type="button" class="btn btn-grey" data-dismiss="modalEmail" (click)="modalEmail.dismiss()">
       {{ 'customers.close' | translate }}</button>
-    <button class="btn btn-primary" data-dismiss="modalEmail">
+    <button class="btn btn-primary" data-dismiss="modalEmail" [disabled]="email_to_send==''"
+            (click)="sendEmail()">
       Gửi báo giá</button>
   </bs-modal-footer>
 </bs-modal>
