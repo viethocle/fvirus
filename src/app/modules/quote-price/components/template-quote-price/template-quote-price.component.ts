@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
@@ -8,6 +8,8 @@ import * as _ from 'lodash';
   styleUrls: ['./template-quote-price.component.css']
 })
 export class TemplateQuotePriceComponent implements OnInit {
+  @ViewChild("template_print") template: ElementRef;
+
   @Output() outputGetBack = new EventEmitter();
   @Input() dataQuote: any;
   today_formatLL: any;
@@ -24,6 +26,10 @@ export class TemplateQuotePriceComponent implements OnInit {
 
   getBackEdit() {
     this.outputGetBack.next();
+  }
+
+  sendEmail() {
+    console.log((this.template.nativeElement as HTMLElement).innerHTML);
   }
 
 }

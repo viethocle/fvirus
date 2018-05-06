@@ -1,5 +1,5 @@
 <div class="container">
-  <div id="main-product" class="col-md-offset-2 col-md-8 border-template">
+  <div #template_print id="main-product" class="col-md-offset-2 col-md-8 border-template">
     <div class="info-company">
       <p>
         Công ty TNHH Ru lô Nam Hải.
@@ -85,8 +85,12 @@
 </div>
 <hr>
 <div class="wizard-actions">
+  <button class="btn btn-primary add-order" (click)="sendEmail()">
+    Gửi báo giá
+    <i class="ace-icon fa fa-paper-plane-o icon-on-right"></i>
+  </button>
 
-  <button class="btn btn-success btn-next" (click)="getBackEdit()" >
+  <button class="btn btn-success btn-next pull-left" (click)="getBackEdit()" >
     <i class="ace-icon fa fa-arrow-left icon-on-left"></i>
     Quay lại chỉnh sửa
   </button>

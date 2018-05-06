@@ -1,13 +1,15 @@
 import { priceMask } from './../../../../shared/masks/price.masks';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 @Component({
   selector: 'app-form-quote-price',
   templateUrl: './form-quote-price.component.html',
   styleUrls: ['./form-quote-price.component.css']
 })
-export class FormQuotePriceComponent implements OnInit {
+export class FormQuotePriceComponent implements OnInit, OnChanges {
+  @Input() dataQuote: any;
   @Output() dataQuotePrice = new EventEmitter();
 
   today_formatLL: any;
@@ -32,6 +34,17 @@ export class FormQuotePriceComponent implements OnInit {
     });
 
     this.today_formatLL = moment().locale('vi').format('LL');
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (_.isObject(changes.dataQuote.currentValue)) {
+      this.form.patchValue({
+        contents: this.dataQuote.contents,
+        to_customers: this.dataQuote.to_customers,
+        spend_day: this.dataQuote.spend_day,
+        user_quote: this.dataQuote.user_quote
+      })
+    }
   }
 
   initItemRows(): FormGroup {
