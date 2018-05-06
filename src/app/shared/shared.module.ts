@@ -73,7 +73,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BsModalModule,
     TranslateModule,
     NgSelectModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    TooltipModule
   ],
   exports: [
     FormsModule,
