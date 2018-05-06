@@ -95,3 +95,21 @@
     Quay lại chỉnh sửa
   </button>
 </div>
+
+
+<bs-modal #modalEmail id="modalEmail">
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">Gửi báo giá qua Email</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <h5>Nhập email:</h5>
+    <input type="email" [(ngModel)]="email_to_send" class="form-control" placeholder="Email">
+    <br>
+  </bs-modal-body>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-grey" data-dismiss="modalEmail" (click)="modalEmail.dismiss()">
+      {{ 'customers.close' | translate }}</button>
+    <button class="btn btn-primary" data-dismiss="modalEmail">
+      Gửi báo giá</button>
+  </bs-modal-footer>
+</bs-modal>

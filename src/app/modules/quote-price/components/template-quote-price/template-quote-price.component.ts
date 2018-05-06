@@ -1,3 +1,4 @@
+import { BsModalComponent } from 'ng2-bs3-modal';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -9,10 +10,11 @@ import * as _ from 'lodash';
 })
 export class TemplateQuotePriceComponent implements OnInit {
   @ViewChild("template_print") template: ElementRef;
-
+  @ViewChild("modalEmail") modalEmail: BsModalComponent;
   @Output() outputGetBack = new EventEmitter();
   @Input() dataQuote: any;
   today_formatLL: any;
+  email_to_send: string;
 
   constructor() { }
 
@@ -29,7 +31,7 @@ export class TemplateQuotePriceComponent implements OnInit {
   }
 
   sendEmail() {
-    console.log((this.template.nativeElement as HTMLElement).innerHTML);
+    this.modalEmail.open();
   }
 
 }
