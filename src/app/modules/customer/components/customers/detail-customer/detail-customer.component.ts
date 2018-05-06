@@ -55,7 +55,7 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
   }
   getCustomer(id: number) {
     this.customerService.getCustomer(id)
-        .map(res => res.customer)
+        .map((res: any) => res.customer)
         .subscribe(res => {
           this.customer = res;
         });
