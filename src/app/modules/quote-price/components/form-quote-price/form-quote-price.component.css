@@ -1,0 +1,26 @@
+.border-template {
+  border: 2px solid black;
+}
+
+div#main-product {
+  font-size: 16px;
+}
+
+.info-company {
+  font-size: 14px;
+}
+
+
+th {
+  font-weight: normal;
+}
+
+.id-user {
+  float: right;
+  width: 50%;
+}
+
+.table-row {
+  table-layout: fixed;
+  background-color: #ffffff;
+}

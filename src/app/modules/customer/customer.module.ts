@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from '@shared/shared.module';
 import { DataTablesModule } from 'angular-datatables';
 
@@ -37,7 +36,6 @@ export const CustomerRoutes: Routes = [
     SharedModule,
     RouterModule.forChild(CustomerRoutes),
     DataTablesModule,
-    NgSelectModule
   ],
   declarations: [CustomerComponent, EditCustomerComponent, CreateCustomerComponent, IndexGroupsComponent, CreateGroupComponent, FormGroupComponent, EditGroupComponent, DeleteGroupComponent, FormCustomerComponent, DetailCustomerComponent]
 })

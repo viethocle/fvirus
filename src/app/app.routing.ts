@@ -35,6 +35,10 @@ const routes: Routes = [
     path: "customers",
     loadChildren: "./modules/customer/customer.module#CustomerModule",
     canLoad: [LoggedInGuard]
+  },
+  {
+    path: "quote-price",
+    loadChildren: "./modules/quote-price/quote-price.module#QuotePriceModule"
   }
 ];
 

@@ -12,6 +12,7 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { TooltipModule } from 'ngx-tooltip';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { ErrorLabelComponent, ErrorMessagesPipe, InputFieldComponent } from './components/';
 import { ColorOrderComponent } from './components/color-order/color-order.component';
@@ -28,6 +29,7 @@ import { TruncateDescriptionPipe } from './pipes/truncate-description.pipe';
 import { VndPipe } from './pipes/vnd.pipe';
 import { ToastrService } from "./toastr.service";
 import { ParseContentOrderPipe } from './pipes/parse-content-order.pipe';
+import { SearchCustomerComponent } from './components/search-customer/search-customer.component';
 
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
@@ -59,7 +61,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ColorOrderComponent,
     NumericDirective,
     DateHumanizePipe,
-    ParseContentOrderPipe
+    ParseContentOrderPipe,
+    SearchCustomerComponent
   ],
   imports: [
     FormsModule,
@@ -68,6 +71,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ClickOutsideModule,
     BsModalModule,
     TranslateModule,
+    NgSelectModule,
     ToastModule.forRoot()
   ],
   exports: [
@@ -99,7 +103,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MyDatePickerModule,
     TextMaskModule,
     NumericDirective,
-    ParseContentOrderPipe
+    ParseContentOrderPipe,
+    NgSelectModule,
+    SearchCustomerComponent
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },

@@ -17,6 +17,7 @@ import {
 } from './guard/';
 import { BsmodalService } from './services/bsmodal.service';
 import { GroupsService } from '../modules/customer/groups.service';
+import { QuoteService } from '../modules/quote-price/quote.service';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { GroupsService } from '../modules/customer/groups.service';
     BsmodalService,
     SortTableService,
     VndPipe,
-    GroupsService
+    GroupsService,
+    QuoteService
     // NgxPermissionsService
   ]
 })
