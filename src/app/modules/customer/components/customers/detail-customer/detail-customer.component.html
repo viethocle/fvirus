@@ -38,6 +38,11 @@
           Địa chỉ:
           <strong>{{customer?.address}}</strong>
         </div>
+        <div>
+          <i class="ace-icon fa fa-users"></i>
+          Nhóm:
+          <strong>{{customer$ | async | showGroup }}</strong>
+        </div>
       </div>
     </div>
   </div>
@@ -48,7 +53,7 @@
                   table-hover dataTable no-footer" cellspacing="0" width="100%">
       <thead>
         <tr>
-          <th>Id</th>
+          <th>Order</th>
           <th>Nội dung</th>
           <th>Giá trị đơn hàng</th>
           <th>Ngày thêm</th>
@@ -58,9 +63,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let order of orders">
-          <td (click)="openDetailModal(order)">{{order?.id}}</td>
-          <td (click)="openDetailModal(order)">{{order?.contents | parseContentOrder}}</td>
-          <td (click)="openDetailModal(order)">{{order?.price | vnd}}</td>
+          <td (click)="openDetailModal(order)" class="text-left">{{order?.id}}</td>
+          <td (click)="openDetailModal(order)" class="text-left">{{order?.contents | parseContentOrder}}</td>
+          <td (click)="openDetailModal(order)" class="text-right">{{order?.price | vnd}}</td>
           <td (click)="openDetailModal(order)">{{order?.created_at | dateTimeVi}}</td>
           <td (click)="openDetailModal(order)">{{order?.due_date | dateTimeVi}}</td>
           <td (click)="openDetailModal(order)">{{order?.status}}</td>

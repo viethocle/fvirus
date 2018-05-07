@@ -8,6 +8,9 @@ import { Order } from '@modules/dashboard/order';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { Subject } from 'rxjs/Subject';
 import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import _ = require('lodash');
+import { Observable } from 'rxjs/Observable';
+import { Group } from '@modules/customer/group.model';
 
 @Destroyable
 @Component({
@@ -23,6 +26,7 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
   loading: boolean;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  customer$: Observable<Customer>;
   param = {
     pagination: {
       page: 1,
@@ -55,6 +59,7 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
   }
   getCustomer(id: number) {
+    this.customer$ = this.customerService.getCustomer(id);
     this.customerService.getCustomer(id)
         .pipe(
           takeUntilDestroy(this)
@@ -83,4 +88,8 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
     this.bsmodalService.selectOrderToView(order);
   }
 
+  showGroups(customer: Customer) {
+    // console.log(customer.groups.length);
+    return customer.groups.length > 0 ? customer.groups.map(g => g.title).join(", ") : "";
+  }
 }
