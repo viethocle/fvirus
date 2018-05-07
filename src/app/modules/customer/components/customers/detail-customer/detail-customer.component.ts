@@ -51,7 +51,6 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
         this.getCustomer(this.customer_id);
         this.getPage();
       });
-    
   }
   ngOnChanges(changes: SimpleChanges) {
   }
