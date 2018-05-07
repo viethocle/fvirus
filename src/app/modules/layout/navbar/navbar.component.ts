@@ -1,15 +1,9 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  Renderer2,
-  ViewChild,
-  AfterViewInit
-} from "@angular/core";
-import { AuthService } from "../../auth/auth.service";
-import { Angular2TokenService } from "angular2-token";
-import { Router, Event, NavigationStart } from "@angular/router";
-import { SidebarService } from "../sidebar.service";
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Event, NavigationStart, Router } from '@angular/router';
+import { Angular2TokenService } from 'angular2-token';
+
+import { AuthService } from '../../auth/auth.service';
+import { SidebarService } from '../sidebar.service';
 
 @Component({
   selector: "[navbar]",
