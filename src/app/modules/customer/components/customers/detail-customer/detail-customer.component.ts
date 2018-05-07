@@ -1,19 +1,15 @@
-import { FormCustomerComponent } from './../form-customer/form-customer.component';
-import { Subject } from 'rxjs/Subject';
-import { BsModalComponent, BsModalService } from 'ng2-bs3-modal';
-import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, SimpleChange, EventEmitter, Output } from '@angular/core';
-import { Customer } from '@modules/customer/customer.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { filter, tap } from 'rxjs/operators';
-import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
-import { CustomerService } from "@modules/customer/customer.service";
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
+import { BsmodalService } from '@core/services/bsmodal.service';
+import { Customer } from '@modules/customer/customer.model';
+import { CustomerService } from '@modules/customer/customer.service';
 import { DashboardService } from '@modules/dashboard/dashboard.service';
 import { Order } from '@modules/dashboard/order';
-import { DataTablesModule } from 'angular-datatables';
-import { BsmodalService } from '@core/services/bsmodal.service';
+import { BsModalComponent } from 'ng2-bs3-modal';
+import { Subject } from 'rxjs/Subject';
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
 
+@Destroyable
 @Component({
   selector: 'app-detail-customer',
   templateUrl: './detail-customer.component.html',
@@ -52,29 +48,34 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
         // Defaults to 0 if no query param provided.
         this.customer_id = params['id'];
         this.param.customer_id = this.customer_id;
+        this.getCustomer(this.customer_id);
+        this.getPage();
       });
-    this.getCustomer(this.customer_id);
-    this.getPage();
+    
   }
   ngOnChanges(changes: SimpleChanges) {
   }
   getCustomer(id: number) {
     this.customerService.getCustomer(id)
+        .pipe(
+          takeUntilDestroy(this)
+         )
         .map(res => res)
         .subscribe(res => {
           this.customer = res;
-          console.log(this.customer);
         });
   }
   getPage() {
     Object.assign(this.param);
     this.dashboardService
       .getOrderFilter(this.param)
+      .pipe(
+        takeUntilDestroy(this)
+       )
       .map(res => res.orders)
       .subscribe(res => {
         this.orders = res;
         this.dtTrigger.next();
-        console.log(res);
       });
   }
 
