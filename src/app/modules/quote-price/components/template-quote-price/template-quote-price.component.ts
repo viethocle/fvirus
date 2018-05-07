@@ -26,7 +26,7 @@ export class TemplateQuotePriceComponent implements OnInit {
   }
 
   get showAmount() {
-    return _.sumBy(this.dataQuote.contents, (e) => e.quantity * e.price);
+    return _.sumBy(this.dataQuote.contents, (e: any) => e.quantity * e.price);
   }
 
   getBackEdit() {

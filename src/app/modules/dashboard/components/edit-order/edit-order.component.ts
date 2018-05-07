@@ -91,9 +91,11 @@ export class EditOrderComponent implements OnInit, OnDestroy {
           }
         });
     this.customerService.getCustomersWithObservable()
+        .pipe(
+              takeUntilDestroy(this),
+            )
         .subscribe(customers => this.customers = customers);
     this.modalEdit.onDismiss.subscribe ( _ => this.exitEdit());
-    console.log(this.formEditOrder);
   }
 
   ngOnDestroy() {

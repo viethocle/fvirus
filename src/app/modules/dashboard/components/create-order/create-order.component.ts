@@ -25,10 +25,9 @@ import { PerfectScrollbarComponent } from "ngx-perfect-scrollbar";
 import * as _ from 'lodash';
 import { FlyInOut } from '../../flyInOut.animate';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
 
-
-
-
+@Destroyable
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
@@ -72,6 +71,9 @@ export class CreateOrderComponent implements OnInit {
     this.buildForm();
     this.initDatetime();
     this.customerService.getCustomersWithObservable()
+        .pipe(
+              takeUntilDestroy(this),
+            )
         .subscribe(customers => this.customers = customers);
   }
 
