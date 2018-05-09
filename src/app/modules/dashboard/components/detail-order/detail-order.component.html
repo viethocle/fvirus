@@ -7,6 +7,9 @@
 
     <div class="col-md-8">
       <!-- description -->
+      <label class="control-label" for="">
+        Chi Tiết *
+      </label>
       <div>
         <table id="dynamic-table_wrapper" class="table table-striped table-bordered table-hover dataTable no-footer table-description"
           cellspacing="0" width="100%">
@@ -20,7 +23,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of contents; let i = index;">
-              <td> {{i}}</td>
+              <td> {{i + 1}}</td>
               <td>
                 {{item.content}}
               </td>

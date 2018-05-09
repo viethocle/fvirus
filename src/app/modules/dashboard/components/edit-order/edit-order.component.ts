@@ -136,7 +136,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     return this.formBuilder.group({
       content: '',
       unit: '',
-      quantity: ''
+      quantity: [1],
     });
   }
 
@@ -145,6 +145,11 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   addRowContent(): void {
     this.contents = this.formEditOrder.get('contents') as FormArray;
     this.contents.push(this.createContent());
+  }
+
+  deleteRow(index: number) {
+    let control = <FormArray>this.formEditOrder.get('contents');
+    control.removeAt(index);
   }
 
   exitEdit() {

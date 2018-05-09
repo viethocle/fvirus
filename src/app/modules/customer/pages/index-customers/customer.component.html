@@ -11,8 +11,7 @@
       <div class="col-sm-12 col-md-3">
         <div class="dataTables_length" id="dynamic-table_wrapper_length">
           <label>Hiển thị
-            <select (change)="onChangeCount($event)" name="dynamic-table_wrapper_length" aria-controls="dynamic-table_wrapper"
-              class="form-control input-sm">
+            <select (change)="onChangeCount($event)" name="dynamic-table_wrapper_length" aria-controls="dynamic-table_wrapper" class="form-control input-sm">
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
@@ -21,15 +20,10 @@
         </div>
       </div>
       <div class="col-sm-12 col-md-5 filter-group">
-        <ng-select 
-          placeholder="Bộ lọc theo nhóm khách hàng"
-          [items]="groups$ | async"
-          bindLabel="title"
-          bindValue="id"
-          [multiple]="true"
+        <ng-select placeholder="Bộ lọc theo nhóm khách hàng" [items]="groups$ | async" bindLabel="title" bindValue="id" [multiple]="true"
           (change)="onChangeFilter($event)"></ng-select>
       </div>
-      <div class="col-sm-12 col-md-4 form-search-query"> 
+      <div class="col-sm-12 col-md-4 form-search-query">
         <div class="input-group">
           <input type="text" id="search-customer" class="form-control search-query" placeholder="Tìm kiếm theo tên">
           <span class="input-group-btn">
@@ -60,14 +54,16 @@
           <th>
             <i class="ace-icon glyphicon glyphicon-home"></i>{{ 'table.address' | translate }}</th>
 
-          
+
           <th class="sorting_disabled"></th>
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let customer of customers | paginate: configPagination" [@flyOut]="'in'">
-          <td (click)="openModalDetail(customer)">{{ customer.name }}</td>
+          <td (click)="openModalDetail(customer)">
+            <span class="editable editable-click">{{ customer.name }} </span>
+          </td>
           <td (click)="openModalDetail(customer)">{{ showGroups(customer, true) }}</td>
           <td (click)="openModalDetail(customer)">{{ customer.email }}</td>
           <td (click)="openModalDetail(customer)">{{ customer.phone }}</td>
@@ -128,8 +124,4 @@
   </bs-modal-footer>
 </bs-modal>
 
-<app-edit-customer
-  [customerEdit]="customerToEdit"
-  (dismissModalEdit)="customerToEdit = null"
-  (customerUpdatedEmit)="handleUpdateCustomer($event)"
-  ></app-edit-customer>
+<app-edit-customer [customerEdit]="customerToEdit" (dismissModalEdit)="customerToEdit = null" (customerUpdatedEmit)="handleUpdateCustomer($event)"></app-edit-customer>

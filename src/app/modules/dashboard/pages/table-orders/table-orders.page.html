@@ -20,7 +20,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let order of orders | paginate: configPagination" [@flyOut]="'in'" color-order="{{ order.due_date }}" status-order="{{ order.status }}">
-          <td (click)="openDetailModal(order)">{{ order.id }}</td>
+          <td (click)="openDetailModal(order)">
+            <span class="editable editable-click ">{{ order.id }} </span>
+          </td>
           <td (click)="openDetailModal(order)">{{ order.contents | parseContentOrder }}</td>
           <td (click)="openDetailModal(order)">{{ order.customer.name }}</td>
           <td (click)="openDetailModal(order)" *ngIf="authService.isCurrentUserAccountant || authService.isCurrentUserAdmin" class="text-right">{{ order.price | vnd }}</td>

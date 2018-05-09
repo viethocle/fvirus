@@ -101,15 +101,18 @@ export class CreateOrderComponent implements OnInit {
     return this.formBuilder.group({
       content: '',
       unit: '',
-      quantity: ''
+      quantity: [1],
     });
   }
 
   addRowContent(): void {
     this.contents = this.formNewOrder.get('contents') as FormArray;
     this.contents.push(this.createContent());
-    console.log(this.contents.length);
+  }
 
+  deleteRow(index: number) {
+    let control = <FormArray>this.formNewOrder.get('contents');
+    control.removeAt(index);
   }
 
   initDatetime(): any {

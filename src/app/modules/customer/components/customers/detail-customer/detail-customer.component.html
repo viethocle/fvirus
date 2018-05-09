@@ -63,12 +63,20 @@
       </thead>
       <tbody>
         <tr *ngFor="let order of orders">
-          <td (click)="openDetailModal(order)" class="text-left">{{order?.id}}</td>
+          <td (click)="openDetailModal(order)" class="text-left">
+            <span class="editable editable-click">{{order?.id}} </span>
+          </td>
           <td (click)="openDetailModal(order)" class="text-left">{{order?.contents | parseContentOrder}}</td>
           <td (click)="openDetailModal(order)" class="text-right">{{order?.price | vnd}}</td>
           <td (click)="openDetailModal(order)">{{order?.created_at | dateTimeVi}}</td>
           <td (click)="openDetailModal(order)">{{order?.due_date | dateTimeVi}}</td>
-          <td (click)="openDetailModal(order)">{{order?.status}}</td>
+          <td (click)="openDetailModal(order)">
+            <span class="label arrowed-right arrowed-in" [ngClass]="{'label-danger': order.status == 'new',
+                                      'label-warning': order.status == 'inprogress',
+                                      'label-success': order.status == 'ready'}">
+              {{ 'label.' + order.status | translate }}
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
