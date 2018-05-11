@@ -1,3 +1,4 @@
+import { Angular2TokenService } from 'angular2-token';
 import { Router } from '@angular/router';
 import { takeUntilDestroy, Destroyable } from 'take-until-destroy';
 import { priceMask } from './../../../../shared/masks/price.masks';
@@ -35,7 +36,8 @@ export class FormQuotePriceComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store<QuoteState>,
-    private router: Router
+    private router: Router,
+    private authTokenService: Angular2TokenService
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,10 @@ export class FormQuotePriceComponent implements OnInit {
       user_quote: [''],
       to_email: [""]
     });
+
+    this.form.patchValue({
+      user_quote: this.authTokenService.currentUserData.name
+    })
 
     this.store.pipe(
       takeUntilDestroy(this),
