@@ -12,7 +12,18 @@ import { quoteDataReducer } from "@modules/quote-price/quote-data";
 export const routes: Routes = [
   {
     path: "",
-    component: QuotePriceComponent
+    component: QuotePriceComponent,
+    children: [
+      {
+        path: "template",
+        component: TemplateQuotePriceComponent,
+      },
+      {
+        path: "", 
+        component: FormQuotePriceComponent
+      }
+
+    ]
   }
 ];
 
@@ -21,7 +32,7 @@ export const routes: Routes = [
     CommonModule,
     SharedModule,
     RouterModule.forChild(routes),
-    StoreModule.forRoot(quoteDataReducer)
+    StoreModule.forRoot({ quoteData: quoteDataReducer})
   ],
   declarations: [QuotePriceComponent, FormQuotePriceComponent, TemplateQuotePriceComponent]
 })
