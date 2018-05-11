@@ -57,11 +57,47 @@ export class TemplateQuotePriceComponent implements OnInit {
   }
 
   exportToPDF() {
-    var pdf = new jsPDF('p', 'pt', 'letter');
-    var options = { pagesplit: true, 'background': '#fff' };
-    pdf.addHTML($('#main-product')[0],options, function () {
-      pdf.save('Test.pdf');
-    });
+    let printContents = (this.template.nativeElement as HTMLElement).innerHTML;
+    let popupWin = window.open("", "_blank", "top=0,left=0,height=100%,width=auto");
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Bao gia san pham</title>
+          <style>
+           div#main-product {
+              font-size: 16px;
+            }
+
+            .info-company {
+              font-size: 14px;
+            }
+
+            table {
+              width: 100%;
+            }
+
+            th {
+              font-weight: normal;
+            }
+
+            .id-user {
+              float: right;
+              width: 50%;
+            }
+
+            .table-row {
+              table-layout: fixed;
+              background-color: #ffffff;
+            }
+          </style>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        </head>
+        <body onload="window.print();window.close()">
+            ${printContents}
+        </body>
+      </html>`);
+    popupWin.document.close();
   }
 
   sendEmail() {
