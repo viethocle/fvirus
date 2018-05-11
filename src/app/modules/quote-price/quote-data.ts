@@ -1,13 +1,26 @@
 import { Action } from '@ngrx/store';
 
-export const STORE = 'STORE';
-export const RESET = 'RESET';
+export enum quoteDataTypes {
+  STORE = '[quote] STORE',
+  RESET = '[quote] RESET'
+}
 
-export function quoteDataReducer(state: any = null, action: Action) {
+export class Store implements Action {
+  readonly type = quoteDataTypes.STORE;
+  constructor(public payload: any) {}
+}
+
+export class Reset implements Action {
+  readonly type = quoteDataTypes.RESET;
+}
+
+export type quoteActionUnion = Store | Reset;
+
+export function quoteDataReducer(state: any = null, action: quoteActionUnion) {
   switch (action.type) {
-    case STORE:
-      return state     
-    case RESET:
+    case quoteDataTypes.STORE:
+      return action.payload;
+    case quoteDataTypes.RESET:
       return null;
     default:
       return state;
