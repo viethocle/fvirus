@@ -1,9 +1,18 @@
+import { Router } from '@angular/router';
+import { takeUntilDestroy, Destroyable } from 'take-until-destroy';
 import { QuoteService } from './../../quote.service';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { Store, select } from '@ngrx/store';
+import * as quoteDataActions from '../../quote-data';
 
+interface QuoteState {
+  data: any;
+}
+
+@Destroyable
 @Component({
   selector: 'app-template-quote-price',
   templateUrl: './template-quote-price.component.html',
@@ -12,17 +21,31 @@ import * as _ from 'lodash';
 export class TemplateQuotePriceComponent implements OnInit {
   @ViewChild("template_print") template: ElementRef;
   @ViewChild("modalEmail") modalEmail: BsModalComponent;
-  @Output() outputGetBack = new EventEmitter();
-  @Input() dataQuote: any;
+  dataQuote: any;
   today_formatLL: any;
   email_to_send: string;
 
   constructor(
-    private quoteService: QuoteService
-  ) { }
+    private quoteService: QuoteService,
+    private store: Store<QuoteState>,
+    private router: Router
+  ) { 
+    store.pipe(
+      takeUntilDestroy(this),
+      select('quoteData')
+    )
+      .subscribe(res => {
+        if (_.isNil(res)) {
+          this.router.navigate(["/quote-price"]);
+          return;
+        }
+        this.dataQuote = res;
+      })
+  }
 
   ngOnInit() {
     this.today_formatLL = moment().locale('vi').format('LL');
+    
   }
 
   get showAmount() {
@@ -30,7 +53,7 @@ export class TemplateQuotePriceComponent implements OnInit {
   }
 
   getBackEdit() {
-    this.outputGetBack.next();
+    this.router.navigate(["/quote-price"]);
   }
 
   sendEmail() {
