@@ -85,8 +85,12 @@
 </div>
 <hr>
 <div class="wizard-actions">
+  <button class="btn btn-primary print-btn" (click)="exportToPDF()">
+    <i class="ace-icon fa fa-download"></i> 
+    Tải xuống PDF
+  </button>
   <button class="btn btn-primary add-order" (click)="modalEmail.open()">
-    Gửi báo giá
+    Gửi bằng email
     <i class="ace-icon fa fa-paper-plane-o icon-on-right"></i>
   </button>
 

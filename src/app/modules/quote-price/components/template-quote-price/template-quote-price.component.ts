@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { Store, select } from '@ngrx/store';
 import * as quoteDataActions from '../../quote-data';
 import * as jsPDF from 'jspdf';
+import * as $ from 'jquery';
 interface QuoteState {
   data: any;
 }
@@ -45,7 +46,6 @@ export class TemplateQuotePriceComponent implements OnInit {
 
   ngOnInit() {
     this.today_formatLL = moment().locale('vi').format('LL');
-    
   }
 
   get showAmount() {
@@ -54,6 +54,14 @@ export class TemplateQuotePriceComponent implements OnInit {
 
   getBackEdit() {
     this.router.navigate(["/quote-price"]);
+  }
+
+  exportToPDF() {
+    var pdf = new jsPDF('p', 'pt', 'letter');
+    var options = { pagesplit: true, 'background': '#fff' };
+    pdf.addHTML($('#main-product')[0],options, function () {
+      pdf.save('Test.pdf');
+    });
   }
 
   sendEmail() {
