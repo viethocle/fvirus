@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 import { Store, select } from '@ngrx/store';
 import * as quoteDataActions from '../../quote-data';
-
+import * as jsPDF from 'jspdf';
 interface QuoteState {
   data: any;
 }
