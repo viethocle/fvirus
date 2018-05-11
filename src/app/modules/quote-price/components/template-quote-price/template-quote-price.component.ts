@@ -41,6 +41,7 @@ export class TemplateQuotePriceComponent implements OnInit {
           return;
         }
         this.dataQuote = res;
+        this.email_to_send = this.dataQuote.to_email;
       })
   }
 

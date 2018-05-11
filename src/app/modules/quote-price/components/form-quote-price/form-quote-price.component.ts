@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 import { Store, select } from '@ngrx/store';
 import * as quoteDataActions from '../../quote-data';
+import { Customer } from "@modules/customer/customer.model";
 interface QuoteState {
   data: any;
 }
@@ -44,7 +45,8 @@ export class FormQuotePriceComponent implements OnInit {
       contents: this.fb.array([this.initItemRows()]),
       to_customer: [''],
       spend_day: ['04 ngày'],
-      user_quote: ['']
+      user_quote: [''],
+      to_email: [""]
     });
 
     this.store.pipe(
@@ -56,6 +58,7 @@ export class FormQuotePriceComponent implements OnInit {
         if (_.isObject(this.dataQuote)) {
           this.form.patchValue({
             to_customer: this.dataQuote.to_customer,
+            to_email: this.dataQuote.to_email,
             contents: this.dataQuote.contents,
             spend_day: this.dataQuote.spend_day,
             user_quote: this.dataQuote.user_quote
@@ -97,6 +100,12 @@ export class FormQuotePriceComponent implements OnInit {
   quotePrice() {
     this.store.dispatch(new quoteDataActions.Store(this.form.value));
     this.router.navigate(['/quote-price/template']);
+  }
+
+  handleDataCustomer(customer: Customer) {
+    this.form.patchValue({
+      to_email: customer.email
+    })
   }
 
 }

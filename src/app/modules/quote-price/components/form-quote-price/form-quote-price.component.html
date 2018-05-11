@@ -15,7 +15,7 @@
 
     <div align="left">
       <strong>Kính gửi: {{ form.value.to_customer }}</strong>
-      <app-search-customer (selectCustomerOutput)="handleSelectCustomer($event)"></app-search-customer>
+      <app-search-customer (nameCustomerOutput)="handleSelectCustomer($event)" (selectCustomerOutput)="handleDataCustomer($event)"></app-search-customer>
     </div>
     <br>
     <p>Công ty TNHH Rulô Nam Hải xin trân trọng báo giá mặt hàng theo yêu cầu của Quý đơn vị như sau:</p>
