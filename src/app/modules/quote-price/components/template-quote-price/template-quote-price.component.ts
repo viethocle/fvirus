@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { takeUntilDestroy, Destroyable } from 'take-until-destroy';
 import { QuoteService } from './../../quote.service';
 import { BsModalComponent } from 'ng2-bs3-modal';
@@ -26,18 +27,25 @@ export class TemplateQuotePriceComponent implements OnInit {
 
   constructor(
     private quoteService: QuoteService,
-    private store: Store<QuoteState>
-  ) { }
+    private store: Store<QuoteState>,
+    private router: Router
+  ) { 
+    store.pipe(
+      takeUntilDestroy(this),
+      select('quoteData')
+    )
+      .subscribe(res => {
+        if (_.isNil(res)) {
+          this.router.navigate(["/quote-price"]);
+          return;
+        }
+        this.dataQuote = res;
+      })
+  }
 
   ngOnInit() {
     this.today_formatLL = moment().locale('vi').format('LL');
-    this.store.pipe(
-          takeUntilDestroy(this),
-          select('quoteData')
-        )
-        .subscribe(res => {
-          this.dataQuote = res;
-        })
+    
   }
 
   get showAmount() {
@@ -45,7 +53,7 @@ export class TemplateQuotePriceComponent implements OnInit {
   }
 
   getBackEdit() {
-    
+    this.router.navigate(["/quote-price"]);
   }
 
   sendEmail() {

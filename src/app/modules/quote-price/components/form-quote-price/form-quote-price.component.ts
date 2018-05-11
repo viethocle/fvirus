@@ -38,10 +38,19 @@ export class FormQuotePriceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
+    this.contents = this.fb.array([this.initItemRows()])
+    this.form = this.fb.group({
+      contents: this.fb.array([this.initItemRows()]),
+      to_customer: [''],
+      spend_day: ['04 ngày'],
+      user_quote: ['']
+    });
+
     this.store.pipe(
-        takeUntilDestroy(this),
-        select('quoteData')
-      )
+      takeUntilDestroy(this),
+      select('quoteData')
+    )
       .subscribe(res => {
         this.dataQuote = res;
         if (_.isObject(this.dataQuote)) {
@@ -53,14 +62,6 @@ export class FormQuotePriceComponent implements OnInit {
           })
         }
       })
-    this.contents = this.fb.array([this.initItemRows()])
-    this.form = this.fb.group({
-      contents: this.fb.array([this.initItemRows()]),
-      to_customer: [''],
-      spend_day: ['04 ngày'],
-      user_quote: ['']
-    });
-
     this.today_formatLL = moment().locale('vi').format('LL');
   }
 
