@@ -9,13 +9,15 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { FormControl } from '@angular/forms';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import * as _ from 'lodash';
+import { BsmodalService } from '@core/services/bsmodal.service';
+import { Customer } from '../../../customer/customer.model';
 
 
 
 @Component({
-  selector: 'app-customer-debt',
-  templateUrl: './customer-debt.component.html',
-  styleUrls: ['./customer-debt.component.css'],
+  selector: "app-customer-debt",
+  templateUrl: "./customer-debt.component.html",
+  styleUrls: ["./customer-debt.component.css"],
   providers: [HomeService]
 })
 export class CustomerDebtComponent implements OnInit {
@@ -36,8 +38,8 @@ export class CustomerDebtComponent implements OnInit {
     mask: createNumberMask({
       allowDecimal: false,
       integerLimit: 10,
-      prefix: '',
-      thousandsSeparatorSymbol: ','
+      prefix: "",
+      thousandsSeparatorSymbol: ","
     })
   });
 
@@ -48,17 +50,20 @@ export class CustomerDebtComponent implements OnInit {
     totalItems: 10
   };
   constructor(
-    private homeService: HomeService
-  ) { }
+    private homeService: HomeService,
+    private bsmodalService: BsmodalService
+  ) {}
 
   ngOnInit() {
     this.getPage(1);
 
-     const subscriptionSearch = this.keyUpSearch
+    const subscriptionSearch = this.keyUpSearch
       .do(search => (this.currentSearch = search))
       .debounceTime(200)
       .distinctUntilChanged()
-      .switchMap(search => this.homeService.getCustomersDebtWithPage(1,this.showCount, search))
+      .switchMap(search =>
+        this.homeService.getCustomersDebtWithPage(1, this.showCount, search)
+      )
       .do(res => {
         this.configPagination.totalItems = res.total;
         this.configPagination.currentPage = 1;
@@ -69,15 +74,6 @@ export class CustomerDebtComponent implements OnInit {
         this.customerDebt = res;
       });
   }
-
-  payCustomerDebt(payment) {
-    this.homeService.sendPaymentDebt(this.currentCustomer.id, payment)
-                    .subscribe(customer => {
-                      _.assign(this.customerDebt.find(t => t.id === customer.id), customer);
-                      this.modal.close();
-                    })
-  }
-
 
   getPage(page: number) {
     this.currentPage = page;
@@ -95,9 +91,13 @@ export class CustomerDebtComponent implements OnInit {
       });
   }
 
-    onChangeCount($event) {
+  onChangeCount($event) {
     this.homeService
-      .getCustomersDebtWithPage(this.currentPage, this.showCount, this.currentSearch)
+      .getCustomersDebtWithPage(
+        this.currentPage,
+        this.showCount,
+        this.currentSearch
+      )
       .do(res => {
         this.configPagination.totalItems = res.total;
         this.configPagination.currentPage = 1;
@@ -108,17 +108,14 @@ export class CustomerDebtComponent implements OnInit {
         this.customerDebt = res;
         this.configPagination.itemsPerPage = this.showCount;
       });
-    }
+  }
 
-  openCustomerDebt(customer: any) {
-    this.payment.reset();
-    this.currentCustomer = customer;
-    this.modal.open();
-    this.homeService.getOrderdebt(customer.id)
-        .map(res => res.orders)
-        .subscribe(res => {
-          this.orders = res;
-          console.log(this.orders);
-        } );
+  openCustomerDebtModal(customer: CustomerDebt) {
+    this.bsmodalService.selectCustomerPayDebt(customer);
+  }
+
+  handlePayOrder(customer: CustomerDebt) {
+    _.assign(this.customerDebt.find(t => t.id === customer.id), customer);
+    // this.customerDebt = _.reject(this.customerDebt, ["total_debt", 0]);
   }
 }

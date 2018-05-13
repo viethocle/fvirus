@@ -5,7 +5,7 @@ import { BsModalComponent } from 'ng2-bs3-modal';
 import { DashboardService } from '../../dashboard.service';
 import { AuthService } from './../../../auth/auth.service';
 import { Order } from './../../order';
-import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
 
 @Destroyable
 @Component({

@@ -29,7 +29,7 @@
       <thead>
       <tr>
         <th>Id </th>
-        <th>{{ 'table.description' | translate }}</th>
+        <th>Nội Dung</th>
         <th>{{ 'table.customer' | translate }}</th>
         <th class="text-right">{{ 'table.price' | translate }}</th>
         <th>{{ 'table.created-at' | translate }}</th>
@@ -41,7 +41,7 @@
       <tbody>
         <tr *ngFor="let order of orders| paginate: configPagination">
           <td>{{ order.id }}</td>
-          <td>{{ order.description | truncateDescription }}</td>
+          <td class="text-left">{{ order.contents | parseContentOrder }}</td>
           <td>{{ order.customer.name }}</td>
           <td class="text-right">{{ order.price | vnd }}</td>
           <td>{{ order.created_at | dateTimeVi }}</td>

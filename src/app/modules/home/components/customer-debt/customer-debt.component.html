@@ -55,8 +55,8 @@
           <td>{{customer.address}}</td>
           <td>{{customer.date_debt | dateTimeVi }}</td>
           <td class="text-right">{{ customer.total_debt | vnd }}</td>
-          <td>
-            <button (click)="openCustomerDebt(customer)" class="btn btn-primary btn-sm">Trả nợ</button>
+          <td class="text-center">
+            <button (click)="openCustomerDebtModal(customer)" class="btn btn-primary btn-sm">Trả nợ</button>
           </td>
         </tr>
       </tbody>
@@ -94,75 +94,4 @@
     <!-- end pagination -->
   </div>
 </div>
-
-<bs-modal #modal [size]="'lg'">
-  <bs-modal-header [showDismiss]="true">
-    <h4 class="modal-title">
-      {{ 'customers_in_debt.ListOrders.Title' | translate }}
-      <a [href]="'mailto:'+ currentCustomer?.email">{{currentCustomer?.name}}</a>
-    </h4>
-  </bs-modal-header>
-
-  <bs-modal-body>
-    <div class="space-10"></div>
-    <div class="widget-box">
-      <div class="widget-header">
-        <h4 class="widget-title">Thanh toán tiền nợ </h4>
-      </div>
-
-      <div class="widget-body">
-        <div class="widget-main no-padding">
-
-          <form class="form-inline">
-            <h3>Tổng số tiền nợ: {{ currentCustomer?.total_debt | vnd }}</h3>
-            <input type="text" class="right-align" [formControl]="payment" [textMask]="priceMask" numeric>
-            <button type="button" class="btn btn-primary btn-sm" (click)="payCustomerDebt(payment.value)">
-              <i class="ace-icon fa fa-money bigger-110"></i> Thanh toán
-            </button>
-          </form>
-
-          <div class="space-10"></div>
-        </div>
-      </div>
-    </div>
-    <table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th>{{ 'table.No' | translate }}</th>
-          <th>{{ 'table.description' | translate }}</th>
-          <th>{{ 'table.due-date' | translate }}</th>
-          <th>{{ 'table.debt_date' | translate }}</th>
-          <th class="text-right">{{ 'orders.price' | translate }}</th>
-          <th class="text-right">{{ 'table.debt' | translate }}</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr *ngFor="let order of orders">
-          <td>
-            #{{ order.id }}
-          </td>
-          <td class="text-right">
-            {{ order.description }}
-          </td>
-          <td class="debt bigger-110 text-right">
-            {{ order.due_date | dateTimeVi}}
-          </td>
-          <td>
-            {{ order.delivered_at | dateTimeVi}}
-          </td>
-          <td class="debt bigger-110 text-right">
-            {{ order.price | vnd}}
-          </td>
-          <td class="debt bigger-110 text-right">
-            {{ order.price - order.paid_amount | vnd}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </bs-modal-body>
-
-  <bs-modal-footer>
-    <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modal.dismiss()">{{ 'customers_in_debt.ListOrders.Button.Close' | translate }}</button>
-  </bs-modal-footer>
-</bs-modal>
+<app-pay-debt (payOrderOutput)="handlePayOrder($event)"></app-pay-debt>

@@ -8,6 +8,7 @@ import { OrderDueDateComponent } from './components/order-due-date/order-due-dat
 import { StatisticalComponent } from './components/statistical/statistical.component';
 import { ChartsModule } from 'ng2-charts';
 import { NumericDirective } from '@shared/directives/numeric.directive';
+import { PayDebtComponent } from './components/pay-debt/pay-debt.component';
 
 export const HomeRoutes: Routes = [
   {
@@ -25,6 +26,6 @@ export const HomeRoutes: Routes = [
     RouterModule.forChild(HomeRoutes)
   ],
   declarations: [
-    HomeComponent, CustomerDebtComponent, OrderDueDateComponent, StatisticalComponent]
+    HomeComponent, CustomerDebtComponent, OrderDueDateComponent, StatisticalComponent, PayDebtComponent]
 })
 export class HomeModule { }
