@@ -4,9 +4,7 @@
     <div class="widget-main">
       <div id="fuelux-wizard-container" class="no-steps-container">
       </div>
-      <app-form-quote-price *ngIf="!showPrint" [dataQuote]="dataQuote" (dataQuotePrice)="handleShowQuote($event)"></app-form-quote-price>
-      <app-template-quote-price *ngIf="showPrint" (outputGetBack)="getBackEdit()" [dataQuote]="dataQuote"></app-template-quote-price>
-
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
