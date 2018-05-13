@@ -14,7 +14,8 @@ import { HomeService } from '@modules/home/home.service';
 @Component({
   selector: "app-pay-debt",
   templateUrl: "./pay-debt.component.html",
-  styleUrls: ["./pay-debt.component.css"]
+  styleUrls: ["./pay-debt.component.css"],
+  providers: [HomeService]
 })
 export class PayDebtComponent implements OnInit {
   @ViewChild("modalPayDebt") modalPayDebt: BsModalComponent;

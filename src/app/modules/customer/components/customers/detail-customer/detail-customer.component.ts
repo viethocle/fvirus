@@ -11,31 +11,34 @@ import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
 import { Observable } from 'rxjs/Observable';
 import { Group } from '@modules/customer/group.model';
 import { AuthService } from '@modules/auth/auth.service';
+import { CustomerDebt } from '@modules/home/customer-debt.model';
 
 @Destroyable
 @Component({
-  selector: 'app-detail-customer',
-  templateUrl: './detail-customer.component.html',
-  styleUrls: ['./detail-customer.component.css']
+  selector: "app-detail-customer",
+  templateUrl: "./detail-customer.component.html",
+  styleUrls: ["./detail-customer.component.css"]
 })
 export class DetailCustomerComponent implements OnInit, OnChanges {
- @ViewChild("modalDetail") modalDetail: BsModalComponent;
+  @ViewChild("modalDetail") modalDetail: BsModalComponent;
   customer_id: number;
   orders: Order[];
-  customer: Customer;
+  customer: CustomerDebt;
   loading: boolean;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
-  customer$: Observable<Customer>;
+  customer$: Observable<CustomerDebt>;
+  isCustomerDebt = false;
+  totalDebt = 0;
   param = {
     pagination: {
       page: 1,
-      per_page: 1000,
+      per_page: 1000
     },
     show_all: true,
     sorted_by: "due_date_asc",
     customer_id: 0
-    };
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -43,54 +46,70 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
     private dashboardService: DashboardService,
     private customerService: CustomerService,
     private bsmodalService: BsmodalService,
-    public authService: AuthService,
-  ) { }
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.route
-      .params
-      .subscribe(params => {
-        // Defaults to 0 if no query param provided.
-        this.customer_id = params['id'];
-        this.param.customer_id = this.customer_id;
-        this.getCustomer(this.customer_id);
-        this.getPage();
-      });
+    this.route.params.subscribe(params => {
+      // Defaults to 0 if no query param provided.
+      this.customer_id = params["id"];
+      this.param.customer_id = this.customer_id;
+      this.getCustomer(this.customer_id);
+      this.getPage();
+    });
   }
-  ngOnChanges(changes: SimpleChanges) {
-  }
+  ngOnChanges(changes: SimpleChanges) {}
+
   getCustomer(id: number) {
     this.customer$ = this.customerService.getCustomer(id);
-    this.customerService.getCustomer(id)
-        .pipe(
-          takeUntilDestroy(this)
-         )
-        .map(res => res)
-        .subscribe(res => {
-          this.customer = res;
-        });
+    this.customerService
+      .getCustomer(id)
+      .pipe(takeUntilDestroy(this))
+      .map(res => res)
+      .subscribe(res => {
+        this.customer = res;
+      });
   }
   getPage() {
     Object.assign(this.param);
     this.dashboardService
       .getOrderFilter(this.param)
-      .pipe(
-        takeUntilDestroy(this)
-       )
+      .pipe(takeUntilDestroy(this))
       .map(res => res.orders)
       .subscribe(res => {
         this.orders = res;
+        this.orders.map(order => {
+          if ((order.price > order.paid_amount) && ( order.status === "delivered")) {
+            this.isCustomerDebt = true;
+            this.totalDebt += order.price - order.paid_amount;
+          }
+        });
         this.dtTrigger.next();
       });
   }
 
   openDetailModal(order: Order) {
-    console.log(order);
     this.bsmodalService.selectOrderToView(order);
   }
 
+  openCustomerDebtModal(customer: CustomerDebt) {
+    customer.total_debt = this.totalDebt;
+    this.bsmodalService.selectCustomerPayDebt(customer);
+  }
+
+  handlePayOrder(customer: CustomerDebt) {
+    this.totalDebt = customer.total_debt;
+    this.dashboardService
+      .getOrderFilter(this.param)
+      .map(res => res.orders)
+      .subscribe(res => {
+        this.orders = res;
+      });
+  }
+
   showGroups(customer: Customer) {
-    // console.log(customer.groups.length);
-    return customer.groups.length > 0 ? customer.groups.map(g => g.title).join(", ") : "";
+    return customer.groups.length > 0
+      ? customer.groups.map(g => g.title).join(", ")
+      : "";
   }
 }

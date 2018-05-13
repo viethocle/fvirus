@@ -45,8 +45,20 @@
         </div>
       </div>
     </div>
-  </div>
 
+    <div *ngIf="isCustomerDebt">
+      <div class="infobox-data col-xs-8">
+        <h4 class="infobox-content blue">Tổng nợ</h4>
+        <h3 class="infobox-content red">{{totalDebt | vnd}}</h3>
+      </div>
+      <div class="col-xs-4">
+        <div class="space-10"></div>
+        <button class="btn btn-warning" (click)="openCustomerDebtModal(customer)">Trả nợ
+          <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
   <div class="col-xs-12 col-sm-9 center">
     <h2>Lịch sử khách hàng</h2>
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dynamic-table_wrapper" class="table table-striped table-bordered
@@ -82,4 +94,5 @@
     </table>
   </div>
   <app-detail-order></app-detail-order>
+  <app-pay-debt (payOrderOutput)="handlePayOrder($event)"></app-pay-debt>
 </div>
