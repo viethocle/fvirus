@@ -7,10 +7,10 @@ import { DashboardService } from '@modules/dashboard/dashboard.service';
 import { Order } from '@modules/dashboard/order';
 import { BsModalComponent } from 'ng2-bs3-modal';
 import { Subject } from 'rxjs/Subject';
-import { Destroyable, takeUntilDestroy } from 'take-until-destroy'
-import _ = require('lodash');
+import { Destroyable, takeUntilDestroy } from 'take-until-destroy';
 import { Observable } from 'rxjs/Observable';
 import { Group } from '@modules/customer/group.model';
+import { AuthService } from '@modules/auth/auth.service';
 
 @Destroyable
 @Component({
@@ -42,7 +42,8 @@ export class DetailCustomerComponent implements OnInit, OnChanges {
     private router: Router,
     private dashboardService: DashboardService,
     private customerService: CustomerService,
-    private bsmodalService: BsmodalService
+    private bsmodalService: BsmodalService,
+    public authService: AuthService,
   ) { }
 
   ngOnInit() {

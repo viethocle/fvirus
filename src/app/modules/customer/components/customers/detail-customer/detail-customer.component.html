@@ -55,7 +55,7 @@
         <tr>
           <th>Order</th>
           <th>Nội dung</th>
-          <th>Giá trị đơn hàng</th>
+          <th *ngIf="authService.isCurrentUserAdmin || authService.isCurrentUserAccountant">Giá trị đơn hàng</th>
           <th>Ngày thêm</th>
           <th>Ngày hết hạn</th>
           <th>Trạng thái</th>
@@ -67,7 +67,7 @@
             <span class="editable editable-click">{{order?.id}} </span>
           </td>
           <td (click)="openDetailModal(order)" class="text-left">{{order?.contents | parseContentOrder}}</td>
-          <td (click)="openDetailModal(order)" class="text-right">{{order?.price | vnd}}</td>
+          <td *ngIf="authService.isCurrentUserAdmin || authService.isCurrentUserAccountant" (click)="openDetailModal(order)" class="text-right">{{order?.price | vnd}}</td>
           <td (click)="openDetailModal(order)">{{order?.created_at | dateTimeVi}}</td>
           <td (click)="openDetailModal(order)">{{order?.due_date | dateTimeVi}}</td>
           <td (click)="openDetailModal(order)">
