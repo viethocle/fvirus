@@ -2,10 +2,10 @@
   <div id="main-product" class="col-md-offset-2 col-md-8 border-template">
     <div class="info-company">
       <p>
-        Công ty TNHH Ru lô Nam Hải.
-        <br> 13A2 Đầm Trấu-Hai Bà Trưng-Hà nội.
-        <br> ĐT:043.9715987-tel/fax:043.9721538.
-        <br> namhairoller@gmail.com
+         Công ty TNHH Ru lô Nam Hải
+        <br> 13A2 Đầm Trấu - Hai Bà Trưng - Hà nội
+        <br> ĐT: 043.9715987 - Tel/fax: 043.9721538
+        <br> Email: namhairoller@gmail.com
         <br>
       </p>
     </div>
@@ -15,7 +15,7 @@
 
     <div align="left">
       <strong>Kính gửi: {{ form.value.to_customer }}</strong>
-      <app-search-customer (selectCustomerOutput)="handleSelectCustomer($event)"></app-search-customer>
+      <app-search-customer (nameCustomerOutput)="handleSelectCustomer($event)" (selectCustomerOutput)="handleDataCustomer($event)"></app-search-customer>
     </div>
     <br>
     <p>Công ty TNHH Rulô Nam Hải xin trân trọng báo giá mặt hàng theo yêu cầu của Quý đơn vị như sau:</p>
@@ -24,8 +24,8 @@
         <tr>
           <th>STT</th>
           <th width="40%">Quy cách bản vẽ</th>
-          <th width="10%">SL</th>
-          <th width="15%">Đơn vị</th>
+          <th width="10%" align="center">SL</th>
+          <th width="15%" align="center">Đơn vị</th>
           <th align="right">Giá VND </th>
           <!-- <th align="right">Thành tiền </th> -->
           <th></th>

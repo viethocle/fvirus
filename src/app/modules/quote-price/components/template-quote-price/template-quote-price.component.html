@@ -2,10 +2,10 @@
   <div #template_print id="main-product" class="col-md-offset-2 col-md-8 border-template">
     <div class="info-company">
       <p>
-        Công ty TNHH Ru lô Nam Hải.
-        <br> 13A2 Đầm Trấu-Hai Bà Trưng-Hà nội.
-        <br> ĐT:043.9715987-tel/fax:043.9721538.
-        <br> namhairoller@gmail.com
+        <strong>Công ty TNHH Ru lô Nam Hải</strong>
+        <br> 13A2 Đầm Trấu - Hai Bà Trưng - Hà nội
+        <br> ĐT: 043.9715987 - Tel/fax: 043.9721538
+        <br> Email: namhairoller@gmail.com
         <br>
       </p>
     </div>
@@ -23,18 +23,18 @@
         <tr>
           <th>STT</th>
           <th width="40%">Quy cách bản vẽ</th>
-          <th width="10%">SL</th>
-          <th width="15%">Đơn vị</th>
-          <th align="right">Giá VND </th>
-          <th align="right">Thành tiền </th>
+          <th width="10%" style="text-align: center">SL</th>
+          <th width="15%" style="text-align: center">Đơn vị</th>
+          <th style="text-align: right">Giá VND </th>
+          <th style="text-align: right">Thành tiền </th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of dataQuote.contents; let i = index">
           <td>{{ i + 1}}</td>
           <td>{{ item.content }} </td>
-          <td>{{ item.quantity }}</td>
-          <td>{{ item.unit }}</td>
+          <td align="center">{{ item.quantity }}</td>
+          <td align="center">{{ item.unit }}</td>
           <td align="right">{{ item.price | vnd }}</td>
           <td align="right">{{ item.quantity * item.price | vnd}}</td>
         </tr>
@@ -85,8 +85,12 @@
 </div>
 <hr>
 <div class="wizard-actions">
+  <button class="btn btn-primary print-btn" (click)="exportToPDF()">
+    <i class="ace-icon fa fa-download"></i> 
+    Tải xuống PDF
+  </button>
   <button class="btn btn-primary add-order" (click)="modalEmail.open()">
-    Gửi báo giá
+    Gửi bằng email
     <i class="ace-icon fa fa-paper-plane-o icon-on-right"></i>
   </button>
 

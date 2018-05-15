@@ -7,7 +7,8 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 import { Store, select } from '@ngrx/store';
 import * as quoteDataActions from '../../quote-data';
-
+import * as jsPDF from 'jspdf';
+import * as $ from 'jquery';
 interface QuoteState {
   data: any;
 }
@@ -40,12 +41,12 @@ export class TemplateQuotePriceComponent implements OnInit {
           return;
         }
         this.dataQuote = res;
+        this.email_to_send = this.dataQuote.to_email;
       })
   }
 
   ngOnInit() {
     this.today_formatLL = moment().locale('vi').format('LL');
-    
   }
 
   get showAmount() {
@@ -54,6 +55,50 @@ export class TemplateQuotePriceComponent implements OnInit {
 
   getBackEdit() {
     this.router.navigate(["/quote-price"]);
+  }
+
+  exportToPDF() {
+    let printContents = (this.template.nativeElement as HTMLElement).innerHTML;
+    let popupWin = window.open("", "_blank", "top=0,left=0,height=100%,width=auto");
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Bao gia san pham</title>
+          <style>
+           div#main-product {
+              font-size: 16px;
+            }
+
+            .info-company {
+              font-size: 14px;
+            }
+
+            table {
+              width: 100%;
+            }
+
+            th {
+              font-weight: normal;
+            }
+
+            .id-user {
+              float: right;
+              width: 50%;
+            }
+
+            .table-row {
+              table-layout: fixed;
+              background-color: #ffffff;
+            }
+          </style>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        </head>
+        <body onload="window.print();window.close()">
+            ${printContents}
+        </body>
+      </html>`);
+    popupWin.document.close();
   }
 
   sendEmail() {
