@@ -14,7 +14,7 @@
     <tbody>
       <tr *ngFor="let quote of quote_prices">
         <td>{{ quote.value.contents |  parseContentOrder }}</td>
-        <td (click)="navigateToCustomer(quote.value.customer_id)">{{ quote.value.to_customer }}</td>
+        <td (click)="navigateToCustomer(quote.value.customer_id)" class="card-key editable editable-click">{{ quote.value.to_customer }}</td>
         <td>{{ quote.value.to_email }}</td>
         <td>{{ quote.created_at | dateTimeVi }}</td>
       </tr>
