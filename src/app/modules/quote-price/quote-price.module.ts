@@ -1,3 +1,4 @@
+import { DataTablesModule } from 'angular-datatables';
 import { SharedModule } from '@shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -37,7 +38,8 @@ export const routes: Routes = [
     CommonModule,
     SharedModule,
     RouterModule.forChild(routes),
-    StoreModule.forRoot({ quoteData: quoteDataReducer})
+    StoreModule.forRoot({ quoteData: quoteDataReducer}),
+    DataTablesModule
   ],
   declarations: [QuotePriceComponent, FormQuotePriceComponent, TemplateQuotePriceComponent, ListQuotePriceComponent]
 })

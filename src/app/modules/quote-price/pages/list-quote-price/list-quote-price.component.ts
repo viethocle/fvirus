@@ -1,3 +1,6 @@
+import { QuoteService } from './../../quote.service';
+import { QuotePrice } from './../../quote-price.model';
+import { Subject } from 'rxjs/Subject';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListQuotePriceComponent implements OnInit {
 
-  constructor() { }
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+
+  quote_prices: QuotePrice[] = [];
+  
+  constructor(
+    private quoteService: QuoteService
+  ) { }
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: "full_numbers",
+      language: {
+        url: '../../assets/i18n/datatables/vi.json'
+      }
+    };
+
+    this.quoteService.getQuotePrices().subscribe(res => { 
+      this.quote_prices = res; 
+      console.log(this.quote_prices);
+    });
   }
+
 
 }
