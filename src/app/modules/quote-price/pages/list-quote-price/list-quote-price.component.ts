@@ -22,6 +22,7 @@ export class ListQuotePriceComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: "full_numbers",
+      pageLength: 25,
       language: {
         url: '../../assets/i18n/datatables/vi.json'
       }
