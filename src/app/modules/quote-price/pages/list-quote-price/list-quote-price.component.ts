@@ -2,6 +2,8 @@ import { QuoteService } from './../../quote.service';
 import { QuotePrice } from './../../quote-price.model';
 import { Subject } from 'rxjs/Subject';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-list-quote-price',
@@ -16,7 +18,8 @@ export class ListQuotePriceComponent implements OnInit {
   quote_prices: QuotePrice[] = [];
   
   constructor(
-    private quoteService: QuoteService
+    private quoteService: QuoteService,
+    private router: Router 
   ) { }
 
   ngOnInit() {
@@ -32,6 +35,12 @@ export class ListQuotePriceComponent implements OnInit {
       this.quote_prices = res; 
       this.dtTrigger.next();
     });
+  }
+
+  navigateToCustomer(customer_id) {
+    if (_.isNumber(customer_id)) {
+      this.router.navigate(["/customers", customer_id]);
+    }
   }
 
 
