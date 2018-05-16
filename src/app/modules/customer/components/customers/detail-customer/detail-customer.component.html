@@ -75,7 +75,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let order of orders">
-          <td (click)="openDetailModal(order)" class="text-left">
+          <td (click)="openDetailModal(order)" class="text-left card-key editable editable-click">
             <span class="editable editable-click">{{order?.id}} </span>
           </td>
           <td (click)="openDetailModal(order)" class="text-left">{{order?.contents | parseContentOrder}}</td>

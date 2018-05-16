@@ -79,7 +79,7 @@ export class FormQuotePriceComponent implements OnInit {
       quantity: [1],
       unit: [''],
       price: [0]
-    })
+    });
   }
 
   get formContents(): FormArray {

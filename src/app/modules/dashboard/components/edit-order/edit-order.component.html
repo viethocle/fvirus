@@ -5,7 +5,7 @@
 
   <bs-modal-body class="container-fluid">
 
-    <div class="col-md-8">
+    <div class="col-xs-12">
       <!-- description -->
       <label class="control-label" for="">
         Chi Tiết *
@@ -18,8 +18,9 @@
               <th class="stt">Stt</th>
               <th class="content">Nội dung</th>
               <th class="unit">Đơn vị</th>
-              <th>Số lượng</th>
-              <th></th>
+              <th class="quant">Số lượng</th>
+              <th>Giá từng đơn vị(VND)</th>
+              <th class="quant"></th>
             </tr>
           </thead>
           <tbody>
@@ -31,58 +32,39 @@
               <td [formGroupName]="i">
                 <input class="inp-unit" formControlName="unit">
               </td>
-              <td [formGroupName]="i">
+              <td [formGroupName]="i" class="text-right">
                 <input type="number" class="inp-unit" formControlName="quantity">
               </td>
-              <td>
+               <td [formGroupName]="i">
+                <input type="text" class="inp-unit text-right" formControlName="price">
+              </td>
+              <td class="text-center">
                 <button class="btn btn-xs btn-danger" (click)="deleteRow(i)">
                   <i class="ace-icon fa fa-trash-o bigger-120"></i>
                 </button>
               </td>
             </tr>
+            <tr>
+              <td colspan="4" class="text-right">
+                Tổng tiền:
+              </td>
+              <td class="text-right">
+                {{totalPrice | vnd}}
+              </td>
+              <td class="text-center">
+                <button class="btn btn-success no-border btn-add" (click)="addRowContent()">
+                  Thêm
+                  <i class="ace-icon glyphicon glyphicon-plus"></i>
+                </button>
+              </td>
+            </tr>
+
           </tbody>
         </table>
-        <button class="btn btn-success no-border btn-add" (click)="addRowContent()">
-          Thêm
-          <i class="ace-icon glyphicon glyphicon-plus"></i>
-        </button>
       </div>
-
-      <div [class.has-error]="formEditOrder.get('price').errors && (formEditOrder.get('price').dirty || formEditOrder.get('price').touched)">
-        <label for="new-price" class="control-label">{{ 'orders.price' | translate }}:</label>
-        <div class="input-group">
-          <input class="form-control right-align" id="new-price" type="text" [formControl]="formEditOrder.get('price')" [textMask]="priceMask"
-            numeric>
-          <span class="input-group-addon">
-            <i class="ace-icon fa fa-money"></i>
-          </span>
-        </div>
-      </div>
-
-      <div *ngIf="authService.isCurrentUserAdmin || authService.isCurrentUserAccountant" [class.has-error]="formEditOrder.get('paid_amount').errors && (formEditOrder.get('paid_amount').dirty || formEditOrder.get('paid_amount').touched)">
-        <label for="paid_amount" class="control-label">{{ 'orders.paid_amount' | translate }}:</label>
-        <div class="input-group">
-          <input class="form-control right-align" id="paid_amount" type="text" [formControl]="formEditOrder.get('paid_amount')" [textMask]="priceMask"
-            numeric>
-          <span class="input-group-addon">
-            <i class="ace-icon fa fa-money"></i>
-          </span>
-        </div>
-        <div *ngIf="formEditOrder.get('price').dirty && formEditOrder.get('price').errors">
-          <p class="alert alert-danger" *ngIf="formEditOrder.get('price')?.errors">Giá nhập quá lớn!</p>
-        </div>
-      </div>
-
-      <div class="input-wrapper">
-        <label for="datetime-picker" class="control-label">{{ 'orders.due-date' | translate }}:</label>
-        <input id="datetime-picker" class="form-control" [formControl]="formEditOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
-          [owlDateTime]="dtPicker2">
-        <owl-date-time #dtPicker2 [pickerType]="'calendar'" [startAt]="startAt"></owl-date-time>
-      </div>
-
     </div>
 
-    <div class="col-md-4">
+    <div class="col-xs-6">
       <label for="" class="control-label">
         {{ 'customers.title' | translate }}:
       </label>
@@ -140,6 +122,40 @@
             </div>
           </div>
         </div>
+      </div>
+
+    </div>
+    <div class="col-xs-6">
+      <!-- <div [class.has-error]="formEditOrder.get('price').errors && (formEditOrder.get('price').dirty || formEditOrder.get('price').touched)">
+        <label for="new-price" class="control-label">{{ 'orders.price' | translate }}:</label>
+        <div class="input-group">
+          <input class="form-control right-align" id="new-price" type="text" [formControl]="formEditOrder.get('price')" [textMask]="priceMask"
+            numeric>
+          <span class="input-group-addon">
+            <i class="ace-icon fa fa-money"></i>
+          </span>
+        </div>
+      </div> -->
+
+      <div *ngIf="authService.isCurrentUserAdmin || authService.isCurrentUserAccountant" [class.has-error]="formEditOrder.get('paid_amount').errors && (formEditOrder.get('paid_amount').dirty || formEditOrder.get('paid_amount').touched)">
+        <label for="paid_amount" class="control-label">{{ 'orders.paid_amount' | translate }}:</label>
+        <div class="input-group">
+          <input class="form-control right-align" id="paid_amount" type="text" [formControl]="formEditOrder.get('paid_amount')" [textMask]="priceMask"
+            numeric>
+          <span class="input-group-addon">
+            <i class="ace-icon fa fa-money"></i>
+          </span>
+        </div>
+        <div *ngIf="formEditOrder.get('price').dirty && formEditOrder.get('price').errors">
+          <p class="alert alert-danger" *ngIf="formEditOrder.get('price')?.errors">Giá nhập quá lớn!</p>
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <label for="datetime-picker" class="control-label">{{ 'orders.due-date' | translate }}:</label>
+        <input id="datetime-picker" class="form-control" [formControl]="formEditOrder.get('due_date')" [owlDateTimeTrigger]="dtPicker2"
+          [owlDateTime]="dtPicker2">
+        <owl-date-time #dtPicker2 [pickerType]="'calendar'" [startAt]="startAt"></owl-date-time>
       </div>
 
     </div>

@@ -7,7 +7,7 @@
   </bs-modal-header>
 
   <bs-modal-body class="container-fluid">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <label class="control-label" for="">
         Chi Tiết *
       </label>
@@ -19,8 +19,9 @@
               <th class="stt">Stt</th>
               <th class="content">Nội dung</th>
               <th class="unit">Đơn vị</th>
-              <th>Số lượng</th>
-              <th></th>
+              <th class="quant">Số lượng</th>
+              <th>Giá từng đơn vị(VND)</th>
+              <th class="quant"></th>
             </tr>
           </thead>
           <tbody>
@@ -33,23 +34,37 @@
                 <input class="inp-unit" formControlName="unit">
               </td>
               <td [formGroupName]="i">
-                <input type="number" class="inp-unit" formControlName="quantity">
+                <input type="number" class="inp-unit text-right" formControlName="quantity">
               </td>
-              <td>
+              <td [formGroupName]="i">
+                <input type="number" class="inp-unit text-right" formControlName="price">
+              </td>
+              <td class="text-center">
                 <button class="btn btn-xs btn-danger" (click)="deleteRow(i)">
                   <i class="ace-icon fa fa-trash-o bigger-120"></i>
                 </button>
               </td>
             </tr>
+            <tr>
+              <td colspan="4" class="text-right">
+                Tổng tiền:
+              </td>
+              <td class="text-right">
+                {{totalPrice | vnd}}
+              </td>
+              <td class="text-center">
+                <button class="btn btn-success no-border btn-add" (click)="addRowContent()">
+                  Thêm
+                  <i class="ace-icon glyphicon glyphicon-plus"></i>
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
-        <button class="btn btn-success no-border btn-add" (click)="addRowContent()">
-          Thêm
-          <i class="ace-icon glyphicon glyphicon-plus"></i>
-        </button>
+
       </div>
 
-      <div [class.has-error]="formNewOrder.get('price').errors && (formNewOrder.get('price').dirty || formNewOrder.get('price').touched)"
+      <!-- <div [class.has-error]="formNewOrder.get('price').errors && (formNewOrder.get('price').dirty || formNewOrder.get('price').touched)"
         class="col-xs-6">
         <label for="new-price" class="control-label">{{ 'orders.price' | translate }}:</label>
         <div class="input-group">
@@ -62,6 +77,67 @@
         <div *ngIf="formNewOrder.get('price').dirty && formNewOrder.get('price').errors">
           <p class="alert alert-danger" *ngIf="formNewOrder.get('price')?.errors">Giá nhập quá lớn!</p>
         </div>
+      </div> -->
+      <div class="col-xs-6">
+        <label for="" class="control-label">
+          {{ 'customers.title' | translate}} *
+        </label>
+
+        <div class="input-group">
+          <input type="search" class="form-control" [(ngModel)]="termCustomer" (input)="onChangeTermCustomer()" (keyup.enter)="chooseCustomer()"
+            (keyup.escape)="escapeSearch($event)" (keydown.arrowup)="shiftFocusUp($event)" (keydown.arrowdown)="shiftFocusDown($event)">
+          <span class="input-group-addon">
+            <i class="ace-icon fa fa-search"></i>
+          </span>
+        </div>
+
+        <div class="results">
+          <perfect-scrollbar class="scroller">
+            <div [ngClass]="{'box-container' : termCustomer != ''}">
+              <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let rowIDx = index">
+                <ng-container *ngIf="termCustomer != ''">
+                  <button type="button" class="list-group-item list-customers" [attr.data-rowIndex]="rowIDx" [attr.data-idCustomer]="customer.id"
+                    #listCustomers (click)="selectCustomer(customer)">
+                    <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
+                </ng-container>
+              </ng-container>
+            </div>
+          </perfect-scrollbar>
+
+          <div [hidden]="!(listCustomers?.length === 0 && termCustomer != '')">
+            {{ "notification.not-found" | translate }}
+          </div>
+        </div>
+
+        <!-- show customer selected -->
+        <div *ngIf="customerSelected && termCustomer == ''" [@flyInOut]="'in'">
+          <div class="widget-box widget-color-green2">
+            <div class="widget-header">
+              <h5 class="widget-title bigger lighter">
+                <i class="ace-icon fa fa-users"></i> {{ 'customers.selected_customer' | translate }}
+              </h5>
+              <i class="ace-icon fa fa-times close-btn pointer" tooltip="{{ 'tooltip.close' | translate }}" (click)="customerSelected=null"></i>
+            </div>
+            <div class="widget-body">
+              <div class="widget-main">
+                <dl class="dl-horizontal">
+                  <dt>{{ 'table.name' | translate }}</dt>
+                  <dd>{{customerSelected?.name}}</dd>
+
+                  <dt>{{ 'table.phone' | translate }}</dt>
+                  <dd>{{customerSelected?.phone}}</dd>
+
+                  <dt>{{ 'table.email' | translate }}</dt>
+                  <dd>{{customerSelected?.email}}</dd>
+
+                  <dt>{{ 'table.address' | translate }}</dt>
+                  <dd>{{customerSelected?.address}}</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="input-wrapper" class="col-xs-6">
@@ -79,69 +155,6 @@
       </div>
 
     </div>
-
-    <div class="col-md-4">
-      <label for="" class="control-label">
-        {{ 'customers.title' | translate}} *
-      </label>
-
-      <div class="input-group">
-        <input type="search" class="form-control" [(ngModel)]="termCustomer" (input)="onChangeTermCustomer()" (keyup.enter)="chooseCustomer()"
-          (keyup.escape)="escapeSearch($event)" (keydown.arrowup)="shiftFocusUp($event)" (keydown.arrowdown)="shiftFocusDown($event)">
-        <span class="input-group-addon">
-          <i class="ace-icon fa fa-search"></i>
-        </span>
-      </div>
-
-      <div class="results">
-        <perfect-scrollbar class="scroller">
-          <div [ngClass]="{'box-container' : termCustomer != ''}">
-            <ng-container *ngFor="let customer of customers|mySearch:termCustomer; let rowIDx = index">
-              <ng-container *ngIf="termCustomer != ''">
-                <button type="button" class="list-group-item list-customers" [attr.data-rowIndex]="rowIDx" [attr.data-idCustomer]="customer.id"
-                  #listCustomers (click)="selectCustomer(customer)">
-                  <strong>{{ customer.name }}</strong> - {{ customer.phone }}</button>
-              </ng-container>
-            </ng-container>
-          </div>
-        </perfect-scrollbar>
-
-        <div [hidden]="!(listCustomers?.length === 0 && termCustomer != '')">
-          {{ "notification.not-found" | translate }}
-        </div>
-      </div>
-
-      <!-- show customer selected -->
-      <div *ngIf="customerSelected && termCustomer == ''" [@flyInOut]="'in'">
-        <div class="widget-box widget-color-green2">
-          <div class="widget-header">
-            <h5 class="widget-title bigger lighter">
-              <i class="ace-icon fa fa-users"></i> {{ 'customers.selected_customer' | translate }}
-            </h5>
-            <i class="ace-icon fa fa-times close-btn pointer" tooltip="{{ 'tooltip.close' | translate }}" (click)="customerSelected=null"></i>
-          </div>
-          <div class="widget-body">
-            <div class="widget-main">
-              <dl class="dl-horizontal">
-                <dt>{{ 'table.name' | translate }}</dt>
-                <dd>{{customerSelected?.name}}</dd>
-
-                <dt>{{ 'table.phone' | translate }}</dt>
-                <dd>{{customerSelected?.phone}}</dd>
-
-                <dt>{{ 'table.email' | translate }}</dt>
-                <dd>{{customerSelected?.email}}</dd>
-
-                <dt>{{ 'table.address' | translate }}</dt>
-                <dd>{{customerSelected?.address}}</dd>
-              </dl>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
   </bs-modal-body>
 
   <bs-modal-footer>
