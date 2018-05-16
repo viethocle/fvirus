@@ -91,6 +91,11 @@ export class TemplateQuotePriceComponent implements OnInit {
               table-layout: fixed;
               background-color: #ffffff;
             }
+
+            @page {
+              size: auto;
+              margin: 5mm;
+            } 
           </style>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         </head>
