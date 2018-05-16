@@ -10,6 +10,6 @@ export class ParseContentOrderPipe implements PipeTransform {
     if (_.isString(value)) {
       value = JSON.parse(value);
     }
-    return value.map(e => e.content).join(", ");
+    return _.truncate(value.map(e => e.content).join(", "));
   }
 }

@@ -29,7 +29,7 @@ export class ListQuotePriceComponent implements OnInit {
 
     this.quoteService.getQuotePrices().subscribe(res => { 
       this.quote_prices = res; 
-      console.log(this.quote_prices);
+      this.dtTrigger.next();
     });
   }
 
