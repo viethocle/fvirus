@@ -47,7 +47,8 @@ export class FormQuotePriceComponent implements OnInit {
       to_customer: [''],
       spend_day: ['04 ngày'],
       user_quote: [''],
-      to_email: [""]
+      to_email: [""],
+      customer_id: [""]
     });
 
     this.form.patchValue({
@@ -109,7 +110,8 @@ export class FormQuotePriceComponent implements OnInit {
 
   handleDataCustomer(customer: Customer) {
     this.form.patchValue({
-      to_email: customer.email
+      to_email: customer.email,
+      customer_id: customer.id
     })
   }
 

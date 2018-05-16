@@ -1,0 +1,23 @@
+<div id="main-product" class="col-md-12">
+  <h1>Lịch sử báo giá</h1>
+
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="dynamic-table_wrapper" class="table table-striped table-bordered
+              table-hover dataTable no-footer" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th>Nội dung</th>
+        <th>Tên khách hàng</th>
+        <th>Email</th>
+        <th>Ngày tạo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let quote of quote_prices">
+        <td>{{ quote.value.contents |  parseContentOrder }}</td>
+        <td (click)="navigateToCustomer(quote.value.customer_id)" class="card-key editable editable-click">{{ quote.value.to_customer }}</td>
+        <td>{{ quote.value.to_email }}</td>
+        <td>{{ quote.created_at | dateTimeVi }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,3 +1,4 @@
+import { DataTablesModule } from 'angular-datatables';
 import { SharedModule } from '@shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,7 @@ import { QuotePriceComponent } from '@modules/quote-price/pages/quote-price/quot
 import { FormQuotePriceComponent } from './components/form-quote-price/form-quote-price.component';
 import { TemplateQuotePriceComponent } from './components/template-quote-price/template-quote-price.component';
 import { quoteDataReducer } from "@modules/quote-price/quote-data";
+import { ListQuotePriceComponent } from './pages/list-quote-price/list-quote-price.component';
 
 export const routes: Routes = [
   {
@@ -19,7 +21,11 @@ export const routes: Routes = [
         component: TemplateQuotePriceComponent,
       },
       {
-        path: "",
+        path: "list",
+        component: ListQuotePriceComponent
+      },
+      {
+        path: "form",
         component: FormQuotePriceComponent
       }
 
@@ -32,8 +38,9 @@ export const routes: Routes = [
     CommonModule,
     SharedModule,
     RouterModule.forChild(routes),
-    StoreModule.forRoot({ quoteData: quoteDataReducer})
+    StoreModule.forRoot({ quoteData: quoteDataReducer}),
+    DataTablesModule
   ],
-  declarations: [QuotePriceComponent, FormQuotePriceComponent, TemplateQuotePriceComponent]
+  declarations: [QuotePriceComponent, FormQuotePriceComponent, TemplateQuotePriceComponent, ListQuotePriceComponent]
 })
 export class QuotePriceModule { }
