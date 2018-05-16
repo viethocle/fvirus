@@ -24,7 +24,7 @@ export const routes: Routes = [
         component: ListQuotePriceComponent
       },
       {
-        path: "",
+        path: "form",
         component: FormQuotePriceComponent
       }
 

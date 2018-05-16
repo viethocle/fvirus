@@ -25,14 +25,34 @@
     </a>
   </li>
 
-  <li routerLinkActive="active">
-    <a [routerLink]="['/quote-price']" >
-      <i class="menu-icon fa fa-envelope "></i>
-      <span class="menu-text">
-        Gửi báo giá
-      </span>
-    </a>
-  </li>
+  
+
+    <li class="" routerLinkActive="active">
+      <a href="#" class="dropdown-toggle">
+        <i class="menu-icon fa fa-envelope"></i>
+        <span class="menu-text"> Báo giá </span>
+        <b class="arrow fa fa-angle-down"></b>
+      </a>
+      <b class="arrow"></b>
+      <ul class="submenu">
+        <li routerLinkActive="active">
+          <a [routerLink]="['/quote-price/form']">
+            <i class="menu-icon fa fa-envelope "></i>
+            <span class="menu-text">
+              Gửi báo giá
+            </span>
+          </a>
+        </li>
+        <li routerLinkActive="active">
+          <a [routerLink]="['/quote-price/list']">
+            <i class="menu-icon fa fa-book"></i>
+            <span class="menu-text">
+              Lịch sử báo giá
+            </span>
+          </a>
+        </li>
+      </ul>
+    </li>
   
   <li *ngIf="isManager  && authService.isCurrentUserAdmin" routerLinkActive="active">
     <a [routerLink]="['/users']">
