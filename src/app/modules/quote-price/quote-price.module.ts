@@ -8,6 +8,7 @@ import { QuotePriceComponent } from '@modules/quote-price/pages/quote-price/quot
 import { FormQuotePriceComponent } from './components/form-quote-price/form-quote-price.component';
 import { TemplateQuotePriceComponent } from './components/template-quote-price/template-quote-price.component';
 import { quoteDataReducer } from "@modules/quote-price/quote-data";
+import { ListQuotePriceComponent } from './pages/list-quote-price/list-quote-price.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,6 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     StoreModule.forRoot({ quoteData: quoteDataReducer})
   ],
-  declarations: [QuotePriceComponent, FormQuotePriceComponent, TemplateQuotePriceComponent]
+  declarations: [QuotePriceComponent, FormQuotePriceComponent, TemplateQuotePriceComponent, ListQuotePriceComponent]
 })
 export class QuotePriceModule { }
