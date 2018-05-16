@@ -19,7 +19,7 @@ export const routes: Routes = [
         component: TemplateQuotePriceComponent,
       },
       {
-        path: "", 
+        path: "",
         component: FormQuotePriceComponent
       }
 

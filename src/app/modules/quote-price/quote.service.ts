@@ -6,14 +6,17 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class QuoteService {
-
   private baseUrl = `${environment.baseUrl}`;
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) {}
 
   sendEmail(param) {
-    let url = this.baseUrl + '/send_quote';
+    let url = this.baseUrl + "/send_quote";
     return this.http.post(url, param);
+  }
+
+  sendValueQuotePrice(value) {
+    let url = this.baseUrl + "/quote_prices.json";
+    return this.http.post(url, {value: value});
   }
 }
