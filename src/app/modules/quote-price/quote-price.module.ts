@@ -20,6 +20,10 @@ export const routes: Routes = [
         component: TemplateQuotePriceComponent,
       },
       {
+        path: "list",
+        component: ListQuotePriceComponent
+      },
+      {
         path: "",
         component: FormQuotePriceComponent
       }
