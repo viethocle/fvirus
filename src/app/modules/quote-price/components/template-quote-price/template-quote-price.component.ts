@@ -30,7 +30,7 @@ export class TemplateQuotePriceComponent implements OnInit {
     private quoteService: QuoteService,
     private store: Store<QuoteState>,
     private router: Router
-  ) { 
+  ) {
     store.pipe(
       takeUntilDestroy(this),
       select('quoteData')
@@ -111,9 +111,12 @@ export class TemplateQuotePriceComponent implements OnInit {
     let params = {
       email: this.email_to_send,
       html: (this.template.nativeElement as HTMLElement).innerHTML
-    }
-
+    };
+    this.dataQuote.to_email = this.email_to_send;
+    console.log(this.dataQuote);
     this.quoteService.sendEmail(params)
+        .subscribe(_ => {});
+    this.quoteService.sendValueQuotePrice(this.dataQuote)
         .subscribe(_ => {});
   }
 

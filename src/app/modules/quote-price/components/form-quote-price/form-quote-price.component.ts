@@ -23,14 +23,14 @@ interface QuoteState {
 
 
 export class FormQuotePriceComponent implements OnInit {
- 
+
   today_formatLL: any;
 
   priceMask = priceMask;
 
   contents: FormArray;
 
-  form: FormGroup; 
+  form: FormGroup;
   dataQuote: any;
 
   constructor(
@@ -41,8 +41,7 @@ export class FormQuotePriceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
-    this.contents = this.fb.array([this.initItemRows()])
+    this.contents = this.fb.array([this.initItemRows()]);
     this.form = this.fb.group({
       contents: this.fb.array([this.initItemRows()]),
       to_customer: [''],
@@ -53,7 +52,7 @@ export class FormQuotePriceComponent implements OnInit {
 
     this.form.patchValue({
       user_quote: this.authTokenService.currentUserData.name
-    })
+    });
 
     this.store.pipe(
       takeUntilDestroy(this),
