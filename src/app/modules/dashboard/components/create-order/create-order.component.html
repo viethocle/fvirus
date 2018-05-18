@@ -1,6 +1,4 @@
-<button *ngIf="!authService.isCurrentUserTechnician" class="create-order btn btn-primary" (click)="modalCreate.open()">Tạo đơn hàng mới</button>
-
-
+<button *ngIf="!authService.isCurrentUserTechnician && isFormQuote" class="create-order btn btn-primary" (click)="modalCreate.open()">Tạo đơn hàng mới</button>
 <bs-modal #modalCreate cssClass="modal-lg">
   <bs-modal-header [showDismiss]="true">
     <h4 class="modal-title">{{ 'orders.create-order' | translate }}</h4>

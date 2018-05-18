@@ -9,6 +9,7 @@
         <th>Tên khách hàng</th>
         <th>Email</th>
         <th>Ngày tạo</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -19,7 +20,11 @@
         </td>
         <td>{{ quote.value.to_email }}</td>
         <td>{{ quote.created_at | dateTimeVi }}</td>
+        <td>
+          <button class="btn btn-white btn-info btn-bold" (click)="createOrderFormQuote(quote)">Tạo đơn hàng</button>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
+<app-create-order [isFormQuote]="false"></app-create-order>

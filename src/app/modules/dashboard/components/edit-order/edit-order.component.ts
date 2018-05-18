@@ -168,7 +168,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
       due_date: this.order.due_date,
       price: this.order.price,
       paid_amount: this.order.paid_amount,
-      customer_id: this.order.customer.id
+      customer_id: this.order.customer.id,
     });
     this.setContents();
   }

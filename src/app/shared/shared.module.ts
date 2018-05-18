@@ -33,6 +33,7 @@ import { DetailOrderComponent } from '@modules/dashboard/components/detail-order
 import { SearchCustomerComponent } from './components/search-customer/search-customer.component';
 import { ShowGroupPipe } from './pipes/show-group.pipe';
 import { PayDebtComponent } from '@modules/home/components/pay-debt/pay-debt.component';
+import { CreateOrderComponent } from '@modules/dashboard/components/create-order/create-order.component';
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
   newestOnTop = false;
@@ -67,7 +68,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DetailOrderComponent,
     SearchCustomerComponent,
     ShowGroupPipe,
-    PayDebtComponent
+    PayDebtComponent,
+    CreateOrderComponent
   ],
   imports: [
     FormsModule,
@@ -78,7 +80,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TranslateModule,
     NgSelectModule,
     ToastModule.forRoot(),
-    TooltipModule
+    TooltipModule,
+    PerfectScrollbarModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   exports: [
     FormsModule,
@@ -115,7 +120,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgSelectModule,
     SearchCustomerComponent,
     ShowGroupPipe,
-    PayDebtComponent
+    PayDebtComponent,
+    CreateOrderComponent
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },

@@ -10,7 +10,8 @@ import {
   ElementRef,
   Renderer2,
   AfterViewChecked,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  Input
 } from "@angular/core";
 import {
   animate,
@@ -47,6 +48,7 @@ import { Destroyable, takeUntilDestroy } from "take-until-destroy";
   animations: [FlyInOut]
 })
 export class CreateOrderComponent implements OnInit {
+  controls: any;
   @ViewChild("modalCreate") modalCreate: BsModalComponent;
   @ViewChild(PerfectScrollbarComponent)
   componentScroll: PerfectScrollbarComponent;
@@ -58,7 +60,7 @@ export class CreateOrderComponent implements OnInit {
   termCustomer = "";
   currentFocusIndex: number = -1;
   customerSelected: Customer;
-
+  @Input() isFormQuote = true;
   totalPrice: number = 0;
 
   contents: any;
@@ -72,7 +74,7 @@ export class CreateOrderComponent implements OnInit {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
     private dashboardService: DashboardService,
     private customerService: CustomerService,
     private renderer2: Renderer2,
@@ -91,7 +93,9 @@ export class CreateOrderComponent implements OnInit {
     this.formNewOrder.valueChanges.subscribe(_ => {
       this.totalPrice = 0;
       this.contents = this.formNewOrder.get("contents") as FormArray;
-      this.contents.value.forEach(res => (this.totalPrice += res.quantity * res.price));
+      this.contents.value.forEach(
+        res => (this.totalPrice += res.quantity * res.price)
+      );
       this.formNewOrder.value.price = this.totalPrice;
     });
   }
