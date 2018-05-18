@@ -49,6 +49,7 @@ export class ListQuotePriceComponent implements OnInit {
     this.dtOptions = {
       pagingType: "full_numbers",
       pageLength: 25,
+      order: [],
       language: {
         url: "../../assets/i18n/datatables/vi.json"
       }
