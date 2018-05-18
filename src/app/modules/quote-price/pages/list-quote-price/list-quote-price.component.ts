@@ -7,10 +7,9 @@ import { QuotePrice } from './../../quote-price.model';
 import { Subject } from 'rxjs/Subject';
 import { Component, OnInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
 import { Router } from '@angular/router';
-import * as _ from 'lodash';
 import { Destroyable, takeUntilDestroy } from "take-until-destroy";
 import * as quoteDataActions from '../../quote-data';
-
+import * as _ from 'lodash';
 
 interface QuoteState {
   data: any;
@@ -24,12 +23,17 @@ interface QuoteState {
 })
 export class ListQuotePriceComponent implements OnInit {
   @ViewChild("modal") modal: BsModalComponent;
+  @ViewChild("modalDelete") modalDelete: BsModalComponent;
   @ViewChild(AdDirective) adHost: AdDirective;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   quote_prices: QuotePrice[] = [];
+
+  contentsShowConfirm: string;
+  quoteDeleteId: number;
+
   
   constructor(
     private quoteService: QuoteService,
@@ -73,6 +77,22 @@ export class ListQuotePriceComponent implements OnInit {
     let componentRef = viewContainerRef.createComponent(componentFactory);
     (<TemplateQuotePriceComponent>componentRef.instance).isPreview = true;
     this.modal.open();
+  }
+
+  openModalDelete(quote: QuotePrice) {
+    this.quoteDeleteId = quote.id;
+    this.contentsShowConfirm = quote.value.contents.map(e => e.content).join("<br>");
+    this.modalDelete.open();
+  }
+
+  sendRequestDelete() {
+    this.quoteService.deleteQuote(this.quoteDeleteId)
+        .pipe(
+          takeUntilDestroy(this)
+        )
+        .subscribe(_ => {
+           this.quote_prices = this.quote_prices.filter(e => e.id !== this.quoteDeleteId);
+        })
   }
 
 

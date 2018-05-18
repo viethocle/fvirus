@@ -9,6 +9,7 @@
         <th>Tên khách hàng</th>
         <th>Email</th>
         <th>Ngày tạo</th>
+        <th></th> 
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,11 @@
         </td>
         <td>{{ quote.value.to_email }}</td>
         <td>{{ quote.created_at | dateTimeVi }}</td>
+        <td>
+          <button class="btn btn-xs btn-danger" (click)="openModalDelete(quote)">
+            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -31,10 +37,26 @@
     <h4 class="modal-title">Xem lại mẫu báo giá</h4>
   </bs-modal-header>
   <bs-modal-body>
-    <ng-template ad-host></ng-template>
+    <div class="template-quote">
+      <ng-template ad-host></ng-template>
+    </div>
   </bs-modal-body>
   <bs-modal-footer>
     <button type="button" class="btn btn-default" (click)="modal.dismiss()">Đóng</button>
+  </bs-modal-footer>
+</bs-modal>
+
+<bs-modal #modalDelete>
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">Xóa nhóm báo giá</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <h5>Bạn có chắc là muốn xóa báo giá có nội dung là:</h5>
+    <div [innerHTML]="contentsShowConfirm"></div>
+  </bs-modal-body>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-default" (click)="modalDelete.dismiss()">{{ 'button.cancel' | translate }}</button>
+    <button type="button" class="btn btn-danger" (click)="modalDelete.close()" (click)="sendRequestDelete()">{{ 'button.delete' | translate }}</button>
   </bs-modal-footer>
 </bs-modal>
 
