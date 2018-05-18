@@ -56,7 +56,7 @@ export class TemplateQuotePriceComponent implements OnInit {
   }
 
   getBackEdit() {
-    this.router.navigate(["/quote-price"]);
+    this.router.navigate(["/quote-price/form"]);
   }
 
   exportToPDF() {
