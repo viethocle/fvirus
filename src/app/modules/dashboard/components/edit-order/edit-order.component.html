@@ -35,7 +35,7 @@
               <td [formGroupName]="i" class="text-right">
                 <input type="number" class="inp-unit" formControlName="quantity">
               </td>
-               <td [formGroupName]="i">
+              <td [formGroupName]="i">
                 <input type="text" class="inp-unit text-right" formControlName="price">
               </td>
               <td class="text-center">
@@ -49,7 +49,7 @@
                 Tổng tiền:
               </td>
               <td class="text-right">
-                {{totalPrice | vnd}}
+                {{totalPrice == 0 ? 0 : totalPrice | vnd}}
               </td>
               <td class="text-center">
                 <button class="btn btn-success no-border btn-add" (click)="addRowContent()">

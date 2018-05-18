@@ -62,7 +62,9 @@
       <tbody>
         <tr *ngFor="let customer of customers | paginate: configPagination" [@flyOut]="'in'">
           <td (click)="openModalDetail(customer)">
-            <span class="card-key editable editable-click">{{ customer.name }} </span>
+            <span [ngClass]="{'card-key editable editable-click': !authService.isCurrentUserTechnician}">
+              {{ customer.name }}
+            </span>
           </td>
           <td (click)="openModalDetail(customer)">{{ showGroups(customer, true) }}</td>
           <td (click)="openModalDetail(customer)">{{ customer.email }}</td>

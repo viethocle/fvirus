@@ -14,6 +14,7 @@ import { FormGroupComponent } from "./components/groups/form-group/form-group.co
 import { CustomerComponent } from "./pages/index-customers/customer.component";
 import { IndexGroupsComponent } from "./pages/index-groups/index-groups.component";
 import { DetailCustomerComponent } from "./components/customers/detail-customer/detail-customer.component";
+import { CustomerGuard } from "@core/guard";
 
 export const CustomerRoutes: Routes = [
   {
@@ -22,11 +23,12 @@ export const CustomerRoutes: Routes = [
   },
   {
     path: "list",
-    component: CustomerComponent
+    component: CustomerComponent,
   },
   {
     path: ":id",
-    component: DetailCustomerComponent
+    component: DetailCustomerComponent,
+    canActivate: [CustomerGuard]
   }
 ];
 

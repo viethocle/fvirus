@@ -15,7 +15,7 @@
           <th sortable-column="created_at" sort-direction="desc">{{ 'table.created-at' | translate }}</th>
           <th sortable-column="due_date">{{ 'table.due-date' | translate }}</th>
           <th>{{ 'table.status' | translate }}</th>
-          <th></th>
+          <th *ngIf="!authService.isCurrentUserTechnician" ></th>
         </tr>
       </thead>
       <tbody>
@@ -32,7 +32,7 @@
             <app-status [order]="order" (statusOrderOutput)="handleUpdateOrder($event)">
             </app-status>
           </td>
-          <td>
+          <td *ngIf="!authService.isCurrentUserTechnician" >
             <button class="btn btn-xs btn-info" tooltip="{{ 'tooltip.edit' | translate }}" (click)="openEditModal(order)">
               <i class="ace-icon fa fa-pencil bigger-120"></i>
             </button>

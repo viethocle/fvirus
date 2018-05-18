@@ -13,8 +13,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {
   AdminRouteGuard,
   LoggedInGuard,
-  LogoutGuard
-} from './guard/';
+  LogoutGuard,
+  CustomerGuard
+} from "./guard/";
 import { BsmodalService } from './services/bsmodal.service';
 import { GroupsService } from '../modules/customer/groups.service';
 import { QuoteService } from '../modules/quote-price/quote.service';
@@ -32,6 +33,7 @@ import { QuoteService } from '../modules/quote-price/quote.service';
     LoggedInGuard,
     AdminRouteGuard,
     LogoutGuard,
+    CustomerGuard,
     CustomerService,
     Ng2SearchPipe,
     BsmodalService,

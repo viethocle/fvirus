@@ -3,8 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import {
   AdminRouteGuard,
   LoggedInGuard,
-  LogoutGuard
-} from './core/guard/';
+  LogoutGuard,
+  CustomerGuard
+} from "./core/guard/";
 
 const routes: Routes = [
   {
