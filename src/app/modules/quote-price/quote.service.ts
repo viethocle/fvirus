@@ -28,4 +28,10 @@ export class QuoteService {
     let url = this.baseUrl + "/quote_prices.json";
     return this.http.post(url, {value: value});
   }
+
+
+  deleteQuote(id) {
+    let url = `${this.baseUrl}/quote_prices/${id}.json`;
+    return this.http.delete(url);
+  }
 }

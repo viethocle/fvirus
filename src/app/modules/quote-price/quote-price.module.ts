@@ -1,3 +1,4 @@
+import { AdDirective } from './directives/ad.directive';
 import { DataTablesModule } from 'angular-datatables';
 import { SharedModule } from '@shared/shared.module';
 import { CommonModule } from '@angular/common';
@@ -41,6 +42,9 @@ export const routes: Routes = [
     StoreModule.forRoot({ quoteData: quoteDataReducer}),
     DataTablesModule
   ],
-  declarations: [QuotePriceComponent, FormQuotePriceComponent, TemplateQuotePriceComponent, ListQuotePriceComponent]
+  declarations: [QuotePriceComponent, FormQuotePriceComponent, TemplateQuotePriceComponent, ListQuotePriceComponent,
+    AdDirective  
+  ],
+  entryComponents: [TemplateQuotePriceComponent]
 })
 export class QuotePriceModule { }

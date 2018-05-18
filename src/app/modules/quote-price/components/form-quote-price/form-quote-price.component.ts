@@ -50,7 +50,6 @@ export class FormQuotePriceComponent implements OnInit {
       to_email: [""],
       customer_id: [""]
     });
-
     this.form.patchValue({
       user_quote: this.authTokenService.currentUserData.name
     });
@@ -68,7 +67,7 @@ export class FormQuotePriceComponent implements OnInit {
             contents: this.dataQuote.contents,
             spend_day: this.dataQuote.spend_day,
             user_quote: this.dataQuote.user_quote
-          })
+          })  
         }
       })
     this.today_formatLL = moment().locale('vi').format('LL');

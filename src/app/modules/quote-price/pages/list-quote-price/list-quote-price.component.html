@@ -14,7 +14,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let quote of quote_prices">
-        <td>{{ quote.value.contents | parseContentOrder }}</td>
+        <td (click)="openPreview(quote)">
+          <span class="card-key editable editable-click">{{ quote.value.contents | parseContentOrder }}</span>
+        </td>
         <td (click)="navigateToCustomer(quote.value.customer_id)">
           <span class="card-key editable editable-click">{{ quote.value.to_customer }}</span>
         </td>
@@ -22,9 +24,41 @@
         <td>{{ quote.created_at | dateTimeVi }}</td>
         <td>
           <button class="btn btn-white btn-info btn-bold" (click)="createOrderFormQuote(quote)">Tạo đơn hàng</button>
+          <button class="btn btn-xs btn-danger" (click)="openModalDelete(quote)">
+            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
 <app-create-order [isFormQuote]="false"></app-create-order>
+
+<bs-modal #modal [size]="'lg'">
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">Xem lại mẫu báo giá</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <div class="template-quote">
+      <ng-template ad-host></ng-template>
+    </div>
+  </bs-modal-body>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-default" (click)="modal.dismiss()">Đóng</button>
+  </bs-modal-footer>
+</bs-modal>
+
+<bs-modal #modalDelete>
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">Xóa nhóm báo giá</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <h5>Bạn có chắc là muốn xóa báo giá có nội dung là:</h5>
+    <div [innerHTML]="contentsShowConfirm"></div>
+  </bs-modal-body>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-default" (click)="modalDelete.dismiss()">{{ 'button.cancel' | translate }}</button>
+    <button type="button" class="btn btn-danger" (click)="modalDelete.close()" (click)="sendRequestDelete()">{{ 'button.delete' | translate }}</button>
+  </bs-modal-footer>
+</bs-modal>
+

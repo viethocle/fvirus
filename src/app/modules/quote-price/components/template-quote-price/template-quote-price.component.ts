@@ -26,6 +26,8 @@ export class TemplateQuotePriceComponent implements OnInit {
   today_formatLL: any;
   email_to_send: string;
 
+  isPreview = false;
+
   constructor(
     private quoteService: QuoteService,
     private store: Store<QuoteState>,
@@ -54,7 +56,7 @@ export class TemplateQuotePriceComponent implements OnInit {
   }
 
   getBackEdit() {
-    this.router.navigate(["/quote-price"]);
+    this.router.navigate(["/quote-price/form"]);
   }
 
   exportToPDF() {
