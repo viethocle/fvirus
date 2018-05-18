@@ -13,7 +13,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let quote of quote_prices">
-        <td>{{ quote.value.contents | parseContentOrder }}</td>
+        <td (click)="openPreview(quote)">
+          <span class="card-key editable editable-click">{{ quote.value.contents | parseContentOrder }}</span>
+        </td>
         <td (click)="navigateToCustomer(quote.value.customer_id)">
           <span class="card-key editable editable-click">{{ quote.value.to_customer }}</span>
         </td>
@@ -23,3 +25,16 @@
     </tbody>
   </table>
 </div>
+
+<bs-modal #modal>
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">Xem lại mẫu báo giá</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <ng-template ad-host></ng-template>
+  </bs-modal-body>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-default" (click)="modal.dismiss()">Đóng</button>
+  </bs-modal-footer>
+</bs-modal>
+
