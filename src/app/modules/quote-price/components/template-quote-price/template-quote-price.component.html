@@ -1,5 +1,5 @@
-<div class="container">
-  <div #template_print id="main-product" class="col-md-offset-2 col-md-8 border-template">
+<div class="container ">
+  <div #template_print id="main-product" class="col-md-8 border-template" [class.col-md-offset-2]="!isPreview">
     <div class="info-company">
       <p>
         <strong>Công ty TNHH Ru lô Nam Hải</strong>
@@ -56,8 +56,8 @@
       <br> - Công ty TNHH Rulo Nam Hải xin đáp ứng đầy đủ về chất lượng, chủng loại mặt hàng mà Quý khách yêu cầu.
       <br> - Thời gian hoàn thành: {{ dataQuote.spend_day }} khi nhận được đơn đặt hàng.
       <br> - Bảo hành: 06 tháng đối với lỗi nhà sản xuất.
-      <br> - Thanh toán bằng tiền mặt hoặc chuyển khoản trước khi nhận hàng vào Tài khoản: Công ty TNHH Ru lô Nam Hải-TK 2111 000000
-      1541 tại Ngân hàng TMCP Đầu tư và Phát triển Việt nam-Chi nhánh Hà nội.
+      <br> - Thanh toán bằng tiền mặt hoặc chuyển khoản trước khi nhận hàng vào Tài khoản: Công ty TNHH Ru lô Nam Hải - TK 2111 000000
+      1541 tại Ngân hàng TMCP Đầu tư và Phát triển Việt nam - Chi nhánh Hà nội.
       <br>
       <strong>Xin chân thành cảm ơn và mong nhận được sự cộng tác của Quý đơn vị.</strong>
       <br>
@@ -94,7 +94,7 @@
     <i class="ace-icon fa fa-paper-plane-o icon-on-right"></i>
   </button>
 
-  <button class="btn btn-success btn-next pull-left" (click)="getBackEdit()" >
+  <button *ngIf="!isPreview" class="btn btn-success btn-next pull-left" (click)="getBackEdit()" >
     <i class="ace-icon fa fa-arrow-left icon-on-left"></i>
     Quay lại chỉnh sửa
   </button>

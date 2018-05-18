@@ -71,7 +71,7 @@ export class ListQuotePriceComponent implements OnInit {
     viewContainerRef.clear();
 
     let componentRef = viewContainerRef.createComponent(componentFactory);
-
+    (<TemplateQuotePriceComponent>componentRef.instance).isPreview = true;
     this.modal.open();
   }
 
