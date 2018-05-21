@@ -4,6 +4,7 @@ import { Order } from '@modules/dashboard/order';
 import { HomeService } from '@modules/home/home.service';
 import * as moment from 'moment';
 import { Subject } from "rxjs/Subject";
+import { BsmodalService } from '@core/services/bsmodal.service';
 
 @Component({
   selector: 'app-order-due-date',
@@ -41,7 +42,8 @@ export class OrderDueDateComponent implements OnInit {
 
   constructor(
     private homeService: HomeService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private bsmodalService: BsmodalService
   ) { }
 
   ngOnInit() {
@@ -64,6 +66,10 @@ export class OrderDueDateComponent implements OnInit {
       .subscribe(res => {
         this.orders = res;
       });
+  }
+
+  openDetailOrder(order: Order) {
+    this.bsmodalService.selectOrderToView(order);
   }
 
 

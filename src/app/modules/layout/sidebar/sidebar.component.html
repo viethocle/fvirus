@@ -25,6 +25,34 @@
     </a>
   </li>
 
+  <li class="" *ngIf="!authService.isCurrentUserTechnician" routerLinkActive="active">
+    <a href="#" class="dropdown-toggle">
+      <i class="menu-icon fa fa-envelope"></i>
+      <span class="menu-text"> Báo giá </span>
+      <b class="arrow fa fa-angle-down"></b>
+    </a>
+    <b class="arrow"></b>
+    <ul class="submenu">
+      <li routerLinkActive="active">
+        <a [routerLink]="['/quote-price/form']">
+          <i class="menu-icon fa fa-envelope "></i>
+          <span class="menu-text">
+            Gửi báo giá
+          </span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/quote-price/list']">
+          <i class="menu-icon fa fa-book"></i>
+          <span class="menu-text">
+            Lịch sử báo giá
+          </span>
+        </a>
+      </li>
+    </ul>
+  </li>
+
+
   <li routerLinkActive="active">
     <a [routerLink]="['/customers/list']" [queryParams]="{page: 1, per_page: 10, show_unactive: false, sorted_by: 'name_asc'}">
       <i class="menu-icon fa fa-users "></i>
@@ -34,47 +62,25 @@
     </a>
   </li>
 
-  <li routerLinkActive="active">
-    <a [routerLink]="['/customers/groups']">
-      <i class="menu-icon fa fa-users "></i>
-      <span class="menu-text">
-        Nhóm khách hàng
-      </span>
-    </a>
-  </li>
+  <div *ngIf="!authService.isCurrentUserTechnician" class="sidebar-toggle my-divider-2" >
+    <i class="my-divider" ></i>
+  </div>
 
 
-    <li class="" *ngIf="!authService.isCurrentUserTechnician" routerLinkActive="active">
-      <a href="#" class="dropdown-toggle">
-        <i class="menu-icon fa fa-envelope"></i>
-        <span class="menu-text"> Báo giá </span>
-        <b class="arrow fa fa-angle-down"></b>
-      </a>
-      <b class="arrow"></b>
-      <ul class="submenu">
-        <li routerLinkActive="active">
-          <a [routerLink]="['/quote-price/form']">
-            <i class="menu-icon fa fa-envelope "></i>
-            <span class="menu-text">
-              Gửi báo giá
-            </span>
-          </a>
-        </li>
-        <li routerLinkActive="active">
-          <a [routerLink]="['/quote-price/list']">
-            <i class="menu-icon fa fa-book"></i>
-            <span class="menu-text">
-              Lịch sử báo giá
-            </span>
-          </a>
-        </li>
-      </ul>
-    </li>
 
   <li *ngIf="isManager  && authService.isCurrentUserAdmin" routerLinkActive="active">
     <a [routerLink]="['/users']">
       <i class="menu-icon fa fa-user-plus"></i>
       <span class="menu-text"> {{ 'sidebar.user-management' | translate }} </span>
+    </a>
+  </li>
+
+  <li routerLinkActive="active" *ngIf="!authService.isCurrentUserTechnician">
+    <a [routerLink]="['/customers/groups']">
+      <i class="menu-icon fa fa-users "></i>
+      <span class="menu-text">
+        Nhóm khách hàng
+      </span>
     </a>
   </li>
   
