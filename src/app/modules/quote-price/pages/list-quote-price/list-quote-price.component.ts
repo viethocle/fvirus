@@ -7,7 +7,7 @@ import { BsModalComponent } from 'ng2-bs3-modal';
 import { QuoteService } from './../../quote.service';
 import { QuotePrice } from './../../quote-price.model';
 import { Subject } from 'rxjs/Subject';
-import { Component, OnInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Destroyable, takeUntilDestroy } from "take-until-destroy";
 import * as quoteDataActions from '../../quote-data';
@@ -23,7 +23,7 @@ interface QuoteState {
   templateUrl: "./list-quote-price.component.html",
   styleUrls: ["./list-quote-price.component.css"]
 })
-export class ListQuotePriceComponent implements OnInit {
+export class ListQuotePriceComponent implements OnInit, AfterViewInit {
   @ViewChild(CreateOrderComponent) createOrderComp: CreateOrderComponent;
   @ViewChild("modal") modal: BsModalComponent;
   @ViewChild("modalDelete") modalDelete: BsModalComponent;
@@ -65,6 +65,14 @@ export class ListQuotePriceComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    this.createOrderComp.newOrder
+        .pipe(takeUntilDestroy(this))
+        .subscribe(_ => {
+          this.sendRequestDelete();
+        })
+  }
+
   navigateToCustomer(customer_id) {
     if (_.isNumber(customer_id)) {
       this.router.navigate(["/customers", customer_id]);
@@ -95,6 +103,9 @@ export class ListQuotePriceComponent implements OnInit {
     this.createOrderComp.customerSelected = this.createOrderComp.customers.find(cus => cus.id == quote.value.customer_id);
 
     this.createOrderComp.modalCreate.open();
+
+    this.quoteDeleteId = quote.id;
+   
   }
   openPreview(quote: QuotePrice) {
     this.store.dispatch(new quoteDataActions.Store(quote.value));
