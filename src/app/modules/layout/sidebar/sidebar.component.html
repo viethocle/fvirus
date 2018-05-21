@@ -62,7 +62,7 @@
     </a>
   </li>
 
-  <div class="sidebar-toggle my-divider-2" >
+  <div *ngIf="!authService.isCurrentUserTechnician" class="sidebar-toggle my-divider-2" >
     <i class="my-divider" ></i>
   </div>
 
