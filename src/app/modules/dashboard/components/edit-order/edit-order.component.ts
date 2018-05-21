@@ -96,7 +96,10 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.formEditOrder.valueChanges.subscribe(_ => {
       this.totalPrice = 0;
       this.contents = this.formEditOrder.get("contents") as FormArray;
-      this.contents.value.forEach(res => (this.totalPrice += res.quantity * res.price));
+      this.contents.value.forEach(res => {
+          res.total = res.quantity * res.price;
+          this.totalPrice += res.quantity * res.price;
+        });
       this.formEditOrder.value.price = this.totalPrice;
     });
   }
@@ -137,7 +140,8 @@ export class EditOrderComponent implements OnInit, OnDestroy {
       content: "",
       unit: "",
       quantity: [1],
-      price: [0]
+      price: [0],
+      total: [0]
     });
   }
 
@@ -184,7 +188,8 @@ export class EditOrderComponent implements OnInit, OnDestroy {
           content: cont.content,
           unit: cont.unit,
           quantity: cont.quantity,
-          price: cont.price
+          price: cont.price,
+          total: cont.total
         })
       );
       this.totalPrice += cont.quantity * cont.price;

@@ -51,10 +51,7 @@ export class FormCustomerComponent implements OnInit {
     this.form.reset();
   }
 
-  getValueForm() { 
+  getValueForm() {
     return this.form.value;
   }
-
-  
-
 }

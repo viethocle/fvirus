@@ -63,6 +63,7 @@ export class CreateOrderComponent implements OnInit {
   @Input() isFormQuote = true;
   totalPrice: number = 0;
 
+
   contents: any;
   priceMask = Object.freeze({
     mask: createNumberMask({
@@ -94,7 +95,12 @@ export class CreateOrderComponent implements OnInit {
       this.totalPrice = 0;
       this.contents = this.formNewOrder.get("contents") as FormArray;
       this.contents.value.forEach(
-        res => (this.totalPrice += res.quantity * res.price)
+        res => {
+          res.total = res.quantity * res.price;
+          console.log(this.formData);
+          console.log(res);
+          this.totalPrice += (res.quantity * res.price);
+        }
       );
       this.formNewOrder.value.price = this.totalPrice;
     });
@@ -125,7 +131,8 @@ export class CreateOrderComponent implements OnInit {
       content: "",
       unit: "",
       quantity: [1],
-      price: [0]
+      price: [0],
+      total: [0]
     });
   }
 

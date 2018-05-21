@@ -20,6 +20,7 @@
               <th class="unit">Đơn vị</th>
               <th class="quant">Số lượng</th>
               <th *ngIf="!authService.isCurrentUserTechnician">Giá từng đơn vị(VND)</th>
+              <th *ngIf="!authService.isCurrentUserTechnician">Thành tiền</th>
             </tr>
           </thead>
           <tbody>
@@ -37,9 +38,12 @@
               <td *ngIf="!authService.isCurrentUserTechnician"class="text-right">
                 {{item.price == null ? 0 :  item.price| vnd}}
               </td>
+                <td *ngIf="!authService.isCurrentUserTechnician"class="text-right">
+                {{item.total == null ? 0 :  item.total| vnd}}
+              </td>
             </tr>
             <tr *ngIf="!authService.isCurrentUserTechnician">
-              <td colspan="4" class="text-right">
+              <td colspan="5" class="text-right">
                 Tổng tiền:
               </td>
               <td class="text-right">
