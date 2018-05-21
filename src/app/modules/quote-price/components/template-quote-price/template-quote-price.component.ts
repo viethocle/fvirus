@@ -118,8 +118,10 @@ export class TemplateQuotePriceComponent implements OnInit {
     console.log(this.dataQuote);
     this.quoteService.sendEmail(params)
         .subscribe(_ => {});
-    this.quoteService.sendValueQuotePrice(this.dataQuote)
-        .subscribe(_ => {});
+    if (!this.isPreview) { // not create quote price when in preview 
+      this.quoteService.sendValueQuotePrice(this.dataQuote)
+        .subscribe(_ => { });
+    }
   }
 
 }
