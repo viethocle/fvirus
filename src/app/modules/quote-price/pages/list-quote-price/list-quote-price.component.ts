@@ -71,6 +71,8 @@ export class ListQuotePriceComponent implements OnInit {
     }
   }
   createOrderFormQuote(quote: QuotePrice) {
+
+    // patch content to form value 
     let control = <FormArray>this.createOrderComp.formNewOrder.controls.contents;
     quote.value.contents.forEach(cont => {
       control.removeAt(cont);
@@ -83,6 +85,14 @@ export class ListQuotePriceComponent implements OnInit {
           price: cont.price
         }));
     });
+
+
+    // choose customer 
+    this.createOrderComp.formNewOrder.patchValue({
+      customer_id: quote.value.customer_id
+    });
+
+    this.createOrderComp.customerSelected = this.createOrderComp.customers.find(cus => cus.id == quote.value.customer_id);
 
     this.createOrderComp.modalCreate.open();
   }
