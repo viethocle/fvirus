@@ -8,7 +8,7 @@
         <th>Nội dung</th>
         <th>Tên khách hàng</th>
         <th>Email</th>
-        <th>Ngày tạo</th>
+        <th class="text-right">Ngày tạo</th>
         <th></th>
       </tr>
     </thead>
@@ -21,7 +21,7 @@
           <span class="card-key editable editable-click">{{ quote.value.to_customer }}</span>
         </td>
         <td>{{ quote.value.to_email }}</td>
-        <td>{{ quote.created_at | dateTimeVi }}</td>
+        <td class="text-right">{{ quote.created_at | dateTimeVi }}</td>
         <td>
           <button class="btn btn-white btn-info btn-bold" (click)="createOrderFormQuote(quote)">Tạo đơn hàng</button>
           <button class="btn btn-xs btn-danger" (click)="openModalDelete(quote)">

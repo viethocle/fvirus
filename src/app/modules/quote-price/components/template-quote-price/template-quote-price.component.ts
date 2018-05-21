@@ -49,7 +49,7 @@ export class TemplateQuotePriceComponent implements OnInit {
         this.email_to_send = this.dataQuote.to_email;
       })
   }
-
+  
   ngOnInit() {
     this.today_formatLL = moment().locale('vi').format('LL');
   }

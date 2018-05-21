@@ -13,7 +13,7 @@
           <th sortable-column="customer">{{ 'table.customer' | translate }}</th>
           <th *ngIf="authService.isCurrentUserAccountant || authService.isCurrentUserAdmin" class="text-right">{{ 'table.price' | translate }}</th>
           <th sortable-column="created_at" sort-direction="desc">{{ 'table.created-at' | translate }}</th>
-          <th sortable-column="due_date">{{ 'table.due-date' | translate }}</th>
+          <th sortable-column="due_date" >{{ 'table.due-date' | translate }}</th>
           <th>{{ 'table.status' | translate }}</th>
           <th *ngIf="!authService.isCurrentUserTechnician" ></th>
         </tr>

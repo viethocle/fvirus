@@ -2,6 +2,10 @@ bs-modal-body >>>  .template-quote {
   padding: 0 50px;
 }
 
+bs-modal-body >>> .modal-body {
+  padding-bottom: 10px;
+}
+
 >>> .modal-xl { 
   width: 900px; 
 }
