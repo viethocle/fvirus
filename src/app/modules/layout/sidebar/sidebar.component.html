@@ -34,7 +34,7 @@
     </a>
   </li>
 
-  <li routerLinkActive="active">
+  <li routerLinkActive="active" *ngIf="!authService.isCurrentUserTechnician">
     <a [routerLink]="['/customers/groups']">
       <i class="menu-icon fa fa-users "></i>
       <span class="menu-text">
