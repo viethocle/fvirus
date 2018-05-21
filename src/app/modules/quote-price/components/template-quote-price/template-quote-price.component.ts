@@ -1,3 +1,4 @@
+import { CustomerService } from '@modules/customer/customer.service';
 import { Router } from '@angular/router';
 import { takeUntilDestroy, Destroyable } from 'take-until-destroy';
 import { QuoteService } from './../../quote.service';
@@ -9,6 +10,7 @@ import { Store, select } from '@ngrx/store';
 import * as quoteDataActions from '../../quote-data';
 import * as jsPDF from 'jspdf';
 import * as $ from 'jquery';
+import { tap, switchMap } from "rxjs/operators";
 interface QuoteState {
   data: any;
 }
@@ -30,6 +32,7 @@ export class TemplateQuotePriceComponent implements OnInit {
 
   constructor(
     private quoteService: QuoteService,
+    private customerService: CustomerService,
     private store: Store<QuoteState>,
     private router: Router
   ) {
@@ -115,12 +118,18 @@ export class TemplateQuotePriceComponent implements OnInit {
       html: (this.template.nativeElement as HTMLElement).innerHTML
     };
     this.dataQuote.to_email = this.email_to_send;
-    console.log(this.dataQuote);
     this.quoteService.sendEmail(params)
         .subscribe(_ => {});
     if (!this.isPreview) { // not create quote price when in preview 
-      this.quoteService.sendValueQuotePrice(this.dataQuote)
-        .subscribe(_ => { });
+      if (this.dataQuote.customer_id == "") {
+        this.customerService.addCustomer({ name: this.dataQuote.to_customer, email: this.dataQuote.to_email })
+            .pipe(
+              takeUntilDestroy(this), 
+              tap(customer => Object.assign(this.dataQuote, { customer_id: customer.id })),
+              switchMap(customer => this.quoteService.sendValueQuotePrice(this.dataQuote))
+            )
+            .subscribe(_ => {this.store.dispatch(new quoteDataActions.Reset())})
+      }
     }
   }
 
