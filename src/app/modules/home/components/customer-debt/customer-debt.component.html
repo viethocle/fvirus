@@ -29,7 +29,6 @@
       width="100%">
       <thead>
         <tr>
-          <th>Id</th>
           <th>
             <i class="ace-icon fa fa-users"></i>{{ 'table.name' | translate }}</th>
           <th>
@@ -48,8 +47,9 @@
 
       <tbody>
         <tr *ngFor="let customer of customerDebt| paginate: configPagination" >
-          <td>{{customer.id}}</td>
-          <td>{{customer.name}}</td>
+          <td [routerLink]="['/customers', customer.id]"> 
+            <span class="card-key editable editable-click">{{customer.name}}</span>
+          </td>
           <td>{{customer.email}}</td>
           <td>{{customer.phone}}</td>
           <td>{{customer.address}}</td>
