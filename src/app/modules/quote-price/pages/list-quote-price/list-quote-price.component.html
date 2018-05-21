@@ -22,8 +22,8 @@
         </td>
         <td>{{ quote.value.to_email }}</td>
         <td>{{ quote.created_at | dateTimeVi }}</td>
-        <td>
-          <button class="btn btn-white btn-info btn-bold" (click)="createOrderFormQuote(quote)">Tạo đơn hàng</button>
+        <td class="text-center actor">
+          <button class="btn btn-primary" (click)="createOrderFormQuote(quote)">Tạo đơn hàng</button>
           <button class="btn btn-xs btn-danger" (click)="openModalDelete(quote)">
             <i class="ace-icon fa fa-trash-o bigger-120"></i>
           </button>
