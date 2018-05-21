@@ -23,11 +23,13 @@
           <td (click)="openDetailModal(order)">
             <span class="card-key editable editable-click ">{{ order.id }} </span>
           </td>
-          <td (click)="openDetailModal(order)">{{ order.contents | parseContentOrder }}</td>
-          <td (click)="openDetailModal(order)">{{ order.customer.name }}</td>
-          <td (click)="openDetailModal(order)" *ngIf="authService.isCurrentUserAccountant || authService.isCurrentUserAdmin" class="text-right">{{ order.price | vnd }}</td>
-          <td (click)="openDetailModal(order)">{{ order.created_at | dateTimeVi }}</td>
-          <td (click)="openDetailModal(order)">{{ order.due_date | dateTimeVi }}</td>
+          <td>{{ order.contents | parseContentOrder }}</td>
+          <td >
+            <span [routerLink]="['/customers', order.customer.id]" class="card-key editable editable-click ">{{ order.customer.name }}</span>
+          </td>
+          <td *ngIf="authService.isCurrentUserAccountant || authService.isCurrentUserAdmin" class="text-right">{{ order.price | vnd }}</td>
+          <td>{{ order.created_at | dateTimeVi }}</td>
+          <td>{{ order.due_date | dateTimeVi }}</td>
           <td>
             <app-status [order]="order" (statusOrderOutput)="handleUpdateOrder($event)">
             </app-status>
