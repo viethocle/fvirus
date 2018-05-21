@@ -90,7 +90,8 @@ export class ListQuotePriceComponent implements OnInit, AfterViewInit {
           content: cont.content,
           unit: cont.unit,
           quantity: cont.quantity,
-          price: cont.price
+          price: cont.price,
+          total: cont.quantity * cont.price
         }));
     });
 
