@@ -55,6 +55,7 @@ export class PayDebtComponent implements OnInit {
   payCustomerDebt(payment) {
     this.homeService
       .sendPaymentDebt(this.customer.id, payment)
+      .pipe(takeUntilDestroy(this))
       .subscribe(customer => {
         this.payOrderOutput.emit(customer);
         // _.assign(this.customerDebt.find(t => t.id === customer.id), customer);
