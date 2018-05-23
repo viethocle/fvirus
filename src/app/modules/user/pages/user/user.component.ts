@@ -35,12 +35,7 @@ export class UserComponent implements OnInit {
     this.dtOptions = {
       pagingType: "simple_numbers",
       language: {
-            paginate: {
-            first:      "Đầu",
-            previous:  "Trước",
-            next:       "Tiếp",
-            last:        "Cuối"
-        }
+        url: '../../assets/i18n/datatables/vi.json'
       }
       };
 

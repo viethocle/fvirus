@@ -1,19 +1,20 @@
 <div class="card" color-order="{{ order.due_date }}" status-order="{{ order.status }}">
   <div>
-    <div class="card-key"> #{{ order.id }}</div>
-    <h5>
-      <i class="fa fa-users  "></i> {{order.customer?.name}}
-    </h5>
-    <h6 [tooltip]="kanbanCardToolTip">{{ order.description | truncateDescription }}</h6>
+    <div class="card-key" (click)="openDetailModal(order)">
+      <i class="fa fa-users"></i>
+      <span class="editable editable-click">{{order.customer?.name}} </span>
+    </div>
+
+    <h6>{{ order.contents | parseContentOrder }}</h6>
     <h6>
-       {{ 'orders.due-date' | translate }}: {{ order.due_date | dateTimeVi}}
+      {{ 'orders.due-date' | translate }}: {{ order.due_date | dateTimeVi}}
     </h6>
   </div>
 </div>
 
-<tooltip-content #kanbanCardToolTip>
+<!-- <tooltip-content #kanbanCardToolTip>
   <div class="box-tooltip">
-    <h5 class="title-tooltip text-left">{{ 'orders.description' | translate }}:</h5> 
-    <span class="text-left">{{order.description }}</span>
+<h5 class="title-tooltip text-left">{{ 'orders.content' | translate }}:</h5>
+    <span class="text-left">{{order.contents }}</span>
   </div>
-</tooltip-content>
+</tooltip-content> -->

@@ -1,21 +1,24 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { TextMaskModule } from 'angular2-text-mask';
 import { MyDatePickerModule } from 'mydatepicker';
-import { ClickOutsideModule } from "ng-click-outside";
+import { ClickOutsideModule } from 'ng-click-outside';
 import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { BsModalModule } from "ng2-bs3-modal";
-import { ToastModule, ToastOptions } from "ng2-toastr/ng2-toastr";
+import { BsModalModule } from 'ng2-bs3-modal';
+import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from "ngx-perfect-scrollbar";
+import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { TooltipModule } from 'ngx-tooltip';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 import { ErrorLabelComponent, ErrorMessagesPipe, InputFieldComponent } from './components/';
 import { ColorOrderComponent } from './components/color-order/color-order.component';
 import { SortableColumnComponent } from './components/sortable-column/sortable-column.component';
 import { NumericDirective } from './directives/numeric.directive';
+import { DateHumanizePipe } from './pipes/date-humanize.pipe';
 import { DateTimeViPipe } from './pipes/date-time-vi.pipe';
 import { ClosedPipe } from './pipes/delivered.pipe';
 import { InprogressPipe } from './pipes/inprogress.pipe';
@@ -25,7 +28,12 @@ import { ReadyPipe } from './pipes/ready.pipe';
 import { TruncateDescriptionPipe } from './pipes/truncate-description.pipe';
 import { VndPipe } from './pipes/vnd.pipe';
 import { ToastrService } from "./toastr.service";
-
+import { ParseContentOrderPipe } from './pipes/parse-content-order.pipe';
+import { DetailOrderComponent } from '@modules/dashboard/components/detail-order/detail-order.component';
+import { SearchCustomerComponent } from './components/search-customer/search-customer.component';
+import { ShowGroupPipe } from './pipes/show-group.pipe';
+import { PayDebtComponent } from '@modules/home/components/pay-debt/pay-debt.component';
+import { CreateOrderComponent } from '@modules/dashboard/components/create-order/create-order.component';
 export class CustomOption extends ToastOptions {
   animate = "flyRight"; // you can pass any options to override defaults
   newestOnTop = false;
@@ -54,7 +62,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     VndPipe,
     SortableColumnComponent,
     ColorOrderComponent,
-    NumericDirective
+    NumericDirective,
+    DateHumanizePipe,
+    ParseContentOrderPipe,
+    DetailOrderComponent,
+    SearchCustomerComponent,
+    ShowGroupPipe,
+    PayDebtComponent,
+    CreateOrderComponent
   ],
   imports: [
     FormsModule,
@@ -63,7 +78,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ClickOutsideModule,
     BsModalModule,
     TranslateModule,
-    ToastModule.forRoot()
+    NgSelectModule,
+    ToastModule.forRoot(),
+    TooltipModule,
+    PerfectScrollbarModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   exports: [
     FormsModule,
@@ -79,6 +99,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     InprogressPipe,
     ReadyPipe,
     ClosedPipe,
+    DateHumanizePipe,
     MySearchPipe,
     PerfectScrollbarModule,
     DatePipe,
@@ -92,7 +113,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ColorOrderComponent,
     MyDatePickerModule,
     TextMaskModule,
-    NumericDirective
+    NumericDirective,
+    ParseContentOrderPipe,
+    DetailOrderComponent,
+    TooltipModule,
+    NgSelectModule,
+    SearchCustomerComponent,
+    ShowGroupPipe,
+    PayDebtComponent,
+    CreateOrderComponent
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomOption },
@@ -102,7 +131,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
     {
       provide: OWL_DATE_TIME_LOCALE,
-      useValue: 'vi' },
+      useValue: "vi"
+    },
     DatePipe,
     ToastrService
   ]

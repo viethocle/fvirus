@@ -29,23 +29,25 @@
       <thead>
       <tr>
         <th>Id </th>
-        <th>{{ 'table.description' | translate }}</th>
+        <th>Nội Dung</th>
         <th>{{ 'table.customer' | translate }}</th>
         <th class="text-right">{{ 'table.price' | translate }}</th>
-        <th>{{ 'table.created-at' | translate }}</th>
-        <th>{{ 'table.due-date' | translate }}</th>
+        <th class="text-right">{{ 'table.created-at' | translate }}</th>
+        <th class="text-right">{{ 'table.due-date' | translate }}</th>
         <th>{{ 'table.status' | translate }}</th>
       </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let order of orders| paginate: configPagination">
-          <td>{{ order.id }}</td>
-          <td>{{ order.description | truncateDescription }}</td>
+          <td (click)="openDetailOrder(order)">
+            <span class="card-key editable editable-click ">{{ order.id }} </span>
+          </td>
+          <td class="text-left">{{ order.contents | parseContentOrder }}</td>
           <td>{{ order.customer.name }}</td>
           <td class="text-right">{{ order.price | vnd }}</td>
-          <td>{{ order.created_at | dateTimeVi }}</td>
-          <td>{{ order.due_date | dateTimeVi }}</td>
+          <td class="text-right">{{ order.created_at | dateTimeVi }}</td>
+          <td class="text-right">{{ order.due_date | dateTimeVi }}</td>
           <td><span class="label arrowed-right arrowed-in"
                     [ngClass]="{'label-danger': order.status == 'new',
                     'label-warning': order.status == 'inprogress',
@@ -88,3 +90,6 @@
     <!-- end pagination -->
   </div>
 </div>
+
+<app-detail-order></app-detail-order>
+

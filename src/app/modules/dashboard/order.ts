@@ -17,4 +17,5 @@ export interface Order {
   price: number;
   paid_amount?: number;
   customer?: Customer;
+  contents?: any;
 }

@@ -29,7 +29,6 @@ export class CreateUserComponent implements OnInit {
   }
 
   addUser(value: any) {
-    console.log(value);
     this.usersService.addUser(value).subscribe(user => {
       this.newUser.emit(user);
       this.modal.close();

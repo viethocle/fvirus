@@ -4,19 +4,32 @@ import { Order } from '@modules/dashboard/order';
 import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from "rxjs/ReplaySubject";
+import { Group } from "@modules/customer/group.model";
+import { Customer } from '@modules/customer/customer.model';
+import { CustomerDebt } from '@modules/home/customer-debt.model';
 
 @Injectable()
 export class BsmodalService {
-
+  orderDetail$ = new Subject<Order>();
   orderDelete$ = new Subject<Order>();
   orderEdit$ = new Subject<Order>();
   paymentOrder$ = new Subject<Order>();
   cancelDrop$ = new Subject<Order>();
+
   userDelete$ = new Subject<User>();
   userEdit$ = new Subject<User>();
 
-  constructor() { }
+  groupEdit$ = new Subject<Group>();
+  groupDelete$ = new Subject<Group>();
+
+  customerDebt$ = new Subject<CustomerDebt>();
+
+  constructor() {}
   // order
+  selectOrderToView(order: Order) {
+    this.orderDetail$.next(order);
+  }
+
   selectOrderToDelete(order: Order) {
     this.orderDelete$.next(order);
   }
@@ -40,5 +53,17 @@ export class BsmodalService {
 
   selectUserToEdit(user: User) {
     this.userEdit$.next(user);
+  }
+
+  selectGroupToEdit(group: Group) {
+    this.groupEdit$.next(group);
+  }
+
+  selectGroupToDelete(group: Group) {
+    this.groupDelete$.next(group);
+  }
+
+  selectCustomerPayDebt(customer: CustomerDebt) {
+    this.customerDebt$.next(customer);
   }
 }

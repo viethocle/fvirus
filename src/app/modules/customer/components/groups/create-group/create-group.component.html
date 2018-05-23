@@ -1,0 +1,17 @@
+<button type="button" class="btn btn-primary" (click)="modal.open()">Tạo mới</button>
+
+<bs-modal #modal>
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">Tạo nhóm khách hàng mới</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <app-form-group></app-form-group>
+  </bs-modal-body>
+  <bs-modal-footer>
+    <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="modal.dismiss()">
+      {{ 'customers.close' | translate }}</button>
+    <button class="btn btn-primary add-cus"  (click)="sendRequestCreateGroup()" 
+      data-dismiss="modal">
+      Tạo mới</button>
+  </bs-modal-footer>
+</bs-modal>

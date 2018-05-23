@@ -8,7 +8,7 @@ import * as _ from 'lodash';
 import { FlyOut } from '../../flyInOut.animate';
 import { BsmodalService } from '@core/services/bsmodal.service';
 import { AuthService } from "./../../../auth/auth.service";
-
+import { JsonPipe } from '@angular/common';
 @Component({
   selector: "app-dashboard-table-orders",
   templateUrl: "./table-orders.page.html",
@@ -35,7 +35,7 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    
+
   }
 
   getPage(page: number) {
@@ -66,6 +66,10 @@ export class TableOrdersPage implements OnInit, OnDestroy {
               </button>`;
   }
 
+  openDetailModal(order: Order) {
+    this.bsmodalService.selectOrderToView(order);
+  }
+
   openEditModal(order: Order) {
     this.bsmodalService.selectOrderToEdit(order);
   }
@@ -80,7 +84,6 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   }
 
   handleUpdateOrder(order) {
-    console.log("UPDATE " + order);
     _.assign(this.orders.find(t => t.id === order.id), order);
   }
 

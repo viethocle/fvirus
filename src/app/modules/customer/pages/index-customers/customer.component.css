@@ -1,3 +1,19 @@
 #search-customer {
-  width: 250px;
+  margin-right: 0px;
+}
+
+.form-search-query {
+  text-align: right;
+}
+
+.filter-group >>> ng-select.ng-select .ng-select-container .ng-value-container .ng-input>input{
+  padding: 0;
+}
+
+.filter-group >>> ng-select.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-label {
+  font-size: 1.2em;
+}
+
+.filter-group >>> ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  font-size: 1.1em;
 }

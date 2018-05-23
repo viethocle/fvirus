@@ -17,7 +17,8 @@ import {
   FormGroup,
   Validators,
   FormBuilder,
-  AbstractControl
+  AbstractControl,
+  FormArray
 } from '@angular/forms';
 import { Customer } from "@modules/customer/customer.model";
 import { FlyInOut } from '../../flyInOut.animate';
@@ -29,38 +30,37 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 
 @Component({
-  selector: 'app-edit-order',
-  templateUrl: './edit-order.component.html',
-  styleUrls: ['./edit-order.component.css'],
-  animations: [
-    FlyInOut
-  ]
+  selector: "app-edit-order",
+  templateUrl: "./edit-order.component.html",
+  styleUrls: ["./edit-order.component.css"],
+  animations: [FlyInOut]
 })
 export class EditOrderComponent implements OnInit, OnDestroy {
-
   @ViewChild("modalEdit") modalEdit: BsModalComponent;
-  @ViewChild(PerfectScrollbarComponent) componentScroll: PerfectScrollbarComponent;
+  @ViewChild(PerfectScrollbarComponent)
+  componentScroll: PerfectScrollbarComponent;
   @ViewChildren("listCustomers") listCustomers;
   @Output() updateOrderOutput = new EventEmitter<Order>();
   order: Order;
-  formEditOrder: FormGroup;
+  formEditOrder: FormGroup = null;
   startAt: Date;
   minDueDate: Date;
-  customers: Customer[] = [];
+  customers: Customer[];
   termCustomer = "";
   currentFocusIndex: number = -1;
   customerSelected: Customer;
   roleUser: RoleUser;
+  contents: any;
+  control: any;
+  totalPrice: number = 0;
 
   priceMask = Object.freeze({
     mask: createNumberMask({
       allowDecimal: false,
-      integerLimit: 10,
-      prefix: '',
-      thousandsSeparatorSymbol: ','
+      prefix: "",
+      thousandsSeparatorSymbol: ","
     })
   });
-
 
   constructor(
     private formBuilder: FormBuilder,
@@ -70,26 +70,38 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     private cdRef: ChangeDetectorRef,
     private renderer2: Renderer2,
     public authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.buildForm();
     this.initDate();
     this.bsmodalService.orderEdit$
-        .pipe(
-          takeUntilDestroy(this),
-        )
-        .subscribe(order => {
-          if (order) {
-            this.order = order;
-            this.customerSelected = this.customers.find(cus => cus.id === this.order.customer.id);
-            this.startAt = new Date(Date.parse(order.due_date));
-            this.setFormValue();
-            this.modalEdit.open();
-          }
+      .pipe(takeUntilDestroy(this))
+      .subscribe(order => {
+        if (order) {
+          this.order = order;
+          this.customerSelected = this.customers.find(
+            cus => cus.id === this.order.customer.id
+          );
+          this.startAt = new Date(Date.parse(order.due_date));
+          this.setFormValue();
+          this.modalEdit.open();
+        }
+      });
+    this.customerService
+      .getCustomersWithObservable()
+      .pipe(takeUntilDestroy(this))
+      .subscribe(customers => (this.customers = customers));
+    this.modalEdit.onDismiss.subscribe(_ => this.exitEdit());
+    this.formEditOrder.valueChanges.subscribe(_ => {
+      this.totalPrice = 0;
+      this.contents = this.formEditOrder.get("contents") as FormArray;
+      this.contents.value.forEach(res => {
+          res.total = res.quantity * res.price;
+          this.totalPrice += res.quantity * res.price;
         });
-    this.customerService.getCustomersWithObservable()
-        .subscribe(customers => this.customers = customers);
+      this.formEditOrder.value.price = this.totalPrice;
+    });
   }
 
   ngOnDestroy() {
@@ -101,12 +113,10 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.formEditOrder.patchValue({
       customer_id: this.customerSelected.id
     });
-    this.dashboardService.updateOrder(this.order.id, this.formEditOrder.value)
-        .pipe(
-          takeUntilDestroy(this)
-        )
+    this.dashboardService
+      .updateOrder(this.order.id, this.formEditOrder.value)
+      .pipe(takeUntilDestroy(this))
       .subscribe(order => this.updateOrderOutput.emit(order));
-
   }
 
   private initDate() {
@@ -117,12 +127,43 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   private buildForm() {
     this.formEditOrder = this.formBuilder.group({
       description: [""],
+      contents: this.formBuilder.array([this.createContent()]),
       due_date: ["", Validators.required],
-      price: [""],
+      price: ["", Validators.max(99999999)],
       paid_amount: [""],
       customer_id: [""]
     });
+  }
 
+  createContent(): FormGroup {
+    return this.formBuilder.group({
+      content: "",
+      unit: "",
+      quantity: [1],
+      price: [0],
+      total: [0]
+    });
+  }
+
+  get formData() {
+    return <FormArray>this.formEditOrder.get("contents");
+  }
+
+  addRowContent(): void {
+    this.contents = this.formEditOrder.get("contents") as FormArray;
+    this.contents.push(this.createContent());
+  }
+
+  deleteRow(index: number) {
+    let control = <FormArray>this.formEditOrder.get("contents");
+    control.removeAt(index);
+  }
+
+  exitEdit() {
+    JSON.parse(this.order.contents).forEach(cont => {
+      this.control.removeAt(cont);
+    });
+    this.modalEdit.dismiss();
   }
 
   private setFormValue() {
@@ -131,10 +172,29 @@ export class EditOrderComponent implements OnInit, OnDestroy {
       due_date: this.order.due_date,
       price: this.order.price,
       paid_amount: this.order.paid_amount,
-      customer_id: this.order.customer.id
-    })
+      customer_id: this.order.customer.id,
+    });
+    this.setContents();
   }
 
+  setContents() {
+    this.control = <FormArray>this.formEditOrder.controls.contents;
+    JSON.parse(this.order.contents).forEach(cont => {
+      this.control.removeAt(cont);
+    });
+    JSON.parse(this.order.contents).forEach(cont => {
+      this.control.push(
+        this.formBuilder.group({
+          content: cont.content,
+          unit: cont.unit,
+          quantity: cont.quantity,
+          price: cont.price,
+          total: cont.total
+        })
+      );
+      this.totalPrice += cont.quantity * cont.price;
+    });
+  }
   // * handle event keyup enter andn click customer
   selectCustomer(cus: Customer) {
     this.customerSelected = cus;
@@ -143,12 +203,16 @@ export class EditOrderComponent implements OnInit, OnDestroy {
 
   chooseCustomer() {
     if (this.currentFocusIndex === -1) return;
-    let listsButton = this.listCustomers.toArray().map(res => res.nativeElement);
-    let selectedCustomerId = listsButton[this.currentFocusIndex].dataset.idcustomer;
-    let selectedCustomer = this.customers.find(cus => cus.id === _.toNumber(selectedCustomerId));
+    let listsButton = this.listCustomers
+      .toArray()
+      .map(res => res.nativeElement);
+    let selectedCustomerId =
+      listsButton[this.currentFocusIndex].dataset.idcustomer;
+    let selectedCustomer = this.customers.find(
+      cus => cus.id === _.toNumber(selectedCustomerId)
+    );
     this.selectCustomer(selectedCustomer);
   }
-
 
   shiftFocusDown(e) {
     e.preventDefault();
@@ -165,7 +229,6 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.currentFocusIndex = -1; // reset focus when typing new term
   }
 
-
   shiftFocusUp(e) {
     e.preventDefault();
     if (this.currentFocusIndex == 0) return;
@@ -178,16 +241,16 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   }
 
   private focusElement(id) {
-    let listsButton = this.listCustomers.toArray().map(res => res.nativeElement);
+    let listsButton = this.listCustomers
+      .toArray()
+      .map(res => res.nativeElement);
     if (id > listsButton.count || id < 0) {
       return;
     }
     listsButton.forEach(e => {
-      this.renderer2.removeClass(e, 'focus-customer');
+      this.renderer2.removeClass(e, "focus-customer");
     });
-    this.renderer2.addClass(listsButton[id], 'focus-customer');
+    this.renderer2.addClass(listsButton[id], "focus-customer");
     this.componentScroll.directiveRef.scrollToY(40 * id);
   }
-
-
 }

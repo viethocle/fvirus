@@ -6,4 +6,5 @@ export class CustomerDebt {
   phone: string;
   address: string;
   total_debt: number;
+  date_debt: string;
 }

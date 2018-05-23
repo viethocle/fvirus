@@ -1,0 +1,15 @@
+bs-modal-body >>>  .template-quote {
+  padding: 0 50px;
+}
+
+>>> .modal-xl {
+  width: 900px;
+}
+
+.actor {
+  width: 20%;
+}
+bs-modal-body >>> .modal-body {
+  padding-bottom: 10px;
+}
+

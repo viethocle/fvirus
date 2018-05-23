@@ -1,0 +1,11 @@
+.form-group >>> ng-select.ng-select .ng-select-container .ng-value-container .ng-input>input{
+  padding: 0;
+}
+
+.form-group >>> ng-select.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-label {
+  font-size: 1.2em;
+}
+
+.form-group >>> ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  font-size: 1.1em;
+}

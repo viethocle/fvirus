@@ -36,3 +36,43 @@ dd {
   font-size: 1.3em;
 
 }
+
+>>> .modal-lg {
+  width: 80%;
+}
+
+
+.table-description {
+  table-layout: fixed;
+}
+
+.stt {
+  width: 5%;
+}
+
+.content {
+  width: 40%;
+}
+
+.unit {
+  width: 10%;
+}
+
+.quant{
+  width: 10%;
+}
+.inp-content {
+  width: 100%;
+  max-width: 475px;
+}
+
+.btn-add {
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.inp-unit {
+  width: 100%;
+  height: 33px;
+}

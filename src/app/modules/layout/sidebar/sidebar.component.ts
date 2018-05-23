@@ -1,7 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import * as _ from "lodash";
-import { Observable } from "rxjs/Observable";
-import { AuthService } from "@modules/auth/auth.service";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@modules/auth/auth.service';
 
 @Component({
   // tslint:disable-next-line:component-selector

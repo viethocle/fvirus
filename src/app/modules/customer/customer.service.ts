@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 import { Angular2TokenService } from 'angular2-token';
 import { Customer } from './customer.model';
 import * as _ from 'lodash';
+import { CustomerDebt } from '@modules/home/customer-debt.model';
 
 export interface ICustomersTotal {
   customers: Customer[],
@@ -21,43 +22,33 @@ export class CustomerService {
 
   private url = `${this.baseUrl}/customers`;
 
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-
-  }
-
-
-  getCustomersWithPage(
-    page: number,
-    per_page: number,
-    search_text: string
-  ): Observable<ICustomersTotal> {
-    const params = {
-      page: page, 
-      per_page: per_page, 
-      search_query: search_text
-    }
+  getCustomersWithPage(params): Observable<ICustomersTotal> {
     const url = `${this.baseUrl}/customers-filteric.json`;
-    return this.http
-      .post(url, params)
-      .map(res => res as ICustomersTotal);
+    return this.http.post(url, params).map(res => res as ICustomersTotal);
   }
 
   getCustomersWithObservable(): Observable<Customer[]> {
     const getUrl = `${this.url}.json`;
+    return this.http.get(getUrl).map((res: any) => res.customers as Customer[]);
+  }
+
+  getCustomer(id: Number): Observable<CustomerDebt> {
+    const getUrl = `${this.url}/${id}.json`;
     return this.http
       .get(getUrl)
-      .map((res: any) => res.customers as Customer[]);
+      .map((res: any) => res.customer as CustomerDebt);
   }
 
   deleteCustomer(customer: Customer): Observable<any> {
     const deleteUrl = `${this.url}/${customer.id}.json`;
-    return this.http
-      .delete(deleteUrl)
+    return this.http.delete(deleteUrl);
   }
 
   updateCustomer(value, id: number): Observable<any> {
     const updateUrl = `${this.url}/${id}.json`;
+    value = this.changeParam(value);
     return this.http
       .put(updateUrl, value)
       .map((res: any) => res.customer as any);
@@ -65,9 +56,19 @@ export class CustomerService {
 
   addCustomer(value: any): Observable<Customer> {
     const addUrl = `${this.url}.json`;
+    value = this.changeParam(value);
     return this.http
       .post(addUrl, value)
       .map((res: any) => res.customer as Customer);
   }
 
+  changeParam(value: any) {
+    let group_ids = value.group_ids;
+    value = _.omit(value, "group_ids");
+    let result = {
+      customer: value,
+      group_ids: group_ids
+    };
+    return result;
+  }
 }
