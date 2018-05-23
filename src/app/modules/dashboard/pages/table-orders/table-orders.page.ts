@@ -84,7 +84,6 @@ export class TableOrdersPage implements OnInit, OnDestroy {
   }
 
   handleUpdateOrder(order) {
-    console.log("UPDATE " + order);
     _.assign(this.orders.find(t => t.id === order.id), order);
   }
 

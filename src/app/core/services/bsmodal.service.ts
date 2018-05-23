@@ -56,7 +56,6 @@ export class BsmodalService {
   }
 
   selectGroupToEdit(group: Group) {
-    console.log("CALL ALL");
     this.groupEdit$.next(group);
   }
 

@@ -97,8 +97,6 @@ export class CreateOrderComponent implements OnInit {
       this.contents.value.forEach(
         res => {
           res.total = res.quantity * res.price;
-          console.log(this.formData);
-          console.log(res);
           this.totalPrice += (res.quantity * res.price);
         }
       );

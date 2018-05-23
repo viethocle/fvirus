@@ -30,7 +30,6 @@ export class DetailOrderComponent implements OnInit, OnDestroy {
         .subscribe(order => {
           if (order) {
             this.order = order;
-            console.log("detail order: ", this.order);
             this.contents = (JSON.parse(order.contents) == null) ? JSON.parse(order.contents) : [];
             this.modalDetail.open();
           }
