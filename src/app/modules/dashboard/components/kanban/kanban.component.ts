@@ -61,7 +61,9 @@ export class KanbanComponent implements OnInit, OnDestroy {
   }
 
   setLiveUpdate() {
-    this.dashboardService.orderChange.subscribe(dataOrder => {
+    this.dashboardService.orderChange.pipe(
+        takeUntilDestroy(this)
+      ).subscribe(dataOrder => {
       if (dataOrder.method == "CREATE") {
         this.orders.push(dataOrder.data);
       }
