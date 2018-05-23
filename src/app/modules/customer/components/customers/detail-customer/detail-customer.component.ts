@@ -20,7 +20,6 @@ import { CustomerDebt } from '@modules/home/customer-debt.model';
   styleUrls: ["./detail-customer.component.css"]
 })
 export class DetailCustomerComponent implements OnInit, OnChanges {
-  @ViewChild("modalDetail") modalDetail: BsModalComponent;
   customer_id: number;
   orders: Order[];
   customer: CustomerDebt;
